@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://gongchenghuigch.github.io/"/>
-  <updated>2020-12-30T06:35:27.972Z</updated>
+  <updated>2021-01-03T11:57:50.286Z</updated>
   <id>https://gongchenghuigch.github.io/</id>
   
   <author>
@@ -15,6 +15,63 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>React实现头部居中滚动</title>
+    <link href="https://gongchenghuigch.github.io/2021/06/01/React%E5%AE%9E%E7%8E%B0%E5%A4%B4%E9%83%A8%E5%B1%85%E4%B8%AD%E6%BB%9A%E5%8A%A8/"/>
+    <id>https://gongchenghuigch.github.io/2021/06/01/React%E5%AE%9E%E7%8E%B0%E5%A4%B4%E9%83%A8%E5%B1%85%E4%B8%AD%E6%BB%9A%E5%8A%A8/</id>
+    <published>2021-06-01T11:57:23.000Z</published>
+    <updated>2021-01-03T11:57:50.286Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;h2 id=&quot;效果&quot;&gt;&lt;a href=&quot;#效果&quot; class=&quot;headerlink&quot; title=&quot;效果&quot;&gt;&lt;/a&gt;效果&lt;/h2&gt;&lt;img
+        
+      
+    
+    </summary>
+    
+    
+      <category term="React" scheme="https://gongchenghuigch.github.io/categories/React/"/>
+    
+    
+      <category term="React" scheme="https://gongchenghuigch.github.io/tags/React/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Linux服务器常用命令</title>
+    <link href="https://gongchenghuigch.github.io/2021/01/03/Linux%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/"/>
+    <id>https://gongchenghuigch.github.io/2021/01/03/Linux%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/</id>
+    <published>2021-01-03T11:40:37.000Z</published>
+    <updated>2021-01-03T11:41:06.284Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;p&gt;&lt;a href=&quot;https://www.linuxcool.com/&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;Linux命令大全&lt;/a&gt;&lt;/p&gt;
+&lt;h1 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot;
+        
+      
+    
+    </summary>
+    
+    
+      <category term="Linux" scheme="https://gongchenghuigch.github.io/categories/Linux/"/>
+    
+    
+      <category term="Linux" scheme="https://gongchenghuigch.github.io/tags/Linux/"/>
+    
+      <category term="shell" scheme="https://gongchenghuigch.github.io/tags/shell/"/>
+    
+  </entry>
   
   <entry>
     <title>前端辅助开发工具</title>
@@ -71,11 +128,270 @@
     
       <category term="flutter" scheme="https://gongchenghuigch.github.io/tags/flutter/"/>
     
+      <category term="React" scheme="https://gongchenghuigch.github.io/tags/React/"/>
+    
       <category term="nodejs" scheme="https://gongchenghuigch.github.io/tags/nodejs/"/>
+    
+      <category term="TypeScrip" scheme="https://gongchenghuigch.github.io/tags/TypeScrip/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>基于源码剖析nodejs模块系统</title>
+    <link href="https://gongchenghuigch.github.io/2020/12/25/%E5%9F%BA%E4%BA%8E%E6%BA%90%E7%A0%81%E5%89%96%E6%9E%90nodejs%E6%A8%A1%E5%9D%97%E7%B3%BB%E7%BB%9F/"/>
+    <id>https://gongchenghuigch.github.io/2020/12/25/%E5%9F%BA%E4%BA%8E%E6%BA%90%E7%A0%81%E5%89%96%E6%9E%90nodejs%E6%A8%A1%E5%9D%97%E7%B3%BB%E7%BB%9F/</id>
+    <published>2020-12-25T11:34:41.000Z</published>
+    <updated>2021-01-03T11:35:31.496Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;h2 id=&quot;nodejs模块系统&quot;&gt;&lt;a href=&quot;#nodejs模块系统&quot; class=&quot;headerlink&quot; title=&quot;nodejs模块系统&quot;&gt;&lt;/a&gt;nodejs模块系统&lt;/h2&gt;&lt;h3 id=&quot;简介&quot;&gt;&lt;a href=&quot;#简介&quot;
+        
+      
+    
+    </summary>
+    
+    
+      <category term="nodejs" scheme="https://gongchenghuigch.github.io/categories/nodejs/"/>
+    
+    
+      <category term="nodejs" scheme="https://gongchenghuigch.github.io/tags/nodejs/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>React中使用Vditor详解</title>
+    <link href="https://gongchenghuigch.github.io/2020/12/24/React%E4%B8%AD%E4%BD%BF%E7%94%A8Vditor%E8%AF%A6%E8%A7%A3/"/>
+    <id>https://gongchenghuigch.github.io/2020/12/24/React%E4%B8%AD%E4%BD%BF%E7%94%A8Vditor%E8%AF%A6%E8%A7%A3/</id>
+    <published>2020-12-24T11:36:57.000Z</published>
+    <updated>2021-01-03T11:38:07.635Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;h2 id=&quot;安装&quot;&gt;&lt;a href=&quot;#安装&quot; class=&quot;headerlink&quot; title=&quot;安装&quot;&gt;&lt;/a&gt;安装&lt;/h2&gt;&lt;blockquote&gt;
+&lt;p&gt;npm install vditor -s&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h2 id=&quot;引用&quot;&gt;&lt;a
+        
+      
+    
+    </summary>
+    
+    
+      <category term="工具类" scheme="https://gongchenghuigch.github.io/categories/%E5%B7%A5%E5%85%B7%E7%B1%BB/"/>
+    
     
       <category term="React" scheme="https://gongchenghuigch.github.io/tags/React/"/>
     
-      <category term="TypeScrip" scheme="https://gongchenghuigch.github.io/tags/TypeScrip/"/>
+      <category term="Vditor" scheme="https://gongchenghuigch.github.io/tags/Vditor/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>git commit husky报错</title>
+    <link href="https://gongchenghuigch.github.io/2020/11/10/git-commit-husky%E6%8A%A5%E9%94%99/"/>
+    <id>https://gongchenghuigch.github.io/2020/11/10/git-commit-husky%E6%8A%A5%E9%94%99/</id>
+    <published>2020-11-10T11:45:34.000Z</published>
+    <updated>2021-01-03T11:46:20.663Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;h2 id=&quot;报错信息&quot;&gt;&lt;a href=&quot;#报错信息&quot; class=&quot;headerlink&quot; title=&quot;报错信息&quot;&gt;&lt;/a&gt;报错信息&lt;/h2&gt;&lt;pre class=&quot;line-numbers language-js&quot;&gt;&lt;code
+        
+      
+    
+    </summary>
+    
+    
+      <category term="git" scheme="https://gongchenghuigch.github.io/categories/git/"/>
+    
+    
+      <category term="git" scheme="https://gongchenghuigch.github.io/tags/git/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>JQuery源码解析</title>
+    <link href="https://gongchenghuigch.github.io/2020/11/03/JQuery%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90/"/>
+    <id>https://gongchenghuigch.github.io/2020/11/03/JQuery%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90/</id>
+    <published>2020-11-03T11:28:24.000Z</published>
+    <updated>2021-01-03T11:32:42.432Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;p&gt;github 上关于 jQuery 源码的全文注解，感兴趣的可以围观一下。jQuery v1.10.2 源码注解（&lt;a href=&quot;https://github.com/chokcoco/jQuery-）&quot; target=&quot;_blank&quot;
+        
+      
+    
+    </summary>
+    
+    
+      <category term="JQuery" scheme="https://gongchenghuigch.github.io/categories/JQuery/"/>
+    
+    
+      <category term="JavaScript" scheme="https://gongchenghuigch.github.io/tags/JavaScript/"/>
+    
+      <category term="JQuery" scheme="https://gongchenghuigch.github.io/tags/JQuery/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>前端常用工具类方法</title>
+    <link href="https://gongchenghuigch.github.io/2020/10/22/%E5%89%8D%E7%AB%AF%E5%B8%B8%E7%94%A8%E5%B7%A5%E5%85%B7%E7%B1%BB%E6%96%B9%E6%B3%95/"/>
+    <id>https://gongchenghuigch.github.io/2020/10/22/%E5%89%8D%E7%AB%AF%E5%B8%B8%E7%94%A8%E5%B7%A5%E5%85%B7%E7%B1%BB%E6%96%B9%E6%B3%95/</id>
+    <published>2020-10-22T11:42:56.000Z</published>
+    <updated>2021-01-03T11:44:13.707Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;h2 id=&quot;背景&quot;&gt;&lt;a href=&quot;#背景&quot; class=&quot;headerlink&quot; title=&quot;背景&quot;&gt;&lt;/a&gt;背景&lt;/h2&gt;&lt;p&gt;在日常开发中，我们经常会用一些工具类方法来实现业务逻辑 下面列举几种最常用的&lt;/p&gt;
+&lt;h2 id=&quot;URL截取参数&quot;&gt;&lt;a
+        
+      
+    
+    </summary>
+    
+    
+      <category term="工具类" scheme="https://gongchenghuigch.github.io/categories/%E5%B7%A5%E5%85%B7%E7%B1%BB/"/>
+    
+    
+      <category term="JavaScript" scheme="https://gongchenghuigch.github.io/tags/JavaScript/"/>
+    
+      <category term="URL" scheme="https://gongchenghuigch.github.io/tags/URL/"/>
+    
+      <category term="JSON" scheme="https://gongchenghuigch.github.io/tags/JSON/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>React+TS弹窗</title>
+    <link href="https://gongchenghuigch.github.io/2020/09/29/React+TS%E5%BC%B9%E7%AA%97/"/>
+    <id>https://gongchenghuigch.github.io/2020/09/29/React+TS%E5%BC%B9%E7%AA%97/</id>
+    <published>2020-09-29T11:47:48.000Z</published>
+    <updated>2021-01-03T11:48:36.368Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;h3 id=&quot;背景&quot;&gt;&lt;a href=&quot;#背景&quot; class=&quot;headerlink&quot;
+        
+      
+    
+    </summary>
+    
+    
+      <category term="React" scheme="https://gongchenghuigch.github.io/categories/React/"/>
+    
+    
+      <category term="TypeScript" scheme="https://gongchenghuigch.github.io/tags/TypeScript/"/>
+    
+      <category term="React" scheme="https://gongchenghuigch.github.io/tags/React/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>gitbook使用及配置详解</title>
+    <link href="https://gongchenghuigch.github.io/2020/07/21/gitbook%E4%BD%BF%E7%94%A8%E5%8F%8A%E9%85%8D%E7%BD%AE%E8%AF%A6%E8%A7%A3/"/>
+    <id>https://gongchenghuigch.github.io/2020/07/21/gitbook%E4%BD%BF%E7%94%A8%E5%8F%8A%E9%85%8D%E7%BD%AE%E8%AF%A6%E8%A7%A3/</id>
+    <published>2020-07-21T11:50:17.000Z</published>
+    <updated>2021-01-03T11:50:52.064Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;h2 id=&quot;安装&quot;&gt;&lt;a href=&quot;#安装&quot; class=&quot;headerlink&quot; title=&quot;安装&quot;&gt;&lt;/a&gt;安装&lt;/h2&gt;&lt;p&gt;安装命令：1&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;npm install -g gitbook-cli
+        
+      
+    
+    </summary>
+    
+    
+      <category term="gitbook" scheme="https://gongchenghuigch.github.io/categories/gitbook/"/>
+    
+    
+      <category term="gitbook" scheme="https://gongchenghuigch.github.io/tags/gitbook/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>React多行文字展开收起</title>
+    <link href="https://gongchenghuigch.github.io/2020/06/04/React%E5%A4%9A%E8%A1%8C%E6%96%87%E5%AD%97%E5%B1%95%E5%BC%80%E6%94%B6%E8%B5%B7/"/>
+    <id>https://gongchenghuigch.github.io/2020/06/04/React%E5%A4%9A%E8%A1%8C%E6%96%87%E5%AD%97%E5%B1%95%E5%BC%80%E6%94%B6%E8%B5%B7/</id>
+    <published>2020-06-04T11:53:48.000Z</published>
+    <updated>2021-01-03T11:54:30.223Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;h2 id=&quot;css实现&quot;&gt;&lt;a href=&quot;#css实现&quot; class=&quot;headerlink&quot;
+        
+      
+    
+    </summary>
+    
+    
+      <category term="React" scheme="https://gongchenghuigch.github.io/categories/React/"/>
+    
+    
+      <category term="React" scheme="https://gongchenghuigch.github.io/tags/React/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>React大图轮播</title>
+    <link href="https://gongchenghuigch.github.io/2020/06/04/React%E5%A4%A7%E5%9B%BE%E8%BD%AE%E6%92%AD/"/>
+    <id>https://gongchenghuigch.github.io/2020/06/04/React%E5%A4%A7%E5%9B%BE%E8%BD%AE%E6%92%AD/</id>
+    <published>2020-06-04T11:51:56.000Z</published>
+    <updated>2021-01-03T11:52:45.647Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;h2 id=&quot;效果&quot;&gt;&lt;a href=&quot;#效果&quot; class=&quot;headerlink&quot; title=&quot;效果&quot;&gt;&lt;/a&gt;效果&lt;/h2&gt;&lt;p&gt;&lt;img
+        
+      
+    
+    </summary>
+    
+    
+      <category term="React" scheme="https://gongchenghuigch.github.io/categories/React/"/>
+    
+    
+      <category term="React" scheme="https://gongchenghuigch.github.io/tags/React/"/>
     
   </entry>
   
@@ -279,323 +595,6 @@
     
     
       <category term="面试题" scheme="https://gongchenghuigch.github.io/tags/%E9%9D%A2%E8%AF%95%E9%A2%98/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>setTimeout,promise,async await的区别</title>
-    <link href="https://gongchenghuigch.github.io/2019/09/14/awat/"/>
-    <id>https://gongchenghuigch.github.io/2019/09/14/awat/</id>
-    <published>2019-09-14T08:54:50.000Z</published>
-    <updated>2019-09-14T08:55:31.613Z</updated>
-    
-    <summary type="html">
-    
-      
-      
-        
-        
-          &lt;p&gt;一道面试题引发的血案，下面进入主题：&lt;/p&gt;
-&lt;pre class=&quot;line-numbers language-js&quot;&gt;&lt;code class=&quot;language-js&quot;&gt;&lt;span class=&quot;token comment&quot; spellcheck=&quot;true&quot;&gt;//
-        
-      
-    
-    </summary>
-    
-    
-      <category term="JavaScript" scheme="https://gongchenghuigch.github.io/categories/JavaScript/"/>
-    
-    
-      <category term="JavaScript" scheme="https://gongchenghuigch.github.io/tags/JavaScript/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>前端JS内存管理</title>
-    <link href="https://gongchenghuigch.github.io/2019/09/12/jsRAM/"/>
-    <id>https://gongchenghuigch.github.io/2019/09/12/jsRAM/</id>
-    <published>2019-09-12T08:16:18.000Z</published>
-    <updated>2019-09-12T08:19:07.625Z</updated>
-    
-    <summary type="html">
-    
-      
-      
-        
-        
-          &lt;h2 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot; title=&quot;前言&quot;&gt;&lt;/a&gt;前言&lt;/h2&gt;&lt;p&gt;像C语言这样的底层语言一般都有底层的内存管理接口，比如
-        
-      
-    
-    </summary>
-    
-    
-      <category term="JavaScript" scheme="https://gongchenghuigch.github.io/categories/JavaScript/"/>
-    
-    
-      <category term="JavaScript" scheme="https://gongchenghuigch.github.io/tags/JavaScript/"/>
-    
-      <category term="RAM" scheme="https://gongchenghuigch.github.io/tags/RAM/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>前端开发JavaScript你必须懂得的33个概念</title>
-    <link href="https://gongchenghuigch.github.io/2019/09/12/jsidea/"/>
-    <id>https://gongchenghuigch.github.io/2019/09/12/jsidea/</id>
-    <published>2019-09-12T03:27:34.000Z</published>
-    <updated>2019-09-12T03:28:16.357Z</updated>
-    
-    <summary type="html">
-    
-      
-      
-        
-        
-          &lt;h2 id=&quot;1-调用堆栈&quot;&gt;&lt;a href=&quot;#1-调用堆栈&quot; class=&quot;headerlink&quot; title=&quot;1. 调用堆栈&quot;&gt;&lt;/a&gt;1. 调用堆栈&lt;/h2&gt;&lt;h3 id=&quot;文章&quot;&gt;&lt;a href=&quot;#文章&quot; class=&quot;headerlink&quot;
-        
-      
-    
-    </summary>
-    
-    
-      <category term="JavaScript" scheme="https://gongchenghuigch.github.io/categories/JavaScript/"/>
-    
-    
-      <category term="JavaScript" scheme="https://gongchenghuigch.github.io/tags/JavaScript/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>非常优秀的前端博文集合</title>
-    <link href="https://gongchenghuigch.github.io/2019/09/12/article/"/>
-    <id>https://gongchenghuigch.github.io/2019/09/12/article/</id>
-    <published>2019-09-12T02:14:35.000Z</published>
-    <updated>2019-09-17T09:35:30.825Z</updated>
-    
-    <summary type="html">
-    
-      
-      
-        
-        
-          &lt;h2 id=&quot;JavaScript&quot;&gt;&lt;a href=&quot;#JavaScript&quot; class=&quot;headerlink&quot; title=&quot;JavaScript&quot;&gt;&lt;/a&gt;JavaScript&lt;/h2&gt;&lt;ul&gt;
-&lt;li&gt;&lt;a
-        
-      
-    
-    </summary>
-    
-    
-      <category term="前端" scheme="https://gongchenghuigch.github.io/categories/%E5%89%8D%E7%AB%AF/"/>
-    
-    
-      <category term="前端" scheme="https://gongchenghuigch.github.io/tags/%E5%89%8D%E7%AB%AF/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>本地配置多个ssh-key</title>
-    <link href="https://gongchenghuigch.github.io/2019/09/11/ssh-key/"/>
-    <id>https://gongchenghuigch.github.io/2019/09/11/ssh-key/</id>
-    <published>2019-09-11T11:31:34.000Z</published>
-    <updated>2019-09-11T11:32:41.884Z</updated>
-    
-    <summary type="html">
-    
-      
-      
-        
-        
-          &lt;h2 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot;
-        
-      
-    
-    </summary>
-    
-    
-      <category term="ssh" scheme="https://gongchenghuigch.github.io/categories/ssh/"/>
-    
-    
-      <category term="Linux" scheme="https://gongchenghuigch.github.io/tags/Linux/"/>
-    
-      <category term="ssh-key" scheme="https://gongchenghuigch.github.io/tags/ssh-key/"/>
-    
-      <category term="ssh" scheme="https://gongchenghuigch.github.io/tags/ssh/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Vscode前端开发插件大全</title>
-    <link href="https://gongchenghuigch.github.io/2019/09/11/vscode/"/>
-    <id>https://gongchenghuigch.github.io/2019/09/11/vscode/</id>
-    <published>2019-09-11T08:28:23.000Z</published>
-    <updated>2019-09-11T08:35:25.398Z</updated>
-    
-    <summary type="html">
-    
-      
-      
-        
-        
-          &lt;h2 id=&quot;快捷键&quot;&gt;&lt;a href=&quot;#快捷键&quot; class=&quot;headerlink&quot; title=&quot;快捷键&quot;&gt;&lt;/a&gt;快捷键&lt;/h2&gt;&lt;h3 id=&quot;通用快捷键&quot;&gt;&lt;a href=&quot;#通用快捷键&quot; class=&quot;headerlink&quot;
-        
-      
-    
-    </summary>
-    
-    
-      <category term="vscode" scheme="https://gongchenghuigch.github.io/categories/vscode/"/>
-    
-    
-      <category term="vscode" scheme="https://gongchenghuigch.github.io/tags/vscode/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>hexo+github搭建免费个人网站</title>
-    <link href="https://gongchenghuigch.github.io/2019/09/09/theme/"/>
-    <id>https://gongchenghuigch.github.io/2019/09/09/theme/</id>
-    <published>2019-09-09T10:19:17.000Z</published>
-    <updated>2019-09-10T08:15:19.640Z</updated>
-    
-    <summary type="html">
-    
-      
-      
-        
-        
-          &lt;h2 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot; title=&quot;前言&quot;&gt;&lt;/a&gt;前言&lt;/h2&gt;&lt;p&gt;GitHub page提供了免费的服务搭建&lt;/p&gt;
-&lt;ol&gt;
-&lt;li&gt;免费域名 xxx.github.io 
-        
-      
-    
-    </summary>
-    
-    
-      <category term="hexo" scheme="https://gongchenghuigch.github.io/categories/hexo/"/>
-    
-    
-      <category term="hexo" scheme="https://gongchenghuigch.github.io/tags/hexo/"/>
-    
-      <category term="github" scheme="https://gongchenghuigch.github.io/tags/github/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>ssh报错</title>
-    <link href="https://gongchenghuigch.github.io/2019/09/06/ssherr/"/>
-    <id>https://gongchenghuigch.github.io/2019/09/06/ssherr/</id>
-    <published>2019-09-06T09:19:35.000Z</published>
-    <updated>2019-09-11T11:32:12.694Z</updated>
-    
-    <summary type="html">
-    
-      
-      
-        
-        
-          &lt;h2 id=&quot;报错信息&quot;&gt;&lt;a href=&quot;#报错信息&quot; class=&quot;headerlink&quot; title=&quot;报错信息&quot;&gt;&lt;/a&gt;报错信息&lt;/h2&gt;&lt;pre class=&quot;line-numbers language-js&quot;&gt;&lt;code
-        
-      
-    
-    </summary>
-    
-    
-      <category term="ssh" scheme="https://gongchenghuigch.github.io/categories/ssh/"/>
-    
-    
-      <category term="Linux" scheme="https://gongchenghuigch.github.io/tags/Linux/"/>
-    
-      <category term="ssh" scheme="https://gongchenghuigch.github.io/tags/ssh/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>TypeScript声明文件</title>
-    <link href="https://gongchenghuigch.github.io/2019/09/05/tsinterface/"/>
-    <id>https://gongchenghuigch.github.io/2019/09/05/tsinterface/</id>
-    <published>2019-09-05T02:29:29.000Z</published>
-    <updated>2019-09-05T02:31:11.811Z</updated>
-    
-    <summary type="html">
-    
-      
-      
-        
-        
-          &lt;h2 id=&quot;声明文件简介&quot;&gt;&lt;a href=&quot;#声明文件简介&quot; class=&quot;headerlink&quot; title=&quot;声明文件简介&quot;&gt;&lt;/a&gt;声明文件简介&lt;/h2&gt;&lt;p&gt;当使用第三方库时，我们需要引用它的声明文件，才能获得对应的代码补全、接口提示等功能。&lt;/p&gt;
-&lt;h3
-        
-      
-    
-    </summary>
-    
-    
-      <category term="TypeScript" scheme="https://gongchenghuigch.github.io/categories/TypeScript/"/>
-    
-    
-      <category term="TypeScript" scheme="https://gongchenghuigch.github.io/tags/TypeScript/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>nvm版本管理</title>
-    <link href="https://gongchenghuigch.github.io/2019/09/04/nvm/"/>
-    <id>https://gongchenghuigch.github.io/2019/09/04/nvm/</id>
-    <published>2019-09-04T09:49:59.000Z</published>
-    <updated>2019-09-04T09:51:45.707Z</updated>
-    
-    <summary type="html">
-    
-      
-      
-        
-        
-          &lt;h2 id=&quot;安装nvm&quot;&gt;&lt;a href=&quot;#安装nvm&quot; class=&quot;headerlink&quot; title=&quot;安装nvm&quot;&gt;&lt;/a&gt;安装nvm&lt;/h2&gt;&lt;p&gt;首先要安装或者更新nvm，可以使用cURL 使用&lt;a
-        
-      
-    
-    </summary>
-    
-    
-      <category term="nodejs" scheme="https://gongchenghuigch.github.io/categories/nodejs/"/>
-    
-    
-      <category term="nodejs" scheme="https://gongchenghuigch.github.io/tags/nodejs/"/>
-    
-      <category term="npm" scheme="https://gongchenghuigch.github.io/tags/npm/"/>
-    
-      <category term="nvm" scheme="https://gongchenghuigch.github.io/tags/nvm/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>TypeScript类型断言</title>
-    <link href="https://gongchenghuigch.github.io/2019/09/04/tsAssertion/"/>
-    <id>https://gongchenghuigch.github.io/2019/09/04/tsAssertion/</id>
-    <published>2019-09-04T08:55:56.456Z</published>
-    <updated>2019-09-04T08:55:56.456Z</updated>
-    
-    <summary type="html">
-    
-      
-      
-        
-        
-          &lt;h2 id=&quot;类型断言&quot;&gt;&lt;a href=&quot;#类型断言&quot; class=&quot;headerlink&quot; title=&quot;类型断言&quot;&gt;&lt;/a&gt;类型断言&lt;/h2&gt;&lt;p&gt;类型断言（Type Assertion）可以用来手动指定一个值的类型。&lt;/p&gt;
-&lt;h3 id=&quot;语法&quot;&gt;&lt;a
-        
-      
-    
-    </summary>
-    
-    
-      <category term="TypeScript" scheme="https://gongchenghuigch.github.io/categories/TypeScript/"/>
-    
-    
-      <category term="TypeScript" scheme="https://gongchenghuigch.github.io/tags/TypeScript/"/>
     
   </entry>
   
