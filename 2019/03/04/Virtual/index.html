@@ -1,0 +1,1542 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN">
+
+
+<head><meta name="generator" content="Hexo 3.9.0">
+    <meta charset="utf-8">
+    <meta name="keywords" content="前端Virtual DOM详解, gongchenghui,github">
+    <meta name="description" content="前言目前最流行的两大前端框架，React和Vue，都不约而同的借助Virtual DOM技术提高页面的渲染效率。那么，什么是Virtual DOM？它是通过什么方式去提升页面渲染效率的呢？
+什么是Virtual DOM本质上来说，Virtu">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="renderer" content="webkit|ie-stand|ie-comp">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <title>前端Virtual DOM详解 | gongchenghui</title>
+    <link rel="icon" type="image/png" href="/favicon.png">
+
+    <link rel="stylesheet" type="text/css" href="/libs/awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/materialize/materialize.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/aos/aos.css">
+    <link rel="stylesheet" type="text/css" href="/libs/animate/animate.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/lightGallery/css/lightgallery.min.css">
+    <link rel="stylesheet" type="text/css" href="/css/matery.css">
+    <link rel="stylesheet" type="text/css" href="/css/my.css">
+    <style type="text/css">
+        
+    </style>
+
+    <script src="/libs/jquery/jquery-2.2.0.min.js"></script>
+<link rel="alternate" href="/atom.xml" title="gongchenghui" type="application/atom+xml">
+<link rel="stylesheet" href="/css/prism-okaidia.css" type="text/css">
+<link rel="stylesheet" href="/css/prism-line-numbers.css" type="text/css"></head>
+
+
+<body>
+
+<header class="navbar-fixed">
+    <nav id="headNav" class="bg-color nav-transparent">
+        <div id="navContainer" class="nav-wrapper container">
+            <div class="brand-logo">
+                <a href="/" class="waves-effect waves-light">
+                    
+                    <img src="/medias/logo.png" class="logo-img" alt="LOGO">
+                    
+                    <span class="logo-span">gongchenghui</span>
+                </a>
+            </div>
+            
+
+<a href="#" data-target="mobile-nav" class="sidenav-trigger button-collapse"><i class="fa fa-navicon"></i></a>
+<ul class="right">
+    
+    <li class="hide-on-med-and-down">
+        <a href="/" class="waves-effect waves-light">
+            
+            <i class="fa fa-home"></i>
+            
+            <span>主页</span>
+        </a>
+    </li>
+    
+    <li class="hide-on-med-and-down">
+        <a href="/tags" class="waves-effect waves-light">
+            
+            <i class="fa fa-tags"></i>
+            
+            <span>标签</span>
+        </a>
+    </li>
+    
+    <li class="hide-on-med-and-down">
+        <a href="/categories" class="waves-effect waves-light">
+            
+            <i class="fa fa-bookmark"></i>
+            
+            <span>分类</span>
+        </a>
+    </li>
+    
+    <li class="hide-on-med-and-down">
+        <a href="/friends" class="waves-effect waves-light">
+            
+            <i class="fa fa-rocket"></i>
+            
+            <span>工具</span>
+        </a>
+    </li>
+    
+    <li class="hide-on-med-and-down">
+        <a href="/archives" class="waves-effect waves-light">
+            
+            <i class="fa fa-archive"></i>
+            
+            <span>归档</span>
+        </a>
+    </li>
+    
+    <li class="hide-on-med-and-down">
+        <a href="/about" class="waves-effect waves-light">
+            
+            <i class="fa fa-user-circle-o"></i>
+            
+            <span>关于</span>
+        </a>
+    </li>
+    
+    <li class="hide-on-med-and-down">
+        <a href="/navi" class="waves-effect waves-light">
+            
+            <i class="fa fa-address-book"></i>
+            
+            <span>快捷导航</span>
+        </a>
+    </li>
+    
+    <li>
+        <a href="#searchModal" class="modal-trigger waves-effect waves-light">
+            <i id="searchIcon" class="fa fa-search" title="搜索"></i>
+        </a>
+    </li>
+</ul>
+
+<div id="mobile-nav" class="side-nav sidenav">
+
+    <div class="mobile-head bg-color">
+        
+        <img src="/medias/logo.png" class="logo-img circle responsive-img">
+        
+        <div class="logo-name">gongchenghui</div>
+        <div class="logo-desc">
+            
+            北冥有鱼，其名为鲲，鲲之大，不知其几千里也； 化而为鸟，其名为鹏.
+            
+        </div>
+    </div>
+
+    
+
+    <ul class="menu-list mobile-menu-list">
+        
+        <li>
+            <a href="/" class="waves-effect waves-light">
+                
+                <i class="fa fa-fw fa-home"></i>
+                
+                主页
+            </a>
+        </li>
+        
+        <li>
+            <a href="/tags" class="waves-effect waves-light">
+                
+                <i class="fa fa-fw fa-tags"></i>
+                
+                标签
+            </a>
+        </li>
+        
+        <li>
+            <a href="/categories" class="waves-effect waves-light">
+                
+                <i class="fa fa-fw fa-bookmark"></i>
+                
+                分类
+            </a>
+        </li>
+        
+        <li>
+            <a href="/friends" class="waves-effect waves-light">
+                
+                <i class="fa fa-fw fa-rocket"></i>
+                
+                工具
+            </a>
+        </li>
+        
+        <li>
+            <a href="/archives" class="waves-effect waves-light">
+                
+                <i class="fa fa-fw fa-archive"></i>
+                
+                归档
+            </a>
+        </li>
+        
+        <li>
+            <a href="/about" class="waves-effect waves-light">
+                
+                <i class="fa fa-fw fa-user-circle-o"></i>
+                
+                关于
+            </a>
+        </li>
+        
+        <li>
+            <a href="/navi" class="waves-effect waves-light">
+                
+                <i class="fa fa-fw fa-address-book"></i>
+                
+                快捷导航
+            </a>
+        </li>
+        
+        
+        <li><div class="divider"></div></li>
+        <li>
+            <a href="https://github.com/gongchenghuigch/gongchenghuigch.github.io" class="waves-effect waves-light" target="_blank">
+                <i class="fa fa-github-square fa-fw"></i>Fork Me
+            </a>
+        </li>
+        
+    </ul>
+</div>
+
+        </div>
+
+        
+            <style>
+    .nav-transparent .github-corner {
+        display: none !important;
+    }
+
+    .github-corner {
+        position: absolute;
+        z-index: 10;
+        top: 0;
+        right: 0;
+        border: 0;
+        transform: scale(1.1);
+    }
+
+    .github-corner svg {
+        color: #0f9d58;
+        fill: #fff;
+        height: 64px;
+        width: 64px;
+    }
+
+    .github-corner:hover .octo-arm {
+        animation: a 0.56s ease-in-out;
+    }
+
+    .github-corner .octo-arm {
+        animation: none;
+    }
+
+    @keyframes a {
+        0%,
+        to {
+            transform: rotate(0);
+        }
+        20%,
+        60% {
+            transform: rotate(-25deg);
+        }
+        40%,
+        80% {
+            transform: rotate(10deg);
+        }
+    }
+</style>
+
+<a href="https://github.com/gongchenghuigch/gongchenghuigch.github.io" class="github-corner tooltipped hide-on-med-and-down" target="_blank"
+   data-tooltip="Fork Me" data-position="left" data-delay="50">
+    <svg viewBox="0 0 250 250" aria-hidden="true">
+        <path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path>
+        <path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2"
+              fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path>
+        <path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z"
+              fill="currentColor" class="octo-body"></path>
+    </svg>
+</a>
+        
+    </nav>
+
+</header>
+
+
+
+
+
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/8.jpg')">
+    <div class="container">
+        <div class="row">
+            <div class="col s12 m12 l12">
+                <div class="brand">
+                    <div class="description center-align post-title">
+                        前端Virtual DOM详解
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<main class="post-container content">
+
+    
+    <link rel="stylesheet" href="/libs/tocbot/tocbot.css">
+<style>
+    #articleContent h1::before,
+    #articleContent h2::before,
+    #articleContent h3::before,
+    #articleContent h4::before,
+    #articleContent h5::before,
+    #articleContent h6::before {
+        display: block;
+        content: " ";
+        height: 100px;
+        margin-top: -100px;
+        visibility: hidden;
+    }
+
+    #articleContent :focus {
+        outline: none;
+    }
+
+    .toc-fixed {
+        position: fixed;
+        top: 64px;
+    }
+
+    .toc-widget {
+        padding-left: 20px;
+    }
+
+    .toc-widget .toc-title {
+        margin: 35px 0 15px 0;
+        padding-left: 17px;
+        font-size: 1.5rem;
+        font-weight: bold;
+        line-height: 1.5rem;
+    }
+
+    .toc-widget ol {
+        padding: 0;
+        list-style: none;
+    }
+
+    #toc-content ol {
+        padding-left: 10px;
+    }
+
+    #toc-content ol li {
+        padding-left: 10px;
+    }
+
+    #toc-content .toc-link:hover {
+        color: #42b983;
+        font-weight: 700;
+        text-decoration: underline;
+    }
+
+    #toc-content .toc-link::before {
+        background-color: transparent;
+        max-height: 25px;
+    }
+
+    #toc-content .is-active-link {
+        color: #42b983;
+    }
+
+    #toc-content .is-active-link::before {
+        background-color: #42b983;
+    }
+
+    #floating-toc-btn {
+        position: fixed;
+        right: 20px;
+        bottom: 76px;
+        padding-top: 15px;
+        margin-bottom: 0;
+        z-index: 998;
+    }
+
+    #floating-toc-btn .btn-floating {
+        width: 48px;
+        height: 48px;
+    }
+
+    #floating-toc-btn .btn-floating i {
+        line-height: 48px;
+        font-size: 1.4rem;
+    }
+</style>
+<div class="row">
+    <div id="main-content" class="col s12 m12 l9">
+        <!-- 文章内容详情 -->
+<div id="artDetail">
+    <div class="card">
+        <div class="card-content article-info">
+            <div class="row tag-cate">
+                <div class="col s7">
+                    
+                    <div class="article-tag">
+                        
+                            <a href="/tags/React/" target="_blank">
+                                <span class="chip bg-color">React</span>
+                            </a>
+                        
+                            <a href="/tags/Virtual-DOM/" target="_blank">
+                                <span class="chip bg-color">Virtual DOM</span>
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+                <div class="col s5 right-align">
+                    
+                    <div class="post-cate">
+                        <i class="fa fa-bookmark fa-fw icon-category"></i>
+                        
+                            <a href="/categories/React/" class="post-category" target="_blank">
+                                React
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+
+            <div class="post-info">
+                <div class="post-date info-break-policy">
+                    <i class="fa fa-calendar-minus-o fa-fw"></i>发布日期:&nbsp;&nbsp;
+                    2019-03-04
+                </div>
+
+                
+                    
+                    <div class="info-break-policy">
+                        <i class="fa fa-file-word-o fa-fw"></i>文章字数:&nbsp;&nbsp;
+                        3.8k
+                    </div>
+                    
+
+                    
+                    <div class="info-break-policy">
+                        <i class="fa fa-clock-o fa-fw"></i>阅读时长:&nbsp;&nbsp;
+                        14 分
+                    </div>
+                    
+                
+				
+				
+                    <div id="busuanzi_container_page_pv" class="info-break-policy">
+                        <i class="fa fa-eye fa-fw"></i>阅读次数:&nbsp;&nbsp;
+                        <span id="busuanzi_value_page_pv"></span>
+                    </div>
+				
+            </div>
+        </div>
+        <hr class="clearfix">
+        <div class="card-content article-card-content">
+            <div id="articleContent">
+                <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>目前最流行的两大前端框架，React和Vue，都不约而同的借助Virtual DOM技术提高页面的渲染效率。那么，什么是Virtual DOM？它是通过什么方式去提升页面渲染效率的呢？</p>
+<h2 id="什么是Virtual-DOM"><a href="#什么是Virtual-DOM" class="headerlink" title="什么是Virtual DOM"></a>什么是Virtual DOM</h2><p>本质上来说，Virtual DOM只是一个简单的JS对象，并且最少包含tag、props和children三个属性。不同的框架对这三个属性的命名会有点差别，但表达的意思是一致的。它们分别是标签名（tag）、属性（props）和子元素对象（children）。下面是一个典型的Virtual DOM对象例子</p>
+<pre class="line-numbers language-js"><code class="language-js"><span class="token punctuation">{</span>
+    tag<span class="token punctuation">:</span> <span class="token string">"div"</span><span class="token punctuation">,</span>
+    props<span class="token punctuation">:</span> <span class="token punctuation">{</span><span class="token punctuation">}</span><span class="token punctuation">,</span>
+    children<span class="token punctuation">:</span> <span class="token punctuation">[</span>
+        <span class="token string">"Hello World"</span><span class="token punctuation">,</span> 
+        <span class="token punctuation">{</span>
+            tag<span class="token punctuation">:</span> <span class="token string">"ul"</span><span class="token punctuation">,</span>
+            props<span class="token punctuation">:</span> <span class="token punctuation">{</span><span class="token punctuation">}</span><span class="token punctuation">,</span>
+            children<span class="token punctuation">:</span> <span class="token punctuation">[</span><span class="token punctuation">{</span>
+                tag<span class="token punctuation">:</span> <span class="token string">"li"</span><span class="token punctuation">,</span>
+                props<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+                    id<span class="token punctuation">:</span> <span class="token number">1</span><span class="token punctuation">,</span>
+                    <span class="token keyword">class</span><span class="token punctuation">:</span> <span class="token string">"li-1"</span>
+                <span class="token punctuation">}</span><span class="token punctuation">,</span>
+                children<span class="token punctuation">:</span> <span class="token punctuation">[</span><span class="token string">"第"</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">]</span>
+            <span class="token punctuation">}</span><span class="token punctuation">]</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">]</span>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>Virtual DOM跟dom对象有一一对应的关系，上面的Virtual DOM是由以下的HTML生成的</p>
+<pre class="line-numbers language-js"><code class="language-js"><span class="token operator">&lt;</span>div<span class="token operator">></span>
+    Hello World
+    <span class="token operator">&lt;</span>ul<span class="token operator">></span>
+        <span class="token operator">&lt;</span>li id<span class="token operator">=</span><span class="token string">"1"</span> <span class="token keyword">class</span><span class="token operator">=</span><span class="token string">"li-1"</span><span class="token operator">></span>
+            第<span class="token number">1</span>
+        <span class="token operator">&lt;</span><span class="token operator">/</span>li<span class="token operator">></span>
+    <span class="token operator">&lt;</span><span class="token operator">/</span>ul<span class="token operator">></span>
+<span class="token operator">&lt;</span><span class="token operator">/</span>div<span class="token operator">></span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>一个dom对象，比如<code>li</code>，由<code>tag(li)</code>, <code>props({id: 1, class: &quot;li-1&quot;})</code>和<code>children([&quot;第&quot;, 1])</code>三个属性来描述。</p>
+<h2 id="前端技术框架发展"><a href="#前端技术框架发展" class="headerlink" title="前端技术框架发展"></a>前端技术框架发展</h2><h3 id="菜鸟的日常操作"><a href="#菜鸟的日常操作" class="headerlink" title="菜鸟的日常操作"></a>菜鸟的日常操作</h3><p>假如现在你需要写一个像下面一样的表格的应用程序，这个表格可以根据不同的字段进行升序或者降序的展示。</p>
+<p><img src="https://img.58cdn.com.cn/escstatic/fecar/pmuse/reactnative/table.png" alt="table.png"></p>
+<p>这个应用程序看起来很简单，你可以想出好几种不同的方式来写。最容易想到的可能是，在你的 JavaScript 代码里面存储这样的数据：</p>
+<pre class="line-numbers language-js"><code class="language-js"><span class="token keyword">var</span> sortKey <span class="token operator">=</span> <span class="token string">"name"</span> <span class="token comment" spellcheck="true">// 排序的字段，名字（name）、年龄（age）、地址（address）</span>
+<span class="token keyword">var</span> sortType <span class="token operator">=</span> <span class="token number">1</span> <span class="token comment" spellcheck="true">// 升序还是逆序</span>
+<span class="token keyword">var</span> data <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token punctuation">{</span><span class="token operator">...</span><span class="token punctuation">}</span><span class="token punctuation">,</span> <span class="token punctuation">{</span><span class="token operator">...</span><span class="token punctuation">}</span><span class="token punctuation">,</span> <span class="token punctuation">{</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">}</span><span class="token punctuation">,</span> <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">]</span> <span class="token comment" spellcheck="true">// 表格数据</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+<p>用三个变量分别存储当前排序的字段、排序方向、还有表格数据；</p>
+<p>然后给表格头部加点击事件，当用户点击排序字段时，会根据上面几个变量存储的值来对内容进行排序；</p>
+<p>然后用 JS 操作 DOM，更新页面的排序状态和表格内容。</p>
+<h3 id="这样做的后果是？"><a href="#这样做的后果是？" class="headerlink" title="这样做的后果是？"></a>这样做的后果是？</h3><p>随着应用程序越来越复杂，需要在JS里面维护的字段也越来越多，需要监听事件和在事件回调用更新页面的DOM操作也越来越多，应用程序会变得非常难维护。</p>
+<h3 id="寻求突破变更？"><a href="#寻求突破变更？" class="headerlink" title="寻求突破变更？"></a>寻求突破变更？</h3><p>后来大牛们使用了 MVC、MVP 的架构模式，希望能从代码组织方式来降低维护这种复杂应用程序的难度；但是 MVC 架构没办法减少你所维护的状态，也没有降低状态更新你需要对页面的更新操作（前端来说就是DOM操作），你需要操作的DOM还是需要操作（他大舅他二舅都是他舅），只是换了个地方。</p>
+<h3 id="思想的革命、技术的突破"><a href="#思想的革命、技术的突破" class="headerlink" title="思想的革命、技术的突破"></a>思想的革命、技术的突破</h3><p>既然前辈大牛们已经实现了状态改变DOM，为什么我们不近一步，做出那么一个东西可以让视图和状态进行</p>
+<p>绑定？</p>
+<p>让状态变更视图自动跟着变更，就不用手动更新页面了。</p>
+<p>这就是后来的 MVVM模式</p>
+<p>只要在模版中声明视图组件是和什么状态进行绑定的，双向绑定引擎就会在状态</p>
+<p>更新的时候自动更新视图，MVVM 可以能很好的降低维护状态以及减少视图的复杂程度</p>
+<h3 id="思维的发散、Virtual-DOM的诞生"><a href="#思维的发散、Virtual-DOM的诞生" class="headerlink" title="思维的发散、Virtual DOM的诞生"></a>思维的发散、Virtual DOM的诞生</h3><p>还有一个非常直观的方法，可以大大降低视图更新的操作。一旦状</p>
+<p>态发生了变化，就用模版引擎重新渲染整个视图，然后用新的视图更换掉旧的视图。就</p>
+<p>像上面的表格，当用户点击的时，还是在 JS 里面更新状态，但是页面更新就不用手动</p>
+<p>操作 DOM 了，直接把整个表格用模版引擎重新渲染一遍，然后设置一下 innerHTML 。</p>
+<p>那么这个方法会有个很大的问题，会导致 DOM 操作变慢，因为任何的状态变更都要重</p>
+<p>新构造整个 DOM，性价比很低。对于局部的小视图的更新，这样没有问题（backbone</p>
+<p>就是这么干的）。但对于大型视图，需要更新页面较多局部视图时，这样的做法就非常不</p>
+<p>可取。</p>
+<p>Virtual DOM 也是这么做的，只是加了一些步骤来避免了整棵 DOM 树变更。上面提供</p>
+<p>的几种方法，其实都在解决同一个问题，那就是维护状态更新视图。如果我们能够很好来</p>
+<p>应对这个问题，就降低复杂性。</p>
+<h2 id="Virtual-DOM-算法"><a href="#Virtual-DOM-算法" class="headerlink" title="Virtual DOM 算法"></a>Virtual DOM 算法</h2><h3 id="DOM解析流程"><a href="#DOM解析流程" class="headerlink" title="DOM解析流程"></a>DOM解析流程</h3><p>DOM 很慢，为啥说它慢，先看一下 Webkit 引擎，所有浏览器都遵循类似的工作流，只</p>
+<p>是在细节处理有些不同。</p>
+<ul>
+<li><p>一旦浏览器接收到一个 HTML 文件，渲染引擎 Render Engine就开始解析它，根据 HTML 元素 Elements 对应地生成 DOM 节点 Nodes，最终组成一棵 DOM 树。</p>
+</li>
+<li><p>构造了渲染树以后，浏览器引擎开始着手布局 Layout。</p>
+</li>
+<li><p>布局时，渲染树上的每个节点根据其在屏幕上应该出现的精确位置，分配一组屏幕坐标值。</p>
+</li>
+<li><p>接着，浏览器将会通过遍历渲染树，调用每个节点的 Paint 方法来绘制这些 Render 对象。</p>
+</li>
+<li><p>Paint 方法根据浏览器平台，使用不同的 UI后端 API（Agnostic UI Backend API）通过绘制，最终将在屏幕上展示内容。</p>
+</li>
+</ul>
+<p>渲染流程图如下：</p>
+<p><img src="https://img.58cdn.com.cn/escstatic/fecar/pmuse/reactnative/vdom.png" alt="vdom.png"></p>
+<h3 id="那么问题来了"><a href="#那么问题来了" class="headerlink" title="那么问题来了"></a>那么问题来了</h3><p>只要在这过程中进行一次 DOM 更新，整个渲染流程都会重做一遍。</p>
+<h3 id="div的属性包含以下这些"><a href="#div的属性包含以下这些" class="headerlink" title="div的属性包含以下这些"></a>div的属性包含以下这些</h3><pre class="line-numbers language-js"><code class="language-js">align<span class="token punctuation">,</span> onwaiting<span class="token punctuation">,</span> onvolumechange<span class="token punctuation">,</span> ontimeupdate<span class="token punctuation">,</span> onsuspend<span class="token punctuation">,</span> onsubmit<span class="token punctuation">,</span>
+onstalled<span class="token punctuation">,</span> onshow<span class="token punctuation">,</span> onselect<span class="token punctuation">,</span> onseeking<span class="token punctuation">,</span> onseeked<span class="token punctuation">,</span> onscroll<span class="token punctuation">,</span> onresize<span class="token punctuation">,</span>
+onreset<span class="token punctuation">,</span> onratechange<span class="token punctuation">,</span> onprogress<span class="token punctuation">,</span> onplaying<span class="token punctuation">,</span> onplay<span class="token punctuation">,</span> onpause<span class="token punctuation">,</span>
+onmousewheel<span class="token punctuation">,</span> onmouseup<span class="token punctuation">,</span> onmouseover<span class="token punctuation">,</span> onmouseout<span class="token punctuation">,</span> onmousemove<span class="token punctuation">,</span>
+onmouseleave<span class="token punctuation">,</span> onmouseenter<span class="token punctuation">,</span> onmousedown<span class="token punctuation">,</span> onloadstart<span class="token punctuation">,</span>
+onloadedmetadata<span class="token punctuation">,</span> onloadeddata<span class="token punctuation">,</span> onload<span class="token punctuation">,</span> onkeyup<span class="token punctuation">,</span> onkeypress<span class="token punctuation">,</span>
+onkeydown<span class="token punctuation">,</span> oninvalid<span class="token punctuation">,</span> oninput<span class="token punctuation">,</span> onfocus<span class="token punctuation">,</span> onerror<span class="token punctuation">,</span> onended<span class="token punctuation">,</span> onemptied<span class="token punctuation">,</span>
+ondurationchange<span class="token punctuation">,</span> ondrop<span class="token punctuation">,</span> ondragstart<span class="token punctuation">,</span> ondragover<span class="token punctuation">,</span> ondragleave<span class="token punctuation">,</span>
+ondragenter<span class="token punctuation">,</span> ondragend<span class="token punctuation">,</span> ondrag<span class="token punctuation">,</span> ondblclick<span class="token punctuation">,</span> oncuechange<span class="token punctuation">,</span>
+oncontextmenu<span class="token punctuation">,</span> onclose<span class="token punctuation">,</span> onclick<span class="token punctuation">,</span> onchange<span class="token punctuation">,</span> oncanplaythrough<span class="token punctuation">,</span>
+oncanplay<span class="token punctuation">,</span> oncancel<span class="token punctuation">,</span> onblur<span class="token punctuation">,</span> onabort<span class="token punctuation">,</span> spellcheck<span class="token punctuation">,</span> isContentEditable<span class="token punctuation">,</span>
+contentEditable<span class="token punctuation">,</span> outerText<span class="token punctuation">,</span> innerText<span class="token punctuation">,</span> accessKey<span class="token punctuation">,</span> hidden<span class="token punctuation">,</span>
+webkitdropzone<span class="token punctuation">,</span> draggable<span class="token punctuation">,</span> tabIndex<span class="token punctuation">,</span> dir<span class="token punctuation">,</span> translate<span class="token punctuation">,</span> lang<span class="token punctuation">,</span> title<span class="token punctuation">,</span>
+childElementCount<span class="token punctuation">,</span> lastElementChild<span class="token punctuation">,</span> firstElementChild<span class="token punctuation">,</span> children<span class="token punctuation">,</span>
+nextElementSibling<span class="token punctuation">,</span> previousElementSibling<span class="token punctuation">,</span> onwheel<span class="token punctuation">,</span>
+onwebkitfullscreenerror<span class="token punctuation">,</span> onwebkitfullscreenchange<span class="token punctuation">,</span> onselectstart<span class="token punctuation">,</span>
+onsearch<span class="token punctuation">,</span> onpaste<span class="token punctuation">,</span> oncut<span class="token punctuation">,</span> oncopy<span class="token punctuation">,</span> onbeforepaste<span class="token punctuation">,</span> onbeforecut<span class="token punctuation">,</span>
+onbeforecopy<span class="token punctuation">,</span> webkitShadowRoot<span class="token punctuation">,</span> dataset<span class="token punctuation">,</span> classList<span class="token punctuation">,</span> className<span class="token punctuation">,</span>
+outerHTML<span class="token punctuation">,</span> innerHTML<span class="token punctuation">,</span> scrollHeight<span class="token punctuation">,</span> scrollWidth<span class="token punctuation">,</span> scrollTop<span class="token punctuation">,</span>
+scrollLeft<span class="token punctuation">,</span> clientHeight<span class="token punctuation">,</span> clientWidth<span class="token punctuation">,</span> clientTop<span class="token punctuation">,</span> clientLeft<span class="token punctuation">,</span>
+offsetParent<span class="token punctuation">,</span> offsetHeight<span class="token punctuation">,</span> offsetWidth<span class="token punctuation">,</span> offsetTop<span class="token punctuation">,</span> offsetLeft<span class="token punctuation">,</span>
+localName<span class="token punctuation">,</span> prefix<span class="token punctuation">,</span> namespaceURI<span class="token punctuation">,</span> id<span class="token punctuation">,</span> style<span class="token punctuation">,</span> attributes<span class="token punctuation">,</span> tagName<span class="token punctuation">,</span>
+parentElement<span class="token punctuation">,</span> textContent<span class="token punctuation">,</span> baseURI<span class="token punctuation">,</span> ownerDocument<span class="token punctuation">,</span> nextSibling<span class="token punctuation">,</span>
+previousSibling<span class="token punctuation">,</span> lastChild<span class="token punctuation">,</span> firstChild<span class="token punctuation">,</span> childNodes<span class="token punctuation">,</span> parentNode<span class="token punctuation">,</span>
+nodeType<span class="token punctuation">,</span> nodeValue<span class="token punctuation">,</span> nodeName<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>来看看空的 div 元素有多少属性要实现，这还只是第一层的自有属性，没包括原型链继承而来</p>
+<p>的。如果触发了页面事件，就就会导致页面重排。相对于 DOM 对象，原生的 JavaScript 处理</p>
+<p>起来才会更快且更简单。</p>
+<h3 id="DOM树"><a href="#DOM树" class="headerlink" title="DOM树"></a>DOM树</h3><p>DOM 树上的结构、属性信息我们都可以很容易地用 JavaScript 对象表示出来。</p>
+<pre class="line-numbers language-js"><code class="language-js"><span class="token keyword">var</span> olE <span class="token operator">=</span> <span class="token punctuation">{</span>
+  tagName<span class="token punctuation">:</span> <span class="token string">'ol'</span><span class="token punctuation">,</span> <span class="token comment" spellcheck="true">// 标签名</span>
+  props<span class="token punctuation">:</span> <span class="token punctuation">{</span> <span class="token comment" spellcheck="true">// 属性用对象存储键值对</span>
+    id<span class="token punctuation">:</span> <span class="token string">'ol-list'</span>
+  <span class="token punctuation">}</span><span class="token punctuation">,</span>
+  children<span class="token punctuation">:</span> <span class="token punctuation">[</span> <span class="token comment" spellcheck="true">// 子节点</span>
+    <span class="token punctuation">{</span>tagName<span class="token punctuation">:</span> <span class="token string">'li'</span><span class="token punctuation">,</span> props<span class="token punctuation">:</span> <span class="token punctuation">{</span><span class="token keyword">class</span><span class="token punctuation">:</span> <span class="token string">'item'</span><span class="token punctuation">}</span><span class="token punctuation">,</span> children<span class="token punctuation">:</span> <span class="token punctuation">[</span><span class="token string">"Item 1"</span><span class="token punctuation">]</span><span class="token punctuation">}</span><span class="token punctuation">,</span>
+    <span class="token punctuation">{</span>tagName<span class="token punctuation">:</span> <span class="token string">'li'</span><span class="token punctuation">,</span> props<span class="token punctuation">:</span> <span class="token punctuation">{</span><span class="token keyword">class</span><span class="token punctuation">:</span> <span class="token string">'item'</span><span class="token punctuation">}</span><span class="token punctuation">,</span> children<span class="token punctuation">:</span> <span class="token punctuation">[</span><span class="token string">"Item 2"</span><span class="token punctuation">]</span><span class="token punctuation">}</span><span class="token punctuation">,</span>
+    <span class="token punctuation">{</span>tagName<span class="token punctuation">:</span> <span class="token string">'li'</span><span class="token punctuation">,</span> props<span class="token punctuation">:</span> <span class="token punctuation">{</span><span class="token keyword">class</span><span class="token punctuation">:</span> <span class="token string">'item'</span><span class="token punctuation">}</span><span class="token punctuation">,</span> children<span class="token punctuation">:</span> <span class="token punctuation">[</span><span class="token string">"Item 3"</span><span class="token punctuation">]</span><span class="token punctuation">}</span><span class="token punctuation">,</span>
+  <span class="token punctuation">]</span>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>对应HTML</p>
+<pre class="line-numbers language-js"><code class="language-js"><span class="token operator">&lt;</span>ol id<span class="token operator">=</span><span class="token string">'ol-list'</span><span class="token operator">></span>
+  <span class="token operator">&lt;</span>li <span class="token keyword">class</span><span class="token operator">=</span><span class="token string">'item'</span><span class="token operator">></span>Item <span class="token number">1</span><span class="token operator">&lt;</span><span class="token operator">/</span>li<span class="token operator">></span>
+  <span class="token operator">&lt;</span>li <span class="token keyword">class</span><span class="token operator">=</span><span class="token string">'item'</span><span class="token operator">></span>Item <span class="token number">2</span><span class="token operator">&lt;</span><span class="token operator">/</span>li<span class="token operator">></span>
+  <span class="token operator">&lt;</span>li <span class="token keyword">class</span><span class="token operator">=</span><span class="token string">'item'</span><span class="token operator">></span>Item <span class="token number">3</span><span class="token operator">&lt;</span><span class="token operator">/</span>li<span class="token operator">></span>
+<span class="token operator">&lt;</span><span class="token operator">/</span>ol<span class="token operator">></span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h3 id="虚拟DOM算法的原理"><a href="#虚拟DOM算法的原理" class="headerlink" title="虚拟DOM算法的原理"></a>虚拟DOM算法的原理</h3><p>DOM 我们都可以用 JavaScript 对象来表示。那反过来，就可以用 JavaScript 对象表示的树结</p>
+<p>构来构建一个真正的 DOM 。当状态变更时，重新渲染这个 JavaScript 的对象结构，实现视图</p>
+<p>的变更，结构根据变更的地方重新渲染。</p>
+<p>这就是所谓的 Virtual DOM 算法：</p>
+<ul>
+<li>用 JavaScript 对象结构表示 DOM 树的结构；</li>
+<li>然后用这个树构建一个真正的 DOM 树</li>
+<li>插到文档当中当状态变更时，重新构造一棵新的对象树。</li>
+<li>然后用新的树和旧的树进行比较两个数的差异。</li>
+<li>然后把差异更新到久的树上，整个视图就更新了。</li>
+</ul>
+<p>Virtual DOM 本质就是在 JS 和 DOM 之间做了一个缓存。既然已经知道 DOM 慢，就在 JS 和 DOM 之间加个缓存。JS 先操作 Virtual DOM对比排序/变更，最后再把整个变更写入真实 DOM。</p>
+<h2 id="Virtual-DOM实现"><a href="#Virtual-DOM实现" class="headerlink" title="Virtual DOM实现"></a>Virtual DOM实现</h2><h3 id="用JS对象模拟DOM树"><a href="#用JS对象模拟DOM树" class="headerlink" title="用JS对象模拟DOM树"></a>用JS对象模拟DOM树</h3><p>用 JavaScript 来表示一个 DOM 节点是很简单的事情，你只需要记录它的节点类型、属性，还有子节点：</p>
+<pre class="line-numbers language-js"><code class="language-js"><span class="token keyword">export</span> <span class="token keyword">default</span> Ele <span class="token operator">=</span> <span class="token punctuation">(</span>tagName<span class="token punctuation">,</span> props<span class="token punctuation">,</span> children<span class="token punctuation">)</span> <span class="token operator">=</span><span class="token operator">></span> <span class="token punctuation">{</span>
+  <span class="token keyword">this</span><span class="token punctuation">.</span>tagName <span class="token operator">=</span> tagName
+  <span class="token keyword">this</span><span class="token punctuation">.</span>props <span class="token operator">=</span> props
+  <span class="token keyword">this</span><span class="token punctuation">.</span>children <span class="token operator">=</span> children
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>例如上面的 DOM 结构就可以简单的表示：</p>
+<pre class="line-numbers language-js"><code class="language-js"><span class="token keyword">import</span> <span class="token operator">*</span> <span class="token keyword">as</span> el <span class="token keyword">from</span> <span class="token string">'Ele'</span><span class="token punctuation">;</span>
+<span class="token keyword">var</span> ol <span class="token operator">=</span> <span class="token function">el</span><span class="token punctuation">(</span><span class="token string">'ol'</span><span class="token punctuation">,</span> <span class="token punctuation">{</span>id<span class="token punctuation">:</span> <span class="token string">'ol-list'</span><span class="token punctuation">}</span><span class="token punctuation">,</span> <span class="token punctuation">[</span>
+  <span class="token function">el</span><span class="token punctuation">(</span><span class="token string">'li'</span><span class="token punctuation">,</span> <span class="token punctuation">{</span><span class="token keyword">class</span><span class="token punctuation">:</span> <span class="token string">'item'</span><span class="token punctuation">}</span><span class="token punctuation">,</span> <span class="token punctuation">[</span><span class="token string">'Item 1'</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+  <span class="token function">el</span><span class="token punctuation">(</span><span class="token string">'li'</span><span class="token punctuation">,</span> <span class="token punctuation">{</span><span class="token keyword">class</span><span class="token punctuation">:</span> <span class="token string">'item'</span><span class="token punctuation">}</span><span class="token punctuation">,</span> <span class="token punctuation">[</span><span class="token string">'Item 2'</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+  <span class="token function">el</span><span class="token punctuation">(</span><span class="token string">'li'</span><span class="token punctuation">,</span> <span class="token punctuation">{</span><span class="token keyword">class</span><span class="token punctuation">:</span> <span class="token string">'item'</span><span class="token punctuation">}</span><span class="token punctuation">,</span> <span class="token punctuation">[</span><span class="token string">'Item 3'</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
+<span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>现在 ol 只是一个 JavaScript 对象表示的 DOM 结构，但页面上并没有这个结构。我们可以根据这</p>
+<p>个 ol 构建来生成真正的 ol。新增一个 render 方法，根据 tagName 构建一个真正的 DOM，然</p>
+<p>后生成 DOM 属性、连接子结构等等。</p>
+<pre class="line-numbers language-js"><code class="language-js">Ele<span class="token punctuation">.</span>prototype<span class="token punctuation">.</span>render <span class="token operator">=</span> <span class="token keyword">function</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token keyword">var</span> e <span class="token operator">=</span> document<span class="token punctuation">.</span><span class="token function">createElement</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">.</span>tagName<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// 创建元素</span>
+  <span class="token keyword">var</span> props <span class="token operator">=</span> <span class="token keyword">this</span><span class="token punctuation">.</span>props<span class="token punctuation">;</span>
+
+  <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">var</span> propName <span class="token keyword">in</span> props<span class="token punctuation">)</span> <span class="token punctuation">{</span> <span class="token comment" spellcheck="true">// 设置 DOM 属性</span>
+    <span class="token keyword">var</span> propValue <span class="token operator">=</span> props<span class="token punctuation">[</span>propName<span class="token punctuation">]</span><span class="token punctuation">;</span>
+    e<span class="token punctuation">.</span><span class="token function">setAttribute</span><span class="token punctuation">(</span>propName<span class="token punctuation">,</span> propValue<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+
+  <span class="token keyword">var</span> children <span class="token operator">=</span> <span class="token keyword">this</span><span class="token punctuation">.</span>children <span class="token operator">||</span> <span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+
+  children<span class="token punctuation">.</span><span class="token function">forEach</span><span class="token punctuation">(</span><span class="token keyword">function</span> <span class="token punctuation">(</span>child<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">var</span> childE <span class="token operator">=</span> <span class="token punctuation">(</span>child <span class="token keyword">instanceof</span> <span class="token class-name">Element</span><span class="token punctuation">)</span>
+      <span class="token operator">?</span> child<span class="token punctuation">.</span><span class="token function">render</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token comment" spellcheck="true">// 子节点也是虚拟 DOM，递归构建</span>
+      <span class="token punctuation">:</span> document<span class="token punctuation">.</span><span class="token function">createTextNode</span><span class="token punctuation">(</span>child<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// 字符串，构建文本节点</span>
+    e<span class="token punctuation">.</span><span class="token function">appendChild</span><span class="token punctuation">(</span>childE<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+  <span class="token keyword">return</span> e<span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>最后只需要 render。</p>
+<pre class="line-numbers language-js"><code class="language-js"><span class="token keyword">var</span> olE <span class="token operator">=</span> Ele<span class="token punctuation">.</span><span class="token function">render</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+document<span class="token punctuation">.</span>body<span class="token punctuation">.</span><span class="token function">appendChild</span><span class="token punctuation">(</span>olE<span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+<p>上面的 olE 是真正的 DOM 节点，把它 append 到 body 中，这样就有了真正的 ol DOM 元素。</p>
+<pre class="line-numbers language-js"><code class="language-js"><span class="token operator">&lt;</span>ol id<span class="token operator">=</span><span class="token string">'ol-list'</span><span class="token operator">></span>
+  <span class="token operator">&lt;</span>li <span class="token keyword">class</span><span class="token operator">=</span><span class="token string">'item'</span><span class="token operator">></span>Item <span class="token number">1</span><span class="token operator">&lt;</span><span class="token operator">/</span>li<span class="token operator">></span>
+  <span class="token operator">&lt;</span>li <span class="token keyword">class</span><span class="token operator">=</span><span class="token string">'item'</span><span class="token operator">></span>Item <span class="token number">2</span><span class="token operator">&lt;</span><span class="token operator">/</span>li<span class="token operator">></span>
+  <span class="token operator">&lt;</span>li <span class="token keyword">class</span><span class="token operator">=</span><span class="token string">'item'</span><span class="token operator">></span>Item <span class="token number">3</span><span class="token operator">&lt;</span><span class="token operator">/</span>li<span class="token operator">></span>
+<span class="token operator">&lt;</span><span class="token operator">/</span>ol<span class="token operator">></span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h2 id="Virtual-DOM-树的差异介绍（Diff算法）"><a href="#Virtual-DOM-树的差异介绍（Diff算法）" class="headerlink" title="Virtual DOM 树的差异介绍（Diff算法）"></a>Virtual DOM 树的差异介绍（Diff算法）</h2><h3 id="比较两棵虚拟DOM树的差异"><a href="#比较两棵虚拟DOM树的差异" class="headerlink" title="比较两棵虚拟DOM树的差异"></a>比较两棵虚拟DOM树的差异</h3><p>正如你所预料的，比较两棵DOM树的差异是 Virtual DOM 算法最核心的部分，这也是所谓的 Virtual DOM 的 diff 算法。两个树的完全的 diff 算法是一个时间复杂度为 O(n^3) 的问题。但是在前端当中，你很少会跨越层级地移动DOM元素。所以 Virtual DOM 只会对同一个层级的元素进行对比：</p>
+<p><img src="https://img.58cdn.com.cn/escstatic/fecar/pmuse/reactnative/diff1.png" alt="diff1.png"></p>
+<p>上面的div只会和同一层级的div对比，第二层级的只会跟第二层级对比。这样算法复杂度就可以达到 O(n)。</p>
+<p>差异是指的是什么呢？DOM 替换掉原来的节点，如把上面的 div 换成了 section 进行移动、删</p>
+<p>除、新增子节点，例如上面 div 的子节点，把 p 和 span 顺序互换修改了节点的属性。对于文本</p>
+<p>节点，文本内容可能会改变。</p>
+<p>如果我把左侧的 p、span、div 反过来变成 div、p、span 怎么办？按照差异正常会被替换掉，</p>
+<p>但这样 DOM开销就会异常的大了。而 React 帮我们做到不需要替换节点，而只需要经过节点移</p>
+<p>动就可以达到。</p>
+<h3 id="深度优先遍历，记录差异"><a href="#深度优先遍历，记录差异" class="headerlink" title="深度优先遍历，记录差异"></a>深度优先遍历，记录差异</h3><p>在实际的代码中，会对新旧两棵树进行一个深度优先的遍历，这样每个节点都会有一个唯一的标记：</p>
+<p><img src="https://img.58cdn.com.cn/escstatic/fecar/pmuse/reactnative/diff2.png" alt="diff2.png"></p>
+<p>在深度优先遍历的时候，每遍历到一个节点就把该节点和新的的树进行对比。如果有差异的话就记录到一个对象里面。</p>
+<pre><code>
+// diff 函数，对比两棵树
+function diff (oldTree, newTree) {
+  var index = 0 // 当前节点的标志
+  var patches = {} // 用来记录每个节点差异的对象
+  dfsWalk(oldTree, newTree, index, patches)
+  return patches
+}
+
+// 对两棵树进行深度优先遍历
+function dfsWalk (oldNode, newNode, index, patches) {
+  // 对比oldNode和newNode的不同，记录下来
+  patches[index] = [...]
+
+  diffChildren(oldNode.children, newNode.children, index, patches)
+}
+
+// 遍历子节点
+function diffChildren (oldChildren, newChildren, index, patches) {
+  var leftNode = null
+  var currentNodeIndex = index
+  oldChildren.forEach(function (child, i) {
+    var newChild = newChildren[i]
+    currentNodeIndex = (leftNode &amp;&amp; leftNode.count) // 计算节点的标识
+      ? currentNodeIndex + leftNode.count + 1
+      : currentNodeIndex + 1
+    dfsWalk(child, newChild, currentNodeIndex, patches) // 深度遍历子节点
+    leftNode = child
+  })
+}</code></pre><p>例如，上面的div和新的div有差异，当前的标记是0，那么：</p>
+<pre><code>patches[0] = [{difference}, {difference}, ...] // 用数组存储新旧节点的不同</code></pre><p>同理p是patches[1]，ul是patches[3]，类推。</p>
+<h3 id="差异类型"><a href="#差异类型" class="headerlink" title="差异类型"></a>差异类型</h3><p>上面说的节点的差异指的是什么呢？对 DOM 操作可能会：</p>
+<ul>
+<li>替换掉原来的节点，例如把上面的div换成了section</li>
+<li>移动、删除、新增子节点，例如上面div的子节点，把p和ul顺序互换</li>
+<li>修改了节点的属性</li>
+<li>对于文本节点，文本内容可能会改变。例如修改上面的文本节点2内容为Virtual DOM 2</li>
+</ul>
+<p>所以我们定义了几种差异类型：</p>
+<pre><code>var REPLACE = 0
+var REORDER = 1
+var PROPS = 2
+var TEXT = 3</code></pre><p>对于节点替换，很简单。判断新旧节点的tagName和是不是一样的，如果不一样的说明需要替换掉。如div换成section，就记录下：</p>
+<pre><code>patches[0] = [{
+  type: REPALCE,
+  node: newNode // el(&#39;section&#39;, props, children)
+}]</code></pre><p>如果给div新增了属性id为container，就记录下：</p>
+<pre><code>patches[0] = [{
+  type: REPALCE,
+  node: newNode // el(&#39;section&#39;, props, children)
+}, {
+  type: PROPS,
+  props: {
+    id: &quot;container&quot;
+  }
+}]
+</code></pre><p>那如果把我div的子节点重新排序呢？例如p, ul, div的顺序换成了div, p, ul。这个该怎么对比？如果按照同层级进行顺序对比的话，它们都会被替换掉。如p和div的tagName不同，p会被div所替代。最终，三个节点都会被替换，这样DOM开销就非常大。而实际上是不需要替换节点，而只需要经过节点移动就可以达到，我们只需知道怎么进行移动。</p>
+<h3 id="列表对比算法"><a href="#列表对比算法" class="headerlink" title="列表对比算法"></a>列表对比算法</h3><p>假设现在可以英文字母唯一地标识每一个子节点：</p>
+<p>旧的节点顺序：</p>
+<blockquote>
+<p>a b c d e f g h i</p>
+</blockquote>
+<p>现在对节点进行了删除、插入、移动的操作。新增j节点，删除e节点，移动h节点：</p>
+<p>新的节点顺序：</p>
+<blockquote>
+<p>a b c h d f g i j</p>
+</blockquote>
+<p>现在知道了新旧的顺序，求最小的插入、删除操作（移动可以看成是删除和插入操作的结合）。这个问题抽象出来其实是字符串的最小编辑距离问题（<a href="https://link.zhihu.com/?target=https%3A//en.wikipedia.org/wiki/Edit_distance" target="_blank" rel="noopener">Edition Distance</a>），最常见的解决算法是 <a href="https://link.zhihu.com/?target=https%3A//en.wikipedia.org/wiki/Levenshtein_distance" target="_blank" rel="noopener">Levenshtein Distance</a>，通过动态规划求解，时间复杂度为 O(M * N)。但是我们并不需要真的达到最小的操作，我们只需要优化一些比较常见的移动情况，牺牲一定DOM操作，让算法时间复杂度达到线性的（O(max(M, N))。具体算法细节比较多，这里不累述，有兴趣可以参考<a href="https://link.zhihu.com/?target=https%3A//github.com/livoras/list-diff/blob/master/lib/diff.js" target="_blank" rel="noopener">代码</a>。</p>
+<p>我们能够获取到某个父节点的子节点的操作，就可以记录下来：</p>
+<pre><code>patches[0] = [{
+  type: REORDER,
+  moves: [{remove or insert}, {remove or insert}, ...]
+}]</code></pre><p>但是要注意的是，因为tagName是可重复的，不能用这个来进行对比。所以需要给子节点加上唯一标识key，列表对比的时候，使用key进行对比，这样才能复用老的 DOM 树上的节点。</p>
+<p>这样，我们就可以通过深度优先遍历两棵树，每层的节点进行对比，记录下每个节点的差异了。</p>
+<h2 id="结语"><a href="#结语" class="headerlink" title="结语"></a>结语</h2><p>实际还需要处理事件监听、状态监控。生成虚拟 DOM 时也可以加入 JSX 语法。当然这些事情都做了的话，就可以构造一个简单的ReactJS了。</p>
+
+            </div>
+            <hr/>
+
+            
+            <style>
+    #reward {
+        margin: 40px 0;
+        text-align: center;
+    }
+
+    #reward .reward-link {
+        font-size: 1.88rem;
+    }
+
+    #reward .btn-floating:hover {
+        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2), 0 5px 15px rgba(0, 0, 0, 0.2);
+    }
+
+    #rewardModal {
+        width: 320px;
+        height: 350px;
+    }
+
+    #rewardModal .reward-title {
+        margin: 15px auto;
+        padding-bottom: 5px;
+    }
+
+    #rewardModal .modal-content {
+        padding: 10px;
+    }
+
+    #rewardModal .close {
+        position: absolute;
+        right: 15px;
+        top: 15px;
+        color: rgba(0, 0, 0, 0.5);
+        font-size: 1.3rem;
+        line-height: 20px;
+        cursor: pointer;
+    }
+
+    #rewardModal .close:hover {
+        color: #ef5350;
+        transform: scale(1.3);
+        -moz-transform:scale(1.3);
+        -webkit-transform:scale(1.3);
+        -o-transform:scale(1.3);
+    }
+
+    #rewardModal .reward-tabs {
+        margin: 0 auto;
+        width: 210px;
+    }
+
+    .reward-tabs .tabs {
+        height: 38px;
+        margin: 10px auto;
+        padding-left: 0;
+    }
+
+    .reward-content ul {
+        padding-left: 0 !important;
+    }
+
+    .reward-tabs .tabs .tab {
+        height: 38px;
+        line-height: 38px;
+    }
+
+    .reward-tabs .tab a {
+        color: #fff;
+        background-color: #ccc;
+    }
+
+    .reward-tabs .tab a:hover {
+        background-color: #ccc;
+        color: #fff;
+    }
+
+    .reward-tabs .wechat-tab .active {
+        color: #fff !important;
+        background-color: #22AB38 !important;
+    }
+
+    .reward-tabs .alipay-tab .active {
+        color: #fff !important;
+        background-color: #019FE8 !important;
+    }
+
+    .reward-tabs .reward-img {
+        width: 210px;
+        height: 210px;
+    }
+</style>
+
+<div id="reward">
+    <a href="#rewardModal" class="reward-link modal-trigger btn-floating btn-large waves-effect waves-light red">赏</a>
+
+    <!-- Modal Structure -->
+    <div id="rewardModal" class="modal">
+        <div class="modal-content">
+            <a class="close modal-close"><i class="fa fa-close"></i></a>
+            <h4 class="reward-title">你的赏识是我前进的动力</h4>
+            <div class="reward-content">
+                <div class="reward-tabs">
+                    <ul class="tabs row">
+                        <li class="tab col s6 alipay-tab waves-effect waves-light"><a href="#alipay">支付宝</a></li>
+                        <li class="tab col s6 wechat-tab waves-effect waves-light"><a href="#wechat">微 信</a></li>
+                    </ul>
+                    <div id="alipay">
+                        <img src="/medias/reward/alipay.jpg" class="reward-img" alt="支付宝打赏二维码">
+                    </div>
+                    <div id="wechat">
+                        <img src="/medias/reward/wechat.png" class="reward-img" alt="微信打赏二维码">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    $(function () {
+        $('.tabs').tabs();
+    });
+</script>
+            
+
+            <link rel="stylesheet" type="text/css" href="/libs/share/css/share.min.css">
+
+<div id="article-share">
+    
+    <div class="social-share" data-disabled="qzone" data-wechat-qrcode-helper="<p>微信里点“发现”->“扫一扫”二维码便可查看分享。</p>"></div>
+    
+</div>
+
+<script src="/libs/share/js/social-share.min.js"></script>
+
+            
+
+    <div class="reprint" id="reprint-statement">
+        <p class="reprint-tip">
+            <i class="fa fa-exclamation-triangle"></i>&nbsp;&nbsp;
+            <span>转载规则</span>
+        </p>
+        
+            <div class="center-align">
+                <a rel="license" href="https://creativecommons.org/licenses/by/4.0/deed.zh">
+                    <img alt=""
+                         style="border-width:0"
+                         src="https://i.creativecommons.org/l/by/4.0/88x31.png"/>
+                </a>
+            </div>
+            <br/>
+            <span xmlns:dct="http://purl.org/dc/terms/" href="http://purl.org/dc/dcmitype/Text"
+                  property="dct:title" rel="dct:type">
+                    《前端Virtual DOM详解》
+                </span> 由
+            <a xmlns:cc="http://creativecommons.org/ns#" href="/2019/03/04/Virtual/" property="cc:attributionName"
+               rel="cc:attributionURL">
+                浅夏晴空
+            </a> 采用
+            <a rel="license" href="https://creativecommons.org/licenses/by/4.0/deed.zh">
+                知识共享署名 4.0 国际许可协议
+            </a>进行许可。
+        
+    </div>
+
+    <script async defer>
+      document.addEventListener("copy", function (e) {
+        let toastHTML = '<span>复制成功，请遵循本文的转载规则</span><button class="btn-flat toast-action" onclick="navToReprintStatement()" style="font-size: smaller">查看</a>';
+        M.toast({html: toastHTML})
+      });
+
+      function navToReprintStatement() {
+        $("html, body").animate({scrollTop: $("#reprint-statement").offset().top - 80}, 800);
+      }
+    </script>
+
+
+        </div>
+    </div>
+
+    
+        <link rel="stylesheet" href="/libs/gitalk/gitalk.css">
+<link rel="stylesheet" href="/css/my-gitalk.css">
+
+<div class="card gitalk-card" data-aos="fade-up">
+    <div id="gitalk-container" class="card-content"></div>
+</div>
+
+<script src="/libs/gitalk/gitalk.min.js"></script>
+<script>
+    let gitalk = new Gitalk({
+        clientID: 'de8dfcea77a9e87de17a',
+        clientSecret: '569b91fd16e2f3972943f6907219b5ca2984aa1b',
+        repo: 'gongchenghuigch.github.io',
+        owner: 'gongchenghuigch',
+        admin: "gongchenghuigch",
+        id: '2019-03-04T10-59-44',
+        distractionFreeMode: false  // Facebook-like distraction free mode
+    });
+
+    gitalk.render('gitalk-container');
+</script>
+    
+
+    
+
+    
+
+    
+
+    
+        <style>
+    .valine-card {
+        margin: 1.5rem auto;
+    }
+
+    .valine-card .card-content {
+        padding: 20px 20px 5px 20px;
+    }
+
+    #vcomments input[type=text],
+    #vcomments input[type=email],
+    #vcomments input[type=url],
+    #vcomments textarea {
+        box-sizing: border-box;
+    }
+
+    #vcomments p {
+        margin: 2px 2px 10px;
+        font-size: 1.05rem;
+        line-height: 1.78rem;
+    }
+
+    #vcomments blockquote p {
+        text-indent: 0.2rem;
+    }
+
+    #vcomments a {
+        padding: 0 2px;
+        color: #42b983;
+        font-weight: 500;
+        text-decoration: underline;
+    }
+
+    #vcomments img {
+        max-width: 100%;
+        height: auto;
+        cursor: pointer;
+    }
+
+    #vcomments ol li {
+        list-style-type: decimal;
+    }
+
+    #vcomments ol,
+    ul {
+        display: block;
+        padding-left: 2em;
+        word-spacing: 0.05rem;
+    }
+
+    #vcomments ul li,
+    ol li {
+        display: list-item;
+        line-height: 1.8rem;
+        font-size: 1rem;
+    }
+
+    #vcomments ul li {
+        list-style-type: disc;
+    }
+
+    #vcomments ul ul li {
+        list-style-type: circle;
+    }
+
+    #vcomments table, th, td {
+        padding: 12px 13px;
+        border: 1px solid #dfe2e5;
+    }
+
+    #vcomments table, th, td {
+        border: 0;
+    }
+
+    table tr:nth-child(2n), thead {
+        background-color: #fafafa;
+    }
+
+    #vcomments table th {
+        background-color: #f2f2f2;
+        min-width: 80px;
+    }
+
+    #vcomments table td {
+        min-width: 80px;
+    }
+
+    #vcomments h1 {
+        font-size: 1.85rem;
+        font-weight: bold;
+        line-height: 2.2rem;
+    }
+
+    #vcomments h2 {
+        font-size: 1.65rem;
+        font-weight: bold;
+        line-height: 1.9rem;
+    }
+
+    #vcomments h3 {
+        font-size: 1.45rem;
+        font-weight: bold;
+        line-height: 1.7rem;
+    }
+
+    #vcomments h4 {
+        font-size: 1.25rem;
+        font-weight: bold;
+        line-height: 1.5rem;
+    }
+
+    #vcomments h5 {
+        font-size: 1.1rem;
+        font-weight: bold;
+        line-height: 1.4rem;
+    }
+
+    #vcomments h6 {
+        font-size: 1rem;
+        line-height: 1.3rem;
+    }
+
+    #vcomments p {
+        font-size: 1rem;
+        line-height: 1.5rem;
+    }
+
+    #vcomments hr {
+        margin: 12px 0;
+        border: 0;
+        border-top: 1px solid #ccc;
+    }
+
+    #vcomments blockquote {
+        margin: 15px 0;
+        border-left: 5px solid #42b983;
+        padding: 1rem 0.8rem 0.3rem 0.8rem;
+        color: #666;
+        background-color: rgba(66, 185, 131, .1);
+    }
+
+    #vcomments pre {
+        font-family: monospace, monospace;
+        padding: 1.2em;
+        margin: .5em 0;
+        background: #272822;
+        overflow: auto;
+        border-radius: 0.3em;
+        tab-size: 4;
+    }
+
+    #vcomments code {
+        font-family: monospace, monospace;
+        padding: 1px 3px;
+        font-size: 0.92rem;
+        color: #e96900;
+        background-color: #f8f8f8;
+        border-radius: 2px;
+    }
+
+    #vcomments pre code {
+        font-family: monospace, monospace;
+        padding: 0;
+        color: #e8eaf6;
+        background-color: #272822;
+    }
+
+    #vcomments pre[class*="language-"] {
+        padding: 1.2em;
+        margin: .5em 0;
+    }
+
+    #vcomments code[class*="language-"],
+    pre[class*="language-"] {
+        color: #e8eaf6;
+    }
+
+    #vcomments [type="checkbox"]:not(:checked), [type="checkbox"]:checked {
+        position: inherit;
+        margin-left: -1.3rem;
+        margin-right: 0.4rem;
+        margin-top: -1px;
+        vertical-align: middle;
+        left: unset;
+        visibility: visible;
+    }
+
+    #vcomments b,
+    strong {
+        font-weight: bold;
+    }
+
+    #vcomments dfn {
+        font-style: italic;
+    }
+
+    #vcomments small {
+        font-size: 85%;
+    }
+
+    #vcomments cite {
+        font-style: normal;
+    }
+
+    #vcomments mark {
+        background-color: #fcf8e3;
+        padding: .2em;
+    }
+
+    #vcomments table, th, td {
+        padding: 12px 13px;
+        border: 1px solid #dfe2e5;
+    }
+
+    table tr:nth-child(2n), thead {
+        background-color: #fafafa;
+    }
+
+    #vcomments table th {
+        background-color: #f2f2f2;
+        min-width: 80px;
+    }
+
+    #vcomments table td {
+        min-width: 80px;
+    }
+
+    #vcomments [type="checkbox"]:not(:checked), [type="checkbox"]:checked {
+        position: inherit;
+        margin-left: -1.3rem;
+        margin-right: 0.4rem;
+        margin-top: -1px;
+        vertical-align: middle;
+        left: unset;
+        visibility: visible;
+    }
+</style>
+
+<div class="card valine-card" data-aos="fade-up">
+    <div id="vcomments" class="card-content"></div>
+</div>
+
+<script src="/libs/valine/av-min.js"></script>
+<script src="/libs/valine/Valine.min.js"></script>
+<script>
+    new Valine({
+        el: '#vcomments',
+        appId: '',
+        appKey: '',
+        notify: 'true' === 'true',
+        verify: 'true' === 'true',
+        visitor: 'true' === 'true',
+        avatar: 'mm',
+        pageSize: '10',
+        lang: 'zh-cn',
+        placeholder: 'just go go'
+    });
+</script>
+    
+
+    
+
+<article id="prenext-posts" class="prev-next articles">
+    <div class="row article-row">
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge left-badge text-color">
+                <i class="fa fa-chevron-left"></i>&nbsp;上一篇</div>
+            <div class="card">
+                <a href="/2019/04/04/rcylist/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/featureimages/19.jpg" class="responsive-img" alt="RecyclerListView的使用">
+                        
+                        <span class="card-title">RecyclerListView的使用</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            安装
+npm install –save recyclerlistview  
+或者：  
+npm install –save recyclerlistview@beta
+
+概述和功能RecyclerListView 是一个高性能的列表（l
+                        
+                    </div>
+                    <div class="publish-info">
+                        <span class="publish-date">
+                            <i class="fa fa-clock-o fa-fw icon-date"></i>2019-04-04
+                        </span>
+                        <span class="publish-author">
+                            
+                            <i class="fa fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/ReactNative/" class="post-category" target="_blank">
+                                    ReactNative
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/ReactNative/" target="_blank">
+                        <span class="chip bg-color">ReactNative</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge right-badge text-color">
+                下一篇&nbsp;<i class="fa fa-chevron-right"></i>
+            </div>
+            <div class="card">
+                <a href="/2019/01/02/submodule/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/featureimages/0.jpg" class="responsive-img" alt="git submodule子模块">
+                        
+                        <span class="card-title">git submodule子模块</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            有种情况我们经常会遇到：某个工作中的项目需要包含并使用另一个项目。 也许是第三方库，或者你独立开发的，用于多个父项目的库。 现在问题来了：你想要把它们当做两个独立的项目，同时又想在一个项目中使用另一个
+1、添加子模块
+git submodu
+                        
+                    </div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="fa fa-clock-o fa-fw icon-date"></i>2019-01-02
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fa fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/Linux/" class="post-category" target="_blank">
+                                    Linux
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/Linux/" target="_blank">
+                        <span class="chip bg-color">Linux</span>
+                    </a>
+                    
+                    <a href="/tags/git/" target="_blank">
+                        <span class="chip bg-color">git</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+    </div>
+</article>
+</div>
+
+
+
+    </div>
+    <div id="toc-aside" class="expanded col l3 hide-on-med-and-down">
+        <div class="toc-widget">
+            <div class="toc-title"><i class="fa fa-list-alt"></i>&nbsp;&nbsp;目录</div>
+            <div id="toc-content"></div>
+        </div>
+    </div>
+</div>
+
+<!-- TOC 悬浮按钮. -->
+
+<div id="floating-toc-btn" class="hide-on-med-and-down">
+    <a class="btn-floating btn-large bg-color">
+        <i class="fa fa-list"></i>
+    </a>
+</div>
+
+
+<script src="/libs/tocbot/tocbot.min.js"></script>
+<script>
+    $(function () {
+        tocbot.init({
+            tocSelector: '#toc-content',
+            contentSelector: '#articleContent',
+            headingsOffset: -($(window).height() * 0.4 - 45),
+            // headingsOffset: -205,
+            headingSelector: 'h2, h3, h4'
+        });
+
+        // modify the toc link href to support Chinese.
+        let i = 0;
+        let tocHeading = 'toc-heading-';
+        $('#toc-content a').each(function () {
+            $(this).attr('href', '#' + tocHeading + (++i));
+        });
+
+        // modify the heading title id to support Chinese.
+        i = 0;
+        $('#articleContent').children('h2, h3, h4').each(function () {
+            $(this).attr('id', tocHeading + (++i));
+        });
+
+        // Set scroll toc fixed.
+        let tocHeight = parseInt($(window).height() * 0.4 - 64);
+        let $tocWidget = $('.toc-widget');
+        $(window).scroll(function () {
+            let scroll = $(window).scrollTop();
+            /* add post toc fixed. */
+            if (scroll > tocHeight) {
+                $tocWidget.addClass('toc-fixed');
+            } else {
+                $tocWidget.removeClass('toc-fixed');
+            }
+        });
+
+        
+        /* 修复文章卡片 div 的宽度. */
+        let fixPostCardWidth = function (srcId, targetId) {
+            let srcDiv = $('#' + srcId);
+            if (srcDiv.length === 0) {
+                return;
+            }
+
+            let w = srcDiv.width();
+            if (w >= 450) {
+                w = w + 21;
+            } else if (w >= 350 && w < 450) {
+                w = w + 18;
+            } else if (w >= 300 && w < 350) {
+                w = w + 16;
+            } else {
+                w = w + 14;
+            }
+            $('#' + targetId).width(w);
+        };
+
+        // 切换TOC目录展开收缩的相关操作.
+        const expandedClass = 'expanded';
+        let $tocAside = $('#toc-aside');
+        let $mainContent = $('#main-content');
+        $('#floating-toc-btn .btn-floating').click(function () {
+            if ($tocAside.hasClass(expandedClass)) {
+                $tocAside.removeClass(expandedClass).slideUp(500);
+                $mainContent.removeClass('l9');
+            } else {
+                $tocAside.addClass(expandedClass).slideDown(500);
+                $mainContent.addClass('l9');
+            }
+            fixPostCardWidth('artDetail', 'prenext-posts');
+        });
+        
+    });
+</script>
+    
+
+</main>
+
+
+<footer class="page-footer bg-color">
+    <div class="container row center-align">
+        <div class="col s12 m8 l8 copy-right">
+            <span id="sitetime"></span> <br>
+            本站由&copy;<a href="https://gongchenghuigch.github.io/" target="_blank">gongchenghui</a>基于
+            <a href="https://hexo.io/" target="_blank">Hexo</a> 的
+            <a href="https://github.com/blinkfox/hexo-theme-matery" target="_blank">hexo-theme-matery</a>主题搭建.
+
+            
+                &nbsp;<i class="fa fa-area-chart"></i>&nbsp;站点总字数:&nbsp;
+                <span class="white-color">119.1k</span>
+            
+
+            
+			
+                <br>
+                
+                <span id="busuanzi_container_site_pv">
+                    <i class="fa fa-heart-o"></i>
+                    本站总访问量 <span id="busuanzi_value_site_pv" class="white-color"></span>
+                </span>
+                
+                
+                <span id="busuanzi_container_site_uv">
+                    <i class="fa fa-users"></i>
+                    次,&nbsp;访客数 <span id="busuanzi_value_site_uv" class="white-color"></span> 人.
+                </span>
+                
+            
+        </div>
+        <div class="col s12 m4 l4 social-link social-statis">
+
+
+    <a href="mailto:gongch0719@163.com" class="tooltipped" target="_blank" data-tooltip="邮件联系我" data-position="top" data-delay="50">
+        <i class="fa fa-envelope-open"></i>
+    </a>
+
+
+
+    <a href="tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=1134929850" class="tooltipped" data-tooltip="QQ联系我: 1134929850" data-position="top" data-delay="50">
+        <i class="fa fa-qq"></i>
+    </a>
+
+
+
+    <a href="/atom.xml" class="tooltipped" target="_blank" data-tooltip="RSS 订阅" data-position="top" data-delay="50">
+        <i class="fa fa-rss"></i>
+    </a>
+</div>
+    </div>
+</footer>
+
+<div class="progress-bar"></div>
+<script language = javascript >
+    function siteTime() {
+        window.setTimeout("siteTime()", 1000);
+        var seconds = 1000;
+        var minutes = seconds * 60;
+        var hours = minutes * 60;
+        var days = hours * 24;
+        var years = days * 365;
+        var today = new Date();
+        var todayYear = today.getFullYear();
+        var todayMonth = today.getMonth() + 1;
+        var todayDate = today.getDate();
+        var todayHour = today.getHours();
+        var todayMinute = today.getMinutes();
+        var todaySecond = today.getSeconds();
+        var t1 = Date.UTC(2018, 08, 11, 00, 00, 00); //北京时间2018-2-13 00:00:00 
+        var t2 = Date.UTC(todayYear, todayMonth, todayDate, todayHour, todayMinute, todaySecond); 
+        var diff = t2 - t1; var diffYears = Math.floor(diff / years); 
+        var diffDays = Math.floor((diff / days) - diffYears * 365); 
+        var diffHours = Math.floor((diff - (diffYears * 365 + diffDays) * days) / hours); 
+        var diffMinutes = Math.floor((diff - (diffYears * 365 + diffDays) * days - diffHours * hours) / minutes); 
+        var diffSeconds = Math.floor((diff - (diffYears * 365 + diffDays) * days - diffHours * hours - diffMinutes * minutes) / seconds); document.getElementById("sitetime").innerHTML = "本站已运行 " +diffYears+" 年 "+diffDays + " 天 " + diffHours + " 小时 " + diffMinutes + " 分钟 " + diffSeconds + " 秒"; 
+    } 
+	siteTime(); 
+</script>
+
+
+<!-- 搜索遮罩框 -->
+<div id="searchModal" class="modal">
+    <div class="modal-content">
+        <div class="search-header">
+            <span class="title"><i class="fa fa-search"></i>&nbsp;&nbsp;搜索</span>
+            <input type="search" id="searchInput" name="s" placeholder="请输入搜索的关键字"
+                   class="search-input">
+        </div>
+        <div id="searchResult"></div>
+    </div>
+</div>
+
+<script src="/js/search.js"></script>
+<script type="text/javascript">
+$(function () {
+    searchFunc("/" + "search.xml", 'searchInput', 'searchResult');
+});
+</script>
+<!-- 回到顶部按钮 -->
+<div id="backTop" class="top-scroll">
+    <a class="btn-floating btn-large waves-effect waves-light" href="#!">
+        <i class="fa fa-angle-up"></i>
+    </a>
+</div>
+
+
+<script src="/libs/materialize/materialize.min.js"></script>
+<script src="/libs/masonry/masonry.pkgd.min.js"></script>
+<script src="/libs/aos/aos.js"></script>
+<script src="/libs/scrollprogress/scrollProgress.min.js"></script>
+<script src="/libs/lightGallery/js/lightgallery-all.min.js"></script>
+<script src="/js/matery.js"></script>
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+
+
+
+    <script src="/libs/others/clicklove.js"></script>
+
+
+    <script async src="/libs/others/busuanzi.pure.mini.js"></script>
+
+
+</body>
+</html>

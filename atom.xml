@@ -1,0 +1,602 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>gongchenghui</title>
+  
+  <subtitle>浅夏晴空</subtitle>
+  <link href="/atom.xml" rel="self"/>
+  
+  <link href="https://gongchenghuigch.github.io/"/>
+  <updated>2020-12-30T06:35:27.972Z</updated>
+  <id>https://gongchenghuigch.github.io/</id>
+  
+  <author>
+    <name>浅夏晴空</name>
+    
+  </author>
+  
+  <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>前端辅助开发工具</title>
+    <link href="https://gongchenghuigch.github.io/2020/12/30/fetool/"/>
+    <id>https://gongchenghuigch.github.io/2020/12/30/fetool/</id>
+    <published>2020-12-30T06:34:28.000Z</published>
+    <updated>2020-12-30T06:35:27.972Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;h2 id=&quot;阿里矢量图库&quot;&gt;&lt;a href=&quot;#阿里矢量图库&quot; class=&quot;headerlink&quot; title=&quot;阿里矢量图库&quot;&gt;&lt;/a&gt;阿里矢量图库&lt;/h2&gt;&lt;p&gt;&lt;a href=&quot;https://www.iconfont.cn/&quot; target=&quot;_blank&quot;
+        
+      
+    
+    </summary>
+    
+    
+      <category term="工具类" scheme="https://gongchenghuigch.github.io/categories/%E5%B7%A5%E5%85%B7%E7%B1%BB/"/>
+    
+    
+      <category term="css" scheme="https://gongchenghuigch.github.io/tags/css/"/>
+    
+      <category term="icon" scheme="https://gongchenghuigch.github.io/tags/icon/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>GMTC大前端技术演变</title>
+    <link href="https://gongchenghuigch.github.io/2020/12/30/GMTC/"/>
+    <id>https://gongchenghuigch.github.io/2020/12/30/GMTC/</id>
+    <published>2020-12-30T06:30:36.000Z</published>
+    <updated>2020-12-30T06:31:59.247Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;p&gt;&lt;img src=&quot;https://tva1.sinaimg.cn/large/0081Kckwly1gm4i6547tdj30hr0b3grp.jpg&quot; alt=&quot;image-20201229101050657&quot;&gt;  &lt;/p&gt;
+&lt;h2 id=&quot;GMTC&quot;&gt;&lt;a
+        
+      
+    
+    </summary>
+    
+    
+      <category term="大前端" scheme="https://gongchenghuigch.github.io/categories/%E5%A4%A7%E5%89%8D%E7%AB%AF/"/>
+    
+    
+      <category term="flutter" scheme="https://gongchenghuigch.github.io/tags/flutter/"/>
+    
+      <category term="nodejs" scheme="https://gongchenghuigch.github.io/tags/nodejs/"/>
+    
+      <category term="React" scheme="https://gongchenghuigch.github.io/tags/React/"/>
+    
+      <category term="TypeScrip" scheme="https://gongchenghuigch.github.io/tags/TypeScrip/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>从一道面试题来了解浏览器工作原理</title>
+    <link href="https://gongchenghuigch.github.io/2019/10/14/jsUrl/"/>
+    <id>https://gongchenghuigch.github.io/2019/10/14/jsUrl/</id>
+    <published>2019-10-14T09:24:46.000Z</published>
+    <updated>2019-10-14T09:25:45.177Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;h2 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot; title=&quot;前言&quot;&gt;&lt;/a&gt;前言&lt;/h2&gt;&lt;p&gt;作为前端工程师，几乎是每天都要与各种浏览器打交道。&lt;/p&gt;
+&lt;p&gt;&lt;img
+        
+      
+    
+    </summary>
+    
+    
+      <category term="JavaScript" scheme="https://gongchenghuigch.github.io/categories/JavaScript/"/>
+    
+    
+      <category term="JavaScript" scheme="https://gongchenghuigch.github.io/tags/JavaScript/"/>
+    
+      <category term="web" scheme="https://gongchenghuigch.github.io/tags/web/"/>
+    
+      <category term="浏览器" scheme="https://gongchenghuigch.github.io/tags/%E6%B5%8F%E8%A7%88%E5%99%A8/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Flutter Text参数详解</title>
+    <link href="https://gongchenghuigch.github.io/2019/10/14/flutterText/"/>
+    <id>https://gongchenghuigch.github.io/2019/10/14/flutterText/</id>
+    <published>2019-10-14T09:21:47.000Z</published>
+    <updated>2019-10-14T09:23:34.163Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;h2 id=&quot;示例&quot;&gt;&lt;a href=&quot;#示例&quot; class=&quot;headerlink&quot; title=&quot;示例&quot;&gt;&lt;/a&gt;示例&lt;/h2&gt;&lt;p&gt;&lt;img
+        
+      
+    
+    </summary>
+    
+    
+      <category term="flutter" scheme="https://gongchenghuigch.github.io/categories/flutter/"/>
+    
+    
+      <category term="flutter" scheme="https://gongchenghuigch.github.io/tags/flutter/"/>
+    
+      <category term="Text" scheme="https://gongchenghuigch.github.io/tags/Text/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>如何写出优雅通俗的JavaScript代码</title>
+    <link href="https://gongchenghuigch.github.io/2019/09/20/jsLint/"/>
+    <id>https://gongchenghuigch.github.io/2019/09/20/jsLint/</id>
+    <published>2019-09-20T09:20:59.000Z</published>
+    <updated>2019-09-20T09:21:52.762Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;h2 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot;
+        
+      
+    
+    </summary>
+    
+    
+      <category term="JavaScript" scheme="https://gongchenghuigch.github.io/categories/JavaScript/"/>
+    
+    
+      <category term="JavaScript" scheme="https://gongchenghuigch.github.io/tags/JavaScript/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Flutter设置背景图片</title>
+    <link href="https://gongchenghuigch.github.io/2019/09/19/flutterBg/"/>
+    <id>https://gongchenghuigch.github.io/2019/09/19/flutterBg/</id>
+    <published>2019-09-19T11:48:43.000Z</published>
+    <updated>2019-09-19T11:49:58.888Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;h2 id=&quot;效果展示&quot;&gt;&lt;a href=&quot;#效果展示&quot; class=&quot;headerlink&quot; title=&quot;效果展示&quot;&gt;&lt;/a&gt;效果展示&lt;/h2&gt;&lt;img
+        
+      
+    
+    </summary>
+    
+    
+      <category term="flutter" scheme="https://gongchenghuigch.github.io/categories/flutter/"/>
+    
+    
+      <category term="flutter" scheme="https://gongchenghuigch.github.io/tags/flutter/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>vscode中调试Flutter</title>
+    <link href="https://gongchenghuigch.github.io/2019/09/17/flutterDebug/"/>
+    <id>https://gongchenghuigch.github.io/2019/09/17/flutterDebug/</id>
+    <published>2019-09-17T09:29:46.000Z</published>
+    <updated>2019-09-17T09:30:43.730Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;h2 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot; title=&quot;前言&quot;&gt;&lt;/a&gt;前言&lt;/h2&gt;&lt;p&gt;之前每次启动flutter时首先是要&lt;code&gt;open -a Simulator&lt;/code&gt;打开本地的模拟器（我这里是Mac
+        
+      
+    
+    </summary>
+    
+    
+      <category term="flutter" scheme="https://gongchenghuigch.github.io/categories/flutter/"/>
+    
+    
+      <category term="flutter" scheme="https://gongchenghuigch.github.io/tags/flutter/"/>
+    
+      <category term="vscode" scheme="https://gongchenghuigch.github.io/tags/vscode/"/>
+    
+      <category term="debug" scheme="https://gongchenghuigch.github.io/tags/debug/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>从一个路由报错来深入理解Flutter的BuildContext</title>
+    <link href="https://gongchenghuigch.github.io/2019/09/17/BuildContext/"/>
+    <id>https://gongchenghuigch.github.io/2019/09/17/BuildContext/</id>
+    <published>2019-09-17T06:07:17.000Z</published>
+    <updated>2019-09-17T06:08:51.087Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;h2 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot; title=&quot;前言&quot;&gt;&lt;/a&gt;前言&lt;/h2&gt;&lt;p&gt;在使用flutter路由跳转是出现如下错误：&lt;/p&gt;
+&lt;p&gt;&lt;img
+        
+      
+    
+    </summary>
+    
+    
+      <category term="flutter" scheme="https://gongchenghuigch.github.io/categories/flutter/"/>
+    
+    
+      <category term="flutter" scheme="https://gongchenghuigch.github.io/tags/flutter/"/>
+    
+      <category term="Navigator" scheme="https://gongchenghuigch.github.io/tags/Navigator/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>前端经典面试题大全</title>
+    <link href="https://gongchenghuigch.github.io/2019/09/15/mianshi/"/>
+    <id>https://gongchenghuigch.github.io/2019/09/15/mianshi/</id>
+    <published>2019-09-15T10:22:47.000Z</published>
+    <updated>2019-09-15T10:23:35.014Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;h2 id=&quot;简答题&quot;&gt;&lt;a href=&quot;#简答题&quot; class=&quot;headerlink&quot; title=&quot;简答题&quot;&gt;&lt;/a&gt;简答题&lt;/h2&gt;&lt;h3 id=&quot;1、什么是防抖和节流？有什么区别？如何实现？&quot;&gt;&lt;a href=&quot;#1、什么是防抖和节流？有什么区别？如何实现？&quot;
+        
+      
+    
+    </summary>
+    
+    
+      <category term="面试题" scheme="https://gongchenghuigch.github.io/categories/%E9%9D%A2%E8%AF%95%E9%A2%98/"/>
+    
+    
+      <category term="面试题" scheme="https://gongchenghuigch.github.io/tags/%E9%9D%A2%E8%AF%95%E9%A2%98/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>setTimeout,promise,async await的区别</title>
+    <link href="https://gongchenghuigch.github.io/2019/09/14/awat/"/>
+    <id>https://gongchenghuigch.github.io/2019/09/14/awat/</id>
+    <published>2019-09-14T08:54:50.000Z</published>
+    <updated>2019-09-14T08:55:31.613Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;p&gt;一道面试题引发的血案，下面进入主题：&lt;/p&gt;
+&lt;pre class=&quot;line-numbers language-js&quot;&gt;&lt;code class=&quot;language-js&quot;&gt;&lt;span class=&quot;token comment&quot; spellcheck=&quot;true&quot;&gt;//
+        
+      
+    
+    </summary>
+    
+    
+      <category term="JavaScript" scheme="https://gongchenghuigch.github.io/categories/JavaScript/"/>
+    
+    
+      <category term="JavaScript" scheme="https://gongchenghuigch.github.io/tags/JavaScript/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>前端JS内存管理</title>
+    <link href="https://gongchenghuigch.github.io/2019/09/12/jsRAM/"/>
+    <id>https://gongchenghuigch.github.io/2019/09/12/jsRAM/</id>
+    <published>2019-09-12T08:16:18.000Z</published>
+    <updated>2019-09-12T08:19:07.625Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;h2 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot; title=&quot;前言&quot;&gt;&lt;/a&gt;前言&lt;/h2&gt;&lt;p&gt;像C语言这样的底层语言一般都有底层的内存管理接口，比如
+        
+      
+    
+    </summary>
+    
+    
+      <category term="JavaScript" scheme="https://gongchenghuigch.github.io/categories/JavaScript/"/>
+    
+    
+      <category term="JavaScript" scheme="https://gongchenghuigch.github.io/tags/JavaScript/"/>
+    
+      <category term="RAM" scheme="https://gongchenghuigch.github.io/tags/RAM/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>前端开发JavaScript你必须懂得的33个概念</title>
+    <link href="https://gongchenghuigch.github.io/2019/09/12/jsidea/"/>
+    <id>https://gongchenghuigch.github.io/2019/09/12/jsidea/</id>
+    <published>2019-09-12T03:27:34.000Z</published>
+    <updated>2019-09-12T03:28:16.357Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;h2 id=&quot;1-调用堆栈&quot;&gt;&lt;a href=&quot;#1-调用堆栈&quot; class=&quot;headerlink&quot; title=&quot;1. 调用堆栈&quot;&gt;&lt;/a&gt;1. 调用堆栈&lt;/h2&gt;&lt;h3 id=&quot;文章&quot;&gt;&lt;a href=&quot;#文章&quot; class=&quot;headerlink&quot;
+        
+      
+    
+    </summary>
+    
+    
+      <category term="JavaScript" scheme="https://gongchenghuigch.github.io/categories/JavaScript/"/>
+    
+    
+      <category term="JavaScript" scheme="https://gongchenghuigch.github.io/tags/JavaScript/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>非常优秀的前端博文集合</title>
+    <link href="https://gongchenghuigch.github.io/2019/09/12/article/"/>
+    <id>https://gongchenghuigch.github.io/2019/09/12/article/</id>
+    <published>2019-09-12T02:14:35.000Z</published>
+    <updated>2019-09-17T09:35:30.825Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;h2 id=&quot;JavaScript&quot;&gt;&lt;a href=&quot;#JavaScript&quot; class=&quot;headerlink&quot; title=&quot;JavaScript&quot;&gt;&lt;/a&gt;JavaScript&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;&lt;a
+        
+      
+    
+    </summary>
+    
+    
+      <category term="前端" scheme="https://gongchenghuigch.github.io/categories/%E5%89%8D%E7%AB%AF/"/>
+    
+    
+      <category term="前端" scheme="https://gongchenghuigch.github.io/tags/%E5%89%8D%E7%AB%AF/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>本地配置多个ssh-key</title>
+    <link href="https://gongchenghuigch.github.io/2019/09/11/ssh-key/"/>
+    <id>https://gongchenghuigch.github.io/2019/09/11/ssh-key/</id>
+    <published>2019-09-11T11:31:34.000Z</published>
+    <updated>2019-09-11T11:32:41.884Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;h2 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot;
+        
+      
+    
+    </summary>
+    
+    
+      <category term="ssh" scheme="https://gongchenghuigch.github.io/categories/ssh/"/>
+    
+    
+      <category term="Linux" scheme="https://gongchenghuigch.github.io/tags/Linux/"/>
+    
+      <category term="ssh-key" scheme="https://gongchenghuigch.github.io/tags/ssh-key/"/>
+    
+      <category term="ssh" scheme="https://gongchenghuigch.github.io/tags/ssh/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Vscode前端开发插件大全</title>
+    <link href="https://gongchenghuigch.github.io/2019/09/11/vscode/"/>
+    <id>https://gongchenghuigch.github.io/2019/09/11/vscode/</id>
+    <published>2019-09-11T08:28:23.000Z</published>
+    <updated>2019-09-11T08:35:25.398Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;h2 id=&quot;快捷键&quot;&gt;&lt;a href=&quot;#快捷键&quot; class=&quot;headerlink&quot; title=&quot;快捷键&quot;&gt;&lt;/a&gt;快捷键&lt;/h2&gt;&lt;h3 id=&quot;通用快捷键&quot;&gt;&lt;a href=&quot;#通用快捷键&quot; class=&quot;headerlink&quot;
+        
+      
+    
+    </summary>
+    
+    
+      <category term="vscode" scheme="https://gongchenghuigch.github.io/categories/vscode/"/>
+    
+    
+      <category term="vscode" scheme="https://gongchenghuigch.github.io/tags/vscode/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>hexo+github搭建免费个人网站</title>
+    <link href="https://gongchenghuigch.github.io/2019/09/09/theme/"/>
+    <id>https://gongchenghuigch.github.io/2019/09/09/theme/</id>
+    <published>2019-09-09T10:19:17.000Z</published>
+    <updated>2019-09-10T08:15:19.640Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;h2 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot; title=&quot;前言&quot;&gt;&lt;/a&gt;前言&lt;/h2&gt;&lt;p&gt;GitHub page提供了免费的服务搭建&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;免费域名 xxx.github.io 
+        
+      
+    
+    </summary>
+    
+    
+      <category term="hexo" scheme="https://gongchenghuigch.github.io/categories/hexo/"/>
+    
+    
+      <category term="hexo" scheme="https://gongchenghuigch.github.io/tags/hexo/"/>
+    
+      <category term="github" scheme="https://gongchenghuigch.github.io/tags/github/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>ssh报错</title>
+    <link href="https://gongchenghuigch.github.io/2019/09/06/ssherr/"/>
+    <id>https://gongchenghuigch.github.io/2019/09/06/ssherr/</id>
+    <published>2019-09-06T09:19:35.000Z</published>
+    <updated>2019-09-11T11:32:12.694Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;h2 id=&quot;报错信息&quot;&gt;&lt;a href=&quot;#报错信息&quot; class=&quot;headerlink&quot; title=&quot;报错信息&quot;&gt;&lt;/a&gt;报错信息&lt;/h2&gt;&lt;pre class=&quot;line-numbers language-js&quot;&gt;&lt;code
+        
+      
+    
+    </summary>
+    
+    
+      <category term="ssh" scheme="https://gongchenghuigch.github.io/categories/ssh/"/>
+    
+    
+      <category term="Linux" scheme="https://gongchenghuigch.github.io/tags/Linux/"/>
+    
+      <category term="ssh" scheme="https://gongchenghuigch.github.io/tags/ssh/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>TypeScript声明文件</title>
+    <link href="https://gongchenghuigch.github.io/2019/09/05/tsinterface/"/>
+    <id>https://gongchenghuigch.github.io/2019/09/05/tsinterface/</id>
+    <published>2019-09-05T02:29:29.000Z</published>
+    <updated>2019-09-05T02:31:11.811Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;h2 id=&quot;声明文件简介&quot;&gt;&lt;a href=&quot;#声明文件简介&quot; class=&quot;headerlink&quot; title=&quot;声明文件简介&quot;&gt;&lt;/a&gt;声明文件简介&lt;/h2&gt;&lt;p&gt;当使用第三方库时，我们需要引用它的声明文件，才能获得对应的代码补全、接口提示等功能。&lt;/p&gt;
+&lt;h3
+        
+      
+    
+    </summary>
+    
+    
+      <category term="TypeScript" scheme="https://gongchenghuigch.github.io/categories/TypeScript/"/>
+    
+    
+      <category term="TypeScript" scheme="https://gongchenghuigch.github.io/tags/TypeScript/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>nvm版本管理</title>
+    <link href="https://gongchenghuigch.github.io/2019/09/04/nvm/"/>
+    <id>https://gongchenghuigch.github.io/2019/09/04/nvm/</id>
+    <published>2019-09-04T09:49:59.000Z</published>
+    <updated>2019-09-04T09:51:45.707Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;h2 id=&quot;安装nvm&quot;&gt;&lt;a href=&quot;#安装nvm&quot; class=&quot;headerlink&quot; title=&quot;安装nvm&quot;&gt;&lt;/a&gt;安装nvm&lt;/h2&gt;&lt;p&gt;首先要安装或者更新nvm，可以使用cURL 使用&lt;a
+        
+      
+    
+    </summary>
+    
+    
+      <category term="nodejs" scheme="https://gongchenghuigch.github.io/categories/nodejs/"/>
+    
+    
+      <category term="nodejs" scheme="https://gongchenghuigch.github.io/tags/nodejs/"/>
+    
+      <category term="npm" scheme="https://gongchenghuigch.github.io/tags/npm/"/>
+    
+      <category term="nvm" scheme="https://gongchenghuigch.github.io/tags/nvm/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>TypeScript类型断言</title>
+    <link href="https://gongchenghuigch.github.io/2019/09/04/tsAssertion/"/>
+    <id>https://gongchenghuigch.github.io/2019/09/04/tsAssertion/</id>
+    <published>2019-09-04T08:55:56.456Z</published>
+    <updated>2019-09-04T08:55:56.456Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;h2 id=&quot;类型断言&quot;&gt;&lt;a href=&quot;#类型断言&quot; class=&quot;headerlink&quot; title=&quot;类型断言&quot;&gt;&lt;/a&gt;类型断言&lt;/h2&gt;&lt;p&gt;类型断言（Type Assertion）可以用来手动指定一个值的类型。&lt;/p&gt;
+&lt;h3 id=&quot;语法&quot;&gt;&lt;a
+        
+      
+    
+    </summary>
+    
+    
+      <category term="TypeScript" scheme="https://gongchenghuigch.github.io/categories/TypeScript/"/>
+    
+    
+      <category term="TypeScript" scheme="https://gongchenghuigch.github.io/tags/TypeScript/"/>
+    
+  </entry>
+  
+</feed>

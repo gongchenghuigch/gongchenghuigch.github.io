@@ -1,0 +1,1945 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN">
+
+
+<head><meta name="generator" content="Hexo 3.9.0">
+    <meta charset="utf-8">
+    <meta name="keywords" content="非常优秀的前端博文集合, gongchenghui,github">
+    <meta name="description" content="JavaScript
+这一次，彻底弄懂 JavaScript 执行机制
+一个合格的中级前端工程师必须要掌握的 28 个 JavaScript 技巧
+JavaScript 专题系列 20 篇正式完结！
+JavaScript 复杂判断的更优雅写">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="renderer" content="webkit|ie-stand|ie-comp">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <title>非常优秀的前端博文集合 | gongchenghui</title>
+    <link rel="icon" type="image/png" href="/favicon.png">
+
+    <link rel="stylesheet" type="text/css" href="/libs/awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/materialize/materialize.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/aos/aos.css">
+    <link rel="stylesheet" type="text/css" href="/libs/animate/animate.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/lightGallery/css/lightgallery.min.css">
+    <link rel="stylesheet" type="text/css" href="/css/matery.css">
+    <link rel="stylesheet" type="text/css" href="/css/my.css">
+    <style type="text/css">
+        
+    </style>
+
+    <script src="/libs/jquery/jquery-2.2.0.min.js"></script>
+<link rel="alternate" href="/atom.xml" title="gongchenghui" type="application/atom+xml">
+<link rel="stylesheet" href="/css/prism-okaidia.css" type="text/css">
+<link rel="stylesheet" href="/css/prism-line-numbers.css" type="text/css"></head>
+
+
+<body>
+
+<header class="navbar-fixed">
+    <nav id="headNav" class="bg-color nav-transparent">
+        <div id="navContainer" class="nav-wrapper container">
+            <div class="brand-logo">
+                <a href="/" class="waves-effect waves-light">
+                    
+                    <img src="/medias/logo.png" class="logo-img" alt="LOGO">
+                    
+                    <span class="logo-span">gongchenghui</span>
+                </a>
+            </div>
+            
+
+<a href="#" data-target="mobile-nav" class="sidenav-trigger button-collapse"><i class="fa fa-navicon"></i></a>
+<ul class="right">
+    
+    <li class="hide-on-med-and-down">
+        <a href="/" class="waves-effect waves-light">
+            
+            <i class="fa fa-home"></i>
+            
+            <span>主页</span>
+        </a>
+    </li>
+    
+    <li class="hide-on-med-and-down">
+        <a href="/tags" class="waves-effect waves-light">
+            
+            <i class="fa fa-tags"></i>
+            
+            <span>标签</span>
+        </a>
+    </li>
+    
+    <li class="hide-on-med-and-down">
+        <a href="/categories" class="waves-effect waves-light">
+            
+            <i class="fa fa-bookmark"></i>
+            
+            <span>分类</span>
+        </a>
+    </li>
+    
+    <li class="hide-on-med-and-down">
+        <a href="/friends" class="waves-effect waves-light">
+            
+            <i class="fa fa-rocket"></i>
+            
+            <span>工具</span>
+        </a>
+    </li>
+    
+    <li class="hide-on-med-and-down">
+        <a href="/archives" class="waves-effect waves-light">
+            
+            <i class="fa fa-archive"></i>
+            
+            <span>归档</span>
+        </a>
+    </li>
+    
+    <li class="hide-on-med-and-down">
+        <a href="/about" class="waves-effect waves-light">
+            
+            <i class="fa fa-user-circle-o"></i>
+            
+            <span>关于</span>
+        </a>
+    </li>
+    
+    <li class="hide-on-med-and-down">
+        <a href="/navi" class="waves-effect waves-light">
+            
+            <i class="fa fa-address-book"></i>
+            
+            <span>快捷导航</span>
+        </a>
+    </li>
+    
+    <li>
+        <a href="#searchModal" class="modal-trigger waves-effect waves-light">
+            <i id="searchIcon" class="fa fa-search" title="搜索"></i>
+        </a>
+    </li>
+</ul>
+
+<div id="mobile-nav" class="side-nav sidenav">
+
+    <div class="mobile-head bg-color">
+        
+        <img src="/medias/logo.png" class="logo-img circle responsive-img">
+        
+        <div class="logo-name">gongchenghui</div>
+        <div class="logo-desc">
+            
+            北冥有鱼，其名为鲲，鲲之大，不知其几千里也； 化而为鸟，其名为鹏.
+            
+        </div>
+    </div>
+
+    
+
+    <ul class="menu-list mobile-menu-list">
+        
+        <li>
+            <a href="/" class="waves-effect waves-light">
+                
+                <i class="fa fa-fw fa-home"></i>
+                
+                主页
+            </a>
+        </li>
+        
+        <li>
+            <a href="/tags" class="waves-effect waves-light">
+                
+                <i class="fa fa-fw fa-tags"></i>
+                
+                标签
+            </a>
+        </li>
+        
+        <li>
+            <a href="/categories" class="waves-effect waves-light">
+                
+                <i class="fa fa-fw fa-bookmark"></i>
+                
+                分类
+            </a>
+        </li>
+        
+        <li>
+            <a href="/friends" class="waves-effect waves-light">
+                
+                <i class="fa fa-fw fa-rocket"></i>
+                
+                工具
+            </a>
+        </li>
+        
+        <li>
+            <a href="/archives" class="waves-effect waves-light">
+                
+                <i class="fa fa-fw fa-archive"></i>
+                
+                归档
+            </a>
+        </li>
+        
+        <li>
+            <a href="/about" class="waves-effect waves-light">
+                
+                <i class="fa fa-fw fa-user-circle-o"></i>
+                
+                关于
+            </a>
+        </li>
+        
+        <li>
+            <a href="/navi" class="waves-effect waves-light">
+                
+                <i class="fa fa-fw fa-address-book"></i>
+                
+                快捷导航
+            </a>
+        </li>
+        
+        
+        <li><div class="divider"></div></li>
+        <li>
+            <a href="https://github.com/gongchenghuigch/gongchenghuigch.github.io" class="waves-effect waves-light" target="_blank">
+                <i class="fa fa-github-square fa-fw"></i>Fork Me
+            </a>
+        </li>
+        
+    </ul>
+</div>
+
+        </div>
+
+        
+            <style>
+    .nav-transparent .github-corner {
+        display: none !important;
+    }
+
+    .github-corner {
+        position: absolute;
+        z-index: 10;
+        top: 0;
+        right: 0;
+        border: 0;
+        transform: scale(1.1);
+    }
+
+    .github-corner svg {
+        color: #0f9d58;
+        fill: #fff;
+        height: 64px;
+        width: 64px;
+    }
+
+    .github-corner:hover .octo-arm {
+        animation: a 0.56s ease-in-out;
+    }
+
+    .github-corner .octo-arm {
+        animation: none;
+    }
+
+    @keyframes a {
+        0%,
+        to {
+            transform: rotate(0);
+        }
+        20%,
+        60% {
+            transform: rotate(-25deg);
+        }
+        40%,
+        80% {
+            transform: rotate(10deg);
+        }
+    }
+</style>
+
+<a href="https://github.com/gongchenghuigch/gongchenghuigch.github.io" class="github-corner tooltipped hide-on-med-and-down" target="_blank"
+   data-tooltip="Fork Me" data-position="left" data-delay="50">
+    <svg viewBox="0 0 250 250" aria-hidden="true">
+        <path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path>
+        <path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2"
+              fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path>
+        <path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z"
+              fill="currentColor" class="octo-body"></path>
+    </svg>
+</a>
+        
+    </nav>
+
+</header>
+
+
+
+
+
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/3.jpg')">
+    <div class="container">
+        <div class="row">
+            <div class="col s12 m12 l12">
+                <div class="brand">
+                    <div class="description center-align post-title">
+                        非常优秀的前端博文集合
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<main class="post-container content">
+
+    
+    <link rel="stylesheet" href="/libs/tocbot/tocbot.css">
+<style>
+    #articleContent h1::before,
+    #articleContent h2::before,
+    #articleContent h3::before,
+    #articleContent h4::before,
+    #articleContent h5::before,
+    #articleContent h6::before {
+        display: block;
+        content: " ";
+        height: 100px;
+        margin-top: -100px;
+        visibility: hidden;
+    }
+
+    #articleContent :focus {
+        outline: none;
+    }
+
+    .toc-fixed {
+        position: fixed;
+        top: 64px;
+    }
+
+    .toc-widget {
+        padding-left: 20px;
+    }
+
+    .toc-widget .toc-title {
+        margin: 35px 0 15px 0;
+        padding-left: 17px;
+        font-size: 1.5rem;
+        font-weight: bold;
+        line-height: 1.5rem;
+    }
+
+    .toc-widget ol {
+        padding: 0;
+        list-style: none;
+    }
+
+    #toc-content ol {
+        padding-left: 10px;
+    }
+
+    #toc-content ol li {
+        padding-left: 10px;
+    }
+
+    #toc-content .toc-link:hover {
+        color: #42b983;
+        font-weight: 700;
+        text-decoration: underline;
+    }
+
+    #toc-content .toc-link::before {
+        background-color: transparent;
+        max-height: 25px;
+    }
+
+    #toc-content .is-active-link {
+        color: #42b983;
+    }
+
+    #toc-content .is-active-link::before {
+        background-color: #42b983;
+    }
+
+    #floating-toc-btn {
+        position: fixed;
+        right: 20px;
+        bottom: 76px;
+        padding-top: 15px;
+        margin-bottom: 0;
+        z-index: 998;
+    }
+
+    #floating-toc-btn .btn-floating {
+        width: 48px;
+        height: 48px;
+    }
+
+    #floating-toc-btn .btn-floating i {
+        line-height: 48px;
+        font-size: 1.4rem;
+    }
+</style>
+<div class="row">
+    <div id="main-content" class="col s12 m12 l9">
+        <!-- 文章内容详情 -->
+<div id="artDetail">
+    <div class="card">
+        <div class="card-content article-info">
+            <div class="row tag-cate">
+                <div class="col s7">
+                    
+                    <div class="article-tag">
+                        
+                            <a href="/tags/前端/" target="_blank">
+                                <span class="chip bg-color">前端</span>
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+                <div class="col s5 right-align">
+                    
+                    <div class="post-cate">
+                        <i class="fa fa-bookmark fa-fw icon-category"></i>
+                        
+                            <a href="/categories/前端/" class="post-category" target="_blank">
+                                前端
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+
+            <div class="post-info">
+                <div class="post-date info-break-policy">
+                    <i class="fa fa-calendar-minus-o fa-fw"></i>发布日期:&nbsp;&nbsp;
+                    2019-09-12
+                </div>
+
+                
+                    
+                    <div class="info-break-policy">
+                        <i class="fa fa-file-word-o fa-fw"></i>文章字数:&nbsp;&nbsp;
+                        8.6k
+                    </div>
+                    
+
+                    
+                    <div class="info-break-policy">
+                        <i class="fa fa-clock-o fa-fw"></i>阅读时长:&nbsp;&nbsp;
+                        31 分
+                    </div>
+                    
+                
+				
+				
+                    <div id="busuanzi_container_page_pv" class="info-break-policy">
+                        <i class="fa fa-eye fa-fw"></i>阅读次数:&nbsp;&nbsp;
+                        <span id="busuanzi_value_page_pv"></span>
+                    </div>
+				
+            </div>
+        </div>
+        <hr class="clearfix">
+        <div class="card-content article-card-content">
+            <div id="articleContent">
+                <h2 id="JavaScript"><a href="#JavaScript" class="headerlink" title="JavaScript"></a>JavaScript</h2><ul>
+<li><a href="https://juejin.im/post/59e85eebf265da430d571f89" target="_blank" rel="noopener">这一次，彻底弄懂 JavaScript 执行机制</a></li>
+<li><a href="https://juejin.im/post/5cef46226fb9a07eaf2b7516" target="_blank" rel="noopener">一个合格的中级前端工程师必须要掌握的 28 个 JavaScript 技巧</a></li>
+<li><a href="https://juejin.im/post/59eff1fb6fb9a044ff30a942" target="_blank" rel="noopener">JavaScript 专题系列 20 篇正式完结！</a></li>
+<li><a href="https://juejin.im/post/5bdfef86e51d453bf8051bf8" target="_blank" rel="noopener">JavaScript 复杂判断的更优雅写法</a></li>
+<li><a href="https://juejin.im/post/5a2a7a5051882535cd4abfce" target="_blank" rel="noopener">编写自己的代码库（javascript 常用实例的实现与封装）</a></li>
+<li><a href="https://link.juejin.im/?target=https%3A%2F%2Fzhuanlan.zhihu.com%2Fp%2F33298555" target="_blank" rel="noopener">从 2.4 万篇文章中挑出的最棒的 JavaScript 学习指南（2018 版）</a></li>
+<li><a href="https://juejin.im/post/5a091afe6fb9a044ff30f402" target="_blank" rel="noopener">打造自己的 JavaScript 武器库</a></li>
+<li><a href="https://link.juejin.im/?target=https%3A%2F%2Fgithub.com%2Fstephentian%2F33-js-concepts" target="_blank" rel="noopener">JavaScript 开发者应懂的 33 个概念</a></li>
+<li><a href="https://juejin.im/post/5a6e881af265da3e2f0134e3" target="_blank" rel="noopener">JavaScript 八张思维导图</a></li>
+<li><a href="https://link.juejin.im/?target=http%3A%2F%2Fcodebay.cn%2Fpost%2F7452.html" target="_blank" rel="noopener">[译]非常有用的 48 个 JavaScript 代码片段，值得收藏！</a></li>
+<li><a href="https://juejin.im/post/5bfaa2e26fb9a04a0440b0e4" target="_blank" rel="noopener">全方位彻底读懂&lt;你不知道的 JavaScript(上)&gt;–一篇六万多字的读书笔记</a></li>
+<li><a href="https://juejin.im/post/5c24b7a851882509a76875e8" target="_blank" rel="noopener">JavaScript 代码简洁之道</a></li>
+<li><a href="https://link.juejin.im/?target=https%3A%2F%2Fsegmentfault.com%2Fa%2F1190000016101940" target="_blank" rel="noopener">急速 JavaScript 全栈教程</a></li>
+<li><a href="https://juejin.im/post/5cf468a9f265da1bb77652aa" target="_blank" rel="noopener">我从来不理解 JavaScript 闭包，直到有人这样向我解释它</a></li>
+<li><a href="https://juejin.im/post/5cc7afdde51d456e671c7e48" target="_blank" rel="noopener">灵活运用 JavaScript 开发技巧</a></li>
+<li><a href="https://juejin.im/post/5b8d0a74f265da431d0e7ec0" target="_blank" rel="noopener">[译文] 如何在 JavaScript 中更好地使用数组</a></li>
+<li><a href="https://juejin.im/post/5b7e1f81f265da436a075db4" target="_blank" rel="noopener">精读《高效 javascript》</a></li>
+<li><a href="https://juejin.im/post/5b6adc7ee51d4534b8587560" target="_blank" rel="noopener">一篇文章搞定 javascript 正则表达式</a></li>
+<li><a href="https://juejin.im/post/5a0c199851882531926e4297" target="_blank" rel="noopener">JavaScript 实用技巧和写法建议</a></li>
+<li><a href="https://juejin.im/post/5b1f899fe51d4506c60e46ee" target="_blank" rel="noopener">44 道 JavaScript 难题（JavaScript Puzzlers!）</a></li>
+<li><a href="https://juejin.im/post/59f697f8f265da431c6f945b" target="_blank" rel="noopener">JavaScript 开发人员需要知道的简写技巧</a></li>
+<li><a href="https://juejin.im/post/5b0284ac51882542ad774c45" target="_blank" rel="noopener">解锁多种 JavaScript 数组去重姿势</a></li>
+<li><a href="https://juejin.im/post/5a8d85506fb9a0634417f120" target="_blank" rel="noopener">javascript 高仿热血传奇游戏</a></li>
+<li><a href="https://juejin.im/post/5b10ba336fb9a01e66164346" target="_blank" rel="noopener">JavaScript 内存机制（前端同学进阶必备）</a></li>
+<li><a href="https://juejin.im/post/5a5d64fbf265da3e243b831f" target="_blank" rel="noopener">JavaScript 运行原理解析</a></li>
+<li><a href="https://link.juejin.im/?target=http%3A%2F%2F36kr.com%2Fp%2F5110763.html" target="_blank" rel="noopener">2018 年最值得关注的 JavaScript 趋势</a></li>
+<li><a href="https://juejin.im/post/5bbafd78f265da0ad947e6ba" target="_blank" rel="noopener">8102 年如何写一个现代的 JavaScript 库</a></li>
+<li><a href="https://juejin.im/post/5bcdb6c6f265da0afd4b75c0" target="_blank" rel="noopener">JavaScript 原型精髓 #一篇就够系列</a></li>
+<li><a href="https://juejin.im/post/5b90e00e6fb9a05cf9080dff" target="_blank" rel="noopener">0.1 + 0.2 不等于 0.3？为什么 JavaScript 有这种“骚”操作？</a></li>
+<li><a href="https://juejin.im/post/5bda4e6fe51d45681f245274" target="_blank" rel="noopener">一次性搞懂 JavaScript 正则表达式之语法</a></li>
+<li><a href="https://link.juejin.im/?target=https%3A%2F%2Fwww.zcfy.cc%2Farticle%2F10-javascript-animation-libraries-to-follow-in-2018" target="_blank" rel="noopener">2018 年值得关注的 10 大 JavaScript 动画库</a></li>
+<li><a href="https://juejin.im/post/5d0e11196fb9a07eee5ed6d2" target="_blank" rel="noopener">[译] 如何写出漂亮的 JavaScript 代码</a></li>
+<li><a href="https://juejin.im/post/5af55e6751882542682e43e7" target="_blank" rel="noopener">网上看到的“12 个非常有用的 JavaScript 技巧”</a></li>
+<li><a href="https://link.juejin.im/?target=https%3A%2F%2Fwww.zcfy.cc%2Farticle%2F11-javascript-animation-libraries-for-2018" target="_blank" rel="noopener">2018 年值得期待 11 个 Javascript 动画库</a></li>
+<li><a href="https://juejin.im/post/5c49b822f265da6142743a87" target="_blank" rel="noopener">【译】用 JavaScript 和 Emoji 做地址栏动画</a></li>
+<li><a href="https://juejin.im/post/5a6ad46ef265da3e513352c8" target="_blank" rel="noopener">JavaScript 异步机制详解</a></li>
+<li><a href="https://juejin.im/post/5a6547d0f265da3e283a1df7" target="_blank" rel="noopener">从浏览器多进程到 JS 单线程，JS 运行机制最全面的一次梳理</a></li>
+<li><a href="https://juejin.im/post/5b51e5d3f265da0f4861143c" target="_blank" rel="noopener">JS 中可以提升幸福度的小技巧</a></li>
+<li><a href="https://juejin.im/post/5ae97bd05188256719521ae0" target="_blank" rel="noopener">如何在疲劳的 JS 世界中持续学习</a></li>
+<li><a href="https://juejin.im/post/5b8de829f265da43623c4261" target="_blank" rel="noopener">7 分钟理解 JS 的节流、防抖及使用场景</a></li>
+<li><a href="https://juejin.im/post/5cc55eb5e51d456e577f93f0" target="_blank" rel="noopener">JS 无形装逼，最为致命</a></li>
+<li><a href="https://juejin.im/post/5a633babf265da3e2a0dadcc" target="_blank" rel="noopener">2017 年崛起的 JS 项目</a></li>
+<li><a href="https://juejin.im/post/5b0903b26fb9a07a9d70c7e0" target="_blank" rel="noopener">【干货】js 数组详细操作方法及解析合集</a></li>
+<li><a href="https://juejin.im/post/5aa7d82c6fb9a028c522de43" target="_blank" rel="noopener">几道 JS 代码手写题以及一些代码实现</a></li>
+<li><a href="https://juejin.im/post/5becf928f265da61380ec986" target="_blank" rel="noopener">看看这些被同事喷的 JS 代码风格你写过多少</a></li>
+<li><a href="https://juejin.im/post/5b3715def265da59af40a630" target="_blank" rel="noopener">你不知道的 js 中关于 this 绑定机制的解析[看完还不懂算我输]</a></li>
+<li><a href="https://juejin.im/post/5d245d4151882555300feb77" target="_blank" rel="noopener">2019 年 JS 正则大全(常用)</a></li>
+<li><a href="https://juejin.im/post/5cec1bcff265da1b8f1aa08f" target="_blank" rel="noopener">【JS 进阶】你真的掌握变量和类型了吗</a></li>
+<li><a href="https://juejin.im/post/5b8a8724f265da435450c591" target="_blank" rel="noopener">小邵教你玩转 JS 面向对象</a></li>
+<li><a href="https://juejin.im/post/59f54321f265da43085d4a7f" target="_blank" rel="noopener">带你理解 JS 容易出错的坑和细节</a></li>
+<li><a href="https://juejin.im/post/5cfd2ec7e51d45554877a59f" target="_blank" rel="noopener">用 JS 开发跨平台桌面应用，从原理到实践</a></li>
+<li><a href="https://link.juejin.im/?target=https%3A%2F%2Fmp.weixin.qq.com%2Fs%2FVkshf-nEDwo2ODUJhxgzVA" target="_blank" rel="noopener">JS 的防抖与节流</a></li>
+<li><a href="https://juejin.im/post/5b42bb9ce51d45199060e199" target="_blank" rel="noopener">【译】5 分钟学习 JS 一些小技巧</a></li>
+<li><a href="https://juejin.im/post/5b62d02ee51d453467552dc9" target="_blank" rel="noopener">常用 JS 方法整理</a></li>
+<li><a href="https://link.juejin.im/?target=https%3A%2F%2Fwww.jianshu.com%2Fp%2Fe65c246beac1" target="_blank" rel="noopener">如何定义一个高逼格的原生 JS 插件</a></li>
+<li><a href="https://juejin.im/post/5d0706a6f265da1bc23f77a9" target="_blank" rel="noopener">「前端进阶」JS 中的内存管理</a></li>
+<li><a href="https://juejin.im/post/5ac472016fb9a028c22afa9d" target="_blank" rel="noopener">想偷懒的话，toLocaleString 了解一下？</a></li>
+<li><a href="https://juejin.im/post/5c96d0c751882511c832ff7b" target="_blank" rel="noopener">嗨，你真的懂 this 吗？</a></li>
+<li><a href="https://juejin.im/post/5a6155126fb9a01cb64edb45" target="_blank" rel="noopener">Event Loop 的规范和实现</a></li>
+<li><a href="https://juejin.im/post/5a30193051882503dc53af3c" target="_blank" rel="noopener">解读 Promise 内部实现原理</a></li>
+<li><a href="https://juejin.im/post/5b1ffff96fb9a01e345ba704" target="_blank" rel="noopener">一次性让你懂 async/await，解决回调地狱</a></li>
+<li><a href="https://link.juejin.im/?target=https%3A%2F%2Fiammapping.com%2Fthe-other-ways-to-use-localstorage%2F" target="_blank" rel="noopener">localStorage 还能这么用</a></li>
+<li><a href="https://juejin.im/post/5cbc0a9cf265da03b11f3505" target="_blank" rel="noopener">最后一次搞懂 Event Loop</a></li>
+<li><a href="https://juejin.im/post/5b7b88d46fb9a019e9767405" target="_blank" rel="noopener">防抖和节流原理分析</a></li>
+<li><a href="https://juejin.im/post/5aa7868b6fb9a028dd4de672" target="_blank" rel="noopener">Promise 原理讲解 &amp;&amp; 实现一个 Promise 对象 (遵循 Promise/A+规范)</a></li>
+<li><a href="https://juejin.im/post/59dc66256fb9a0452a3b4832" target="_blank" rel="noopener">如何无痛降低 if else 面条代码复杂度</a></li>
+<li><a href="https://juejin.im/post/5d25b39bf265da1bb67a4176" target="_blank" rel="noopener">嘿，不要给 async 函数写那么多 try/catch 了</a></li>
+<li><a href="https://juejin.im/post/5d2d146bf265da1b9163c5c9" target="_blank" rel="noopener">8 个问题看你是否真的懂 JS</a></li>
+<li><a href="https://juejin.im/post/5afafb0c6fb9a07ac65331fe" target="_blank" rel="noopener">console 觉醒之路，打印个动画如何？</a></li>
+<li><a href="https://juejin.im/post/5ad6b34a6fb9a028cc61bfb3" target="_blank" rel="noopener">高阶函数，你怎么那么漂亮呢！</a></li>
+<li><a href="https://juejin.im/post/5a04066351882517c416715d" target="_blank" rel="noopener">Promise 必知必会（十道题）</a></li>
+<li><a href="https://juejin.im/post/5afe6d3bf265da0b9e654c4b" target="_blank" rel="noopener">Promise 不会？？看这里！！！史上最通俗易懂的 Promise！！！</a></li>
+<li><a href="https://juejin.im/post/5b83cb5ae51d4538cc3ec354" target="_blank" rel="noopener">Promise 实现原理（附源码）</a></li>
+<li><a href="https://juejin.im/post/5b7ccc65f265da436631a3d9" target="_blank" rel="noopener">小哥哥小姐姐，来尝尝 Async 函数这块语法糖</a></li>
+<li><a href="https://juejin.im/post/59bfe84351882531b730bac2" target="_blank" rel="noopener">this、apply、call、bind</a></li>
+<li><a href="https://juejin.im/post/5a2e5f0851882575d42f5609" target="_blank" rel="noopener">import、require、export、module.exports 混合使用详解</a></li>
+<li><a href="https://juejin.im/post/5bc1ae9be51d450e8b140b0c" target="_blank" rel="noopener">深拷贝的终极探索（90%的人都不知道）</a></li>
+<li><a href="https://juejin.im/post/5aed6110518825671b026bed" target="_blank" rel="noopener">7 种方法实现数组去重</a></li>
+<li><a href="https://juejin.im/post/5b5dcf8351882519790c9a2e" target="_blank" rel="noopener">浅拷贝与深拷贝</a></li>
+</ul>
+<h2 id="CSS"><a href="#CSS" class="headerlink" title="CSS"></a>CSS</h2><ul>
+<li><a href="https://juejin.im/post/5c35953ce51d45523f04b6d2" target="_blank" rel="noopener">不可思议的纯 CSS 滚动进度条效果</a></li>
+<li><a href="https://juejin.im/post/5cb45a06f265da03474df54e" target="_blank" rel="noopener">【前端词典】提高幸福感的 9 个 CSS 技巧</a></li>
+<li><a href="https://juejin.im/post/5b9a4477f265da0ad82bf921" target="_blank" rel="noopener">CSS 实现水平垂直居中的 1010 种方式（史上最全）</a></li>
+<li><a href="https://juejin.im/post/5d3eca78e51d4561cb5dde12" target="_blank" rel="noopener">你未必知道的 49 个 CSS 知识点</a></li>
+<li><a href="https://juejin.im/post/5a0c184c51882531926e4294" target="_blank" rel="noopener">个人总结（css3 新特性）</a></li>
+<li><a href="https://juejin.im/post/5b1e2b50f265da6e5546c15d" target="_blank" rel="noopener">用最短的 CSS 样式，勾勒大数据演示屏</a></li>
+<li><a href="https://juejin.im/post/5b6133a351882519d346853f" target="_blank" rel="noopener">CSS 性能优化的 8 个技巧</a></li>
+<li><a href="https://juejin.im/post/5aab4f985188255582521c57" target="_blank" rel="noopener">🚨Web 开发者需要知道的 CSS Tricks</a></li>
+<li><a href="https://juejin.im/post/5ab9e9056fb9a028be360292" target="_blank" rel="noopener">不可思议的纯 CSS 导航栏下划线跟随效果</a></li>
+<li><a href="https://juejin.im/post/5d2716ab5188257b775d35ba" target="_blank" rel="noopener">单标签！纯 CSS 实现动态晴阴雨雪</a></li>
+<li><a href="https://juejin.im/post/5ce607a7e51d454f6f16eb3d" target="_blank" rel="noopener">前端基础篇之 CSS 世界</a></li>
+<li><a href="https://juejin.im/post/5b6d0756e51d4562b31ad23c" target="_blank" rel="noopener">滚动视差？CSS 不在话下</a></li>
+<li><a href="https://link.juejin.im/?target=https%3A%2F%2Fgithub.com%2Fjawil%2Fblog%2Fissues%2F29" target="_blank" rel="noopener">CSS 黑魔法小技巧，让你少写不必要的 JS，代码更优雅</a></li>
+<li><a href="https://juejin.im/post/5a954add6fb9a06348538c0d" target="_blank" rel="noopener">CSS 知识点及技巧整理</a></li>
+<li><a href="https://juejin.im/post/5a446d19f265da43052eebcc" target="_blank" rel="noopener">你以为 CSS 只是个简单的布局？</a></li>
+<li><a href="https://juejin.im/post/5a0c18196fb9a045023b2ddf" target="_blank" rel="noopener">编写自己的代码库(css3 常用动画的实现)</a></li>
+<li><a href="https://juejin.im/post/5b12ae3de51d4506d73f0bb4" target="_blank" rel="noopener">不定期更新的 CSS 奇淫技巧（一）</a></li>
+<li><a href="https://juejin.im/post/5b6d0c5cf265da0f504a837f" target="_blank" rel="noopener">从青铜到王者 10 个 css3 伪类使用技巧和运用，了解一哈</a></li>
+<li><a href="https://juejin.im/post/5d0ad9a4f265da1bae38ffe6" target="_blank" rel="noopener">【译】一行 css 代码搞定响应式布局</a></li>
+<li><a href="https://juejin.im/post/5b0a9f266fb9a07aa114a908" target="_blank" rel="noopener">愈发熟练的 CSS 技巧</a></li>
+<li><a href="https://link.juejin.im/?target=https%3A%2F%2Fwww.zcfy.cc%2Farticle%2Fstunning-hover-effects-with-css-variables" target="_blank" rel="noopener">利用 CSS 变量实现令人震惊的悬浮效果</a></li>
+<li><a href="https://juejin.im/post/5b607a0b6fb9a04fd260aa70" target="_blank" rel="noopener">不定期更新的 CSS 奇淫技巧（二）</a></li>
+<li><a href="https://juejin.im/post/59c60691518825396f4f71a1" target="_blank" rel="noopener">原来 CSS 与 JS 是这样阻塞 DOM 解析和渲染的</a></li>
+<li><a href="https://juejin.im/post/5b88ddca6fb9a019c7717096" target="_blank" rel="noopener">css 加载会造成阻塞吗？</a></li>
+<li><a href="https://juejin.im/post/5c7f333ce51d4541e510cd6f" target="_blank" rel="noopener">不可思议的纯 CSS 实现鼠标跟随效果</a></li>
+<li><a href="https://juejin.im/post/5b406f40e51d45194832b759" target="_blank" rel="noopener">CSS 世界中那些说起来很冷的知识</a></li>
+<li><a href="https://juejin.im/post/5b876f86518825431079ddd6" target="_blank" rel="noopener">彻底搞懂 CSS 层叠上下文、层叠等级、层叠顺序、z-index</a></li>
+<li><a href="https://juejin.im/post/5a7a9a545188257a892998ef" target="_blank" rel="noopener">CSS 设置居中的方案总结-超全</a></li>
+<li><a href="https://link.juejin.im/?target=https%3A%2F%2Fzhuanlan.zhihu.com%2Fp%2F26317328" target="_blank" rel="noopener">15 个有趣的 JS 和 CSS 库</a></li>
+<li><a href="https://juejin.im/post/5b1f41246fb9a01e725131fb" target="_blank" rel="noopener">CSS 常用技巧</a></li>
+<li><a href="https://juejin.im/post/5c1101875188257afc713809" target="_blank" rel="noopener">【译】22 个必备的 CSS 小技巧</a></li>
+<li><a href="https://link.juejin.im/?target=http%3A%2F%2Fsvgtrick.com%2Ftricks%2Fdc4f73cd7193fff5f61dfdb1d36a4b6c" target="_blank" rel="noopener">10 个独特的 CSS 背景视觉效果</a></li>
+<li><a href="https://juejin.im/post/5cc089eae51d456e7d189f9d" target="_blank" rel="noopener">可能是最全的前端动效库汇总</a></li>
+<li><a href="https://juejin.im/post/5ace1b306fb9a028c71ed009" target="_blank" rel="noopener">腾讯一面总结-web 前端-2018.4.11</a></li>
+<li><a href="https://juejin.im/post/5b8905456fb9a01a105966b4" target="_blank" rel="noopener">彻底搞懂 word-break、word-wrap、white-space</a></li>
+<li><a href="https://juejin.im/post/5a1e7e7e51882503eb4b0a80" target="_blank" rel="noopener">一起炫起来 – 3D 粒子动画篇</a></li>
+<li><a href="https://juejin.im/post/5ac2329b6fb9a028bf057caf" target="_blank" rel="noopener">【基础知识】Flex-弹性布局原来如此简单！！</a></li>
+<li><a href="https://juejin.im/post/5bdfe1dbe51d45054771f9d4" target="_blank" rel="noopener">炫酷粒子表白，双十一脱单靠它了！</a></li>
+<li><a href="https://juejin.im/post/5bc8184ee51d450e81090d94" target="_blank" rel="noopener">幻术，一行代码实现镂空效果</a></li>
+<li><a href="https://juejin.im/post/5b82ac63e51d4538c362233f" target="_blank" rel="noopener">怎么实现一个 3d 翻书效果</a></li>
+<li><a href="https://juejin.im/post/5a22d0086fb9a0451a7631ee" target="_blank" rel="noopener">Web 自适应布局你需要知道的所有事儿</a></li>
+</ul>
+<h2 id="Vue"><a href="#Vue" class="headerlink" title="Vue"></a>Vue</h2><ul>
+<li><a href="https://juejin.im/post/5b174de8f265da6e410e0b4e" target="_blank" rel="noopener">Vue 项目里戳中你痛点的问题及解决办法（更新）</a></li>
+<li><a href="https://juejin.im/post/5b55c118f265da0f6f1aa354" target="_blank" rel="noopener">vue 中 Axios 的封装和 API 接口的管理</a></li>
+<li><a href="https://juejin.im/post/59fa9257f265da43062a1b0e" target="_blank" rel="noopener">Vue 2.x 脱坑记 - 查漏补缺(汇总下群里高频询问的 xxx 及给出不靠谱的解决方案)</a></li>
+<li><a href="https://juejin.im/post/5b29c3bde51d45588d4d7110" target="_blank" rel="noopener">浅谈使用 Vue 构建前端 10w+ 代码量的单页面应用开发底层</a></li>
+<li><a href="https://juejin.im/post/5b1230c1f265da6e603933ad" target="_blank" rel="noopener">你或许不知道 Vue 的这些小技巧</a></li>
+<li><a href="https://link.juejin.im/?target=https%3A%2F%2Fsegmentfault.com%2Fa%2F1190000012692321" target="_blank" rel="noopener">Vue 学习看这篇就够</a></li>
+<li><a href="https://juejin.im/post/5b960fcae51d450e9d645c5f" target="_blank" rel="noopener">Vue 应用性能优化指南</a></li>
+<li><a href="https://juejin.im/post/5c92ff94f265da6128275a85" target="_blank" rel="noopener">手摸手，带你用 vue 撸后台 系列五(v4.0 新版本)</a></li>
+<li><a href="https://juejin.im/post/5af16a2cf265da0b8636353b" target="_blank" rel="noopener">VUE 组件汇总</a></li>
+<li><a href="https://juejin.im/post/5b4ad441f265da0f7d4eeb7a" target="_blank" rel="noopener">Vue 源码阅读前必须知道 javascript 的基础内容</a></li>
+<li><a href="https://juejin.im/post/5ada9b586fb9a07aaf34c746" target="_blank" rel="noopener">Vue 前端开发规范</a></li>
+<li><a href="https://juejin.im/post/5afb6ecef265da0b8070e726" target="_blank" rel="noopener">Vue 全家桶实现网易云音乐 WebApp</a></li>
+<li><a href="https://juejin.im/post/5b834971f265da436d7e4a9d" target="_blank" rel="noopener">Vue 学习路径-轻松从基础到实战</a></li>
+<li><a href="https://juejin.im/post/5b850a3e51882542e4420779" target="_blank" rel="noopener">前后端分离 Vue + NodeJS(Koa) + MongoDB，从产品到开发，全栈实践</a></li>
+<li><a href="https://juejin.im/post/5a8e3f00f265da4e747fc700" target="_blank" rel="noopener">vue 多页面开发和打包的正确姿势</a></li>
+<li><a href="https://juejin.im/post/5b41bdef6fb9a04fe63765f1" target="_blank" rel="noopener">Vue 的钩子函数[路由导航守卫、keep-alive、生命周期钩子]</a></li>
+<li><a href="https://juejin.im/post/5b5bfd5b6fb9a04fdd7d687a" target="_blank" rel="noopener">vue 权限路由实现方式总结</a></li>
+<li><a href="https://juejin.im/post/5adff30f518825672d33d596" target="_blank" rel="noopener">【大型干货】手拉手带你过一遍 vue 部分源码</a></li>
+<li><a href="https://juejin.im/post/5a4b78226fb9a0451a76c1a1" target="_blank" rel="noopener">2018 我所了解的 Vue 知识大全（一）</a></li>
+<li><a href="https://juejin.im/post/5ce3b519f265da1bb31c0d5f" target="_blank" rel="noopener">7 个有用的 Vue 开发技巧</a></li>
+<li><a href="https://link.juejin.im/?target=https%3A%2F%2Fblog.fundebug.com%2F2018%2F05%2F29%2F30-amazing-vuejs-open-source%2F" target="_blank" rel="noopener">2018 年最值得关注的 30 个 Vue 开源项目</a></li>
+<li><a href="https://juejin.im/post/59c0aedf6fb9a00a59595105" target="_blank" rel="noopener">一步步带你做 vue 后台管理框架 - 登录功能</a></li>
+<li><a href="https://juejin.im/post/5d0259f2518825405d15ae62" target="_blank" rel="noopener">Vue3.0 前的 TypeScript 最佳入门实践</a></li>
+<li><a href="https://juejin.im/post/5d267dcdf265da1b957081a3" target="_blank" rel="noopener">vue 中 8 种组件通信方式, 值得收藏!</a></li>
+<li><a href="https://juejin.im/post/5c488a3cf265da615705cc2a" target="_blank" rel="noopener">离职后才搞懂 vue 项目开发流程中的疑惑点</a></li>
+<li><a href="https://juejin.im/post/5b45df255188251b1d474860" target="_blank" rel="noopener">手把手教你封装 Vue 组件，并使用 npm 发布</a></li>
+<li><a href="https://juejin.im/post/5bd97e7c6fb9a022852a71cf" target="_blank" rel="noopener">vue 组件通信全揭秘(共 7 章)</a></li>
+<li><a href="https://juejin.im/post/5b592635e51d4533d2043e15" target="_blank" rel="noopener">手把手教你用原生 JavaScript 造轮子（1）——分页器（最后更新：Vue 插件版本，本篇 Over！）</a></li>
+<li><a href="https://juejin.im/post/5cab64ce5188251b19486041" target="_blank" rel="noopener">「Vue 实践」武装你的前端项目</a></li>
+<li><a href="https://juejin.im/post/5c3c544c6fb9a049d37f5903" target="_blank" rel="noopener">vue-cli3 从搭建到优化</a></li>
+<li><a href="https://juejin.im/post/5a7914386fb9a063543c0f44" target="_blank" rel="noopener">Vue 实战篇（Vue 仿今日头条）</a></li>
+<li><a href="https://juejin.im/post/5cde0b43f265da03867e78d3" target="_blank" rel="noopener">Vue 组件间通信六种方式（完整版）</a></li>
+<li><a href="https://juejin.im/post/5a0d5df1f265da43062a542f" target="_blank" rel="noopener">[译] 2017 年比较 Angular、React、Vue 三剑客 </a></li>
+<li><a href="https://juejin.im/post/5aca46e2f265da238c3af4ca" target="_blank" rel="noopener">仿美团外卖的全栈项目(vue+node+mongodb)带支付-&gt;大三求实习</a></li>
+<li><a href="https://juejin.im/post/5ae02f39518825672f198ac2" target="_blank" rel="noopener">Vue 使用中的小技巧</a></li>
+<li><a href="https://juejin.im/post/5ba358a56fb9a05d2068401d" target="_blank" rel="noopener">Vue 页面跳转动画效果实现</a></li>
+<li><a href="https://link.juejin.im/?target=https%3A%2F%2Fsegmentfault.com%2Fa%2F1190000014963269%3Futm_source%3Dchannel-hottest" target="_blank" rel="noopener">Vue 页面骨架屏 </a></li>
+<li><a href="https://juejin.im/post/5b80f4e36fb9a019ce148fe9" target="_blank" rel="noopener">干货分享：vue2.0 做移动端开发用到的相关插件和经验总结(更新)</a></li>
+<li><a href="https://juejin.im/post/5b6f8eeb6fb9a0098729aa68" target="_blank" rel="noopener">当大多数人对 Vue 理解到炉火纯青的时候，是不是该思考一下怎么让 vue 页面骚气起来</a></li>
+<li><a href="https://juejin.im/post/5cdcbae9e51d454759351d84" target="_blank" rel="noopener">vue 路由 按需 keep-alive</a></li>
+<li><a href="https://juejin.im/post/5ad56d86518825556534ff4b" target="_blank" rel="noopener">vue 中需要注意的问题总结(上)</a></li>
+<li><a href="https://juejin.im/post/5a3c73c2f265da4310488f20" target="_blank" rel="noopener">关于 vue 全家桶的四个 “最佳实践”</a></li>
+<li><a href="https://juejin.im/post/5a291092518825293b50366d" target="_blank" rel="noopener">Vue SPA 首屏加载优化实践</a></li>
+<li><a href="https://juejin.im/post/5ab2ff496fb9a028c06ab78f" target="_blank" rel="noopener">你应该要知道的 Vue.js</a></li>
+<li><a href="https://link.juejin.im/?target=https%3A%2F%2Fgithub.com%2Felemefe%2Fv-charts" target="_blank" rel="noopener">v-charts | 饿了么团队开源的基于 Vue 和 ECharts 的图表工具</a></li>
+<li><a href="https://juejin.im/post/5a711724518825733201ebb1" target="_blank" rel="noopener">使用 vue 构建一个自动建站项目</a></li>
+<li><a href="https://juejin.im/post/5a121e4b6fb9a045076f41a3" target="_blank" rel="noopener">也许 Vue+CSS3 做交互特效更简单</a></li>
+<li><a href="https://juejin.im/post/5ae91fa76fb9a07aa7677543" target="_blank" rel="noopener">Vue.js 中 watch 的高级用法</a></li>
+<li><a href="https://juejin.im/post/5a0c191f6fb9a04514639419" target="_blank" rel="noopener">vue 快速入门的三个小实例</a></li>
+<li><a href="https://juejin.im/post/5b8e526051882542a82baba6" target="_blank" rel="noopener">VuePress 手摸手教你搭建一个类 Vue 文档风格的技术文档/博客</a></li>
+<li><a href="https://juejin.im/post/5cb3eed65188251b0351f2c4" target="_blank" rel="noopener">封装 Vue 组件的一些技巧</a></li>
+<li><a href="https://juejin.im/post/5b3027cce51d4558c65216a9" target="_blank" rel="noopener">没朋友(mpvue)，点个外卖，一个人也要好好吃饭</a></li>
+<li><a href="https://juejin.im/post/5b2fd09ee51d45588576f429" target="_blank" rel="noopener">一个 Vue 页面的内存泄露分析</a></li>
+<li><a href="https://link.juejin.im/?target=https%3A%2F%2Fwww.zcfy.cc%2Farticle%2Fthe-best-explanation-of-javascript-reactivity" target="_blank" rel="noopener">Vue.js 是如何做到数据响应的？</a></li>
+<li><a href="https://juejin.im/post/5a716c4c6fb9a01cb42cac4b" target="_blank" rel="noopener">Vue 项目自动转换 px 为 rem，高保真还原设计图</a></li>
+<li><a href="https://juejin.im/post/5cd8b450e51d453a580fa8e1" target="_blank" rel="noopener">少女风 vue 组件库制作全攻略~~</a></li>
+<li><a href="https://juejin.im/post/59cb19d95188257e84671938" target="_blank" rel="noopener">Vant - 高效的 Vue 组件库，再造一个有赞移动商城也不在话下</a></li>
+<li><a href="https://juejin.im/post/5c106485e51d450e657571a6" target="_blank" rel="noopener">加快 Vue 项目的开发速度</a></li>
+<li><a href="https://juejin.im/post/5ad56aad51882532ce65affa" target="_blank" rel="noopener">基于 react/vue 的移动端终极适配方案（更新 css-modules 配置）</a></li>
+<li><a href="https://juejin.im/post/5c73554cf265da2de33f2a32" target="_blank" rel="noopener">「从源码中学习」Vue 源码中的 JS 骚操作</a></li>
+<li><a href="https://juejin.im/post/5adc99f56fb9a07abd0d3ee7" target="_blank" rel="noopener">Vue 还有这种骚操作？浅析几个新手常常忽略的 API</a></li>
+<li><a href="https://juejin.im/post/5ab07a63f265da2389258b12" target="_blank" rel="noopener">Vue 源码简析(版本 vue-2.4.4)</a></li>
+<li><a href="https://juejin.im/post/5b5697675188251b11097464" target="_blank" rel="noopener">VueRouter 源码深度解析</a></li>
+<li><a href="https://juejin.im/post/5b97e60a5188255c5d567aea" target="_blank" rel="noopener">干货分享：vue2.0 做移动端开发用到的相关插件和经验总结(2)</a></li>
+<li><a href="https://juejin.im/post/5bdec6e8e51d4505327a8952" target="_blank" rel="noopener">一份超级详细的 Vue-cli3.0 使用教程[赶紧来试试！]</a></li>
+<li><a href="https://juejin.im/post/5ae986636fb9a07ac3634826" target="_blank" rel="noopener">入职第一天：前端 leader 手把手教我入门 Vue 服务器端渲染（SSR）</a></li>
+<li><a href="https://juejin.im/post/5b98e5875188255c8320f88a" target="_blank" rel="noopener">通过 vue-cli3 构建一个 SSR 应用程序</a></li>
+<li><a href="https://juejin.im/post/5b86f6cc5188256fd44c0ce9" target="_blank" rel="noopener">Vue.js 从 Virtual DOM 映射到真实 DOM 的过程</a></li>
+<li><a href="https://juejin.im/post/5a31ddb251882527541053ee" target="_blank" rel="noopener">使用 VUE 分分钟写一个验证码输入组件</a></li>
+<li><a href="https://juejin.im/post/5b18c50d5188251377116fe9" target="_blank" rel="noopener">vue 实践中的常见知识漏洞 001</a></li>
+<li><a href="https://juejin.im/post/5ce5565d6fb9a07ed2244513" target="_blank" rel="noopener">【前端词典】学习 Vue 源码的必要知识储备</a></li>
+<li><a href="https://juejin.im/post/59f2845e6fb9a0451a759e85" target="_blank" rel="noopener">Vue2 原理浅谈</a></li>
+<li><a href="https://juejin.im/post/5b063962f265da0ddb63dac3" target="_blank" rel="noopener">解密 Vue SSR</a></li>
+<li><a href="https://juejin.im/post/5b610da4e51d45195c07720d" target="_blank" rel="noopener">Vue 全站缓存之 keep-alive ： 动态移除缓存</a></li>
+<li><a href="https://juejin.im/post/5afba3c5f265da0b9e653b6c" target="_blank" rel="noopener">淘宝、网易移动端 px 转换 rem 原理，Vue-cli 实现 px 转换 rem</a></li>
+<li><a href="https://juejin.im/post/5b1a3eba6fb9a01e4320cb68" target="_blank" rel="noopener">Vue 源码的最后一站</a></li>
+<li><a href="https://juejin.im/post/5b71587bf265da282a765096" target="_blank" rel="noopener">vue 全家桶仿某鱼部分布局以及功能实现</a></li>
+<li><a href="https://juejin.im/post/5b1fa77451882513ea5cc2ca" target="_blank" rel="noopener">50 行代码的 MVVM，感受闭包的艺术</a></li>
+<li><a href="https://juejin.im/post/5abdd6f6f265da23793c4458" target="_blank" rel="noopener">不好意思！耽误你的十分钟，让 MVVM 原理还给你</a></li>
+</ul>
+<h2 id="React"><a href="#React" class="headerlink" title="React"></a>React</h2><ul>
+<li><a href="https://juejin.im/post/5d085be0f265da1bac401937" target="_blank" rel="noopener">掘金最污的 React16.x 图文视频教程(2 万 5 千字长文-慎入)</a></li>
+<li><a href="https://juejin.im/post/5b506ae0e51d45191a0d4ec9" target="_blank" rel="noopener">React 16 加载性能优化指南</a></li>
+<li><a href="https://juejin.im/post/5cfe4b13f265da1bb13f26a8" target="_blank" rel="noopener">webpack4 的 30 个步骤打造优化到极致的 react 开发环境，如约而至</a></li>
+<li><a href="https://juejin.im/post/5be3ea136fb9a049f9121014" target="_blank" rel="noopener">30 分钟精通 React Hooks</a></li>
+<li><a href="https://juejin.im/post/5a84682ef265da4e83266cc4" target="_blank" rel="noopener">《React 源码解析》系列完结！</a></li>
+<li><a href="https://juejin.im/post/5c0c7304f265da613e22106c" target="_blank" rel="noopener">200 行代码实现简版 react</a></li>
+<li><a href="https://juejin.im/post/5ce24f8ae51d45106477bd45" target="_blank" rel="noopener">可能是你需要的 React + TypeScript 50 条规范和经验</a></li>
+<li><a href="https://juejin.im/post/5b07caf16fb9a07aa83f2977" target="_blank" rel="noopener">TypeScript 2.8 下的终极 React 组件模式</a></li>
+<li><a href="https://juejin.im/post/5ad81c24f265da504c168c85" target="_blank" rel="noopener">怎样学习 React？当然是自己动手实现一个 React 啦</a></li>
+<li><a href="https://link.juejin.im/?target=https%3A%2F%2Fgithub.com%2FSangKa%2Freact-in-patterns-cn" target="_blank" rel="noopener">《React in patterns》 中文版来了</a></li>
+<li><a href="https://link.juejin.im/?target=https%3A%2F%2Fzhuanlan.zhihu.com%2Fp%2F39744174" target="_blank" rel="noopener">React 学习路线图 - 2018 版</a></li>
+<li><a href="https://juejin.im/post/5b45c57c51882519790c7441" target="_blank" rel="noopener">你真的理解 setState 吗？</a></li>
+</ul>
+<h2 id="Webpack"><a href="#Webpack" class="headerlink" title="Webpack"></a>Webpack</h2><ul>
+<li><a href="https://juejin.im/post/5aa3d2056fb9a028c36868aa" target="_blank" rel="noopener">webpack 详解</a></li>
+<li><a href="https://juejin.im/post/5adea0106fb9a07a9d6ff6de" target="_blank" rel="noopener">webpack4-用之初体验，一起敲它十一遍</a></li>
+<li><a href="https://juejin.im/post/5a068c2b5188255851322b8c" target="_blank" rel="noopener">妈妈再也不用担心我不会 webpack 了</a></li>
+<li><a href="https://juejin.im/post/5badd0c5e51d450e4437f07a" target="_blank" rel="noopener">Webpack 揭秘——走向高阶前端的必经之路</a></li>
+<li><a href="https://juejin.im/post/59bb37fa6fb9a00a554f89d2" target="_blank" rel="noopener">webpack：从入门到真实项目配置</a></li>
+<li><a href="https://juejin.im/post/5b304f1f51882574c72f19b0" target="_blank" rel="noopener">Webpack 4 配置最佳实践</a></li>
+<li><a href="https://juejin.im/post/5b4609f5e51d4519596b66a7" target="_blank" rel="noopener">手写一个 webpack4.0 配置</a></li>
+<li><a href="https://juejin.im/post/5cea1e1ae51d4510664d1652" target="_blank" rel="noopener">关于 webpack4 的 14 个知识点,童叟无欺</a></li>
+<li><a href="https://juejin.im/post/5bf61082f265da616a474b5c" target="_blank" rel="noopener">脑阔疼的 webpack 按需加载</a></li>
+<li><a href="https://juejin.im/post/5c25b76ef265da614b120ed0" target="_blank" rel="noopener">📚 免费的渐进式教程：Webpack4 的 16 篇讲解和 16 份代码</a></li>
+<li><a href="https://juejin.im/post/5b192afde51d45069c2efe5a" target="_blank" rel="noopener">手把手教你撸一个简易的 webpack</a></li>
+<li><a href="https://juejin.im/post/5b38d27451882574d87aa5d5" target="_blank" rel="noopener">不聊 webpack 配置，来说说它的原理</a></li>
+<li><a href="https://juejin.im/post/5a23b130f265da432003101a" target="_blank" rel="noopener">简单易懂的 webpack 打包后 JS 的运行过程</a></li>
+<li><a href="https://juejin.im/post/5b652b036fb9a04fa01d616b" target="_blank" rel="noopener">三十分钟掌握 Webpack 性能优化</a></li>
+<li><a href="https://juejin.im/post/5cb36a3ef265da03a1581d6d" target="_blank" rel="noopener">从基础到实战 手摸手带你掌握新版 Webpack4.0 详解 一起读文档</a></li>
+<li><a href="https://juejin.im/post/5be64a7bf265da615304493e" target="_blank" rel="noopener">webpack4 配置详解之慢嚼细咽</a></li>
+<li><a href="https://juejin.im/post/5ac9dc9af265da23884d5543" target="_blank" rel="noopener">带你走进 webpack 世界，成为 webpack 头号玩家。</a></li>
+<li><a href="https://juejin.im/post/5b56909a518825195f499806" target="_blank" rel="noopener">手摸手，带你用合理的姿势使用 webpack4（上）</a></li>
+<li><a href="https://juejin.im/post/5ad1d85f518825651d081c68" target="_blank" rel="noopener">webpack 从此不再是我们的痛点 — 核心基础</a></li>
+<li><a href="https://juejin.im/post/5b9116086fb9a05d05307e96" target="_blank" rel="noopener">webpack4 多页面，多环境配置</a></li>
+<li><a href="https://juejin.im/post/5a63f082f265da3e303c95cc" target="_blank" rel="noopener">webpack 增量打包多页应用</a></li>
+</ul>
+<h2 id="ES6"><a href="#ES6" class="headerlink" title="ES6"></a>ES6</h2><ul>
+<li><a href="https://juejin.im/post/5ca2e1935188254416288eb2" target="_blank" rel="noopener">ES6、ES7、ES8、ES9、ES10 新特性一览</a></li>
+<li><a href="https://juejin.im/post/5c6234f16fb9a049a81fcca5" target="_blank" rel="noopener">近一万字的 ES6 语法知识点补充</a></li>
+<li><a href="https://juejin.im/post/5b6d6f8ae51d453509566974" target="_blank" rel="noopener">ES6 核心，值得驻足花一天时间来学习</a></li>
+<li><a href="https://juejin.im/post/5bfe05505188252098022400" target="_blank" rel="noopener">ES6 完全使用手册</a></li>
+<li><a href="https://juejin.im/post/5b9cb3336fb9a05d290ee47e" target="_blank" rel="noopener">ES6、ES7、ES8 特性一锅炖(ES6、ES7、ES8 学习指南)</a></li>
+<li><a href="https://juejin.im/post/5aaa37c8f265da23945f365c" target="_blank" rel="noopener">前端模块化：CommonJS,AMD,CMD,ES6</a></li>
+<li><a href="https://juejin.im/post/5cd1ab3df265da03587c142a" target="_blank" rel="noopener">「中高级前端」窥探数据结构的世界- ES6 版</a></li>
+<li><a href="https://juejin.im/post/5acb1847f265da237c693362" target="_blank" rel="noopener">学会了 ES6，就不会写出那样的代码</a></li>
+<li><a href="https://juejin.im/post/5b7b95206fb9a019bd2463d8" target="_blank" rel="noopener">小邵教你玩转 ES6</a></li>
+<li><a href="https://juejin.im/post/59d7790e6fb9a00a496e926a" target="_blank" rel="noopener">ES6 常用知识点概述</a></li>
+<li><a href="https://juejin.im/post/5a08e5c55188252abc5dd96f" target="_blank" rel="noopener">实例感受-es6 的常用语法和优越性</a></li>
+<li><a href="https://juejin.im/post/5abf531d6fb9a028dc412419" target="_blank" rel="noopener">ES6 会这些就够了</a></li>
+<li><a href="https://juejin.im/post/5b2a186cf265da596d04a648" target="_blank" rel="noopener">[译] ES2018（ES9）的新特性</a></li>
+</ul>
+<h2 id="移动端"><a href="#移动端" class="headerlink" title="移动端"></a>移动端</h2><ul>
+<li><a href="https://juejin.im/post/5cddf289f265da038f77696c" target="_blank" rel="noopener">关于移动端适配，你必须要知道的</a></li>
+<li><a href="https://juejin.im/post/5b72e1f66fb9a009d018fb94" target="_blank" rel="noopener">移动端调试痛点？——送你五款前端开发利器</a></li>
+<li><a href="https://juejin.im/post/5af918636fb9a07ac5603ecb" target="_blank" rel="noopener">移动端常见 bug 汇总 001</a></li>
+<li><a href="https://juejin.im/post/5b346e8f5188251e1d39bd09" target="_blank" rel="noopener">真的，移动端尺寸自适应与 dpr 无关</a></li>
+<li><a href="https://juejin.im/post/5c0dd7ac6fb9a049c43d7edc" target="_blank" rel="noopener">移动端适配总结</a></li>
+<li><a href="https://juejin.im/post/5b6575b0518825196b01fd85" target="_blank" rel="noopener">web 移动端布局的那些事儿</a></li>
+<li><a href="https://juejin.im/post/5d33fd0f5188256e820c80d4" target="_blank" rel="noopener">实战篇 - 如何实现和淘宝移动端一样的模块化加载 （task-silce）</a></li>
+<li><a href="https://juejin.im/post/5b29f476e51d455892718380" target="_blank" rel="noopener">如何利用 vw+rem 进行移动端布局</a></li>
+<li><a href="https://juejin.im/post/5ad0b52d6fb9a028d82c30c1" target="_blank" rel="noopener">轻松掌握移动端 web 开发【尺寸适配】常用解决方案</a></li>
+<li><a href="https://juejin.im/post/5add7a44f265da0b886d05f8" target="_blank" rel="noopener">移动端适配问题解决方案</a></li>
+<li><a href="https://juejin.im/post/59dc572c6fb9a0450f20e40e" target="_blank" rel="noopener">BetterScroll：可能是目前最好用的移动端滚动插件</a></li>
+<li><a href="https://juejin.im/post/5b6d21daf265da0f9d1a2ed7" target="_blank" rel="noopener">移动端适配知识你到底知多少</a></li>
+<li><a href="https://juejin.im/post/5a02d91ef265da43085d756c" target="_blank" rel="noopener">滴滴 Web 移动端组件库 cube-ui 开源</a></li>
+<li><a href="https://juejin.im/post/5a5f46ac51882573520d6f8b" target="_blank" rel="noopener">移动端自适应个人理解与收集——rem</a></li>
+<li><a href="https://juejin.im/post/5b7efb2ee51d45388b6af96c" target="_blank" rel="noopener">H5 唤起 APP 指南(附开源唤端库)</a></li>
+<li><a href="https://juejin.im/post/5a17c5e26fb9a04527254689" target="_blank" rel="noopener">一次 H5 「保存页面为图片」 的踩坑之旅</a></li>
+<li><a href="https://juejin.im/post/5aa8b00c51882555627cfa0e" target="_blank" rel="noopener">H5 与 APP 混合开发遇到的问题总结</a></li>
+<li><a href="https://juejin.im/post/5b03b2ee5188254284525e87" target="_blank" rel="noopener">移动端 H5 多页开发拍门砖经验</a></li>
+<li><a href="https://link.juejin.im/?target=https%3A%2F%2Fyezihaohao.github.io%2F2018%2F03%2F30%2FH5%E6%89%8B%E6%9C%BA%E7%AB%AF%E5%BC%80%E5%8F%91%E9%97%AE%E9%A2%98%E6%B1%87%E6%80%BB%E5%8F%8A%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88%2F" target="_blank" rel="noopener">H5 手机端开发问题汇总及解决方案</a></li>
+<li><a href="https://juejin.im/post/5abc4f8c6fb9a028d37578ab" target="_blank" rel="noopener">multipages-generator 今日发布 👏！妈妈再也不用担心移动端 h5 网站搭建了！</a></li>
+<li><a href="https://juejin.im/post/5a044fd5f265da43333ddabd" target="_blank" rel="noopener">手机/移动前端开发需要注意的 20 个要点</a></li>
+</ul>
+<h2 id="小程序"><a href="#小程序" class="headerlink" title="小程序"></a>小程序</h2><ul>
+<li><a href="https://juejin.im/post/5b8fd1416fb9a05cf3710690" target="_blank" rel="noopener">近两万字小程序攻略发布了</a></li>
+<li><a href="https://juejin.im/post/5b3d9378f265da0f6012eb65" target="_blank" rel="noopener">VS Code 折腾记 - (14) 再来推荐一波大前端适用系列 (Node/React/Vue/小程序/主题/代码体验等) 的插件</a></li>
+<li><a href="https://juejin.im/post/5b481d216fb9a04fdb16a88f" target="_blank" rel="noopener">微信小程序：一个 json 帮你完成分享朋友圈图片</a></li>
+<li><a href="https://juejin.im/post/5ac9b72cf265da23906c486a" target="_blank" rel="noopener">手把手教会你小程序登录鉴权</a></li>
+<li><a href="https://juejin.im/post/5b0ccd4e51882515861d2347" target="_blank" rel="noopener">送给写小程序的你。</a></li>
+<li><a href="https://juejin.im/post/5a61b6a1518825732739af03" target="_blank" rel="noopener">从零开始一个微信小程序版知乎</a></li>
+<li><a href="https://juejin.im/post/5b0e431f51882515497d979f" target="_blank" rel="noopener">只需两步快速获取微信小程序源码</a></li>
+<li><a href="https://juejin.im/post/5b15ce94f265da6e29010554" target="_blank" rel="noopener">滴滴一夏， 小程序专车来了</a></li>
+<li><a href="https://juejin.im/post/5b39bbcc5188252ce018c745" target="_blank" rel="noopener">两天撸一个天气应用微信小程序</a></li>
+<li><a href="https://juejin.im/post/5b6323baf265da0f5511533a" target="_blank" rel="noopener">网易严选商城小程序全栈开发,域名备案中近期上线(mpvue+koa2+mysql)</a></li>
+<li><a href="https://juejin.im/post/5ba57b7c5188255c971fda3a" target="_blank" rel="noopener">做完小程序项目、老板给我加了 6k 薪资～</a></li>
+<li><a href="https://link.juejin.im/?target=https%3A%2F%2Fgithub.com%2FMeituan-Dianping%2Fmpvue" target="_blank" rel="noopener">mpvue - 美团点评开源的基于 Vue 的微信小程序前端框架</a></li>
+<li><a href="https://juejin.im/post/5b72cf88e51d45666436d3c5" target="_blank" rel="noopener">两周撸一个掘金微信小程序</a></li>
+<li><a href="https://juejin.im/post/5ba0bc8d6fb9a05d396f0827" target="_blank" rel="noopener">小程序的全栈开发新时代</a></li>
+<li><a href="https://juejin.im/post/5b74d85751882560fb24b6c5" target="_blank" rel="noopener">小程序开发实践总结</a></li>
+<li><a href="https://juejin.im/post/5baf4a04e51d450ea52fd9a4" target="_blank" rel="noopener">H5 和小程序拍照图片旋转、压缩和上传</a></li>
+</ul>
+<h2 id="设计模式与算法"><a href="#设计模式与算法" class="headerlink" title="设计模式与算法"></a>设计模式与算法</h2><ul>
+<li><a href="https://juejin.im/post/5afe6430518825428630bc4d" target="_blank" rel="noopener">JavaScript 中常见设计模式整理</a></li>
+<li><a href="https://juejin.im/post/59df4f74f265da430f311909" target="_blank" rel="noopener">JavaScript 设计模式</a></li>
+<li><a href="https://juejin.im/post/5c2e10a76fb9a049c0432697" target="_blank" rel="noopener">《JavaScript 设计模式与开发实践》最全知识点汇总大全</a></li>
+<li><a href="https://link.juejin.im/?target=https%3A%2F%2Fgithub.com%2Ftrekhleb%2Fjavascript-algorithms%2Fblob%2Fmaster%2FREADME.zh-CN.md" target="_blank" rel="noopener">JavaScript 算法与数据结构</a></li>
+<li><a href="https://juejin.im/post/5b331bc7f265da598451fd88" target="_blank" rel="noopener">前端你应该了解的数据结构与算法</a></li>
+</ul>
+<h2 id="面试"><a href="#面试" class="headerlink" title="面试"></a>面试</h2><ul>
+<li><a href="https://juejin.im/post/5d23e750f265da1b855c7bbe" target="_blank" rel="noopener">前端 100 问：能搞懂 80% 的请把简历给我</a></li>
+<li><a href="https://juejin.im/post/5b94d8965188255c5a0cdc02" target="_blank" rel="noopener">2018 前端面试总结，看完弄懂，工资少说加 3K | 掘金技术征文</a></li>
+<li><a href="https://juejin.im/post/5c64d15d6fb9a049d37f9c20" target="_blank" rel="noopener">中高级前端大厂面试秘籍，为你保驾护航金三银四，直通大厂(上)</a></li>
+<li><a href="https://juejin.im/post/5b44a485e51d4519945fb6b7" target="_blank" rel="noopener">总结了 17 年初到 18 年初百场前端面试的面试经验(含答案)</a></li>
+<li><a href="https://juejin.im/post/5a998991f265da237f1dbdf9" target="_blank" rel="noopener">2018 春招前端面试: 闯关记(精排精校) | 掘金技术征文</a></li>
+<li><a href="https://juejin.im/post/5aae076d6fb9a028cc6100a9" target="_blank" rel="noopener">前端面试考点多？看这些文章就够了（2019 年 6 月更新版）</a></li>
+<li><a href="https://juejin.im/post/5c9c3989e51d454e3a3902b6" target="_blank" rel="noopener">「中高级前端面试」JavaScript 手写代码无敌秘籍</a></li>
+<li><a href="https://juejin.im/post/5a9b8417518825558251ce15" target="_blank" rel="noopener">记录面试中一些回答不够好的题（Vue 居多） | 掘金技术征文</a></li>
+<li><a href="https://link.juejin.im/?target=https%3A%2F%2Fsegmentfault.com%2Fa%2F1190000013331105" target="_blank" rel="noopener">面试的信心来源于过硬的基础</a></li>
+<li><a href="https://juejin.im/post/5ac61da66fb9a028c71eae1b" target="_blank" rel="noopener">面试官: 你了解前端路由吗?</a></li>
+<li><a href="https://juejin.im/post/5d124a12f265da1b9163a28d" target="_blank" rel="noopener">这儿有 20 道大厂面试题等你查收</a></li>
+<li><a href="https://juejin.im/post/5cab0c45f265da2513734390" target="_blank" rel="noopener">【面试篇】寒冬求职季之你必须要懂的原生 JS(上)</a></li>
+<li><a href="https://juejin.im/post/5aa8a07cf265da238a3022a4" target="_blank" rel="noopener">几道高级前端面试题解析</a></li>
+<li><a href="https://juejin.im/post/5b2f02cd5188252b937548ab" target="_blank" rel="noopener">BAT 前端经典面试问题：史上最最最详细的手写 Promise 教程</a></li>
+<li><a href="https://juejin.im/post/5d0644976fb9a07ed064b0ca" target="_blank" rel="noopener">[译] 送你 43 道 JavaScript 面试题</a></li>
+<li><a href="https://juejin.im/post/5ad4094e6fb9a028d7011069" target="_blank" rel="noopener">小哥哥,小姐姐,我有一份 tcp、http 面试指南你要吗？</a></li>
+<li><a href="https://juejin.im/post/5befeb5051882511a8527dbe" target="_blank" rel="noopener">一年半经验，百度、有赞、阿里前端面试总结</a></li>
+<li><a href="https://juejin.im/post/5b72f0caf265da282809f3b5" target="_blank" rel="noopener">前端笔试&amp;面试爬坑系列—算法</a></li>
+<li><a href="https://juejin.im/post/5adf0085518825673123da9a" target="_blank" rel="noopener">当面试官问你 Vue 响应式原理，你可以这么回答他</a></li>
+<li><a href="https://juejin.im/post/5d2ee123e51d4577614761f8" target="_blank" rel="noopener">20 道 JS 原理题助你面试一臂之力！</a></li>
+<li><a href="https://juejin.im/post/5a99f80cf265da238c3a1e16" target="_blank" rel="noopener">当面试官问你如何进行性能优化时，你该这么回答(一)</a></li>
+<li><a href="https://juejin.im/post/5cb0315f518825215e61ec14" target="_blank" rel="noopener">【周刊-2】三年大厂面试官-前端面试题（偏难）</a></li>
+<li><a href="https://juejin.im/post/5b31a4b7f265da595725f322" target="_blank" rel="noopener">面试精选之 Promise</a></li>
+<li><a href="https://juejin.im/post/5abb55ee6fb9a028e33b7e0a" target="_blank" rel="noopener">面试官:请你实现一个深克隆</a></li>
+<li><a href="https://juejin.im/post/5c19c1b6e51d451d1e06c163" target="_blank" rel="noopener">腾讯前端面试篇（一）</a></li>
+<li><a href="https://juejin.im/post/5c6977e46fb9a049fd1063dc" target="_blank" rel="noopener">【半月刊】前端高频面试题及答案汇总</a></li>
+<li><a href="https://juejin.im/post/5aad40e4f265da237f1e12ed" target="_blank" rel="noopener">前端笔试题面试题记录（上）| 掘金技术征文</a></li>
+<li><a href="https://juejin.im/post/5cc55c336fb9a032086dd701" target="_blank" rel="noopener">面试官：自己搭建过 vue 开发环境吗？</a></li>
+<li><a href="https://juejin.im/post/5b4a9136f265da0f990d49cb" target="_blank" rel="noopener">地表最强面试图谱</a></li>
+<li><a href="https://juejin.im/post/5d1d52aff265da1bb2774de0" target="_blank" rel="noopener">面试官到底想看什么样的简历？</a></li>
+<li><a href="https://juejin.im/post/5a92c23b5188257a6b06110b" target="_blank" rel="noopener">面试分享：专科半年经验面试阿里前端 P6+总结(附面试真题及答案)</a></li>
+<li><a href="https://juejin.im/post/5acd0c8a6fb9a028da7cdfaf" target="_blank" rel="noopener">面试官: 实现双向绑定 Proxy 比 defineproperty 优劣如何?</a></li>
+<li><a href="https://juejin.im/post/5a59db5a518825732d7f8ce5" target="_blank" rel="noopener">合格前端系列第九弹-前端面试那些事</a></li>
+<li><a href="https://juejin.im/post/5b68f384f265da0fa00a3df0" target="_blank" rel="noopener">一点感悟：当走完所有大厂的实习面试后</a></li>
+<li><a href="https://juejin.im/post/5af3cc4af265da0ba3521028" target="_blank" rel="noopener">社招中级前端笔试面试题总结</a></li>
+<li><a href="https://juejin.im/post/5bf5610be51d452a1353b08d" target="_blank" rel="noopener">2019 年前端面试都聊啥？一起来看看</a></li>
+<li><a href="https://juejin.im/post/5c92f499f265da612647b754" target="_blank" rel="noopener">(中篇)中高级前端大厂面试秘籍，寒冬中为您保驾护航，直通大厂</a></li>
+<li><a href="https://juejin.im/post/5acc17cb51882555745a03f8" target="_blank" rel="noopener">面试题：你能写一个 Vue 的双向数据绑定吗？</a></li>
+<li><a href="https://juejin.im/post/5c02142fe51d4511be77aad7" target="_blank" rel="noopener">面试官(6): 写过『通用前端组件』吗?</a></li>
+<li><a href="https://juejin.im/post/5ce4171ff265da1bd04eb4f3" target="_blank" rel="noopener">2019 前端面试 | “HTML + CSS + JS”专题</a></li>
+<li><a href="https://juejin.im/post/5a96c6326fb9a063626408c8" target="_blank" rel="noopener">2018 美团前端面试题，两年经验，你能答对几道？</a></li>
+<li><a href="https://juejin.im/post/5bd97627f265da39651c0a4b" target="_blank" rel="noopener">三年前端，面试思考（头条蚂蚁美团 offer）</a></li>
+<li><a href="https://juejin.im/post/5cf0733de51d4510803ce34e" target="_blank" rel="noopener">你要的 React 面试知识点，都在这了</a></li>
+<li><a href="https://juejin.im/post/5ca0425e51882567ce181037" target="_blank" rel="noopener">五年面试，三年模拟</a></li>
+<li><a href="https://link.juejin.im/?target=https%3A%2F%2Fwww.itcodemonkey.com%2Farticle%2F2853.html" target="_blank" rel="noopener">50 道 CSS 基础面试题（附答案）</a></li>
+<li><a href="https://juejin.im/post/5aa00229f265da239b40fc02" target="_blank" rel="noopener">此面试题版本落后-请勿观看</a></li>
+<li><a href="https://juejin.im/post/5c8e4cd3f265da67c87454a0" target="_blank" rel="noopener">jsliang 的 2019 面试准备</a></li>
+<li><a href="https://juejin.im/post/5b5567b25188256256696ee0" target="_blank" rel="noopener">面试图谱：前端基础技术知识讲解</a></li>
+<li><a href="https://juejin.im/post/5b1a512de51d45068f65ccfe" target="_blank" rel="noopener">JS 高级之面试必须知道的几个点</a></li>
+<li><a href="https://juejin.im/post/5ab70735f265da237a4cf9b1" target="_blank" rel="noopener">大厂前端面试考什么? | 掘金技术征文</a></li>
+<li><a href="https://juejin.im/post/5cbd1e33e51d45789161d053" target="_blank" rel="noopener">【面试篇】寒冬求职季之你必须要懂的原生 JS(中)</a></li>
+<li><a href="https://juejin.im/post/5ab0da85f265da23866fb9b7" target="_blank" rel="noopener">面试分享：2018 阿里巴巴前端面试总结 | 掘金技术征文</a></li>
+<li><a href="https://juejin.im/post/5c3d8956e51d4511dc72c200" target="_blank" rel="noopener">一次弄懂 Event Loop（彻底解决此类面试问题）</a></li>
+<li><a href="https://link.juejin.im/?target=https%3A%2F%2Fsegmentfault.com%2Fa%2F1190000014321635%3Futm_source%3Dindex-hottest" target="_blank" rel="noopener">面试之 JavaScript 篇</a></li>
+<li><a href="https://juejin.im/post/59cb6307f265da064e1f65b9" target="_blank" rel="noopener">前端面试之 webpack 篇</a></li>
+<li><a href="https://juejin.im/post/5b3c87386fb9a04f9a5cb037" target="_blank" rel="noopener">面试精选之 http 缓存</a></li>
+<li><a href="https://juejin.im/post/5bbaa549e51d450e827b6b13" target="_blank" rel="noopener">一篇文章搞定前端面试</a></li>
+<li><a href="https://juejin.im/post/5c8bb79e6fb9a04a006fe79a" target="_blank" rel="noopener">写给初级前端的面试经验</a></li>
+<li><a href="https://juejin.im/post/5c62b92de51d457fd77b22ce" target="_blank" rel="noopener">前端面试之路二(javaScript 基础整理)</a></li>
+<li><a href="https://juejin.im/post/59ffb4b66fb9a04512385402" target="_blank" rel="noopener">vue 面试题总汇</a></li>
+<li><a href="https://link.juejin.im/?target=https%3A%2F%2Fgithub.com%2Fqiu-deqing%2FFE-interview" target="_blank" rel="noopener">分享收集的一大波前端面试题和答案</a></li>
+<li><a href="https://juejin.im/post/5cf495e96fb9a07ef5622025" target="_blank" rel="noopener">公司要求会使用框架 vue，面试题会被问及哪些？</a></li>
+<li><a href="https://juejin.im/post/5cd0bdfc6fb9a031f10ca08c" target="_blank" rel="noopener">前端工程师面试必备（持续更新中）</a></li>
+<li><a href="https://juejin.im/post/5d032b77e51d45777a126183" target="_blank" rel="noopener">面试官（9）：可能是全网最全的 http 面试答案</a></li>
+<li><a href="https://link.juejin.im/?target=https%3A%2F%2Felemefe.github.io%2Fnode-interview%2F%23%2Fsections%2Fzh-cn%2F" target="_blank" rel="noopener">如何通过饿了么 Node.js 面试</a></li>
+<li><a href="https://juejin.im/post/5abf68886fb9a028b54802e0" target="_blank" rel="noopener">（干货）记前端工程师面试题，一起带大家理一理</a></li>
+<li><a href="https://juejin.im/post/5c959f74f265da610c068fa8" target="_blank" rel="noopener">「从源码中学习」面试官都不知道的 Vue 题目答案</a></li>
+<li><a href="https://juejin.im/post/5c7bd72ef265da2de80f7f17" target="_blank" rel="noopener">【半月刊 2】前端高频面试题及答案汇总</a></li>
+<li><a href="https://juejin.im/post/5b4d543ce51d4519610dea67" target="_blank" rel="noopener">记一次凉凉的小米面试</a></li>
+<li><a href="https://juejin.im/post/5ac2fb886fb9a028b86e328c" target="_blank" rel="noopener">面试官:既然 React/Vue 可以用 Event Bus 进行组件通信,你可以实现下吗?</a></li>
+<li><a href="https://juejin.im/post/5b984950f265da0afc2be3bf" target="_blank" rel="noopener">七年切图仔如何面试大厂 web 前端？（沟通软技能总结） | 掘金技术征文</a></li>
+<li><a href="https://juejin.im/post/5a0c170c6fb9a0451c39eff2" target="_blank" rel="noopener">让我印象深刻的 JavaScript 面试题</a></li>
+<li><a href="https://juejin.im/post/5c6d4789f265da2d8e70e164" target="_blank" rel="noopener">面试前如何准备才能提高成功率（含前端面试押题）</a></li>
+<li><a href="https://link.juejin.im/?target=http%3A%2F%2Fwww.jackpu.com%2Fnian-hou-fu-xi-zhi-nan%2F" target="_blank" rel="noopener">Web 前端年后跳槽面试复习指南</a></li>
+<li><a href="https://juejin.im/post/5bc5c752f265da0a9a399a62" target="_blank" rel="noopener">从一道面试题说起—js 隐式转换踩坑合集</a></li>
+<li><a href="https://juejin.im/post/5c87b54ce51d455f7943dddb" target="_blank" rel="noopener">2019 面试准备 - JS 防抖与节流</a></li>
+<li><a href="https://link.juejin.im/?target=https%3A%2F%2Fgithub.com%2FLiyuk%2FInterview-Questions-Answers" target="_blank" rel="noopener">再不看就删了！近期大厂前端面试题(链接失效请点原文)</a></li>
+<li><a href="https://juejin.im/post/5cdb7bc26fb9a0321557044d" target="_blank" rel="noopener">【前端面试分享】- 寒冬求职上篇</a></li>
+<li><a href="https://link.juejin.im/?target=https%3A%2F%2Fwww.geekjc.com%2Fpost%2F5b1e1e86274bfd42d16a697d" target="_blank" rel="noopener">前端工程师面试题(性能优化)</a></li>
+<li><a href="https://juejin.im/post/5bca74cfe51d450e9163351b" target="_blank" rel="noopener">[译] 以面试官的角度来看 React 工作面试</a></li>
+<li><a href="https://juejin.im/post/5c72a1766fb9a049ea3993e6" target="_blank" rel="noopener">2019 面试准备 - JS 原型与原型链</a></li>
+<li><a href="https://juejin.im/post/59ec3d50f265da431c6f7339" target="_blank" rel="noopener">2018web 前端面试总结</a></li>
+<li><a href="https://juejin.im/post/5b9267b1e51d450e7579af94" target="_blank" rel="noopener">9 月，水了几个大中厂前端面试的一些总结分享 | 掘金技术征文</a></li>
+<li><a href="https://juejin.im/post/5c8f30606fb9a070ef60996d" target="_blank" rel="noopener">寒冬中的前端社招面试</a></li>
+<li><a href="https://juejin.im/post/5ab4ab126fb9a028d4448365" target="_blank" rel="noopener">JavaScript：面试频繁出现的几个易错点</a></li>
+<li><a href="https://juejin.im/post/5ae17a386fb9a07abc299cdd" target="_blank" rel="noopener">面试：页面加载海量数据</a></li>
+<li><a href="https://juejin.im/post/5c9ac3f66fb9a070e056718f" target="_blank" rel="noopener">【半月刊 3】前端高频面试题及答案汇总</a></li>
+<li><a href="https://juejin.im/post/5ae13cfe5188256715475806" target="_blank" rel="noopener">2018 美团、腾讯、头条、蔚来 社招面试随谈</a></li>
+<li><a href="https://juejin.im/post/5bd95d22e51d45685f442f73" target="_blank" rel="noopener">26 个精选的 JavaScript 面试问题</a></li>
+<li><a href="https://juejin.im/post/5cede821f265da1bbd4b5630" target="_blank" rel="noopener">面试必备！webpack 中那些最易混淆的 5 个知识点</a></li>
+<li><a href="https://juejin.im/post/5cb3376bf265da039c0543da" target="_blank" rel="noopener">【半月刊 4】前端高频面试题及答案汇总</a></li>
+<li><a href="https://juejin.im/post/5a6a1dabf265da3e290c6804" target="_blank" rel="noopener">转眼人到中年：前端老程序员无法忘怀的一次百度电话面试</a></li>
+<li><a href="https://juejin.im/post/5b2215f76fb9a00e8f795cd1" target="_blank" rel="noopener">关于 React 面试题汇总</a></li>
+<li><a href="https://link.juejin.im/?target=https%3A%2F%2Fblog.ihoey.com%2Fposts%2FInterview%2F2018-02-28-alibaba-interview.html" target="_blank" rel="noopener">面试分享：2018 阿里巴巴前端面试总结(题目+答案)</a></li>
+<li><a href="https://juejin.im/post/5c45112e6fb9a04a027aa8fe" target="_blank" rel="noopener">【进阶 4-3 期】面试题之如何实现一个深拷贝</a></li>
+<li><a href="https://juejin.im/post/5b0562306fb9a07aaf3596c1" target="_blank" rel="noopener">【面试】社招中级前端笔试面试题总结-答案及拓展</a></li>
+<li><a href="https://juejin.im/post/5ba34e54e51d450e5162789b" target="_blank" rel="noopener">2 万 5 千字大厂面经 | 掘金技术征文</a></li>
+<li><a href="https://juejin.im/post/5af99678f265da0b8e7f881e" target="_blank" rel="noopener">毕业一年左右的前端妹子面经总结</a></li>
+<li><a href="https://juejin.im/post/5b19e81de51d454e907bd1c5" target="_blank" rel="noopener">太原面经分享：如何在 vue 面试环节，展示你晋级阿里 P6+的技术功底？</a></li>
+<li><a href="https://juejin.im/post/5ba6e77e6fb9a05d0b14359b" target="_blank" rel="noopener">那些年你踩过的坑，都在这里了～| 掘金技术征文</a></li>
+<li><a href="https://juejin.im/post/5bbc54a2e51d450e5a7445b4" target="_blank" rel="noopener">如何轻松拿到淘宝前端 offer | 掘金技术征文</a></li>
+<li><a href="https://juejin.im/post/59c907d46fb9a00a4746e2db" target="_blank" rel="noopener">腾讯校招前端三面,虐完继续撸|掘金技术征文</a></li>
+<li><a href="https://juejin.im/post/5bb470295188255c5e66f88f" target="_blank" rel="noopener">百度阿里网易大疆等大小厂前端校招面筋 | 掘金技术征文</a></li>
+<li><a href="https://juejin.im/post/5a64541bf265da3e2d338862" target="_blank" rel="noopener">16 年毕业的前端 er 在杭州求职 ing</a></li>
+<li><a href="https://juejin.im/post/5a718cd36fb9a01caa20d8a8" target="_blank" rel="noopener">杭州 17 届前端期待加入一个更好的团队</a></li>
+</ul>
+<h2 id="Electron"><a href="#Electron" class="headerlink" title="Electron"></a>Electron</h2><ul>
+<li><a href="https://juejin.im/post/5ba06b67f265da0ae343e89c" target="_blank" rel="noopener">[electron]终极奥义 五千字教程丢给你</a></li>
+<li><a href="https://juejin.im/post/5c46ab47e51d45522b4f55b1" target="_blank" rel="noopener">Electron 构建跨平台应用 Mac/Windows/Linux</a></li>
+</ul>
+<h2 id="Typescript"><a href="#Typescript" class="headerlink" title="Typescript"></a>Typescript</h2><ul>
+<li><a href="https://juejin.im/post/5b54886ce51d45198f5c75d7" target="_blank" rel="noopener">TypeScript + 大型项目实战</a></li>
+<li><a href="https://juejin.im/post/5a9c004a6fb9a028b92c9e91" target="_blank" rel="noopener">TypeScript 实践</a></li>
+<li><a href="https://juejin.im/post/59c46bc86fb9a00a4636f939" target="_blank" rel="noopener">TypeScript 体系调研报告</a></li>
+<li><a href="https://juejin.im/post/5cd6387d518825682348442d" target="_blank" rel="noopener">TypeScript - 一种思维方式</a></li>
+</ul>
+<h2 id="Node"><a href="#Node" class="headerlink" title="Node"></a>Node</h2><ul>
+<li><a href="https://juejin.im/post/5c1f8e52f265da6170071e43" target="_blank" rel="noopener">Node - 从 0 基础到实战企业官网</a></li>
+<li><a href="https://juejin.im/post/5b1717a86fb9a01e3e5ce540" target="_blank" rel="noopener">一点感悟：《Node.js 学习笔记》star 数突破 1000+</a></li>
+<li><a href="https://juejin.im/post/5c4c0ee8f265da61117aa527" target="_blank" rel="noopener">一篇文章构建你的 NodeJS 知识体系</a></li>
+<li><a href="https://juejin.im/post/5ba48fc4e51d450e704277fa" target="_blank" rel="noopener">node 进阶——之事无巨细手写 koa 源码</a></li>
+<li><a href="https://juejin.im/post/5ca321f76fb9a05e5d09bb8a" target="_blank" rel="noopener">技术栈：为什么 Node 是小菜前端团队的核心技术栈</a></li>
+<li><a href="https://juejin.im/post/5c77c6bef265da2de6611cff" target="_blank" rel="noopener">用 Node+wechaty 写一个爬虫脚本每天定时给女(男)朋友发微信暖心话</a></li>
+<li><a href="https://juejin.im/post/5c75fa4af265da2d84109219" target="_blank" rel="noopener">用 Node + EJS 写一个爬虫脚本每天定时女朋友发一封暖心邮件</a></li>
+<li><a href="https://juejin.im/post/5d25ce36f265da1ba84ab97a" target="_blank" rel="noopener">想学 Node.js，stream 先有必要搞清楚</a></li>
+<li><a href="https://juejin.im/post/5a31d210f265da431a43330e" target="_blank" rel="noopener">基于 node.js 的脚手架工具开发经历</a></li>
+</ul>
+<h2 id="性能"><a href="#性能" class="headerlink" title="性能"></a>性能</h2><ul>
+<li><a href="https://juejin.im/post/5b0b7d74518825158e173a0c" target="_blank" rel="noopener">网站性能优化实战——从 12.67s 到 1.06s 的故事</a></li>
+<li><a href="https://juejin.im/post/5b6fa8c86fb9a0099910ac91" target="_blank" rel="noopener">网站性能优化实战——从 12.67s 到 1.06s 的故事</a></li>
+<li><a href="https://link.juejin.im/?target=https%3A%2F%2Fmp.weixin.qq.com%2Fs%3F__biz%3DMzUxMzcxMzE5Ng%3D%3D%26mid%3D2247489586%26idx%3D1%26sn%3D2168d42df837521da50b3ed7f8932698%26chksm%3Df951ad71ce262467728b7940de1a2311c523f264f4ca7e705712bf655a844fab93706cbe1ca3%26token%3D1792152421%26lang%3Dzh_CN%23rd" target="_blank" rel="noopener">首屏时间从 12.67s 到 1.06s，我是如何做到的？</a></li>
+<li><a href="https://juejin.im/post/5bec223f5188250c102116b5" target="_blank" rel="noopener">用 100 行代码提升 10 倍的性能</a></li>
+<li><a href="https://juejin.im/post/5caa0c2d51882543fa41e478" target="_blank" rel="noopener">【前端词典】5 种滚动吸顶实现方式的比较[性能升级版]</a></li>
+<li><a href="https://juejin.im/post/5a966bd16fb9a0635172a50a" target="_blank" rel="noopener">2018 前端性能优化清单</a></li>
+<li><a href="https://juejin.im/post/5b5dcfb46fb9a04f8f37afbb" target="_blank" rel="noopener">前端性能与异常上报</a></li>
+<li><a href="https://juejin.im/post/5b7a50c0e51d4538af60d995" target="_blank" rel="noopener">5 分钟撸一个前端性能监控工具</a></li>
+<li><a href="https://link.juejin.im/?target=https%3A%2F%2Fmp.weixin.qq.com%2Fs%3F__biz%3DMzUxMTcwOTM4Mg%3D%3D%26mid%3D2247483962%26idx%3D1%26sn%3Df9337ad983c6303811eb43d07d9f23d5%26chksm%3Df96edb93ce195285943211e645cc683989826abdaaa8ab0b073a20761369ed04843c835c50b7%23rd" target="_blank" rel="noopener">嗨，送你一张 Web 性能优化地图</a></li>
+<li><a href="https://juejin.im/post/5ac1d117f265da2396128b9f" target="_blank" rel="noopener">2018 前端性能检查表</a></li>
+<li><a href="https://juejin.im/post/5b73ef38f265da281e048e51" target="_blank" rel="noopener">前端性能优化之雅虎 35 条军规</a></li>
+<li><a href="https://juejin.im/post/5b9550806fb9a05cff31f7b3" target="_blank" rel="noopener">前端性能优化—js 代码打包</a></li>
+</ul>
+<h2 id="前后端交互"><a href="#前后端交互" class="headerlink" title="前后端交互"></a>前后端交互</h2><ul>
+<li><a href="https://juejin.im/post/5a4e6a43f265da3e303c4787" target="_blank" rel="noopener">WebSocket：5 分钟从入门到精通</a></li>
+<li><a href="https://juejin.im/post/5bc7f6b96fb9a05d3447eef8" target="_blank" rel="noopener">WebSocket 是时候展现你优秀的一面了</a></li>
+<li><a href="https://juejin.im/post/5a1bdf676fb9a045055dd99d" target="_blank" rel="noopener">WebSocket 探秘</a></li>
+<li><a href="https://juejin.im/post/5b7ea1366fb9a01a0b319612" target="_blank" rel="noopener">前后端分离使用 Token 登录解决方案</a></li>
+<li><a href="https://juejin.im/post/5a6c60166fb9a01caf37a5e5" target="_blank" rel="noopener">Token 认证的来龙去脉</a></li>
+<li><a href="https://juejin.im/post/59cb4f49f265da0658153c9a" target="_blank" rel="noopener">注册、登录和 token 的安全之道</a></li>
+<li><a href="https://juejin.im/post/59fc04ecf265da4317697f26" target="_blank" rel="noopener">你敢在 post 和 get 上刁难我，就别怪我装逼了</a></li>
+<li><a href="https://juejin.im/post/5a2ff29c6fb9a045132aac5a" target="_blank" rel="noopener">九个问题从入门到熟悉 HTTPS</a></li>
+<li><a href="https://juejin.im/post/5a39da9af265da4327185dc9" target="_blank" rel="noopener">JS 维护 nginx 反向代理，妈妈再也不用担心我跨域了！</a></li>
+<li><a href="https://juejin.im/post/5bb1cc2af265da0ae5052496" target="_blank" rel="noopener">前端必须懂的计算机网络知识—(跨域、代理、本地存储)</a></li>
+<li><a href="https://juejin.im/post/5a2f92c65188253e2470f16d" target="_blank" rel="noopener">正确面对跨域，别慌</a></li>
+<li><a href="https://juejin.im/post/5c23993de51d457b8c1f4ee1" target="_blank" rel="noopener">九种跨域方式实现原理（完整版）</a></li>
+<li><a href="https://link.juejin.im/?target=http%3A%2F%2Fweb.jobbole.com%2F94928%2F" target="_blank" rel="noopener">不要再问我跨域的问题了</a></li>
+<li><a href="https://juejin.im/post/5a6320d56fb9a01cb64ee191" target="_blank" rel="noopener">我知道的跨域与安全</a></li>
+<li><a href="https://link.juejin.im/?target=https%3A%2F%2Fsegmentfault.com%2Fa%2F1190000012469713" target="_blank" rel="noopener">ajax 跨域，这应该是最全的解决方案了</a></li>
+<li><a href="https://juejin.im/post/5bce886af265da0ac07c8ef8" target="_blank" rel="noopener">socket.io 让每个人都可以开发属于自己的即时通讯</a></li>
+<li><a href="https://juejin.im/post/59e4c02151882578d02f4aca" target="_blank" rel="noopener">谈谈 HTTPS</a></li>
+<li><a href="https://juejin.im/post/5b51f39b5188251a9f24a264" target="_blank" rel="noopener">不务正业的前端之 SSO（单点登录）实践</a></li>
+<li><a href="https://juejin.im/post/5a002b536fb9a045132a1727" target="_blank" rel="noopener">前端需要了解的 SSO 与 CAS 知识</a></li>
+<li><a href="https://juejin.im/post/5cd0438c6fb9a031ec6d3ab2" target="_blank" rel="noopener">前端基础篇之 HTTP 协议</a></li>
+<li><a href="https://juejin.im/post/5ad6ad575188255c272273c4" target="_blank" rel="noopener">分分钟让你理解 HTTPS</a></li>
+<li><a href="https://juejin.im/post/5cd9037ee51d456e5c5babca" target="_blank" rel="noopener">你真的了解 Cookie 和 Session 吗</a></li>
+<li><a href="https://juejin.im/post/59d1f59bf265da06700b0934" target="_blank" rel="noopener">把 cookie 聊清楚</a></li>
+<li><a href="https://juejin.im/post/5b3b870a5188251ac85826b8" target="_blank" rel="noopener">不要用 JWT 替代 session 管理（上）：全面了解 Token,JWT,OAuth,SAML,SSO</a></li>
+<li><a href="https://juejin.im/post/5acde23c5188255cb32e7e76" target="_blank" rel="noopener">从 ajax 到 fetch、axios</a></li>
+<li><a href="https://juejin.im/post/5c7e541b6fb9a049e06415a5" target="_blank" rel="noopener">如何在 Web 关闭页面时发送 Ajax 请求</a></li>
+</ul>
+<h2 id="Git"><a href="#Git" class="headerlink" title="Git"></a>Git</h2><ul>
+<li><a href="https://juejin.im/post/5a54386af265da3e3b7a6317" target="_blank" rel="noopener">如何优雅地使用 Git</a></li>
+<li><a href="https://juejin.im/post/5a2cdfe26fb9a0452936b07f" target="_blank" rel="noopener">🛠Git 常用操作总结</a></li>
+<li><a href="https://juejin.im/post/5afc5242f265da0b7f44bee4" target="_blank" rel="noopener">优雅的提交你的 Git Commit Message</a></li>
+<li><a href="https://juejin.im/post/5c33f49de51d45523070f7bb" target="_blank" rel="noopener">马蹄疾 | 2018(农历年)封山之作，和我一起嚼烂 Git(两万字长文)</a></li>
+<li><a href="https://juejin.im/post/5bd2a0d8e51d457a4e0d4fd5" target="_blank" rel="noopener">超详实 Git 简明教程与命令大全</a></li>
+<li><a href="https://juejin.im/post/5d3edad9f265da03a652f133" target="_blank" rel="noopener">前端进阶必备，github 优质资源整理分享！</a></li>
+</ul>
+<h2 id="Flutter"><a href="#Flutter" class="headerlink" title="Flutter"></a>Flutter</h2><ul>
+<li><a href="https://juejin.im/post/5c452bac6fb9a049af6d919a" target="_blank" rel="noopener">Flutter 44 集免费基础视频教程 </a></li>
+<li><a href="https://juejin.im/post/5be3d54cf265da611d6624d3" target="_blank" rel="noopener">Flutter 免费视频教程第一季：开发环境搭建</a></li>
+</ul>
+<h2 id="Docker"><a href="#Docker" class="headerlink" title="Docker"></a>Docker</h2><ul>
+<li><a href="https://juejin.im/post/5c4a6fcd518825469414e062" target="_blank" rel="noopener">vue-cli3 项目从搭建优化到 docker 部署</a></li>
+<li><a href="https://juejin.im/post/5a142d7b6fb9a0451170c2c7" target="_blank" rel="noopener">基于 Docker 打造前端持续集成开发环境</a></li>
+<li><a href="https://juejin.im/post/5ad3172c5188257ddb10109a" target="_blank" rel="noopener">从 0 开始了解 Docker</a></li>
+<li><a href="https://juejin.im/post/5cce4b1cf265da0373719819" target="_blank" rel="noopener">[手把手系列之]Docker 部署 vue 项目</a></li>
+<li><a href="https://juejin.im/post/5c83cbaa6fb9a04a0f65fdaa" target="_blank" rel="noopener">如何使用 docker 部署前端应用</a></li>
+</ul>
+<h2 id="VS-Code"><a href="#VS-Code" class="headerlink" title="VS Code"></a>VS Code</h2><ul>
+<li><a href="https://juejin.im/post/5bea48c4e51d454e5b5f19e8" target="_blank" rel="noopener">写给前端开发者不一样的 VSCode 配置(JS/React)</a></li>
+<li><a href="https://juejin.im/post/5ad13d8a6fb9a028ce7c0721" target="_blank" rel="noopener">能让你开发效率翻倍的 VSCode 插件配置（中）</a></li>
+<li><a href="https://juejin.im/post/5a08d1d6f265da430f31950e" target="_blank" rel="noopener">能让你开发效率翻倍的 VSCode 插件配置（上）</a></li>
+<li><a href="https://juejin.im/post/5d34fdfff265da1b897b0c8d" target="_blank" rel="noopener">21 个 VSCode 快捷键，让代码更快，更有趣</a></li>
+<li><a href="https://juejin.im/post/5b123ace6fb9a01e6f560a4b" target="_blank" rel="noopener">强大的 VSCode</a></li>
+<li><a href="https://juejin.im/post/5a704d84518825734f5300c8" target="_blank" rel="noopener">VS Code 折腾记 - (12) 春节前的最后一波插件推荐(前端/协作/主题)</a></li>
+<li><a href="https://juejin.im/post/5bc55606e51d450e853075c9" target="_blank" rel="noopener">VS Code：让你工作效率翻倍的 23 个插件和 23 个编辑技巧</a></li>
+<li><a href="https://juejin.im/post/5b99a927f265da0a922399cd" target="_blank" rel="noopener">30 个极大提高开发效率的 Visual Studio Code 插件</a></li>
+<li><a href="https://link.juejin.im/?target=http%3A%2F%2Fwww.cnblogs.com%2FSroot%2Fp%2F7429186.html" target="_blank" rel="noopener">实用的 Visual Studio Code 插件</a></li>
+<li><a href="https://juejin.im/post/5c356b106fb9a049ef26c368" target="_blank" rel="noopener">VS Code 折腾记 - (15) 再来一波大前端适用系列的插件(主打编码体验改善)</a></li>
+</ul>
+<h2 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h2><ul>
+<li><a href="https://juejin.im/post/5cc1da82f265da036023b628" target="_blank" rel="noopener">一名【合格】前端工程师的自检清单</a></li>
+<li><a href="https://juejin.im/post/5a5bc8c36fb9a01ca26774eb" target="_blank" rel="noopener">技术胖 155 集前端视频教程-全部免费观看</a></li>
+<li><a href="https://juejin.im/post/5c11bf145188252704368b98" target="_blank" rel="noopener">新年献礼 技术胖 262 集前端免费视频 让您走的更容易些</a></li>
+<li><a href="https://juejin.im/post/5ba7d5dd5188255c6140cc9d" target="_blank" rel="noopener">前端常用插件、工具类库汇总，不要重复造轮子啦！！！</a></li>
+<li><a href="https://juejin.im/post/5d387f696fb9a07eeb13ea60" target="_blank" rel="noopener">一个合格(优秀)的前端都应该阅读这些文章</a></li>
+<li><a href="https://juejin.im/post/5cea1f705188250640005472" target="_blank" rel="noopener">大型项目前端架构浅谈（8000 字原创）</a></li>
+<li><a href="https://juejin.im/post/5a0c1956f265da430a501f51" target="_blank" rel="noopener">个人分享–web 前端学习资源分享</a></li>
+<li><a href="https://juejin.im/post/5b3adfe2e51d4555b17e85df" target="_blank" rel="noopener">2018 上半年掘金微信群日报优质文章合集：前端篇</a></li>
+<li><a href="https://juejin.im/post/5aa252ac518825558001d5de" target="_blank" rel="noopener">干货!各种常见布局实现+知名网站实例分析</a></li>
+<li><a href="https://juejin.im/post/5bdfb387e51d452c8e0aa902" target="_blank" rel="noopener">年终回顾，为你汇总一份「前端技术清单」</a></li>
+<li><a href="https://juejin.im/post/5ae95f17f265da0b93481dec" target="_blank" rel="noopener">四月前端知识集锦（每月不可错过的文章集锦）</a></li>
+<li><a href="https://juejin.im/post/5bd7a6046fb9a05d2c43f8c7" target="_blank" rel="noopener">前端必会的 Nginx 入门视频教程(共 11 集)</a></li>
+<li><a href="https://juejin.im/post/5a3b56b4518825089e501fe1" target="_blank" rel="noopener">2017 下半年掘金日报优质文章合集：前端篇</a></li>
+<li><a href="https://juejin.im/post/5bacbd395188255c8d0fd4b2" target="_blank" rel="noopener">Nginx 与前端开发</a></li>
+<li><a href="https://juejin.im/post/5cdcd42551882568651554e6" target="_blank" rel="noopener">正则表达式不要背</a></li>
+<li><a href="https://juejin.im/post/5d0878aaf265da1b83338f74" target="_blank" rel="noopener">8 年前端开发的知识点沉淀(不知道会多少字，一直写下去吧…)</a></li>
+<li><a href="https://juejin.im/post/5af53823f265da0b75282b0f" target="_blank" rel="noopener">chrome 开发者工具各种骚技巧</a></li>
+<li><a href="https://juejin.im/post/5a519d305188257327396da5" target="_blank" rel="noopener">2018 前端值得关注的技术</a></li>
+<li><a href="https://juejin.im/post/5b01336af265da0b8a67e5c9" target="_blank" rel="noopener">谁说前端不需要懂-Nginx 反向代理与负载均衡</a></li>
+<li><a href="https://link.juejin.im/?target=https%3A%2F%2Fw3ctrain.com%2F2018%2F08%2F20%2Ftrigonometry-you-must-know%2F" target="_blank" rel="noopener">前端程序员必须掌握之三角函数在前端动画中的应用</a></li>
+<li><a href="https://juejin.im/post/5a961d496fb9a06356314a36" target="_blank" rel="noopener">前端知识集锦</a></li>
+<li><a href="https://juejin.im/post/5a193b4bf265da43052e528a" target="_blank" rel="noopener">前端本地文件操作与上传</a></li>
+<li><a href="https://juejin.im/post/5b5db5b8e51d4519155720d2" target="_blank" rel="noopener">可能是最好的正则表达式的教程笔记了吧…</a></li>
+<li><a href="https://juejin.im/post/5abb22925188255c4c1050e0" target="_blank" rel="noopener">3 月前端知识集锦</a></li>
+<li><a href="https://juejin.im/post/59cb0d0b5188257e876a2d27" target="_blank" rel="noopener">如何管理好 10 万行代码的前端单页面应用</a></li>
+<li><a href="https://juejin.im/post/5a473a2df265da431441098c" target="_blank" rel="noopener">B 站的前端之路</a></li>
+<li><a href="https://juejin.im/post/5d1ea7a8e51d454fd8057bea" target="_blank" rel="noopener">为什么视频网站的视频链接地址是 blob？</a></li>
+<li><a href="https://juejin.im/post/5ad1980e6fb9a028c42ea1be" target="_blank" rel="noopener">实战笔记：Jenkins 打造强大的前端自动化工作流</a></li>
+<li><a href="https://juejin.im/post/5d1589c8e51d45776031b02e" target="_blank" rel="noopener">哪些技术会决定前端开发者的未来发展？</a></li>
+<li><a href="https://juejin.im/post/5a490d8051882511793e8a5f" target="_blank" rel="noopener">送给前端开发者的一份新年礼物</a></li>
+<li><a href="https://juejin.im/post/5afe3735518825426539afce" target="_blank" rel="noopener">如何阅读大型前端开源项目的源码</a></li>
+<li><a href="https://juejin.im/post/5c75d34851882564965edb23" target="_blank" rel="noopener">我如何零基础转行成为一个自信的前端</a></li>
+<li><a href="https://juejin.im/post/5a9224c6f265da4e710f7786" target="_blank" rel="noopener">细数国内外的前端大牛</a></li>
+<li><a href="https://juejin.im/post/5ab3f77df265da2392364341" target="_blank" rel="noopener">2018 年了，你还是只会 npm install 吗？</a></li>
+<li><a href="https://juejin.im/post/5b911f306fb9a05cdb1013b9" target="_blank" rel="noopener">如何保障前端项目的代码质量</a></li>
+<li><a href="https://juejin.im/post/5b6349716fb9a04f834669d6" target="_blank" rel="noopener">可视化搭建前端工程 - 阿里飞冰了解一下</a></li>
+<li><a href="https://juejin.im/post/5c3ff18b6fb9a04a0a5f76aa" target="_blank" rel="noopener">让老板虎躯一震的前端技术，KPI 杀手</a></li>
+<li><a href="https://juejin.im/post/5d003f51e51d454fbe24a661" target="_blank" rel="noopener">前端工作学习相关网站收集整理</a></li>
+<li><a href="https://juejin.im/post/5b2f4790e51d45589e7bd63d" target="_blank" rel="noopener">[杂谈]了解一些额外知识，让前端开发锦上添花</a></li>
+<li><a href="https://link.juejin.im/?target=https%3A%2F%2Fgithub.com%2FSangKa%2FPWA-Book-CN" target="_blank" rel="noopener">第一本 PWA 中文书</a></li>
+<li><a href="https://juejin.im/post/5c92446b6fb9a070c022f0e2" target="_blank" rel="noopener">【前端词典】分享 8 个有趣且实用的 API</a></li>
+<li><a href="https://juejin.im/post/59bb864b5188257e7a427c09" target="_blank" rel="noopener">手摸手，带你优雅的使用 icon</a></li>
+<li><a href="https://juejin.im/post/5adc8e18518825672b0352a8" target="_blank" rel="noopener">重构 - 改善代码的各方面问题</a></li>
+<li><a href="https://juejin.im/post/5c74d4b9e51d4512c37ea03b" target="_blank" rel="noopener">我在淘宝做前端的这三年 — 第一年</a></li>
+<li><a href="https://juejin.im/post/5c1f01fef265da61587723f4" target="_blank" rel="noopener">五星推荐的系列文章清单</a></li>
+<li><a href="https://juejin.im/post/5cf765275188257c6b51775f" target="_blank" rel="noopener">前端大文件上传</a></li>
+<li><a href="https://juejin.im/post/5d08d3d3f265da1b7e103a4d" target="_blank" rel="noopener">前端工程化（5）：你所需要的 npm 知识储备都在这了</a></li>
+<li><a href="https://juejin.im/post/59ffad656fb9a0450b65c4c0" target="_blank" rel="noopener">web 调试优化-chrome 开发者工具不完全指南</a></li>
+<li><a href="https://juejin.im/post/5aaa06e4f265da237b21cf63" target="_blank" rel="noopener">如何写一个通用的 README 规范</a></li>
+<li><a href="https://juejin.im/post/5b9e61b15188255c980bc6fd" target="_blank" rel="noopener">作为前端你拿什么证明网站体验？</a></li>
+<li><a href="https://link.juejin.im/?target=http%3A%2F%2Flitten.me%2F2017%2F07%2F09%2Fprevent-spiders%2F" target="_blank" rel="noopener">反击爬虫，前端工程师的脑洞可以有多大？</a></li>
+<li><a href="https://juejin.im/post/5c6bbf0f6fb9a049ba4224fd" target="_blank" rel="noopener">如何编写高质量的函数 – 敲山震虎篇</a></li>
+<li><a href="https://link.juejin.im/?target=http%3A%2F%2Fwww.zcfy.cc%2Farticle%2Fthe-best-front-end-hacking-cheatsheets-all-in-one-place-4520.html%3Ft%3Dnew" target="_blank" rel="noopener">好用的前端 API 备忘录</a></li>
+<li><a href="https://juejin.im/post/59e6a995518825619a01c433" target="_blank" rel="noopener">iView 发布后台管理系统 iview-admin，没错，它就是你想要的</a></li>
+<li><a href="https://juejin.im/post/5b3da006e51d4518f140edb2" target="_blank" rel="noopener">如何机智地回答浏览器兼容性问题</a></li>
+<li><a href="https://juejin.im/post/5afede99f265da0b82630af8" target="_blank" rel="noopener">ESLint 里的规则教会我，无规矩 不编程</a></li>
+<li><a href="https://juejin.im/post/5cf5f358e51d45778f076ce5" target="_blank" rel="noopener">分享阿里前端 p7 架构图谱</a></li>
+<li><a href="https://juejin.im/post/5c17ad756fb9a049ff4e0a62" target="_blank" rel="noopener">前端模块化详解(完整版)</a></li>
+<li><a href="https://juejin.im/post/5c3c4b3551882524a5420119" target="_blank" rel="noopener">这应该是你见过的最全前端下载总结</a></li>
+<li><a href="https://juejin.im/post/5c617c576fb9a049e93d33a4" target="_blank" rel="noopener">给 2019 前端的 5 个建议</a></li>
+<li><a href="https://juejin.im/post/5c0dd824f265da611a47b080" target="_blank" rel="noopener">想写好前端，先练好内功</a></li>
+<li><a href="https://juejin.im/post/5cc7d540e51d456e537ef39e" target="_blank" rel="noopener">我是如何将业务代码写优雅的</a></li>
+<li><a href="https://juejin.im/post/5b4ffa045188251b134e7211" target="_blank" rel="noopener">水波图实现原理</a></li>
+<li><a href="https://juejin.im/post/5c8e5e4951882545c109ae9c" target="_blank" rel="noopener">让虚拟 DOM 和 DOM-diff 不再成为你的绊脚石</a></li>
+<li><a href="https://juejin.im/post/5cd8c361f265da03a33c5521" target="_blank" rel="noopener">25 岁，毕业写前端的这三年</a></li>
+<li><a href="https://juejin.im/post/5c7dafe8f265da2de25bab27" target="_blank" rel="noopener">我在淘宝做前端的这三年 — 第二年</a></li>
+<li><a href="https://juejin.im/post/5b6ad6b0e51d4519171766e2" target="_blank" rel="noopener">[前端开发]–分享个人习惯的命名方式</a></li>
+<li><a href="https://juejin.im/post/5c9075305188252d5c743520" target="_blank" rel="noopener">前端构建秘籍</a></li>
+<li><a href="https://juejin.im/post/5be54a286fb9a049ae07641b" target="_blank" rel="noopener">弹幕，是怎样练成的？</a></li>
+<li><a href="https://juejin.im/post/5b66993ee51d451924734c35" target="_blank" rel="noopener">前端 er 怎样操作剪切复制以及禁止复制+破解等</a></li>
+<li><a href="https://juejin.im/post/5b28d4fbe51d45587b47fd43" target="_blank" rel="noopener">一套比较完整的前端技术选型，需要规整哪些东西，你知道不？</a></li>
+<li><a href="https://juejin.im/post/5c1606d9f265da613d7bf7a4" target="_blank" rel="noopener">你（可能）不知道的 web api</a></li>
+<li><a href="https://juejin.im/post/5bfc21d2e51d4544313df666" target="_blank" rel="noopener">平庸前端码农之蜕变 — AST</a></li>
+<li><a href="https://juejin.im/post/5c591fda6fb9a049dc02b1cc" target="_blank" rel="noopener">【前端词典】进阶必备的网络基础（上）</a></li>
+<li><a href="https://juejin.im/post/5c85a64d6fb9a04a0e2e038c" target="_blank" rel="noopener">前端开发者必备的 Nginx 知识</a></li>
+<li><a href="https://juejin.im/post/5c2c47dcf265da616d544a53" target="_blank" rel="noopener">前端中的 IoC 理念</a></li>
+<li><a href="https://juejin.im/post/5cb5c3445188256c83279255" target="_blank" rel="noopener">前端代码质量管理（一）</a></li>
+<li><a href="https://juejin.im/post/5b125ad3e51d450688133f22" target="_blank" rel="noopener">发布订阅模式，在工作中它的能量超乎你的想象</a></li>
+<li><a href="https://juejin.im/post/5a22af716fb9a045132a825c" target="_blank" rel="noopener">如果有人问你爬虫抓取技术的门道，请叫他来看这篇文章</a></li>
+<li><a href="https://juejin.im/post/5c21b584e51d4548ac6f6c99" target="_blank" rel="noopener">深入 Babel，这一篇就够了</a></li>
+<li><a href="https://juejin.im/post/5b4b73e7f265da0f96287f0a" target="_blank" rel="noopener">[浅析]特定场景下取代 if-else 和 switch 的方案</a></li>
+<li><a href="https://juejin.im/post/5b0c3b53f265da09253cbed0" target="_blank" rel="noopener">懒加载和预加载</a></li>
+<li><a href="https://juejin.im/post/5aed6da16fb9a07aac2457f6" target="_blank" rel="noopener">如何判断用户浏览器以及一些前端常用的正则表单验证</a></li>
+<li><a href="https://juejin.im/post/5c136bd16fb9a049d37efc47" target="_blank" rel="noopener">前端缓存最佳实践</a></li>
+<li><a href="https://juejin.im/post/5a12881a6fb9a044fd115dd4" target="_blank" rel="noopener">浅谈前端线上部署与运维</a></li>
+<li><a href="https://juejin.im/post/5a0b29756fb9a045167cb643" target="_blank" rel="noopener">别再拿奇技淫巧搬砖了</a></li>
+<li><a href="https://juejin.im/post/5bee7dd4e51d451f5b54cbb4" target="_blank" rel="noopener">前端黑科技：美团网页首帧优化实践</a></li>
+<li><a href="https://juejin.im/post/5c99c17df265da6129788ae2" target="_blank" rel="noopener">技术栈：小菜前端的技术栈是如何规划和演进的</a></li>
+<li><a href="https://juejin.im/post/5d37d982e51d45108c59a635" target="_blank" rel="noopener">【中高级前端必备】手摸手教你撸一个脚手架</a></li>
+<li><a href="https://juejin.im/post/5b626a096fb9a04fdd7d7433" target="_blank" rel="noopener">单枪匹马撸个聊天室, 支持 Web/Android/iOS 三端</a></li>
+<li><a href="https://juejin.im/post/59c4c9d85188254f58412d17" target="_blank" rel="noopener">移动 Web 开发问题和优化小结</a></li>
+<li><a href="https://juejin.im/post/5d1c6550518825330a3bfa01" target="_blank" rel="noopener">前端团队代码评审 CheckList 清单</a></li>
+<li><a href="https://link.juejin.im/?target=https%3A%2F%2Fmp.weixin.qq.com%2Fs%2FC6HrDJnQivNMIBz5jjcm6g" target="_blank" rel="noopener">前端工程师必备十大网站</a></li>
+<li><a href="https://juejin.im/post/59dad63ff265da065270d49e" target="_blank" rel="noopener">实践中的前后端分离</a></li>
+<li><a href="https://juejin.im/post/5a52f138f265da3e5b32a41b" target="_blank" rel="noopener">把前端监控做到极致</a></li>
+<li><a href="https://juejin.im/post/5a9759a16fb9a0635b5360b3" target="_blank" rel="noopener">手把手教你如何编写一个前端图片压缩、方向纠正、预览、上传插件</a></li>
+<li><a href="https://juejin.im/post/5a8d720a5188257a67177c3c" target="_blank" rel="noopener">程序员的小浪漫—-烟火</a></li>
+<li><a href="https://juejin.im/post/59e5a86c51882578bf185dba" target="_blank" rel="noopener">无头浏览器 Puppeteer 初探</a></li>
+<li><a href="https://juejin.im/post/5b50c8b76fb9a04fd3439215" target="_blank" rel="noopener">优雅的类写法</a></li>
+<li><a href="https://juejin.im/post/59c4d696f265da065d2b7843" target="_blank" rel="noopener">网易严选 App 感受 Weex 开发（已完结）</a></li>
+<li><a href="https://juejin.im/post/5b10dd36e51d4506e04cf802" target="_blank" rel="noopener">深入框架本源系列 —— Virtual Dom</a></li>
+<li><a href="https://juejin.im/post/5a372716518825258a5fbc80" target="_blank" rel="noopener">搭建一个前端监控系统,不再错过 BUG</a></li>
+<li><a href="https://juejin.im/post/5a6c87c46fb9a01ca560b4d7" target="_blank" rel="noopener">缓存详解</a></li>
+<li><a href="https://juejin.im/post/5d1fe6be51882579db031a6d" target="_blank" rel="noopener">从头开始，彻底理解服务端渲染原理(8 千字汇总长文)</a></li>
+<li><a href="https://link.juejin.im/?target=https%3A%2F%2Fsegmentfault.com%2Fa%2F1190000012578794" target="_blank" rel="noopener">很全很全的前端本地存储讲解</a></li>
+<li><a href="https://juejin.im/post/5b09a641f265da0dcd0b674f" target="_blank" rel="noopener">新一代的前端存储方案–indexedDB</a></li>
+<li><a href="https://juejin.im/post/5bf174396fb9a049ca36f13d" target="_blank" rel="noopener">正则表达式详解及实战</a></li>
+<li><a href="https://juejin.im/post/5b8bf7e3e51d4538c210c6b0" target="_blank" rel="noopener">如何实现前端录音功能</a></li>
+<li><a href="https://link.juejin.im/?target=http%3A%2F%2Fhpoenixf.com%2F%E5%89%8D%E7%AB%AF%E8%BF%9B%E9%98%B6%E7%B3%BB%E5%88%97-%E7%9B%AE%E5%BD%95.html" target="_blank" rel="noopener">前端进阶系列-目录</a></li>
+<li><a href="https://juejin.im/post/5c09a80151882521c81168a2" target="_blank" rel="noopener">【译】你不知道的 Chrome 调试工具技巧 第一天：console 中的 ‘$’</a></li>
+<li><a href="https://juejin.im/post/5c0d2622e51d4529ee234272" target="_blank" rel="noopener">ECharts 打造在线个人简历</a></li>
+<li><a href="https://juejin.im/post/5b62d68df265da0f9d1a1cd6" target="_blank" rel="noopener">前端监控和前端埋点方案设计</a></li>
+<li><a href="https://juejin.im/post/5b729909e51d45662434aef0" target="_blank" rel="noopener">开源库架构实战——从 0 到 1 搭建属于你自己的开源库</a></li>
+<li><a href="https://juejin.im/post/5d24096ee51d454d1d6285a1" target="_blank" rel="noopener">有赞前端质量保障体系</a></li>
+<li><a href="https://juejin.im/post/5a474c8ff265da430a50ea57" target="_blank" rel="noopener">未来的前端工程师</a></li>
+<li><a href="https://juejin.im/post/5a069b6d51882509e5432656" target="_blank" rel="noopener">一篇文章带你熟悉 TCP/IP 协议（网络协议篇二）</a></li>
+<li><a href="https://juejin.im/post/5afd6a88f265da0b9127a879" target="_blank" rel="noopener">优化页面的打开速度，要不要了解一下~</a></li>
+<li><a href="https://juejin.im/post/5a5b2a5c6fb9a01cbc6e59f9" target="_blank" rel="noopener">重构 - 代码整洁之道</a></li>
+<li><a href="https://juejin.im/post/5c811e426fb9a04a0c2f3bdb" target="_blank" rel="noopener">我在淘宝做前端的这三年 — 第三年</a></li>
+<li><a href="https://juejin.im/post/5a5e28b2f265da3e355b1451" target="_blank" rel="noopener">2018 Web 开发者最佳学习路线</a></li>
+<li><a href="https://juejin.im/post/5cfe4e8a6fb9a07ec63b09a4" target="_blank" rel="noopener">富文本原理了解一下？</a></li>
+<li><a href="https://link.juejin.im/?target=https%3A%2F%2Fjeffjade.com%2F2017%2F12%2F17%2F134-kinds-of-toss-using-puppeteer%2F" target="_blank" rel="noopener">大前端神器安利之 Puppeteer</a></li>
+<li><a href="https://juejin.im/post/5b890c386fb9a019c771713a" target="_blank" rel="noopener">少侠，留步，图片预览术</a></li>
+<li><a href="https://juejin.im/post/5a9923e9518825558251c96a" target="_blank" rel="noopener">浏览器的回流与重绘 (Reflow &amp; Repaint)</a></li>
+<li><a href="https://juejin.im/post/5a97bb3951882555867ecffc" target="_blank" rel="noopener">用 Canvas 画一只会跟着鼠标走的小狗</a></li>
+<li><a href="https://link.juejin.im/?target=http%3A%2F%2Fjspang.com%2F2017%2F11%2F13%2Fkoa2%2F" target="_blank" rel="noopener">前端挑战全栈 13 集原创 Koa2.x 免费视频奉上</a></li>
+<li><a href="https://juejin.im/post/5b0cf331f265da0905017b48" target="_blank" rel="noopener">学习笔记——正则匹配方法整理</a></li>
+<li><a href="https://juejin.im/post/59ed37f5f265da431e15eaac" target="_blank" rel="noopener">HTML5 桌面通知：Notification API</a></li>
+<li><a href="https://juejin.im/post/5a5380a6518825733365e62a" target="_blank" rel="noopener">前后端分离实践有感</a></li>
+<li><a href="https://juejin.im/post/5b762bace51d45556f41c431" target="_blank" rel="noopener">写给工程师的十条精进原则</a></li>
+<li><a href="https://juejin.im/post/5bbc1b0c6fb9a05cf230140c" target="_blank" rel="noopener">优秀前端必知的话题：我们应该做些力所能及的优化</a></li>
+<li><a href="https://juejin.im/post/5b7e74ce51882542a92ba0e9" target="_blank" rel="noopener">动画道路上的新宠 – Lottie</a></li>
+<li><a href="https://juejin.im/post/5bad9140e51d450e935c6d64" target="_blank" rel="noopener">前端安全系列（一）：如何防止 XSS 攻击？</a></li>
+<li><a href="https://link.juejin.im/?target=https%3A%2F%2Fcalpa.me%2F2018%2F11%2F05%2Ffront-end-daily-improving-learning-list%3Futm_source%3Djuejin" target="_blank" rel="noopener">前端工程师的日常修炼清单</a></li>
+<li><a href="https://juejin.im/post/5c178aaaf265da6147702108" target="_blank" rel="noopener">前端埋点统计方案思考</a></li>
+<li><a href="https://juejin.im/post/5b1d5b3951882513e83b8c78" target="_blank" rel="noopener">重构 - 用各种方式优化自己的函数库</a></li>
+<li><a href="https://juejin.im/post/5d1178c3e51d45108223fc92" target="_blank" rel="noopener">这个前端写的免费 Web 版 PS，让他三十岁前财务自由</a></li>
+<li><a href="https://juejin.im/post/5b3731b36fb9a00e5326f087" target="_blank" rel="noopener">[译文] 初学者应该了解的数据结构：Array、HashMap 与 List</a></li>
+<li><a href="https://juejin.im/post/5c19c5e0e51d4502a232c1c6" target="_blank" rel="noopener">一口(很长的)气了解 babel</a></li>
+<li><a href="https://juejin.im/post/5b921b415188255c9031b0c3" target="_blank" rel="noopener">用微前端的方式搭建类单页应用</a></li>
+<li><a href="https://juejin.im/post/5a20fe96f265da431120025b" target="_blank" rel="noopener">一个炫酷大屏展示页的打造过程</a></li>
+<li><a href="https://juejin.im/post/5b20758d5188257d555c5c34" target="_blank" rel="noopener">聊天系统很复杂？前端工程师也能完成！</a></li>
+<li><a href="https://juejin.im/post/5cae9de95188251ae2324ec3" target="_blank" rel="noopener">前端想要了解的 Nginx</a></li>
+<li><a href="https://juejin.im/post/5bc823d46fb9a05d1d2e3fc9" target="_blank" rel="noopener">腾讯发布前端组件框架 Omi，全面拥抱 Web Components</a></li>
+<li><a href="https://juejin.im/post/5ac43e7c6fb9a028d1414f84" target="_blank" rel="noopener">前端常见问题整理</a></li>
+<li><a href="https://juejin.im/post/5ca0c0abe51d4553a942c17d" target="_blank" rel="noopener">你不知道的浏览器页面渲染机制</a></li>
+<li><a href="https://juejin.im/post/5c9ac607f265da6103588b31" target="_blank" rel="noopener">全面分析前端的网络请求方式</a></li>
+<li><a href="https://link.juejin.im/?target=https%3A%2F%2Faotu.io%2Fnotes%2F2018%2F06%2F07%2FTaro%2F" target="_blank" rel="noopener">多端统一开发框架 - Taro</a></li>
+<li><a href="https://juejin.im/post/5c860282e51d45531330e10e" target="_blank" rel="noopener">让你的网页更丝滑（一）</a></li>
+<li><a href="https://juejin.im/post/5aae8b4f5188255588052ffb" target="_blank" rel="noopener">大道至简–API 设计的美学</a></li>
+<li><a href="https://juejin.im/post/5a9e8ad5f265da23a40456d4" target="_blank" rel="noopener">什么是 PWA</a></li>
+<li><a href="https://juejin.im/post/5b4160f4f265da0f83646849" target="_blank" rel="noopener">接口咋整？前端数据药神来也</a></li>
+<li><a href="https://juejin.im/post/5a2bc28f6fb9a044fe464b19" target="_blank" rel="noopener">学习 Less-看这篇就够了</a></li>
+<li><a href="https://juejin.im/post/5ad04d20f265da238440feb9" target="_blank" rel="noopener">前端必会的抓包工具</a></li>
+<li><a href="https://juejin.im/post/5ae56927f265da0b7e0c0968" target="_blank" rel="noopener">前端将数据转化为弹幕效果的实现方式</a></li>
+<li><a href="https://juejin.im/post/5cb9e563f265da03712999e8" target="_blank" rel="noopener">[前端漫谈_5] 从 IIFE 聊到 Babel 带你深入了解前端模块化发展体系</a></li>
+<li><a href="https://juejin.im/post/5ce6b9c9f265da1b7b31637c" target="_blank" rel="noopener">【前端词典】如何向老板解释反向代理</a></li>
+<li><a href="https://juejin.im/post/5bd2f19051882526d14975d2" target="_blank" rel="noopener">厌倦了写活动页？快来撸一个页面生成器吧！</a></li>
+<li><a href="https://juejin.im/post/5c06a3b35188257f30199529" target="_blank" rel="noopener">2019 年如何打造自己的“前端品牌”</a></li>
+<li><a href="https://juejin.im/post/59dc2b7a6fb9a0451869ae3a" target="_blank" rel="noopener">前端安全知识</a></li>
+<li><a href="https://juejin.im/post/5abc4c0d6fb9a028d3757884" target="_blank" rel="noopener">如何写一个高逼格 README</a></li>
+</ul>
+
+            </div>
+            <hr/>
+
+            
+            <style>
+    #reward {
+        margin: 40px 0;
+        text-align: center;
+    }
+
+    #reward .reward-link {
+        font-size: 1.88rem;
+    }
+
+    #reward .btn-floating:hover {
+        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2), 0 5px 15px rgba(0, 0, 0, 0.2);
+    }
+
+    #rewardModal {
+        width: 320px;
+        height: 350px;
+    }
+
+    #rewardModal .reward-title {
+        margin: 15px auto;
+        padding-bottom: 5px;
+    }
+
+    #rewardModal .modal-content {
+        padding: 10px;
+    }
+
+    #rewardModal .close {
+        position: absolute;
+        right: 15px;
+        top: 15px;
+        color: rgba(0, 0, 0, 0.5);
+        font-size: 1.3rem;
+        line-height: 20px;
+        cursor: pointer;
+    }
+
+    #rewardModal .close:hover {
+        color: #ef5350;
+        transform: scale(1.3);
+        -moz-transform:scale(1.3);
+        -webkit-transform:scale(1.3);
+        -o-transform:scale(1.3);
+    }
+
+    #rewardModal .reward-tabs {
+        margin: 0 auto;
+        width: 210px;
+    }
+
+    .reward-tabs .tabs {
+        height: 38px;
+        margin: 10px auto;
+        padding-left: 0;
+    }
+
+    .reward-content ul {
+        padding-left: 0 !important;
+    }
+
+    .reward-tabs .tabs .tab {
+        height: 38px;
+        line-height: 38px;
+    }
+
+    .reward-tabs .tab a {
+        color: #fff;
+        background-color: #ccc;
+    }
+
+    .reward-tabs .tab a:hover {
+        background-color: #ccc;
+        color: #fff;
+    }
+
+    .reward-tabs .wechat-tab .active {
+        color: #fff !important;
+        background-color: #22AB38 !important;
+    }
+
+    .reward-tabs .alipay-tab .active {
+        color: #fff !important;
+        background-color: #019FE8 !important;
+    }
+
+    .reward-tabs .reward-img {
+        width: 210px;
+        height: 210px;
+    }
+</style>
+
+<div id="reward">
+    <a href="#rewardModal" class="reward-link modal-trigger btn-floating btn-large waves-effect waves-light red">赏</a>
+
+    <!-- Modal Structure -->
+    <div id="rewardModal" class="modal">
+        <div class="modal-content">
+            <a class="close modal-close"><i class="fa fa-close"></i></a>
+            <h4 class="reward-title">你的赏识是我前进的动力</h4>
+            <div class="reward-content">
+                <div class="reward-tabs">
+                    <ul class="tabs row">
+                        <li class="tab col s6 alipay-tab waves-effect waves-light"><a href="#alipay">支付宝</a></li>
+                        <li class="tab col s6 wechat-tab waves-effect waves-light"><a href="#wechat">微 信</a></li>
+                    </ul>
+                    <div id="alipay">
+                        <img src="/medias/reward/alipay.jpg" class="reward-img" alt="支付宝打赏二维码">
+                    </div>
+                    <div id="wechat">
+                        <img src="/medias/reward/wechat.png" class="reward-img" alt="微信打赏二维码">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    $(function () {
+        $('.tabs').tabs();
+    });
+</script>
+            
+
+            <link rel="stylesheet" type="text/css" href="/libs/share/css/share.min.css">
+
+<div id="article-share">
+    
+    <div class="social-share" data-disabled="qzone" data-wechat-qrcode-helper="<p>微信里点“发现”->“扫一扫”二维码便可查看分享。</p>"></div>
+    
+</div>
+
+<script src="/libs/share/js/social-share.min.js"></script>
+
+            
+
+    <div class="reprint" id="reprint-statement">
+        <p class="reprint-tip">
+            <i class="fa fa-exclamation-triangle"></i>&nbsp;&nbsp;
+            <span>转载规则</span>
+        </p>
+        
+            <div class="center-align">
+                <a rel="license" href="https://creativecommons.org/licenses/by/4.0/deed.zh">
+                    <img alt=""
+                         style="border-width:0"
+                         src="https://i.creativecommons.org/l/by/4.0/88x31.png"/>
+                </a>
+            </div>
+            <br/>
+            <span xmlns:dct="http://purl.org/dc/terms/" href="http://purl.org/dc/dcmitype/Text"
+                  property="dct:title" rel="dct:type">
+                    《非常优秀的前端博文集合》
+                </span> 由
+            <a xmlns:cc="http://creativecommons.org/ns#" href="/2019/09/12/article/" property="cc:attributionName"
+               rel="cc:attributionURL">
+                浅夏晴空
+            </a> 采用
+            <a rel="license" href="https://creativecommons.org/licenses/by/4.0/deed.zh">
+                知识共享署名 4.0 国际许可协议
+            </a>进行许可。
+        
+    </div>
+
+    <script async defer>
+      document.addEventListener("copy", function (e) {
+        let toastHTML = '<span>复制成功，请遵循本文的转载规则</span><button class="btn-flat toast-action" onclick="navToReprintStatement()" style="font-size: smaller">查看</a>';
+        M.toast({html: toastHTML})
+      });
+
+      function navToReprintStatement() {
+        $("html, body").animate({scrollTop: $("#reprint-statement").offset().top - 80}, 800);
+      }
+    </script>
+
+
+        </div>
+    </div>
+
+    
+        <link rel="stylesheet" href="/libs/gitalk/gitalk.css">
+<link rel="stylesheet" href="/css/my-gitalk.css">
+
+<div class="card gitalk-card" data-aos="fade-up">
+    <div id="gitalk-container" class="card-content"></div>
+</div>
+
+<script src="/libs/gitalk/gitalk.min.js"></script>
+<script>
+    let gitalk = new Gitalk({
+        clientID: 'de8dfcea77a9e87de17a',
+        clientSecret: '569b91fd16e2f3972943f6907219b5ca2984aa1b',
+        repo: 'gongchenghuigch.github.io',
+        owner: 'gongchenghuigch',
+        admin: "gongchenghuigch",
+        id: '2019-09-12T10-14-35',
+        distractionFreeMode: false  // Facebook-like distraction free mode
+    });
+
+    gitalk.render('gitalk-container');
+</script>
+    
+
+    
+
+    
+
+    
+
+    
+        <style>
+    .valine-card {
+        margin: 1.5rem auto;
+    }
+
+    .valine-card .card-content {
+        padding: 20px 20px 5px 20px;
+    }
+
+    #vcomments input[type=text],
+    #vcomments input[type=email],
+    #vcomments input[type=url],
+    #vcomments textarea {
+        box-sizing: border-box;
+    }
+
+    #vcomments p {
+        margin: 2px 2px 10px;
+        font-size: 1.05rem;
+        line-height: 1.78rem;
+    }
+
+    #vcomments blockquote p {
+        text-indent: 0.2rem;
+    }
+
+    #vcomments a {
+        padding: 0 2px;
+        color: #42b983;
+        font-weight: 500;
+        text-decoration: underline;
+    }
+
+    #vcomments img {
+        max-width: 100%;
+        height: auto;
+        cursor: pointer;
+    }
+
+    #vcomments ol li {
+        list-style-type: decimal;
+    }
+
+    #vcomments ol,
+    ul {
+        display: block;
+        padding-left: 2em;
+        word-spacing: 0.05rem;
+    }
+
+    #vcomments ul li,
+    ol li {
+        display: list-item;
+        line-height: 1.8rem;
+        font-size: 1rem;
+    }
+
+    #vcomments ul li {
+        list-style-type: disc;
+    }
+
+    #vcomments ul ul li {
+        list-style-type: circle;
+    }
+
+    #vcomments table, th, td {
+        padding: 12px 13px;
+        border: 1px solid #dfe2e5;
+    }
+
+    #vcomments table, th, td {
+        border: 0;
+    }
+
+    table tr:nth-child(2n), thead {
+        background-color: #fafafa;
+    }
+
+    #vcomments table th {
+        background-color: #f2f2f2;
+        min-width: 80px;
+    }
+
+    #vcomments table td {
+        min-width: 80px;
+    }
+
+    #vcomments h1 {
+        font-size: 1.85rem;
+        font-weight: bold;
+        line-height: 2.2rem;
+    }
+
+    #vcomments h2 {
+        font-size: 1.65rem;
+        font-weight: bold;
+        line-height: 1.9rem;
+    }
+
+    #vcomments h3 {
+        font-size: 1.45rem;
+        font-weight: bold;
+        line-height: 1.7rem;
+    }
+
+    #vcomments h4 {
+        font-size: 1.25rem;
+        font-weight: bold;
+        line-height: 1.5rem;
+    }
+
+    #vcomments h5 {
+        font-size: 1.1rem;
+        font-weight: bold;
+        line-height: 1.4rem;
+    }
+
+    #vcomments h6 {
+        font-size: 1rem;
+        line-height: 1.3rem;
+    }
+
+    #vcomments p {
+        font-size: 1rem;
+        line-height: 1.5rem;
+    }
+
+    #vcomments hr {
+        margin: 12px 0;
+        border: 0;
+        border-top: 1px solid #ccc;
+    }
+
+    #vcomments blockquote {
+        margin: 15px 0;
+        border-left: 5px solid #42b983;
+        padding: 1rem 0.8rem 0.3rem 0.8rem;
+        color: #666;
+        background-color: rgba(66, 185, 131, .1);
+    }
+
+    #vcomments pre {
+        font-family: monospace, monospace;
+        padding: 1.2em;
+        margin: .5em 0;
+        background: #272822;
+        overflow: auto;
+        border-radius: 0.3em;
+        tab-size: 4;
+    }
+
+    #vcomments code {
+        font-family: monospace, monospace;
+        padding: 1px 3px;
+        font-size: 0.92rem;
+        color: #e96900;
+        background-color: #f8f8f8;
+        border-radius: 2px;
+    }
+
+    #vcomments pre code {
+        font-family: monospace, monospace;
+        padding: 0;
+        color: #e8eaf6;
+        background-color: #272822;
+    }
+
+    #vcomments pre[class*="language-"] {
+        padding: 1.2em;
+        margin: .5em 0;
+    }
+
+    #vcomments code[class*="language-"],
+    pre[class*="language-"] {
+        color: #e8eaf6;
+    }
+
+    #vcomments [type="checkbox"]:not(:checked), [type="checkbox"]:checked {
+        position: inherit;
+        margin-left: -1.3rem;
+        margin-right: 0.4rem;
+        margin-top: -1px;
+        vertical-align: middle;
+        left: unset;
+        visibility: visible;
+    }
+
+    #vcomments b,
+    strong {
+        font-weight: bold;
+    }
+
+    #vcomments dfn {
+        font-style: italic;
+    }
+
+    #vcomments small {
+        font-size: 85%;
+    }
+
+    #vcomments cite {
+        font-style: normal;
+    }
+
+    #vcomments mark {
+        background-color: #fcf8e3;
+        padding: .2em;
+    }
+
+    #vcomments table, th, td {
+        padding: 12px 13px;
+        border: 1px solid #dfe2e5;
+    }
+
+    table tr:nth-child(2n), thead {
+        background-color: #fafafa;
+    }
+
+    #vcomments table th {
+        background-color: #f2f2f2;
+        min-width: 80px;
+    }
+
+    #vcomments table td {
+        min-width: 80px;
+    }
+
+    #vcomments [type="checkbox"]:not(:checked), [type="checkbox"]:checked {
+        position: inherit;
+        margin-left: -1.3rem;
+        margin-right: 0.4rem;
+        margin-top: -1px;
+        vertical-align: middle;
+        left: unset;
+        visibility: visible;
+    }
+</style>
+
+<div class="card valine-card" data-aos="fade-up">
+    <div id="vcomments" class="card-content"></div>
+</div>
+
+<script src="/libs/valine/av-min.js"></script>
+<script src="/libs/valine/Valine.min.js"></script>
+<script>
+    new Valine({
+        el: '#vcomments',
+        appId: '',
+        appKey: '',
+        notify: 'true' === 'true',
+        verify: 'true' === 'true',
+        visitor: 'true' === 'true',
+        avatar: 'mm',
+        pageSize: '10',
+        lang: 'zh-cn',
+        placeholder: 'just go go'
+    });
+</script>
+    
+
+    
+
+<article id="prenext-posts" class="prev-next articles">
+    <div class="row article-row">
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge left-badge text-color">
+                <i class="fa fa-chevron-left"></i>&nbsp;上一篇</div>
+            <div class="card">
+                <a href="/2019/09/12/jsidea/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/featureimages/12.jpg" class="responsive-img" alt="前端开发JavaScript你必须懂得的33个概念">
+                        
+                        <span class="card-title">前端开发JavaScript你必须懂得的33个概念</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            1. 调用堆栈文章
+📖 Call Stack — MDN
+📖 [译] JavaScript 如何工作：对引擎、运行时、调用堆栈的概述 —— 掘金
+📖 [译] 理解 JavaScript 中的执行上下文和执行栈 —— 掘金
+📖 这一次
+                        
+                    </div>
+                    <div class="publish-info">
+                        <span class="publish-date">
+                            <i class="fa fa-clock-o fa-fw icon-date"></i>2019-09-12
+                        </span>
+                        <span class="publish-author">
+                            
+                            <i class="fa fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/JavaScript/" class="post-category" target="_blank">
+                                    JavaScript
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/JavaScript/" target="_blank">
+                        <span class="chip bg-color">JavaScript</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge right-badge text-color">
+                下一篇&nbsp;<i class="fa fa-chevron-right"></i>
+            </div>
+            <div class="card">
+                <a href="/2019/09/11/ssh-key/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/featureimages/21.jpg" class="responsive-img" alt="本地配置多个ssh-key">
+                        
+                        <span class="card-title">本地配置多个ssh-key</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            前言有时我们在开发的过程中，需要把代码提交到不同的gitlab仓库里面，比如：公司的gitlab、GitHub等其他git仓库；在代码提交的时候都需要验证本机的SSH Keys；
+在使用  ssh-keygen -t rsa -C “you
+                        
+                    </div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="fa fa-clock-o fa-fw icon-date"></i>2019-09-11
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fa fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/ssh/" class="post-category" target="_blank">
+                                    ssh
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/Linux/" target="_blank">
+                        <span class="chip bg-color">Linux</span>
+                    </a>
+                    
+                    <a href="/tags/ssh-key/" target="_blank">
+                        <span class="chip bg-color">ssh-key</span>
+                    </a>
+                    
+                    <a href="/tags/ssh/" target="_blank">
+                        <span class="chip bg-color">ssh</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+    </div>
+</article>
+</div>
+
+
+
+    </div>
+    <div id="toc-aside" class="expanded col l3 hide-on-med-and-down">
+        <div class="toc-widget">
+            <div class="toc-title"><i class="fa fa-list-alt"></i>&nbsp;&nbsp;目录</div>
+            <div id="toc-content"></div>
+        </div>
+    </div>
+</div>
+
+<!-- TOC 悬浮按钮. -->
+
+<div id="floating-toc-btn" class="hide-on-med-and-down">
+    <a class="btn-floating btn-large bg-color">
+        <i class="fa fa-list"></i>
+    </a>
+</div>
+
+
+<script src="/libs/tocbot/tocbot.min.js"></script>
+<script>
+    $(function () {
+        tocbot.init({
+            tocSelector: '#toc-content',
+            contentSelector: '#articleContent',
+            headingsOffset: -($(window).height() * 0.4 - 45),
+            // headingsOffset: -205,
+            headingSelector: 'h2, h3, h4'
+        });
+
+        // modify the toc link href to support Chinese.
+        let i = 0;
+        let tocHeading = 'toc-heading-';
+        $('#toc-content a').each(function () {
+            $(this).attr('href', '#' + tocHeading + (++i));
+        });
+
+        // modify the heading title id to support Chinese.
+        i = 0;
+        $('#articleContent').children('h2, h3, h4').each(function () {
+            $(this).attr('id', tocHeading + (++i));
+        });
+
+        // Set scroll toc fixed.
+        let tocHeight = parseInt($(window).height() * 0.4 - 64);
+        let $tocWidget = $('.toc-widget');
+        $(window).scroll(function () {
+            let scroll = $(window).scrollTop();
+            /* add post toc fixed. */
+            if (scroll > tocHeight) {
+                $tocWidget.addClass('toc-fixed');
+            } else {
+                $tocWidget.removeClass('toc-fixed');
+            }
+        });
+
+        
+        /* 修复文章卡片 div 的宽度. */
+        let fixPostCardWidth = function (srcId, targetId) {
+            let srcDiv = $('#' + srcId);
+            if (srcDiv.length === 0) {
+                return;
+            }
+
+            let w = srcDiv.width();
+            if (w >= 450) {
+                w = w + 21;
+            } else if (w >= 350 && w < 450) {
+                w = w + 18;
+            } else if (w >= 300 && w < 350) {
+                w = w + 16;
+            } else {
+                w = w + 14;
+            }
+            $('#' + targetId).width(w);
+        };
+
+        // 切换TOC目录展开收缩的相关操作.
+        const expandedClass = 'expanded';
+        let $tocAside = $('#toc-aside');
+        let $mainContent = $('#main-content');
+        $('#floating-toc-btn .btn-floating').click(function () {
+            if ($tocAside.hasClass(expandedClass)) {
+                $tocAside.removeClass(expandedClass).slideUp(500);
+                $mainContent.removeClass('l9');
+            } else {
+                $tocAside.addClass(expandedClass).slideDown(500);
+                $mainContent.addClass('l9');
+            }
+            fixPostCardWidth('artDetail', 'prenext-posts');
+        });
+        
+    });
+</script>
+    
+
+</main>
+
+
+<footer class="page-footer bg-color">
+    <div class="container row center-align">
+        <div class="col s12 m8 l8 copy-right">
+            <span id="sitetime"></span> <br>
+            本站由&copy;<a href="https://gongchenghuigch.github.io/" target="_blank">gongchenghui</a>基于
+            <a href="https://hexo.io/" target="_blank">Hexo</a> 的
+            <a href="https://github.com/blinkfox/hexo-theme-matery" target="_blank">hexo-theme-matery</a>主题搭建.
+
+            
+                &nbsp;<i class="fa fa-area-chart"></i>&nbsp;站点总字数:&nbsp;
+                <span class="white-color">119.1k</span>
+            
+
+            
+			
+                <br>
+                
+                <span id="busuanzi_container_site_pv">
+                    <i class="fa fa-heart-o"></i>
+                    本站总访问量 <span id="busuanzi_value_site_pv" class="white-color"></span>
+                </span>
+                
+                
+                <span id="busuanzi_container_site_uv">
+                    <i class="fa fa-users"></i>
+                    次,&nbsp;访客数 <span id="busuanzi_value_site_uv" class="white-color"></span> 人.
+                </span>
+                
+            
+        </div>
+        <div class="col s12 m4 l4 social-link social-statis">
+
+
+    <a href="mailto:gongch0719@163.com" class="tooltipped" target="_blank" data-tooltip="邮件联系我" data-position="top" data-delay="50">
+        <i class="fa fa-envelope-open"></i>
+    </a>
+
+
+
+    <a href="tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=1134929850" class="tooltipped" data-tooltip="QQ联系我: 1134929850" data-position="top" data-delay="50">
+        <i class="fa fa-qq"></i>
+    </a>
+
+
+
+    <a href="/atom.xml" class="tooltipped" target="_blank" data-tooltip="RSS 订阅" data-position="top" data-delay="50">
+        <i class="fa fa-rss"></i>
+    </a>
+</div>
+    </div>
+</footer>
+
+<div class="progress-bar"></div>
+<script language = javascript >
+    function siteTime() {
+        window.setTimeout("siteTime()", 1000);
+        var seconds = 1000;
+        var minutes = seconds * 60;
+        var hours = minutes * 60;
+        var days = hours * 24;
+        var years = days * 365;
+        var today = new Date();
+        var todayYear = today.getFullYear();
+        var todayMonth = today.getMonth() + 1;
+        var todayDate = today.getDate();
+        var todayHour = today.getHours();
+        var todayMinute = today.getMinutes();
+        var todaySecond = today.getSeconds();
+        var t1 = Date.UTC(2018, 08, 11, 00, 00, 00); //北京时间2018-2-13 00:00:00 
+        var t2 = Date.UTC(todayYear, todayMonth, todayDate, todayHour, todayMinute, todaySecond); 
+        var diff = t2 - t1; var diffYears = Math.floor(diff / years); 
+        var diffDays = Math.floor((diff / days) - diffYears * 365); 
+        var diffHours = Math.floor((diff - (diffYears * 365 + diffDays) * days) / hours); 
+        var diffMinutes = Math.floor((diff - (diffYears * 365 + diffDays) * days - diffHours * hours) / minutes); 
+        var diffSeconds = Math.floor((diff - (diffYears * 365 + diffDays) * days - diffHours * hours - diffMinutes * minutes) / seconds); document.getElementById("sitetime").innerHTML = "本站已运行 " +diffYears+" 年 "+diffDays + " 天 " + diffHours + " 小时 " + diffMinutes + " 分钟 " + diffSeconds + " 秒"; 
+    } 
+	siteTime(); 
+</script>
+
+
+<!-- 搜索遮罩框 -->
+<div id="searchModal" class="modal">
+    <div class="modal-content">
+        <div class="search-header">
+            <span class="title"><i class="fa fa-search"></i>&nbsp;&nbsp;搜索</span>
+            <input type="search" id="searchInput" name="s" placeholder="请输入搜索的关键字"
+                   class="search-input">
+        </div>
+        <div id="searchResult"></div>
+    </div>
+</div>
+
+<script src="/js/search.js"></script>
+<script type="text/javascript">
+$(function () {
+    searchFunc("/" + "search.xml", 'searchInput', 'searchResult');
+});
+</script>
+<!-- 回到顶部按钮 -->
+<div id="backTop" class="top-scroll">
+    <a class="btn-floating btn-large waves-effect waves-light" href="#!">
+        <i class="fa fa-angle-up"></i>
+    </a>
+</div>
+
+
+<script src="/libs/materialize/materialize.min.js"></script>
+<script src="/libs/masonry/masonry.pkgd.min.js"></script>
+<script src="/libs/aos/aos.js"></script>
+<script src="/libs/scrollprogress/scrollProgress.min.js"></script>
+<script src="/libs/lightGallery/js/lightgallery-all.min.js"></script>
+<script src="/js/matery.js"></script>
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+
+
+
+    <script src="/libs/others/clicklove.js"></script>
+
+
+    <script async src="/libs/others/busuanzi.pure.mini.js"></script>
+
+
+</body>
+</html>

@@ -1,0 +1,1525 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN">
+
+
+<head><meta name="generator" content="Hexo 3.9.0">
+    <meta charset="utf-8">
+    <meta name="keywords" content="前端JS内存管理, gongchenghui,github">
+    <meta name="description" content="前言像C语言这样的底层语言一般都有底层的内存管理接口，比如 malloc()和free()。相反，JavaScript是在创建变量（对象，字符串等）时自动进行了分配内存，并且在不使用它们时“自动”释放。 释放的过程称为垃圾回收。这个“自动”">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="renderer" content="webkit|ie-stand|ie-comp">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <title>前端JS内存管理 | gongchenghui</title>
+    <link rel="icon" type="image/png" href="/favicon.png">
+
+    <link rel="stylesheet" type="text/css" href="/libs/awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/materialize/materialize.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/aos/aos.css">
+    <link rel="stylesheet" type="text/css" href="/libs/animate/animate.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/lightGallery/css/lightgallery.min.css">
+    <link rel="stylesheet" type="text/css" href="/css/matery.css">
+    <link rel="stylesheet" type="text/css" href="/css/my.css">
+    <style type="text/css">
+        
+    </style>
+
+    <script src="/libs/jquery/jquery-2.2.0.min.js"></script>
+<link rel="alternate" href="/atom.xml" title="gongchenghui" type="application/atom+xml">
+<link rel="stylesheet" href="/css/prism-okaidia.css" type="text/css">
+<link rel="stylesheet" href="/css/prism-line-numbers.css" type="text/css"></head>
+
+
+<body>
+
+<header class="navbar-fixed">
+    <nav id="headNav" class="bg-color nav-transparent">
+        <div id="navContainer" class="nav-wrapper container">
+            <div class="brand-logo">
+                <a href="/" class="waves-effect waves-light">
+                    
+                    <img src="/medias/logo.png" class="logo-img" alt="LOGO">
+                    
+                    <span class="logo-span">gongchenghui</span>
+                </a>
+            </div>
+            
+
+<a href="#" data-target="mobile-nav" class="sidenav-trigger button-collapse"><i class="fa fa-navicon"></i></a>
+<ul class="right">
+    
+    <li class="hide-on-med-and-down">
+        <a href="/" class="waves-effect waves-light">
+            
+            <i class="fa fa-home"></i>
+            
+            <span>主页</span>
+        </a>
+    </li>
+    
+    <li class="hide-on-med-and-down">
+        <a href="/tags" class="waves-effect waves-light">
+            
+            <i class="fa fa-tags"></i>
+            
+            <span>标签</span>
+        </a>
+    </li>
+    
+    <li class="hide-on-med-and-down">
+        <a href="/categories" class="waves-effect waves-light">
+            
+            <i class="fa fa-bookmark"></i>
+            
+            <span>分类</span>
+        </a>
+    </li>
+    
+    <li class="hide-on-med-and-down">
+        <a href="/friends" class="waves-effect waves-light">
+            
+            <i class="fa fa-rocket"></i>
+            
+            <span>工具</span>
+        </a>
+    </li>
+    
+    <li class="hide-on-med-and-down">
+        <a href="/archives" class="waves-effect waves-light">
+            
+            <i class="fa fa-archive"></i>
+            
+            <span>归档</span>
+        </a>
+    </li>
+    
+    <li class="hide-on-med-and-down">
+        <a href="/about" class="waves-effect waves-light">
+            
+            <i class="fa fa-user-circle-o"></i>
+            
+            <span>关于</span>
+        </a>
+    </li>
+    
+    <li class="hide-on-med-and-down">
+        <a href="/navi" class="waves-effect waves-light">
+            
+            <i class="fa fa-address-book"></i>
+            
+            <span>快捷导航</span>
+        </a>
+    </li>
+    
+    <li>
+        <a href="#searchModal" class="modal-trigger waves-effect waves-light">
+            <i id="searchIcon" class="fa fa-search" title="搜索"></i>
+        </a>
+    </li>
+</ul>
+
+<div id="mobile-nav" class="side-nav sidenav">
+
+    <div class="mobile-head bg-color">
+        
+        <img src="/medias/logo.png" class="logo-img circle responsive-img">
+        
+        <div class="logo-name">gongchenghui</div>
+        <div class="logo-desc">
+            
+            北冥有鱼，其名为鲲，鲲之大，不知其几千里也； 化而为鸟，其名为鹏.
+            
+        </div>
+    </div>
+
+    
+
+    <ul class="menu-list mobile-menu-list">
+        
+        <li>
+            <a href="/" class="waves-effect waves-light">
+                
+                <i class="fa fa-fw fa-home"></i>
+                
+                主页
+            </a>
+        </li>
+        
+        <li>
+            <a href="/tags" class="waves-effect waves-light">
+                
+                <i class="fa fa-fw fa-tags"></i>
+                
+                标签
+            </a>
+        </li>
+        
+        <li>
+            <a href="/categories" class="waves-effect waves-light">
+                
+                <i class="fa fa-fw fa-bookmark"></i>
+                
+                分类
+            </a>
+        </li>
+        
+        <li>
+            <a href="/friends" class="waves-effect waves-light">
+                
+                <i class="fa fa-fw fa-rocket"></i>
+                
+                工具
+            </a>
+        </li>
+        
+        <li>
+            <a href="/archives" class="waves-effect waves-light">
+                
+                <i class="fa fa-fw fa-archive"></i>
+                
+                归档
+            </a>
+        </li>
+        
+        <li>
+            <a href="/about" class="waves-effect waves-light">
+                
+                <i class="fa fa-fw fa-user-circle-o"></i>
+                
+                关于
+            </a>
+        </li>
+        
+        <li>
+            <a href="/navi" class="waves-effect waves-light">
+                
+                <i class="fa fa-fw fa-address-book"></i>
+                
+                快捷导航
+            </a>
+        </li>
+        
+        
+        <li><div class="divider"></div></li>
+        <li>
+            <a href="https://github.com/gongchenghuigch/gongchenghuigch.github.io" class="waves-effect waves-light" target="_blank">
+                <i class="fa fa-github-square fa-fw"></i>Fork Me
+            </a>
+        </li>
+        
+    </ul>
+</div>
+
+        </div>
+
+        
+            <style>
+    .nav-transparent .github-corner {
+        display: none !important;
+    }
+
+    .github-corner {
+        position: absolute;
+        z-index: 10;
+        top: 0;
+        right: 0;
+        border: 0;
+        transform: scale(1.1);
+    }
+
+    .github-corner svg {
+        color: #0f9d58;
+        fill: #fff;
+        height: 64px;
+        width: 64px;
+    }
+
+    .github-corner:hover .octo-arm {
+        animation: a 0.56s ease-in-out;
+    }
+
+    .github-corner .octo-arm {
+        animation: none;
+    }
+
+    @keyframes a {
+        0%,
+        to {
+            transform: rotate(0);
+        }
+        20%,
+        60% {
+            transform: rotate(-25deg);
+        }
+        40%,
+        80% {
+            transform: rotate(10deg);
+        }
+    }
+</style>
+
+<a href="https://github.com/gongchenghuigch/gongchenghuigch.github.io" class="github-corner tooltipped hide-on-med-and-down" target="_blank"
+   data-tooltip="Fork Me" data-position="left" data-delay="50">
+    <svg viewBox="0 0 250 250" aria-hidden="true">
+        <path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path>
+        <path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2"
+              fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path>
+        <path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z"
+              fill="currentColor" class="octo-body"></path>
+    </svg>
+</a>
+        
+    </nav>
+
+</header>
+
+
+
+
+
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/19.jpg')">
+    <div class="container">
+        <div class="row">
+            <div class="col s12 m12 l12">
+                <div class="brand">
+                    <div class="description center-align post-title">
+                        前端JS内存管理
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<main class="post-container content">
+
+    
+    <link rel="stylesheet" href="/libs/tocbot/tocbot.css">
+<style>
+    #articleContent h1::before,
+    #articleContent h2::before,
+    #articleContent h3::before,
+    #articleContent h4::before,
+    #articleContent h5::before,
+    #articleContent h6::before {
+        display: block;
+        content: " ";
+        height: 100px;
+        margin-top: -100px;
+        visibility: hidden;
+    }
+
+    #articleContent :focus {
+        outline: none;
+    }
+
+    .toc-fixed {
+        position: fixed;
+        top: 64px;
+    }
+
+    .toc-widget {
+        padding-left: 20px;
+    }
+
+    .toc-widget .toc-title {
+        margin: 35px 0 15px 0;
+        padding-left: 17px;
+        font-size: 1.5rem;
+        font-weight: bold;
+        line-height: 1.5rem;
+    }
+
+    .toc-widget ol {
+        padding: 0;
+        list-style: none;
+    }
+
+    #toc-content ol {
+        padding-left: 10px;
+    }
+
+    #toc-content ol li {
+        padding-left: 10px;
+    }
+
+    #toc-content .toc-link:hover {
+        color: #42b983;
+        font-weight: 700;
+        text-decoration: underline;
+    }
+
+    #toc-content .toc-link::before {
+        background-color: transparent;
+        max-height: 25px;
+    }
+
+    #toc-content .is-active-link {
+        color: #42b983;
+    }
+
+    #toc-content .is-active-link::before {
+        background-color: #42b983;
+    }
+
+    #floating-toc-btn {
+        position: fixed;
+        right: 20px;
+        bottom: 76px;
+        padding-top: 15px;
+        margin-bottom: 0;
+        z-index: 998;
+    }
+
+    #floating-toc-btn .btn-floating {
+        width: 48px;
+        height: 48px;
+    }
+
+    #floating-toc-btn .btn-floating i {
+        line-height: 48px;
+        font-size: 1.4rem;
+    }
+</style>
+<div class="row">
+    <div id="main-content" class="col s12 m12 l9">
+        <!-- 文章内容详情 -->
+<div id="artDetail">
+    <div class="card">
+        <div class="card-content article-info">
+            <div class="row tag-cate">
+                <div class="col s7">
+                    
+                    <div class="article-tag">
+                        
+                            <a href="/tags/JavaScript/" target="_blank">
+                                <span class="chip bg-color">JavaScript</span>
+                            </a>
+                        
+                            <a href="/tags/RAM/" target="_blank">
+                                <span class="chip bg-color">RAM</span>
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+                <div class="col s5 right-align">
+                    
+                    <div class="post-cate">
+                        <i class="fa fa-bookmark fa-fw icon-category"></i>
+                        
+                            <a href="/categories/JavaScript/" class="post-category" target="_blank">
+                                JavaScript
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+
+            <div class="post-info">
+                <div class="post-date info-break-policy">
+                    <i class="fa fa-calendar-minus-o fa-fw"></i>发布日期:&nbsp;&nbsp;
+                    2019-09-12
+                </div>
+
+                
+                    
+                    <div class="info-break-policy">
+                        <i class="fa fa-file-word-o fa-fw"></i>文章字数:&nbsp;&nbsp;
+                        4.4k
+                    </div>
+                    
+
+                    
+                    <div class="info-break-policy">
+                        <i class="fa fa-clock-o fa-fw"></i>阅读时长:&nbsp;&nbsp;
+                        15 分
+                    </div>
+                    
+                
+				
+				
+                    <div id="busuanzi_container_page_pv" class="info-break-policy">
+                        <i class="fa fa-eye fa-fw"></i>阅读次数:&nbsp;&nbsp;
+                        <span id="busuanzi_value_page_pv"></span>
+                    </div>
+				
+            </div>
+        </div>
+        <hr class="clearfix">
+        <div class="card-content article-card-content">
+            <div id="articleContent">
+                <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>像C语言这样的底层语言一般都有底层的内存管理接口，比如 <code>malloc()</code>和<code>free()</code>。相反，JavaScript是在创建变量（对象，字符串等）时自动进行了分配内存，并且在不使用它们时“自动”释放。 释放的过程称为垃圾回收。这个“自动”是混乱的根源，并让JavaScript（和其他高级语言）开发者错误的感觉他们可以不关心内存管理。</p>
+<h2 id="内存的生命周期"><a href="#内存的生命周期" class="headerlink" title="内存的生命周期"></a>内存的生命周期</h2><h3 id="生命周期概念"><a href="#生命周期概念" class="headerlink" title="生命周期概念"></a>生命周期概念</h3><p>无论是是使用什么编程语言，内存生命周期几乎都是一样的：</p>
+<p><img src="https://img.58cdn.com.cn/escstatic/fecar/pmuse/blog/neicun.png" alt></p>
+<p>生命周期的概述：</p>
+<ul>
+<li>内存分配（Allocate memory ）：当我们申明变量、函数、对象的时候，系统会自动为他们分配内存</li>
+<li>内存使用（Use memory ）：即读写内存，也就是使用变量、函数等</li>
+<li>内存释放（Release memory ）：使用完毕，由垃圾回收机制自动回收不再使用的内存</li>
+</ul>
+<h3 id="内存的概念"><a href="#内存的概念" class="headerlink" title="内存的概念"></a>内存的概念</h3><p>在硬件层面，计算机内存是由大量的<a href="https://en.wikipedia.org/wiki/Flip-flop_(electronics)" target="_blank" rel="noopener">触发器</a>组成的。每一个触发器都包含有一些晶体管，能够存储1比特。单个触发器可通过一个唯一标识符来寻址，这样我们就可以读和写了。因此从概念上讲，我们可以把计算机内存看作是一个巨大的比特数组，我们可以对它进行读和写。</p>
+<p>但是作为人类，我们并不善于用比特来思考和运算，因此我们将其组成更大些的分组，这样我们就可以用来表示数字。8个比特就是一个字节。比字节大的有字（16比特或32比特）。</p>
+<p>有很多东西都存储在内存中：</p>
+<ol>
+<li>所有被程序使用的变量和其他数据</li>
+<li>程序的代码，包括操作系统自身的代码</li>
+</ol>
+<p>当你编译你的代码时，编译器可以检查原始的数据类型并且提前计算出将会需要多少内存。然后把所需的（内存）容量分配给调用栈空间中的程序。这些变量因为函数被调用而分配到的空间被称为<strong>堆栈空间</strong>，它们的内存增加在现存的内存上面（累加）。如它们不再被需要就会按照 LIFO（后进，先出）的顺序被移除。例如，参见如下声明：</p>
+<pre class="line-numbers language-js"><code class="language-js">int n<span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// 4 bytes</span>
+int x<span class="token punctuation">[</span><span class="token number">4</span><span class="token punctuation">]</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// array of 4 elements, each 4 bytes</span>
+double m<span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// 8 bytes</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+<p>编译器可以立即清楚这段代码需要4 + 4 × 4 + 8 = 28字节。</p>
+<blockquote>
+<p>这就是它怎样工作于当前的 integers 和 doubles 型的大小。约20年前，integers通常（占用）2字节，double占4字节。你的代码不应该依赖于此时刻的基本数据类型的大小。</p>
+</blockquote>
+<p>编译器将插入些会互相作用于操作系统在堆栈上去请求必要的字节数来存储变量代码。</p>
+<p>在以上例子中，编译器知道每个变量精确的内存地址。事实上，无论我们何时写入变量n，而本质上这会被翻译为如“内存地址 4127963 ”。</p>
+<h3 id="JS内存分配"><a href="#JS内存分配" class="headerlink" title="JS内存分配"></a>JS内存分配</h3><p>为了不让程序员费心分配内存，JavaScript 在定义变量时就完成了内存分配。</p>
+<pre class="line-numbers language-js"><code class="language-js"><span class="token comment" spellcheck="true">//给数值分配内存空间</span>
+<span class="token keyword">var</span> num <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span> 
+
+<span class="token comment" spellcheck="true">//给字符串分配内存</span>
+<span class="token keyword">var</span> str <span class="token operator">=</span> <span class="token string">"hehe"</span><span class="token punctuation">;</span>
+
+<span class="token comment" spellcheck="true">//给对象及其包含的值分配内存</span>
+<span class="token keyword">var</span> obj <span class="token operator">=</span> <span class="token punctuation">{</span>
+  a<span class="token punctuation">:</span> <span class="token number">1</span><span class="token punctuation">,</span>
+  b<span class="token punctuation">:</span> <span class="token string">"str"</span><span class="token punctuation">,</span>
+  c<span class="token punctuation">:</span> <span class="token keyword">null</span>
+<span class="token punctuation">}</span>
+
+<span class="token comment" spellcheck="true">// 给数组及其包含的值分配内存（就像对象一样）</span>
+<span class="token keyword">var</span> a <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token keyword">null</span><span class="token punctuation">,</span> <span class="token string">"abra"</span><span class="token punctuation">]</span><span class="token punctuation">;</span> 
+
+<span class="token comment" spellcheck="true">// 给函数（可调用的对象）分配内存</span>
+<span class="token keyword">function</span> <span class="token function">f</span><span class="token punctuation">(</span>a<span class="token punctuation">)</span><span class="token punctuation">{</span>
+  <span class="token keyword">return</span> a <span class="token operator">+</span> <span class="token number">2</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span> 
+
+<span class="token comment" spellcheck="true">// 函数表达式也能分配一个对象</span>
+someElement<span class="token punctuation">.</span><span class="token function">addEventListener</span><span class="token punctuation">(</span><span class="token string">'click'</span><span class="token punctuation">,</span> <span class="token keyword">function</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+  someElement<span class="token punctuation">.</span>style<span class="token punctuation">.</span>backgroundColor <span class="token operator">=</span> <span class="token string">'blue'</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span class="token punctuation">,</span> <span class="token boolean">false</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>有些函数调用结果是分配对象内存 如下：</p>
+<pre class="line-numbers language-js"><code class="language-js"><span class="token keyword">var</span> d <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Date</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// 分配一个 Date 对象</span>
+
+<span class="token keyword">var</span> e <span class="token operator">=</span> document<span class="token punctuation">.</span><span class="token function">createElement</span><span class="token punctuation">(</span><span class="token string">'div'</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// 分配一个 DOM 元素</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+<p> 有些方法是分配新变量或者新对象 如下：</p>
+<pre class="line-numbers language-js"><code class="language-js"><span class="token keyword">var</span> s <span class="token operator">=</span> <span class="token string">"azerty"</span><span class="token punctuation">;</span>
+<span class="token keyword">var</span> s2 <span class="token operator">=</span> s<span class="token punctuation">.</span><span class="token function">substr</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// s2 是一个新的字符串</span>
+<span class="token comment" spellcheck="true">// 因为字符串是不变量，</span>
+<span class="token comment" spellcheck="true">// JavaScript 可能决定不分配内存，</span>
+<span class="token comment" spellcheck="true">// 只是存储了 [0-3] 的范围。</span>
+
+<span class="token keyword">var</span> a <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token string">"ouais ouais"</span><span class="token punctuation">,</span> <span class="token string">"nan nan"</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+<span class="token keyword">var</span> a2 <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token string">"generation"</span><span class="token punctuation">,</span> <span class="token string">"nan nan"</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+<span class="token keyword">var</span> a3 <span class="token operator">=</span> a<span class="token punctuation">.</span><span class="token function">concat</span><span class="token punctuation">(</span>a2<span class="token punctuation">)</span><span class="token punctuation">;</span> 
+<span class="token comment" spellcheck="true">// 新数组有四个元素，是 a 连接 a2 的结果</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h3 id="JS使用内存"><a href="#JS使用内存" class="headerlink" title="JS使用内存"></a>JS使用内存</h3><p>基本上在 JavaScript 中使用分配的内存，就是对它进行读和写操作。</p>
+<p>可以读写变量的值或某个对象的属性，甚至是给某个函数传递一个参数。</p>
+<pre class="line-numbers language-js"><code class="language-js"><span class="token keyword">var</span> a <span class="token operator">=</span> <span class="token number">10</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// 分配内存</span>
+console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>a<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// 对内存的使用</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+<h3 id="JS内存回收"><a href="#JS内存回收" class="headerlink" title="JS内存回收"></a>JS内存回收</h3><p><strong>当内存不再需要的时候要释放掉</strong></p>
+<p>大部分的内存管理问题出现在这个阶段。</p>
+<p>这里面最难的任务是指出，在什么时候分配的内存不再被需要。这通常需要开发者来决定程序中的那一块内存不再需要了，并释放。</p>
+<p>高级语言嵌入了一个叫<strong>垃圾收集器</strong>的程序，它可以跟踪内存分配和使用情况，以找出在哪种情况下某一块已分配的内存不再被需要，并自动的释放它。</p>
+<p>不幸的是，这种程序只是一种近似的操作，因为知道某块内存是否被需要是<a href="http://en.wikipedia.org/wiki/Decidability_(logic)" target="_blank" rel="noopener">不可判定的</a>（并不能通过算法来解决）。</p>
+<p>大部分的垃圾收集器的工作方式是收集那些不能够被再次访问的内存，比如超出作用域的变量。但是，能够被收集的内存空间是低于近似值的，因为在任何时候都可能存在一个在作用域内的变量指向一块内存区域，但是它永远不能够被再次访问。</p>
+<blockquote>
+<p>不再需要使用的变量也就是生命周期结束的变量，是局部变量，局部变量只在函数的执行过程中存在， 当函数运行结束，没有其他引用(闭包)，那么该变量会被标记回收。</p>
+</blockquote>
+<blockquote>
+<p>全局变量的生命周期直至浏览器卸载页面才会结束，也就是说全局变量不会被当成垃圾回收。</p>
+</blockquote>
+<p>因为自动垃圾回收机制的存在，开发人员可以不关心也不注意内存释放的有关问题，但对无用内存的释放这件事是客观存在的。 不幸的是，即使不考虑垃圾回收对性能的影响，目前最新的垃圾回收算法，也无法智能回收所有的极端情况。</p>
+<h2 id="垃圾回收"><a href="#垃圾回收" class="headerlink" title="垃圾回收"></a>垃圾回收</h2><h3 id="引用"><a href="#引用" class="headerlink" title="引用"></a>引用</h3><p>垃圾回收算法主要依赖于引用的概念。</p>
+<p>在内存管理的环境中，一个对象如果有访问另一个对象的权限（隐式或者显式），叫做一个对象引用另一个对象。</p>
+<p>例如，一个Javascript对象具有对它原型的引用（隐式引用）和对它属性的引用（显式引用）。</p>
+<p>在这里，“对象”的概念不仅特指 JavaScript 对象，还包括函数作用域（或者全局词法作用域）。</p>
+<h3 id="引用计数垃圾收集"><a href="#引用计数垃圾收集" class="headerlink" title="引用计数垃圾收集"></a>引用计数垃圾收集</h3><p>这是最初级的垃圾回收算法。</p>
+<p>引用计数算法定义“内存不再使用”的标准很简单，就是看一个对象是否有指向它的引用。 如果没有其他对象指向它了，说明该对象已经不再需了。</p>
+<pre class="line-numbers language-js"><code class="language-js"><span class="token keyword">var</span> o <span class="token operator">=</span> <span class="token punctuation">{</span> 
+  a<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+    b<span class="token punctuation">:</span><span class="token number">2</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span> 
+<span class="token comment" spellcheck="true">// 两个对象被创建，一个作为另一个的属性被引用，另一个被分配给变量o</span>
+<span class="token comment" spellcheck="true">// 很显然，没有一个可以被垃圾收集</span>
+
+
+<span class="token keyword">var</span> o2 <span class="token operator">=</span> o<span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// o2变量是第二个对“这个对象”的引用</span>
+
+o <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span>      <span class="token comment" spellcheck="true">// 现在，“这个对象”的原始引用o被o2替换了</span>
+
+<span class="token keyword">var</span> oa <span class="token operator">=</span> o2<span class="token punctuation">.</span>a<span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// 引用“这个对象”的a属性</span>
+<span class="token comment" spellcheck="true">// 现在，“这个对象”有两个引用了，一个是o2，一个是oa</span>
+
+o2 <span class="token operator">=</span> <span class="token string">"yo"</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// 最初的对象现在已经是零引用了</span>
+           <span class="token comment" spellcheck="true">// 他可以被垃圾回收了</span>
+           <span class="token comment" spellcheck="true">// 然而它的属性a的对象还在被oa引用，所以还不能回收</span>
+
+oa <span class="token operator">=</span> <span class="token keyword">null</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// a属性的那个对象现在也是零引用了</span>
+           <span class="token comment" spellcheck="true">// 它可以被垃圾回收了</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>由上面可以看出，引用计数算法是个简单有效的算法。但它却存在一个致命的问题：循环引用。</p>
+<p>如果两个对象相互引用，尽管他们已不再使用，垃圾回收不会进行回收，导致内存泄露。</p>
+<p>来看一个循环引用的例子：</p>
+<pre class="line-numbers language-js"><code class="language-js"><span class="token keyword">function</span> <span class="token function">f</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+  <span class="token keyword">var</span> o <span class="token operator">=</span> <span class="token punctuation">{</span><span class="token punctuation">}</span><span class="token punctuation">;</span>
+  <span class="token keyword">var</span> o2 <span class="token operator">=</span> <span class="token punctuation">{</span><span class="token punctuation">}</span><span class="token punctuation">;</span>
+  o<span class="token punctuation">.</span>a <span class="token operator">=</span> o2<span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// o 引用 o2</span>
+  o2<span class="token punctuation">.</span>a <span class="token operator">=</span> o<span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// o2 引用 o  这里</span>
+
+  <span class="token keyword">return</span> <span class="token string">"azerty"</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+<span class="token function">f</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>上面我们申明了一个函数 f ，其中包含两个相互引用的对象。 在调用函数结束后，对象 o1 和 o2 实际上已离开函数范围，因此不再需要了。 但根据引用计数的原则，他们之间的相互引用依然存在，因此这部分内存不会被回收，内存泄露不可避免了。</p>
+<p>再来看一个实际的例子：</p>
+<pre><code>var div = document.createElement(&quot;div&quot;);
+div.onclick = function() {
+    console.log(&quot;click&quot;);
+};
+复制代码</code></pre><p>上面这种JS写法再普通不过了，创建一个DOM元素并绑定一个点击事件。 此时变量 div 有事件处理函数的引用，同时事件处理函数也有div的引用！（div变量可在函数内被访问）。 一个循序引用出现了，按上面所讲的算法，该部分内存无可避免的泄露了。</p>
+<p>为了解决循环引用造成的问题，现代浏览器通过使用标记清除算法来实现垃圾回收。</p>
+<h3 id="标记清除算法"><a href="#标记清除算法" class="headerlink" title="标记清除算法"></a>标记清除算法</h3><p>标记清除算法将“不再使用的对象”定义为“无法达到的对象”。 简单来说，就是从根部（在JS中就是全局对象）出发定时扫描内存中的对象。 凡是能从根部到达的对象，都是还需要使用的。 那些无法由根部出发触及到的对象被标记为不再使用，稍后进行回收。</p>
+<p>从这个概念可以看出，无法触及的对象包含了没有引用的对象这个概念（没有任何引用的对象也是无法触及的对象）。 但反之未必成立。</p>
+<p>工作流程：</p>
+<ol>
+<li>垃圾收集器会在运行的时候会给存储在内存中的所有变量都加上标记。</li>
+<li>从根部出发将能触及到的对象的标记清除。</li>
+<li>那些还存在标记的变量被视为准备删除的变量。</li>
+<li>最后垃圾收集器会执行最后一步内存清除的工作，销毁那些带标记的值并回收它们所占用的内存空间。</li>
+</ol>
+<p><img src="https://img.58cdn.com.cn/escstatic/fecar/pmuse/blog/neicun.gif" alt="img"></p>
+<h4 id="循环引用不再是问题了"><a href="#循环引用不再是问题了" class="headerlink" title="循环引用不再是问题了"></a>循环引用不再是问题了</h4><p>再看之前循环引用的例子：</p>
+<pre class="line-numbers language-js"><code class="language-js"><span class="token keyword">function</span> <span class="token function">f</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+  <span class="token keyword">var</span> o <span class="token operator">=</span> <span class="token punctuation">{</span><span class="token punctuation">}</span><span class="token punctuation">;</span>
+  <span class="token keyword">var</span> o2 <span class="token operator">=</span> <span class="token punctuation">{</span><span class="token punctuation">}</span><span class="token punctuation">;</span>
+  o<span class="token punctuation">.</span>a <span class="token operator">=</span> o2<span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// o 引用 o2</span>
+  o2<span class="token punctuation">.</span>a <span class="token operator">=</span> o<span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// o2 引用 o</span>
+
+  <span class="token keyword">return</span> <span class="token string">"azerty"</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+<span class="token function">f</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>函数调用返回之后，两个循环引用的对象在垃圾收集时从全局对象出发无法再获取他们的引用。 因此，他们将会被垃圾回收器回收。</p>
+<h2 id="内存泄露"><a href="#内存泄露" class="headerlink" title="内存泄露"></a>内存泄露</h2><h3 id="概念"><a href="#概念" class="headerlink" title="概念"></a>概念</h3><p>程序的运行需要内存。只要程序提出要求，操作系统或者运行时（runtime）就必须供给内存。</p>
+<p>对于持续运行的服务进程（daemon），必须及时释放不再用到的内存。 否则，内存占用越来越高，轻则影响系统性能，重则导致进程崩溃。</p>
+<p>本质上讲,内存泄漏就是由于疏忽或错误造成程序未能释放那些已经不再使用的内存，造成内存的浪费。</p>
+<h3 id="常见的JS内存泄露"><a href="#常见的JS内存泄露" class="headerlink" title="常见的JS内存泄露"></a>常见的JS内存泄露</h3><h4 id="1-意外的全局变量"><a href="#1-意外的全局变量" class="headerlink" title="1.意外的全局变量"></a>1.意外的全局变量</h4><p>JavaScript 处理未定义变量的方式比较宽松：未定义的变量会在全局对象创建一个新变量。在浏览器中，全局对象是 window 。</p>
+<pre class="line-numbers language-js"><code class="language-js">
+<span class="token keyword">function</span> <span class="token function">foo</span><span class="token punctuation">(</span>arg<span class="token punctuation">)</span> <span class="token punctuation">{</span> 
+    bar <span class="token operator">=</span> <span class="token string">"this is a hidden global variable"</span><span class="token punctuation">;</span> 
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+<p>事实上变量bar被解释成下面的情况：</p>
+<pre class="line-numbers language-js"><code class="language-js"><span class="token keyword">function</span> <span class="token function">foo</span><span class="token punctuation">(</span>arg<span class="token punctuation">)</span> <span class="token punctuation">{</span> 
+    window<span class="token punctuation">.</span>bar <span class="token operator">=</span> <span class="token string">"this is a hidden global variable"</span><span class="token punctuation">;</span> 
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+<p>函数 <code>foo</code> 内部忘记使用 <code>var</code> ，意外创建了一个全局变量。此例泄露了一个简单的字符串，无伤大雅，但是有更糟的情况。</p>
+<p>由this创建的意外的全局变量：</p>
+<pre class="line-numbers language-js"><code class="language-js"><span class="token keyword">function</span> <span class="token function">foo</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span> 
+    <span class="token keyword">this</span><span class="token punctuation">.</span>variable <span class="token operator">=</span> <span class="token string">"potential accidental global"</span><span class="token punctuation">;</span> 
+<span class="token punctuation">}</span> 
+
+<span class="token comment" spellcheck="true">// Foo 调用自己，this 指向了全局对象（window） </span>
+<span class="token comment" spellcheck="true">// 而不是 undefined </span>
+<span class="token function">foo</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p><code>在 JavaScript 文件头部加上</code>‘use strict’<code>，可以避免此类错误发生。启用严格模式解析 JavaScript ，避免意外的全局变量。</code></p>
+<p><strong>全局变量使用注意事项</strong></p>
+<ol>
+<li>尽管我们讨论了一些意外的全局变量，但是仍有一些明确的全局变量产生的垃圾。它们被定义为不可回收（除非定义为空或重新分配）。</li>
+<li>全局变量用于 临时存储和处理大量信息时，需要多加小心。如果必须使用全局变量存储大量数据时，确保用完以后把它设置为 null 或者重新定义</li>
+<li>与全局变量相关的增加内存消耗的一个主因是缓存。缓存数据是为了重用，缓存必须有一个大小上限才有用。</li>
+<li>高内存消耗导致缓存突破上限，因为缓存内容无法被回收。</li>
+</ol>
+<h4 id="2-没有释放的计时器或者回调函数"><a href="#2-没有释放的计时器或者回调函数" class="headerlink" title="2.没有释放的计时器或者回调函数"></a>2.没有释放的计时器或者回调函数</h4><p>在 JavaScript 中使用 setInterval 非常平常。一段常见的代码：</p>
+<pre class="line-numbers language-js"><code class="language-js"><span class="token keyword">var</span> someResource <span class="token operator">=</span> <span class="token function">getData</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> 
+<span class="token function">setInterval</span><span class="token punctuation">(</span><span class="token keyword">function</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span> 
+    <span class="token keyword">var</span> node <span class="token operator">=</span> document<span class="token punctuation">.</span><span class="token function">getElementById</span><span class="token punctuation">(</span><span class="token string">'Node'</span><span class="token punctuation">)</span><span class="token punctuation">;</span> 
+    <span class="token keyword">if</span><span class="token punctuation">(</span>node<span class="token punctuation">)</span> <span class="token punctuation">{</span> 
+        <span class="token comment" spellcheck="true">// 处理 node 和 someResource </span>
+        node<span class="token punctuation">.</span>innerHTML <span class="token operator">=</span> JSON<span class="token punctuation">.</span><span class="token function">stringify</span><span class="token punctuation">(</span>someResource<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span> 
+    <span class="token punctuation">}</span> 
+<span class="token punctuation">}</span><span class="token punctuation">,</span> <span class="token number">1000</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>与节点或数据关联的计时器不再需要，<code>node</code> 对象可以删除，整个回调函数也不需要了。可是，计时器回调函数仍然没被回收（计时器停止才会被回收）。同时，<code>someResource</code> 如果存储了大量的数据，也是无法被回收的。</p>
+<p>对于观察者的例子，一旦它们不再需要（或者关联的对象变成不可达），明确地移除它们非常重要。老的 IE 6 是无法处理循环引用的。如今，即使没有明确移除它们，一旦观察者对象变成不可达，大部分浏览器是可以回收观察者处理函数的。</p>
+<pre class="line-numbers language-js"><code class="language-js"><span class="token keyword">var</span> element <span class="token operator">=</span> document<span class="token punctuation">.</span><span class="token function">getElementById</span><span class="token punctuation">(</span><span class="token string">'button'</span><span class="token punctuation">)</span><span class="token punctuation">;</span> 
+<span class="token keyword">function</span> <span class="token function">onClick</span><span class="token punctuation">(</span>event<span class="token punctuation">)</span> <span class="token punctuation">{</span> 
+    element<span class="token punctuation">.</span>innerHTML <span class="token operator">=</span> <span class="token string">'text'</span><span class="token punctuation">;</span> 
+<span class="token punctuation">}</span> 
+
+element<span class="token punctuation">.</span><span class="token function">addEventListener</span><span class="token punctuation">(</span><span class="token string">'click'</span><span class="token punctuation">,</span> onClick<span class="token punctuation">)</span><span class="token punctuation">;</span> 
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p><strong>对象观察者和循环引用注意事项</strong></p>
+<p>老版本的 IE 是无法检测 DOM 节点与 JavaScript 代码之间的循环引用，会导致内存泄露。如今，现代的浏览器（包括 IE 和 Microsoft Edge）使用了更先进的垃圾回收算法，已经可以正确检测和处理循环引用了。换言之，回收节点内存时，不必非要调用 removeEventListener 了。</p>
+<h4 id="3-脱离DOM的引用"><a href="#3-脱离DOM的引用" class="headerlink" title="3.脱离DOM的引用"></a>3.脱离DOM的引用</h4><p>有时，保存 DOM 节点内部数据结构很有用。假如你想快速更新表格的几行内容，把每一行 DOM 存成字典（JSON 键值对）或者数组很有意义。此时，同样的 DOM 元素存在两个引用：一个在 DOM 树中，另一个在字典中。将来你决定删除这些行时，需要把两个引用都清除。</p>
+<pre class="line-numbers language-js"><code class="language-js"><span class="token keyword">var</span> elements <span class="token operator">=</span> <span class="token punctuation">{</span> 
+    button<span class="token punctuation">:</span> document<span class="token punctuation">.</span><span class="token function">getElementById</span><span class="token punctuation">(</span><span class="token string">'button'</span><span class="token punctuation">)</span><span class="token punctuation">,</span> 
+    image<span class="token punctuation">:</span> document<span class="token punctuation">.</span><span class="token function">getElementById</span><span class="token punctuation">(</span><span class="token string">'image'</span><span class="token punctuation">)</span><span class="token punctuation">,</span> 
+    text<span class="token punctuation">:</span> document<span class="token punctuation">.</span><span class="token function">getElementById</span><span class="token punctuation">(</span><span class="token string">'text'</span><span class="token punctuation">)</span> 
+<span class="token punctuation">}</span><span class="token punctuation">;</span> 
+
+<span class="token keyword">function</span> <span class="token function">doStuff</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span> 
+    image<span class="token punctuation">.</span>src <span class="token operator">=</span> <span class="token string">'http://some.url/image'</span><span class="token punctuation">;</span> 
+    button<span class="token punctuation">.</span><span class="token function">click</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> 
+    console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>text<span class="token punctuation">.</span>innerHTML<span class="token punctuation">)</span><span class="token punctuation">;</span> 
+    <span class="token comment" spellcheck="true">// 更多逻辑 </span>
+<span class="token punctuation">}</span> 
+
+<span class="token keyword">function</span> <span class="token function">removeButton</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span> 
+    <span class="token comment" spellcheck="true">// 按钮是 body 的后代元素 </span>
+    document<span class="token punctuation">.</span>body<span class="token punctuation">.</span><span class="token function">removeChild</span><span class="token punctuation">(</span>document<span class="token punctuation">.</span><span class="token function">getElementById</span><span class="token punctuation">(</span><span class="token string">'button'</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span> 
+
+    <span class="token comment" spellcheck="true">// 此时，仍旧存在一个全局的 #button 的引用 </span>
+    <span class="token comment" spellcheck="true">// elements 字典。button 元素仍旧在内存中，不能被 GC 回收。 </span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>此外还要考虑 DOM 树内部或子节点的引用问题。假如你的 JavaScript 代码中保存了表格某一个 <td> 的引用。将来决定删除整个表格的时候，直觉认为 GC 会回收除了已保存的 </td><td> 以外的其它节点。实际情况并非如此：此</td><td> 是表格的子节点，子元素与父元素是引用关系。由于代码保留了 </td><td> 的引用，导致整个表格仍待在内存中。保存 DOM 元素引用的时候，要小心谨慎。</td></p>
+<h4 id="4-闭包"><a href="#4-闭包" class="headerlink" title="4.闭包"></a>4.闭包</h4><p>闭包是 JavaScript 开发的一个关键方面：匿名函数可以访问父级作用域的变量。</p>
+<pre class="line-numbers language-js"><code class="language-js"><span class="token keyword">var</span> theThing <span class="token operator">=</span> <span class="token keyword">null</span><span class="token punctuation">;</span> 
+<span class="token keyword">var</span> replaceThing <span class="token operator">=</span> <span class="token keyword">function</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span> 
+  <span class="token keyword">var</span> originalThing <span class="token operator">=</span> theThing<span class="token punctuation">;</span> 
+  <span class="token keyword">var</span> unused <span class="token operator">=</span> <span class="token keyword">function</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span> 
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>originalThing<span class="token punctuation">)</span> 
+      console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">"hi"</span><span class="token punctuation">)</span><span class="token punctuation">;</span> 
+  <span class="token punctuation">}</span><span class="token punctuation">;</span> 
+
+  theThing <span class="token operator">=</span> <span class="token punctuation">{</span> 
+    longStr<span class="token punctuation">:</span> <span class="token keyword">new</span> <span class="token class-name">Array</span><span class="token punctuation">(</span><span class="token number">1000000</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">join</span><span class="token punctuation">(</span><span class="token string">'*'</span><span class="token punctuation">)</span><span class="token punctuation">,</span> 
+    someMethod<span class="token punctuation">:</span> <span class="token keyword">function</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span> 
+      console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>someMessage<span class="token punctuation">)</span><span class="token punctuation">;</span> 
+    <span class="token punctuation">}</span> 
+  <span class="token punctuation">}</span><span class="token punctuation">;</span> 
+<span class="token punctuation">}</span><span class="token punctuation">;</span> 
+
+<span class="token function">setInterval</span><span class="token punctuation">(</span>replaceThing<span class="token punctuation">,</span> <span class="token number">1000</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>每次调用 replaceThing ，theThing 得到一个包含一个大数组和一个新闭包（someMethod）的新对象。同时，变量 unused 是一个引用 originalThing 的闭包（先前的 replaceThing 又调用了 theThing ）。思绪混乱了吗？最重要的事情是，闭包的作用域一旦创建，它们有同样的父级作用域，作用域是共享的。someMethod 可以通过 theThing 使用，someMethod 与 unused 分享闭包作用域，尽管 unused从未使用，它引用的 originalThing 迫使它保留在内存中（防止被回收）。当这段代码反复运行，就会看到内存占用不断上升，垃圾回收器（GC）并无法降低内存占用。本质上，闭包的链表已经创建，每一个闭包作用域携带一个指向大数组的间接的引用，造成严重的内存泄露。</p>
+<h3 id="避免内存泄露"><a href="#避免内存泄露" class="headerlink" title="避免内存泄露"></a>避免内存泄露</h3><p>记住一个原则：不用的东西，及时归还。</p>
+<ol>
+<li>减少不必要的全局变量，使用严格模式避免意外创建全局变量。</li>
+<li>在你使用完数据后，及时解除引用（闭包中的变量，dom引用，定时器清除）。</li>
+<li>组织好你的逻辑，避免死循环等造成浏览器卡顿，崩溃的问题。</li>
+</ol>
+
+            </div>
+            <hr/>
+
+            
+            <style>
+    #reward {
+        margin: 40px 0;
+        text-align: center;
+    }
+
+    #reward .reward-link {
+        font-size: 1.88rem;
+    }
+
+    #reward .btn-floating:hover {
+        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2), 0 5px 15px rgba(0, 0, 0, 0.2);
+    }
+
+    #rewardModal {
+        width: 320px;
+        height: 350px;
+    }
+
+    #rewardModal .reward-title {
+        margin: 15px auto;
+        padding-bottom: 5px;
+    }
+
+    #rewardModal .modal-content {
+        padding: 10px;
+    }
+
+    #rewardModal .close {
+        position: absolute;
+        right: 15px;
+        top: 15px;
+        color: rgba(0, 0, 0, 0.5);
+        font-size: 1.3rem;
+        line-height: 20px;
+        cursor: pointer;
+    }
+
+    #rewardModal .close:hover {
+        color: #ef5350;
+        transform: scale(1.3);
+        -moz-transform:scale(1.3);
+        -webkit-transform:scale(1.3);
+        -o-transform:scale(1.3);
+    }
+
+    #rewardModal .reward-tabs {
+        margin: 0 auto;
+        width: 210px;
+    }
+
+    .reward-tabs .tabs {
+        height: 38px;
+        margin: 10px auto;
+        padding-left: 0;
+    }
+
+    .reward-content ul {
+        padding-left: 0 !important;
+    }
+
+    .reward-tabs .tabs .tab {
+        height: 38px;
+        line-height: 38px;
+    }
+
+    .reward-tabs .tab a {
+        color: #fff;
+        background-color: #ccc;
+    }
+
+    .reward-tabs .tab a:hover {
+        background-color: #ccc;
+        color: #fff;
+    }
+
+    .reward-tabs .wechat-tab .active {
+        color: #fff !important;
+        background-color: #22AB38 !important;
+    }
+
+    .reward-tabs .alipay-tab .active {
+        color: #fff !important;
+        background-color: #019FE8 !important;
+    }
+
+    .reward-tabs .reward-img {
+        width: 210px;
+        height: 210px;
+    }
+</style>
+
+<div id="reward">
+    <a href="#rewardModal" class="reward-link modal-trigger btn-floating btn-large waves-effect waves-light red">赏</a>
+
+    <!-- Modal Structure -->
+    <div id="rewardModal" class="modal">
+        <div class="modal-content">
+            <a class="close modal-close"><i class="fa fa-close"></i></a>
+            <h4 class="reward-title">你的赏识是我前进的动力</h4>
+            <div class="reward-content">
+                <div class="reward-tabs">
+                    <ul class="tabs row">
+                        <li class="tab col s6 alipay-tab waves-effect waves-light"><a href="#alipay">支付宝</a></li>
+                        <li class="tab col s6 wechat-tab waves-effect waves-light"><a href="#wechat">微 信</a></li>
+                    </ul>
+                    <div id="alipay">
+                        <img src="/medias/reward/alipay.jpg" class="reward-img" alt="支付宝打赏二维码">
+                    </div>
+                    <div id="wechat">
+                        <img src="/medias/reward/wechat.png" class="reward-img" alt="微信打赏二维码">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    $(function () {
+        $('.tabs').tabs();
+    });
+</script>
+            
+
+            <link rel="stylesheet" type="text/css" href="/libs/share/css/share.min.css">
+
+<div id="article-share">
+    
+    <div class="social-share" data-disabled="qzone" data-wechat-qrcode-helper="<p>微信里点“发现”->“扫一扫”二维码便可查看分享。</p>"></div>
+    
+</div>
+
+<script src="/libs/share/js/social-share.min.js"></script>
+
+            
+
+    <div class="reprint" id="reprint-statement">
+        <p class="reprint-tip">
+            <i class="fa fa-exclamation-triangle"></i>&nbsp;&nbsp;
+            <span>转载规则</span>
+        </p>
+        
+            <div class="center-align">
+                <a rel="license" href="https://creativecommons.org/licenses/by/4.0/deed.zh">
+                    <img alt=""
+                         style="border-width:0"
+                         src="https://i.creativecommons.org/l/by/4.0/88x31.png"/>
+                </a>
+            </div>
+            <br/>
+            <span xmlns:dct="http://purl.org/dc/terms/" href="http://purl.org/dc/dcmitype/Text"
+                  property="dct:title" rel="dct:type">
+                    《前端JS内存管理》
+                </span> 由
+            <a xmlns:cc="http://creativecommons.org/ns#" href="/2019/09/12/jsRAM/" property="cc:attributionName"
+               rel="cc:attributionURL">
+                浅夏晴空
+            </a> 采用
+            <a rel="license" href="https://creativecommons.org/licenses/by/4.0/deed.zh">
+                知识共享署名 4.0 国际许可协议
+            </a>进行许可。
+        
+    </div>
+
+    <script async defer>
+      document.addEventListener("copy", function (e) {
+        let toastHTML = '<span>复制成功，请遵循本文的转载规则</span><button class="btn-flat toast-action" onclick="navToReprintStatement()" style="font-size: smaller">查看</a>';
+        M.toast({html: toastHTML})
+      });
+
+      function navToReprintStatement() {
+        $("html, body").animate({scrollTop: $("#reprint-statement").offset().top - 80}, 800);
+      }
+    </script>
+
+
+        </div>
+    </div>
+
+    
+        <link rel="stylesheet" href="/libs/gitalk/gitalk.css">
+<link rel="stylesheet" href="/css/my-gitalk.css">
+
+<div class="card gitalk-card" data-aos="fade-up">
+    <div id="gitalk-container" class="card-content"></div>
+</div>
+
+<script src="/libs/gitalk/gitalk.min.js"></script>
+<script>
+    let gitalk = new Gitalk({
+        clientID: 'de8dfcea77a9e87de17a',
+        clientSecret: '569b91fd16e2f3972943f6907219b5ca2984aa1b',
+        repo: 'gongchenghuigch.github.io',
+        owner: 'gongchenghuigch',
+        admin: "gongchenghuigch",
+        id: '2019-09-12T16-16-18',
+        distractionFreeMode: false  // Facebook-like distraction free mode
+    });
+
+    gitalk.render('gitalk-container');
+</script>
+    
+
+    
+
+    
+
+    
+
+    
+        <style>
+    .valine-card {
+        margin: 1.5rem auto;
+    }
+
+    .valine-card .card-content {
+        padding: 20px 20px 5px 20px;
+    }
+
+    #vcomments input[type=text],
+    #vcomments input[type=email],
+    #vcomments input[type=url],
+    #vcomments textarea {
+        box-sizing: border-box;
+    }
+
+    #vcomments p {
+        margin: 2px 2px 10px;
+        font-size: 1.05rem;
+        line-height: 1.78rem;
+    }
+
+    #vcomments blockquote p {
+        text-indent: 0.2rem;
+    }
+
+    #vcomments a {
+        padding: 0 2px;
+        color: #42b983;
+        font-weight: 500;
+        text-decoration: underline;
+    }
+
+    #vcomments img {
+        max-width: 100%;
+        height: auto;
+        cursor: pointer;
+    }
+
+    #vcomments ol li {
+        list-style-type: decimal;
+    }
+
+    #vcomments ol,
+    ul {
+        display: block;
+        padding-left: 2em;
+        word-spacing: 0.05rem;
+    }
+
+    #vcomments ul li,
+    ol li {
+        display: list-item;
+        line-height: 1.8rem;
+        font-size: 1rem;
+    }
+
+    #vcomments ul li {
+        list-style-type: disc;
+    }
+
+    #vcomments ul ul li {
+        list-style-type: circle;
+    }
+
+    #vcomments table, th, td {
+        padding: 12px 13px;
+        border: 1px solid #dfe2e5;
+    }
+
+    #vcomments table, th, td {
+        border: 0;
+    }
+
+    table tr:nth-child(2n), thead {
+        background-color: #fafafa;
+    }
+
+    #vcomments table th {
+        background-color: #f2f2f2;
+        min-width: 80px;
+    }
+
+    #vcomments table td {
+        min-width: 80px;
+    }
+
+    #vcomments h1 {
+        font-size: 1.85rem;
+        font-weight: bold;
+        line-height: 2.2rem;
+    }
+
+    #vcomments h2 {
+        font-size: 1.65rem;
+        font-weight: bold;
+        line-height: 1.9rem;
+    }
+
+    #vcomments h3 {
+        font-size: 1.45rem;
+        font-weight: bold;
+        line-height: 1.7rem;
+    }
+
+    #vcomments h4 {
+        font-size: 1.25rem;
+        font-weight: bold;
+        line-height: 1.5rem;
+    }
+
+    #vcomments h5 {
+        font-size: 1.1rem;
+        font-weight: bold;
+        line-height: 1.4rem;
+    }
+
+    #vcomments h6 {
+        font-size: 1rem;
+        line-height: 1.3rem;
+    }
+
+    #vcomments p {
+        font-size: 1rem;
+        line-height: 1.5rem;
+    }
+
+    #vcomments hr {
+        margin: 12px 0;
+        border: 0;
+        border-top: 1px solid #ccc;
+    }
+
+    #vcomments blockquote {
+        margin: 15px 0;
+        border-left: 5px solid #42b983;
+        padding: 1rem 0.8rem 0.3rem 0.8rem;
+        color: #666;
+        background-color: rgba(66, 185, 131, .1);
+    }
+
+    #vcomments pre {
+        font-family: monospace, monospace;
+        padding: 1.2em;
+        margin: .5em 0;
+        background: #272822;
+        overflow: auto;
+        border-radius: 0.3em;
+        tab-size: 4;
+    }
+
+    #vcomments code {
+        font-family: monospace, monospace;
+        padding: 1px 3px;
+        font-size: 0.92rem;
+        color: #e96900;
+        background-color: #f8f8f8;
+        border-radius: 2px;
+    }
+
+    #vcomments pre code {
+        font-family: monospace, monospace;
+        padding: 0;
+        color: #e8eaf6;
+        background-color: #272822;
+    }
+
+    #vcomments pre[class*="language-"] {
+        padding: 1.2em;
+        margin: .5em 0;
+    }
+
+    #vcomments code[class*="language-"],
+    pre[class*="language-"] {
+        color: #e8eaf6;
+    }
+
+    #vcomments [type="checkbox"]:not(:checked), [type="checkbox"]:checked {
+        position: inherit;
+        margin-left: -1.3rem;
+        margin-right: 0.4rem;
+        margin-top: -1px;
+        vertical-align: middle;
+        left: unset;
+        visibility: visible;
+    }
+
+    #vcomments b,
+    strong {
+        font-weight: bold;
+    }
+
+    #vcomments dfn {
+        font-style: italic;
+    }
+
+    #vcomments small {
+        font-size: 85%;
+    }
+
+    #vcomments cite {
+        font-style: normal;
+    }
+
+    #vcomments mark {
+        background-color: #fcf8e3;
+        padding: .2em;
+    }
+
+    #vcomments table, th, td {
+        padding: 12px 13px;
+        border: 1px solid #dfe2e5;
+    }
+
+    table tr:nth-child(2n), thead {
+        background-color: #fafafa;
+    }
+
+    #vcomments table th {
+        background-color: #f2f2f2;
+        min-width: 80px;
+    }
+
+    #vcomments table td {
+        min-width: 80px;
+    }
+
+    #vcomments [type="checkbox"]:not(:checked), [type="checkbox"]:checked {
+        position: inherit;
+        margin-left: -1.3rem;
+        margin-right: 0.4rem;
+        margin-top: -1px;
+        vertical-align: middle;
+        left: unset;
+        visibility: visible;
+    }
+</style>
+
+<div class="card valine-card" data-aos="fade-up">
+    <div id="vcomments" class="card-content"></div>
+</div>
+
+<script src="/libs/valine/av-min.js"></script>
+<script src="/libs/valine/Valine.min.js"></script>
+<script>
+    new Valine({
+        el: '#vcomments',
+        appId: '',
+        appKey: '',
+        notify: 'true' === 'true',
+        verify: 'true' === 'true',
+        visitor: 'true' === 'true',
+        avatar: 'mm',
+        pageSize: '10',
+        lang: 'zh-cn',
+        placeholder: 'just go go'
+    });
+</script>
+    
+
+    
+
+<article id="prenext-posts" class="prev-next articles">
+    <div class="row article-row">
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge left-badge text-color">
+                <i class="fa fa-chevron-left"></i>&nbsp;上一篇</div>
+            <div class="card">
+                <a href="/2019/09/14/awat/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/featureimages/15.jpg" class="responsive-img" alt="setTimeout,promise,async await的区别">
+                        
+                        <span class="card-title">setTimeout,promise,async await的区别</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            一道面试题引发的血案，下面进入主题：
+// 今日头条面试题
+async function async1() {
+    console.log('async1 start')
+    await async2()
+    console.l
+                        
+                    </div>
+                    <div class="publish-info">
+                        <span class="publish-date">
+                            <i class="fa fa-clock-o fa-fw icon-date"></i>2019-09-14
+                        </span>
+                        <span class="publish-author">
+                            
+                            <i class="fa fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/JavaScript/" class="post-category" target="_blank">
+                                    JavaScript
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/JavaScript/" target="_blank">
+                        <span class="chip bg-color">JavaScript</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge right-badge text-color">
+                下一篇&nbsp;<i class="fa fa-chevron-right"></i>
+            </div>
+            <div class="card">
+                <a href="/2019/09/12/jsidea/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/featureimages/12.jpg" class="responsive-img" alt="前端开发JavaScript你必须懂得的33个概念">
+                        
+                        <span class="card-title">前端开发JavaScript你必须懂得的33个概念</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            1. 调用堆栈文章
+📖 Call Stack — MDN
+📖 [译] JavaScript 如何工作：对引擎、运行时、调用堆栈的概述 —— 掘金
+📖 [译] 理解 JavaScript 中的执行上下文和执行栈 —— 掘金
+📖 这一次
+                        
+                    </div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="fa fa-clock-o fa-fw icon-date"></i>2019-09-12
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fa fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/JavaScript/" class="post-category" target="_blank">
+                                    JavaScript
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/JavaScript/" target="_blank">
+                        <span class="chip bg-color">JavaScript</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+    </div>
+</article>
+</div>
+
+
+
+    </div>
+    <div id="toc-aside" class="expanded col l3 hide-on-med-and-down">
+        <div class="toc-widget">
+            <div class="toc-title"><i class="fa fa-list-alt"></i>&nbsp;&nbsp;目录</div>
+            <div id="toc-content"></div>
+        </div>
+    </div>
+</div>
+
+<!-- TOC 悬浮按钮. -->
+
+<div id="floating-toc-btn" class="hide-on-med-and-down">
+    <a class="btn-floating btn-large bg-color">
+        <i class="fa fa-list"></i>
+    </a>
+</div>
+
+
+<script src="/libs/tocbot/tocbot.min.js"></script>
+<script>
+    $(function () {
+        tocbot.init({
+            tocSelector: '#toc-content',
+            contentSelector: '#articleContent',
+            headingsOffset: -($(window).height() * 0.4 - 45),
+            // headingsOffset: -205,
+            headingSelector: 'h2, h3, h4'
+        });
+
+        // modify the toc link href to support Chinese.
+        let i = 0;
+        let tocHeading = 'toc-heading-';
+        $('#toc-content a').each(function () {
+            $(this).attr('href', '#' + tocHeading + (++i));
+        });
+
+        // modify the heading title id to support Chinese.
+        i = 0;
+        $('#articleContent').children('h2, h3, h4').each(function () {
+            $(this).attr('id', tocHeading + (++i));
+        });
+
+        // Set scroll toc fixed.
+        let tocHeight = parseInt($(window).height() * 0.4 - 64);
+        let $tocWidget = $('.toc-widget');
+        $(window).scroll(function () {
+            let scroll = $(window).scrollTop();
+            /* add post toc fixed. */
+            if (scroll > tocHeight) {
+                $tocWidget.addClass('toc-fixed');
+            } else {
+                $tocWidget.removeClass('toc-fixed');
+            }
+        });
+
+        
+        /* 修复文章卡片 div 的宽度. */
+        let fixPostCardWidth = function (srcId, targetId) {
+            let srcDiv = $('#' + srcId);
+            if (srcDiv.length === 0) {
+                return;
+            }
+
+            let w = srcDiv.width();
+            if (w >= 450) {
+                w = w + 21;
+            } else if (w >= 350 && w < 450) {
+                w = w + 18;
+            } else if (w >= 300 && w < 350) {
+                w = w + 16;
+            } else {
+                w = w + 14;
+            }
+            $('#' + targetId).width(w);
+        };
+
+        // 切换TOC目录展开收缩的相关操作.
+        const expandedClass = 'expanded';
+        let $tocAside = $('#toc-aside');
+        let $mainContent = $('#main-content');
+        $('#floating-toc-btn .btn-floating').click(function () {
+            if ($tocAside.hasClass(expandedClass)) {
+                $tocAside.removeClass(expandedClass).slideUp(500);
+                $mainContent.removeClass('l9');
+            } else {
+                $tocAside.addClass(expandedClass).slideDown(500);
+                $mainContent.addClass('l9');
+            }
+            fixPostCardWidth('artDetail', 'prenext-posts');
+        });
+        
+    });
+</script>
+    
+
+</main>
+
+
+<footer class="page-footer bg-color">
+    <div class="container row center-align">
+        <div class="col s12 m8 l8 copy-right">
+            <span id="sitetime"></span> <br>
+            本站由&copy;<a href="https://gongchenghuigch.github.io/" target="_blank">gongchenghui</a>基于
+            <a href="https://hexo.io/" target="_blank">Hexo</a> 的
+            <a href="https://github.com/blinkfox/hexo-theme-matery" target="_blank">hexo-theme-matery</a>主题搭建.
+
+            
+                &nbsp;<i class="fa fa-area-chart"></i>&nbsp;站点总字数:&nbsp;
+                <span class="white-color">119.1k</span>
+            
+
+            
+			
+                <br>
+                
+                <span id="busuanzi_container_site_pv">
+                    <i class="fa fa-heart-o"></i>
+                    本站总访问量 <span id="busuanzi_value_site_pv" class="white-color"></span>
+                </span>
+                
+                
+                <span id="busuanzi_container_site_uv">
+                    <i class="fa fa-users"></i>
+                    次,&nbsp;访客数 <span id="busuanzi_value_site_uv" class="white-color"></span> 人.
+                </span>
+                
+            
+        </div>
+        <div class="col s12 m4 l4 social-link social-statis">
+
+
+    <a href="mailto:gongch0719@163.com" class="tooltipped" target="_blank" data-tooltip="邮件联系我" data-position="top" data-delay="50">
+        <i class="fa fa-envelope-open"></i>
+    </a>
+
+
+
+    <a href="tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=1134929850" class="tooltipped" data-tooltip="QQ联系我: 1134929850" data-position="top" data-delay="50">
+        <i class="fa fa-qq"></i>
+    </a>
+
+
+
+    <a href="/atom.xml" class="tooltipped" target="_blank" data-tooltip="RSS 订阅" data-position="top" data-delay="50">
+        <i class="fa fa-rss"></i>
+    </a>
+</div>
+    </div>
+</footer>
+
+<div class="progress-bar"></div>
+<script language = javascript >
+    function siteTime() {
+        window.setTimeout("siteTime()", 1000);
+        var seconds = 1000;
+        var minutes = seconds * 60;
+        var hours = minutes * 60;
+        var days = hours * 24;
+        var years = days * 365;
+        var today = new Date();
+        var todayYear = today.getFullYear();
+        var todayMonth = today.getMonth() + 1;
+        var todayDate = today.getDate();
+        var todayHour = today.getHours();
+        var todayMinute = today.getMinutes();
+        var todaySecond = today.getSeconds();
+        var t1 = Date.UTC(2018, 08, 11, 00, 00, 00); //北京时间2018-2-13 00:00:00 
+        var t2 = Date.UTC(todayYear, todayMonth, todayDate, todayHour, todayMinute, todaySecond); 
+        var diff = t2 - t1; var diffYears = Math.floor(diff / years); 
+        var diffDays = Math.floor((diff / days) - diffYears * 365); 
+        var diffHours = Math.floor((diff - (diffYears * 365 + diffDays) * days) / hours); 
+        var diffMinutes = Math.floor((diff - (diffYears * 365 + diffDays) * days - diffHours * hours) / minutes); 
+        var diffSeconds = Math.floor((diff - (diffYears * 365 + diffDays) * days - diffHours * hours - diffMinutes * minutes) / seconds); document.getElementById("sitetime").innerHTML = "本站已运行 " +diffYears+" 年 "+diffDays + " 天 " + diffHours + " 小时 " + diffMinutes + " 分钟 " + diffSeconds + " 秒"; 
+    } 
+	siteTime(); 
+</script>
+
+
+<!-- 搜索遮罩框 -->
+<div id="searchModal" class="modal">
+    <div class="modal-content">
+        <div class="search-header">
+            <span class="title"><i class="fa fa-search"></i>&nbsp;&nbsp;搜索</span>
+            <input type="search" id="searchInput" name="s" placeholder="请输入搜索的关键字"
+                   class="search-input">
+        </div>
+        <div id="searchResult"></div>
+    </div>
+</div>
+
+<script src="/js/search.js"></script>
+<script type="text/javascript">
+$(function () {
+    searchFunc("/" + "search.xml", 'searchInput', 'searchResult');
+});
+</script>
+<!-- 回到顶部按钮 -->
+<div id="backTop" class="top-scroll">
+    <a class="btn-floating btn-large waves-effect waves-light" href="#!">
+        <i class="fa fa-angle-up"></i>
+    </a>
+</div>
+
+
+<script src="/libs/materialize/materialize.min.js"></script>
+<script src="/libs/masonry/masonry.pkgd.min.js"></script>
+<script src="/libs/aos/aos.js"></script>
+<script src="/libs/scrollprogress/scrollProgress.min.js"></script>
+<script src="/libs/lightGallery/js/lightgallery-all.min.js"></script>
+<script src="/js/matery.js"></script>
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+
+
+
+    <script src="/libs/others/clicklove.js"></script>
+
+
+    <script async src="/libs/others/busuanzi.pure.mini.js"></script>
+
+
+</body>
+</html>

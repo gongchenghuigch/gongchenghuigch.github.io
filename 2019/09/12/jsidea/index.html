@@ -1,0 +1,1667 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN">
+
+
+<head><meta name="generator" content="Hexo 3.9.0">
+    <meta charset="utf-8">
+    <meta name="keywords" content="前端开发JavaScript你必须懂得的33个概念, gongchenghui,github">
+    <meta name="description" content="1. 调用堆栈文章
+📖 Call Stack — MDN
+📖 [译] JavaScript 如何工作：对引擎、运行时、调用堆栈的概述 —— 掘金
+📖 [译] 理解 JavaScript 中的执行上下文和执行栈 —— 掘金
+📖 这一次">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="renderer" content="webkit|ie-stand|ie-comp">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <title>前端开发JavaScript你必须懂得的33个概念 | gongchenghui</title>
+    <link rel="icon" type="image/png" href="/favicon.png">
+
+    <link rel="stylesheet" type="text/css" href="/libs/awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/materialize/materialize.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/aos/aos.css">
+    <link rel="stylesheet" type="text/css" href="/libs/animate/animate.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/lightGallery/css/lightgallery.min.css">
+    <link rel="stylesheet" type="text/css" href="/css/matery.css">
+    <link rel="stylesheet" type="text/css" href="/css/my.css">
+    <style type="text/css">
+        
+    </style>
+
+    <script src="/libs/jquery/jquery-2.2.0.min.js"></script>
+<link rel="alternate" href="/atom.xml" title="gongchenghui" type="application/atom+xml">
+<link rel="stylesheet" href="/css/prism-okaidia.css" type="text/css">
+<link rel="stylesheet" href="/css/prism-line-numbers.css" type="text/css"></head>
+
+
+<body>
+
+<header class="navbar-fixed">
+    <nav id="headNav" class="bg-color nav-transparent">
+        <div id="navContainer" class="nav-wrapper container">
+            <div class="brand-logo">
+                <a href="/" class="waves-effect waves-light">
+                    
+                    <img src="/medias/logo.png" class="logo-img" alt="LOGO">
+                    
+                    <span class="logo-span">gongchenghui</span>
+                </a>
+            </div>
+            
+
+<a href="#" data-target="mobile-nav" class="sidenav-trigger button-collapse"><i class="fa fa-navicon"></i></a>
+<ul class="right">
+    
+    <li class="hide-on-med-and-down">
+        <a href="/" class="waves-effect waves-light">
+            
+            <i class="fa fa-home"></i>
+            
+            <span>主页</span>
+        </a>
+    </li>
+    
+    <li class="hide-on-med-and-down">
+        <a href="/tags" class="waves-effect waves-light">
+            
+            <i class="fa fa-tags"></i>
+            
+            <span>标签</span>
+        </a>
+    </li>
+    
+    <li class="hide-on-med-and-down">
+        <a href="/categories" class="waves-effect waves-light">
+            
+            <i class="fa fa-bookmark"></i>
+            
+            <span>分类</span>
+        </a>
+    </li>
+    
+    <li class="hide-on-med-and-down">
+        <a href="/friends" class="waves-effect waves-light">
+            
+            <i class="fa fa-rocket"></i>
+            
+            <span>工具</span>
+        </a>
+    </li>
+    
+    <li class="hide-on-med-and-down">
+        <a href="/archives" class="waves-effect waves-light">
+            
+            <i class="fa fa-archive"></i>
+            
+            <span>归档</span>
+        </a>
+    </li>
+    
+    <li class="hide-on-med-and-down">
+        <a href="/about" class="waves-effect waves-light">
+            
+            <i class="fa fa-user-circle-o"></i>
+            
+            <span>关于</span>
+        </a>
+    </li>
+    
+    <li class="hide-on-med-and-down">
+        <a href="/navi" class="waves-effect waves-light">
+            
+            <i class="fa fa-address-book"></i>
+            
+            <span>快捷导航</span>
+        </a>
+    </li>
+    
+    <li>
+        <a href="#searchModal" class="modal-trigger waves-effect waves-light">
+            <i id="searchIcon" class="fa fa-search" title="搜索"></i>
+        </a>
+    </li>
+</ul>
+
+<div id="mobile-nav" class="side-nav sidenav">
+
+    <div class="mobile-head bg-color">
+        
+        <img src="/medias/logo.png" class="logo-img circle responsive-img">
+        
+        <div class="logo-name">gongchenghui</div>
+        <div class="logo-desc">
+            
+            北冥有鱼，其名为鲲，鲲之大，不知其几千里也； 化而为鸟，其名为鹏.
+            
+        </div>
+    </div>
+
+    
+
+    <ul class="menu-list mobile-menu-list">
+        
+        <li>
+            <a href="/" class="waves-effect waves-light">
+                
+                <i class="fa fa-fw fa-home"></i>
+                
+                主页
+            </a>
+        </li>
+        
+        <li>
+            <a href="/tags" class="waves-effect waves-light">
+                
+                <i class="fa fa-fw fa-tags"></i>
+                
+                标签
+            </a>
+        </li>
+        
+        <li>
+            <a href="/categories" class="waves-effect waves-light">
+                
+                <i class="fa fa-fw fa-bookmark"></i>
+                
+                分类
+            </a>
+        </li>
+        
+        <li>
+            <a href="/friends" class="waves-effect waves-light">
+                
+                <i class="fa fa-fw fa-rocket"></i>
+                
+                工具
+            </a>
+        </li>
+        
+        <li>
+            <a href="/archives" class="waves-effect waves-light">
+                
+                <i class="fa fa-fw fa-archive"></i>
+                
+                归档
+            </a>
+        </li>
+        
+        <li>
+            <a href="/about" class="waves-effect waves-light">
+                
+                <i class="fa fa-fw fa-user-circle-o"></i>
+                
+                关于
+            </a>
+        </li>
+        
+        <li>
+            <a href="/navi" class="waves-effect waves-light">
+                
+                <i class="fa fa-fw fa-address-book"></i>
+                
+                快捷导航
+            </a>
+        </li>
+        
+        
+        <li><div class="divider"></div></li>
+        <li>
+            <a href="https://github.com/gongchenghuigch/gongchenghuigch.github.io" class="waves-effect waves-light" target="_blank">
+                <i class="fa fa-github-square fa-fw"></i>Fork Me
+            </a>
+        </li>
+        
+    </ul>
+</div>
+
+        </div>
+
+        
+            <style>
+    .nav-transparent .github-corner {
+        display: none !important;
+    }
+
+    .github-corner {
+        position: absolute;
+        z-index: 10;
+        top: 0;
+        right: 0;
+        border: 0;
+        transform: scale(1.1);
+    }
+
+    .github-corner svg {
+        color: #0f9d58;
+        fill: #fff;
+        height: 64px;
+        width: 64px;
+    }
+
+    .github-corner:hover .octo-arm {
+        animation: a 0.56s ease-in-out;
+    }
+
+    .github-corner .octo-arm {
+        animation: none;
+    }
+
+    @keyframes a {
+        0%,
+        to {
+            transform: rotate(0);
+        }
+        20%,
+        60% {
+            transform: rotate(-25deg);
+        }
+        40%,
+        80% {
+            transform: rotate(10deg);
+        }
+    }
+</style>
+
+<a href="https://github.com/gongchenghuigch/gongchenghuigch.github.io" class="github-corner tooltipped hide-on-med-and-down" target="_blank"
+   data-tooltip="Fork Me" data-position="left" data-delay="50">
+    <svg viewBox="0 0 250 250" aria-hidden="true">
+        <path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path>
+        <path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2"
+              fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path>
+        <path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z"
+              fill="currentColor" class="octo-body"></path>
+    </svg>
+</a>
+        
+    </nav>
+
+</header>
+
+
+
+
+
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/12.jpg')">
+    <div class="container">
+        <div class="row">
+            <div class="col s12 m12 l12">
+                <div class="brand">
+                    <div class="description center-align post-title">
+                        前端开发JavaScript你必须懂得的33个概念
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<main class="post-container content">
+
+    
+    <link rel="stylesheet" href="/libs/tocbot/tocbot.css">
+<style>
+    #articleContent h1::before,
+    #articleContent h2::before,
+    #articleContent h3::before,
+    #articleContent h4::before,
+    #articleContent h5::before,
+    #articleContent h6::before {
+        display: block;
+        content: " ";
+        height: 100px;
+        margin-top: -100px;
+        visibility: hidden;
+    }
+
+    #articleContent :focus {
+        outline: none;
+    }
+
+    .toc-fixed {
+        position: fixed;
+        top: 64px;
+    }
+
+    .toc-widget {
+        padding-left: 20px;
+    }
+
+    .toc-widget .toc-title {
+        margin: 35px 0 15px 0;
+        padding-left: 17px;
+        font-size: 1.5rem;
+        font-weight: bold;
+        line-height: 1.5rem;
+    }
+
+    .toc-widget ol {
+        padding: 0;
+        list-style: none;
+    }
+
+    #toc-content ol {
+        padding-left: 10px;
+    }
+
+    #toc-content ol li {
+        padding-left: 10px;
+    }
+
+    #toc-content .toc-link:hover {
+        color: #42b983;
+        font-weight: 700;
+        text-decoration: underline;
+    }
+
+    #toc-content .toc-link::before {
+        background-color: transparent;
+        max-height: 25px;
+    }
+
+    #toc-content .is-active-link {
+        color: #42b983;
+    }
+
+    #toc-content .is-active-link::before {
+        background-color: #42b983;
+    }
+
+    #floating-toc-btn {
+        position: fixed;
+        right: 20px;
+        bottom: 76px;
+        padding-top: 15px;
+        margin-bottom: 0;
+        z-index: 998;
+    }
+
+    #floating-toc-btn .btn-floating {
+        width: 48px;
+        height: 48px;
+    }
+
+    #floating-toc-btn .btn-floating i {
+        line-height: 48px;
+        font-size: 1.4rem;
+    }
+</style>
+<div class="row">
+    <div id="main-content" class="col s12 m12 l9">
+        <!-- 文章内容详情 -->
+<div id="artDetail">
+    <div class="card">
+        <div class="card-content article-info">
+            <div class="row tag-cate">
+                <div class="col s7">
+                    
+                    <div class="article-tag">
+                        
+                            <a href="/tags/JavaScript/" target="_blank">
+                                <span class="chip bg-color">JavaScript</span>
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+                <div class="col s5 right-align">
+                    
+                    <div class="post-cate">
+                        <i class="fa fa-bookmark fa-fw icon-category"></i>
+                        
+                            <a href="/categories/JavaScript/" class="post-category" target="_blank">
+                                JavaScript
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+
+            <div class="post-info">
+                <div class="post-date info-break-policy">
+                    <i class="fa fa-calendar-minus-o fa-fw"></i>发布日期:&nbsp;&nbsp;
+                    2019-09-12
+                </div>
+
+                
+                    
+                    <div class="info-break-policy">
+                        <i class="fa fa-file-word-o fa-fw"></i>文章字数:&nbsp;&nbsp;
+                        3.4k
+                    </div>
+                    
+
+                    
+                    <div class="info-break-policy">
+                        <i class="fa fa-clock-o fa-fw"></i>阅读时长:&nbsp;&nbsp;
+                        13 分
+                    </div>
+                    
+                
+				
+				
+                    <div id="busuanzi_container_page_pv" class="info-break-policy">
+                        <i class="fa fa-eye fa-fw"></i>阅读次数:&nbsp;&nbsp;
+                        <span id="busuanzi_value_page_pv"></span>
+                    </div>
+				
+            </div>
+        </div>
+        <hr class="clearfix">
+        <div class="card-content article-card-content">
+            <div id="articleContent">
+                <h2 id="1-调用堆栈"><a href="#1-调用堆栈" class="headerlink" title="1. 调用堆栈"></a>1. 调用堆栈</h2><h3 id="文章"><a href="#文章" class="headerlink" title="文章"></a>文章</h3><ul>
+<li>📖 <a href="https://developer.mozilla.org/zh-CN/docs/Glossary/Call_stack" target="_blank" rel="noopener">Call Stack — MDN</a></li>
+<li>📖 <a href="https://juejin.im/post/5a05b4576fb9a04519690d42" target="_blank" rel="noopener">[译] JavaScript 如何工作：对引擎、运行时、调用堆栈的概述 —— 掘金</a></li>
+<li>📖 <a href="https://juejin.im/post/5ba32171f265da0ab719a6d7" target="_blank" rel="noopener">[译] 理解 JavaScript 中的执行上下文和执行栈 —— 掘金</a></li>
+<li>📖 <a href="https://juejin.im/post/59e85eebf265da430d571f89" target="_blank" rel="noopener">这一次，彻底弄懂 JavaScript 执行机制 —— 掘金</a></li>
+<li>📖 <a href="https://www.oschina.net/translate/how-does-javascript-actually-work-part-1" target="_blank" rel="noopener">解读 JavaScript 之引擎、运行时和堆栈调用 —— 开源中国</a></li>
+<li>📖 <a href="https://jakearchibald.com/2015/tasks-microtasks-queues-and-schedules/" target="_blank" rel="noopener">Tasks, microtasks, queues and schedules —— Jake Archibald</a></li>
+<li>📖 <a href="https://juejin.im/entry/55dbd51a60b2f3a92a8f5bff" target="_blank" rel="noopener">Tasks, microtasks, queues and schedules（译） —— 掘金</a></li>
+</ul>
+<h3 id="视频"><a href="#视频" class="headerlink" title="视频"></a>视频</h3><ul>
+<li>📺 <a href="https://v.qq.com/x/page/h0372bld8re.html?ptag=qqbrowser" target="_blank" rel="noopener">What is the event loop anyway? —— 腾讯视频(英文字幕)</a></li>
+<li>📺 <a href="https://www.bilibili.com/video/av33824933/" target="_blank" rel="noopener">Understanding The JavaScript Call Stack, Event Queue, Event Table, &amp; Event Loop —— Bilibili</a></li>
+<li>📺 <a href="http://www.acfun.cn/v/ac4495641" target="_blank" rel="noopener">JS 中的变量提升、堆栈内存及闭包详解 —— Acfun</a></li>
+<li>📺 <a href="http://www.php.cn/code/21194.html" target="_blank" rel="noopener">事件循环模型 —— PHP 中文网</a></li>
+<li>📺 <a href="https://www.youtube.com/watch?v=w6QGEiQceOM" target="_blank" rel="noopener">Javascript: the Call Stack explained — Coding Blocks India</a></li>
+<li>📺 <a href="https://www.youtube.com/watch?v=W8AeMrVtFLY" target="_blank" rel="noopener">The JS Call Stack Explained In 9 Minutes — Colt Steele</a></li>
+<li>📺 <a href="https://www.youtube.com/watch?v=jT0USJeNFEA" target="_blank" rel="noopener">JavaScript Execution Stack — Codecademy</a></li>
+<li>📺 <a href="https://www.youtube.com/watch?v=w7QWQlkLY_s" target="_blank" rel="noopener">What is the Call Stack? — Eric Traub</a></li>
+<li>📺 <a href="https://www.youtube.com/watch?v=Q2sFmqvpBe0" target="_blank" rel="noopener">The Call Stack — Kevin Drumm</a></li>
+<li>📺 <a href="https://www.youtube.com/watch?v=Z6a1cLyq7Ac&list=PLWrQZnG8l0E4kd1T_nyuVoxQUaYEWFgcD" target="_blank" rel="noopener">Understanding JavaScript Execution — Codesmith</a></li>
+<li>📺 <a href="https://www.youtube.com/watch?v=mk0lu9MKBto" target="_blank" rel="noopener">Call Stack &amp; Event Loop — movies com</a></li>
+</ul>
+<hr>
+<h2 id="2-原始类型"><a href="#2-原始类型" class="headerlink" title="2. 原始类型"></a>2. 原始类型</h2><h3 id="文章-1"><a href="#文章-1" class="headerlink" title="文章"></a>文章</h3><ul>
+<li>📖 <a href="https://developer.mozilla.org/zh-CN/docs/Glossary/Primitive" target="_blank" rel="noopener">原始数据 —— MDN</a></li>
+<li>📖 <a href="https://segmentfault.com/a/1190000017090272" target="_blank" rel="noopener">[译]JavaScript 是怎样编码数字的 —— SegmentFault</a></li>
+<li>📖 <a href="https://yanhaijing.com/javascript/2014/03/14/what-every-javascript-developer-should-know-about-floating-points/" target="_blank" rel="noopener">每一个 JavaScript 开发者应该了解的浮点知识 —— 颜海镜</a></li>
+<li>📖 <a href="https://wangdoc.com/javascript/types/number.html" target="_blank" rel="noopener">JavaScript 标准参考教程(基本语法之数值) —— 阮一峰</a></li>
+<li>📖 <a href="https://javascriptweblog.wordpress.com/2010/09/27/the-secret-life-of-javascript-primitives/" target="_blank" rel="noopener">The Secret Life of JavaScript Primitives —— Angus Croll</a></li>
+</ul>
+<h3 id="视频-1"><a href="#视频-1" class="headerlink" title="视频"></a>视频</h3><ul>
+<li>📺 <a href="https://www.imooc.com/video/5674" target="_blank" rel="noopener">javascript 六种数据类型 —— 慕课网</a></li>
+<li>📺 <a href="http://www.php.cn/code/5808.html" target="_blank" rel="noopener">javascript 视频教程(数据类型) —— PHP 中文网</a></li>
+<li>📺 <a href="https://www.youtube.com/watch?v=9ooYYRLdg_g" target="_blank" rel="noopener">JavaScript Reference vs Primitive Types — Academind</a></li>
+<li>📺 <a href="https://www.youtube.com/watch?v=HsbWQsSCE5Y" target="_blank" rel="noopener">JavaScript Primitive Types — Simon Sez IT</a></li>
+<li>📺 <a href="https://www.youtube.com/watch?v=F7YbhKbpFic" target="_blank" rel="noopener">Javascript Primitive and Reference Types — Baljeet Singh</a></li>
+<li>📺 <a href="https://www.youtube.com/watch?v=e-_mDyqm2oU" target="_blank" rel="noopener">Value Types and Reference Types in JavaScript — Programming with Mosh</a></li>
+<li>📺 <a href="https://www.youtube.com/watch?v=qw3j0A3DIzQ" target="_blank" rel="noopener">JavaScript Primitive Data Types — Avelx</a></li>
+<li>📺 <a href="https://www.youtube.com/watch?v=MqHDDtVYJRI" target="_blank" rel="noopener">Everything you never wanted to know about JavaScript numbers — Bartek Szopka</a></li>
+</ul>
+<hr>
+<h2 id="3-值类型和引用类型"><a href="#3-值类型和引用类型" class="headerlink" title="3. 值类型和引用类型"></a>3. 值类型和引用类型</h2><h3 id="文章-2"><a href="#文章-2" class="headerlink" title="文章"></a>文章</h3><ul>
+<li>📖 <a href="http://www.w3school.com.cn/js/pro_js_referencetypes.asp" target="_blank" rel="noopener">ECMAScript 引用类型 —— W3school</a></li>
+<li>📖 <a href="https://www.cnblogs.com/leiting/p/8081413.html" target="_blank" rel="noopener">js 中的值类型和引用类型的区别 —— 博客园</a></li>
+<li>📖 <a href="https://blog.fundebug.com/2017/08/09/explain_value_reference_in_js/" target="_blank" rel="noopener">JavaScript 的值传递和引用传递 —— FunDebug</a></li>
+<li>📖 <a href="https://docstore.mik.ua/orelly/webprog/jscript/ch04_04.htm" target="_blank" rel="noopener">Primitive Types &amp; Reference Types in JavaScript —— Bran van der Meer</a></li>
+<li>📖 <a href="https://blog.csdn.net/xiaojia_boke/article/details/54906509" target="_blank" rel="noopener">JavaScript: Passing by Value or by Reference —— CSDN</a></li>
+<li>📖 <a href="https://segmentfault.com/a/1190000015411195" target="_blank" rel="noopener">js 值引用和值复制 —— SegmentFault</a></li>
+<li>📖 <a href="https://blog.csdn.net/zzzaquarius/article/details/4902235" target="_blank" rel="noopener">js- 引用和复制(传值和传址) —— CSDN</a></li>
+</ul>
+<h3 id="视频-2"><a href="#视频-2" class="headerlink" title="视频"></a>视频</h3><ul>
+<li>📺 <a href="https://www.youtube.com/watch?v=E-dAnFdq8k8" target="_blank" rel="noopener">Javascript Pass by Value vs Pass by Reference — techsith</a></li>
+<li>📺 <a href="https://www.youtube.com/watch?v=fD0t_DKREbE" target="_blank" rel="noopener">JavaScript Value vs Reference Types — Programming with Mosh</a></li>
+</ul>
+<hr>
+<h2 id="4-隐式-显式-名义和鸭子类型"><a href="#4-隐式-显式-名义和鸭子类型" class="headerlink" title="4. 隐式, 显式, 名义和鸭子类型"></a>4. 隐式, 显式, 名义和鸭子类型</h2><h3 id="文章-3"><a href="#文章-3" class="headerlink" title="文章"></a>文章</h3><ul>
+<li>📖 <a href="http://www.w3school.com.cn/js/pro_js_typeconversion.asp" target="_blank" rel="noopener">ECMAScript 类型转换 —— W3school</a></li>
+<li>📖 <a href="http://justjavac.com/javascript/2013/04/08/javascript-quirk-1-implicit-conversion-of-values.html" target="_blank" rel="noopener">JavaScript 的怪癖 1：隐式类型转换 —— justjavac</a></li>
+<li>📖 <a href="https://juejin.im/post/59ad2585f265da246a20e026" target="_blank" rel="noopener">JavaScript 运算符规则与隐式类型转换详解 —— 掘金</a></li>
+<li>📖 <a href="https://segmentfault.com/a/1190000004482388" target="_blank" rel="noopener">聊一聊 JS 中的隐式类型转换 —— SegmentFault</a></li>
+<li>📖 <a href="https://www.cnblogs.com/yugege/p/5277883.html" target="_blank" rel="noopener">有趣的 JavaScript 隐式类型转换 —— 博客园</a></li>
+<li>📖 <a href="https://blog.csdn.net/yangjvn/article/details/48284163" target="_blank" rel="noopener">JavaScript 显式类型转换与隐式类型转换 —— CSDN</a></li>
+<li>📖 <a href="https://www.jianshu.com/p/777a89b4ed9a" target="_blank" rel="noopener">你不知道的 JavaScript（中卷）强制类型转换 —— 简书</a></li>
+<li>📖 <a href="https://ithelp.ithome.com.tw/articles/10201512" target="_blank" rel="noopener">你懂 JavaScript 嗎？#8 強制轉型 —— cythilya</a></li>
+<li>📖 <a href="http://book.51cto.com/art/201505/475153.htm" target="_blank" rel="noopener">动态类型语言和鸭子类型 —— 曾探</a></li>
+<li>📖 <a href="https://flow.org/en/docs/lang/nominal-structural/" target="_blank" rel="noopener">Nominal &amp; Structural Typing —— flow</a></li>
+<li>📖 <a href="https://stackoverflow.com/questions/19915688/what-exactly-is-type-coercion-in-javascript" target="_blank" rel="noopener">What exactly is Type Coercion in Javascript? —— stackoverflow</a></li>
+<li>📖 [You Don’t Know JS: Types &amp; Grammar —— github](<a href="https://github.com/getify/You-Dont-Know-JS/blob/master/types" target="_blank" rel="noopener">https://github.com/getify/You-Dont-Know-JS/blob/master/types</a> &amp; grammar/ch4.md)</li>
+</ul>
+<h3 id="视频-3"><a href="#视频-3" class="headerlink" title="视频"></a>视频</h3><ul>
+<li>📺 <a href="https://www.imooc.com/video/5675" target="_blank" rel="noopener">javascript 隐式转换 —— 慕课网</a></li>
+<li>📺 <a href="http://www.le.com/ptv/vplay/27767009.html" target="_blank" rel="noopener">Javascript 基础加强-类型转换 —— 黑马程序员</a></li>
+</ul>
+<hr>
+<h2 id="5-vs-typeof-vs-instanceof"><a href="#5-vs-typeof-vs-instanceof" class="headerlink" title="5. == vs ===, typeof vs instanceof"></a>5. == vs ===, typeof vs instanceof</h2><h3 id="文章-4"><a href="#文章-4" class="headerlink" title="文章"></a>文章</h3><ul>
+<li>📖 <a href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Equality_comparisons_and_sameness" target="_blank" rel="noopener">JavaScript 中的相等性判断 —— MDN</a></li>
+<li>📖 <a href="https://juejin.im/entry/584918612f301e005716add6" target="_blank" rel="noopener">js 中 == 和 === 的区别 —— 掘金</a></li>
+<li>📖 <a href="https://blog.csdn.net/w97531/article/details/82255225" target="_blank" rel="noopener">== vs === in Javascript —— CSDN</a></li>
+<li>📖 <a href="https://blog.csdn.net/mevicky/article/details/50353881" target="_blank" rel="noopener">深入理解 javascript 之 typeof 和 instanceof —— CSDN</a></li>
+<li>📖 <a href="http://justjavac.com/javascript/2012/12/23/what-is-javascripts-typeof-operator-used-for.html" target="_blank" rel="noopener">JavaScript 的 typeof 的用途 —— justjavac</a></li>
+<li>📖 <a href="https://juejin.im/post/58358606570c35005e4142bd" target="_blank" rel="noopener">一张图看懂 Function 和 Object 的关系及简述 instanceof 运算符 —— 掘金</a></li>
+<li>📖 <a href="https://juejin.im/post/5b0b9b9051882515773ae714" target="_blank" rel="noopener">浅谈 instanceof 和 typeof 的实现原理 —— 掘金</a></li>
+<li>📖 <a href="https://segmentfault.com/a/1190000000730982" target="_blank" rel="noopener">typeof 和 instanceOf 的区别</a></li>
+</ul>
+<hr>
+<h2 id="6-this-call-apply-和-bind"><a href="#6-this-call-apply-和-bind" class="headerlink" title="6. this, call, apply 和 bind"></a>6. this, call, apply 和 bind</h2><h3 id="文章-5"><a href="#文章-5" class="headerlink" title="文章"></a>文章</h3><ul>
+<li>📖 <a href="http://www.ruanyifeng.com/blog/2010/04/using_this_keyword_in_javascript.html" target="_blank" rel="noopener">Javascript 的 this 用法 —— 阮一峰</a></li>
+<li>📖 <a href="https://www.jianshu.com/p/6b4333e78bf5" target="_blank" rel="noopener">学会 JS 的 this 这一篇就够了，根本不用记 —— 简书</a></li>
+<li>📖 <a href="https://juejin.im/post/5b9f176b6fb9a05d3827d03f" target="_blank" rel="noopener">[译] this（他喵的）到底是什么 — 理解 JavaScript 中的 this、call、apply 和 bind —— 掘金</a></li>
+<li>📖 <a href="https://juejin.im/post/59bfe84351882531b730bac2" target="_blank" rel="noopener">this、apply、call、bind —— 掘金</a></li>
+<li>📖 <a href="https://www.cnblogs.com/tingyu-blog/p/6212392.html" target="_blank" rel="noopener">使用 call、apply 和 bind 解决 js 中烦人的 this，事件绑定时的 this 和传参问题 —— 博客园</a></li>
+<li>📖 <a href="https://github.com/Abiel1024/blog/issues/16" target="_blank" rel="noopener">call、apply 和 bind 的原生实现 —— github</a></li>
+</ul>
+<h3 id="视频-4"><a href="#视频-4" class="headerlink" title="视频"></a>视频</h3><ul>
+<li>📺 <a href="https://www.iqiyi.com/w_19rr1augsd.html" target="_blank" rel="noopener">JavaScript 关于 this 关键字解释 —— 爱奇艺</a></li>
+<li>📺 <a href="http://baidu.iqiyi.com/watch/845335533383874688.html?page=videoMultiNeed" target="_blank" rel="noopener">JS 关于作用域闭包和 this 的综合面试题 —— 百度视频</a></li>
+<li>📺 <a href="http://www.le.com/ptv/vplay/27478413.html?ch=baidu_s" target="_blank" rel="noopener">js 面向对象闭包数组 12.函数中的 this —— 乐视视频</a></li>
+<li>📺 <a href="http://www.le.com/ptv/vplay/24835911.html?ch=baidu_s" target="_blank" rel="noopener">1.3.10-this 指向及 this 应用 —— 乐视视频</a></li>
+<li>📺 <a href="https://study.163.com/course/introduction/590005.htm" target="_blank" rel="noopener">珠峰培训 JavaScript 开发课程：关于 this 关键字、闭包作用域 —— 网易云课堂</a></li>
+</ul>
+<hr>
+<h2 id="7-函数作用域-块级作用域和词法作用域"><a href="#7-函数作用域-块级作用域和词法作用域" class="headerlink" title="7. 函数作用域, 块级作用域和词法作用域"></a>7. 函数作用域, 块级作用域和词法作用域</h2><h3 id="文章-6"><a href="#文章-6" class="headerlink" title="文章"></a>文章</h3><ul>
+<li>📖 <a href="https://www.liaoxuefeng.com/wiki/001434446689867b27157e896e74d51a89c25cc8b43bdb3000/0014344993159773a464f34e1724700a6d5dd9e235ceb7c000" target="_blank" rel="noopener">变量作用域与解构赋值 —— 廖雪峰</a></li>
+<li>📖 <a href="http://www.ruanyifeng.com/blog/2009/08/learning_javascript_closures.html" target="_blank" rel="noopener">学习 Javascript 闭包（Closure） —— 阮一峰</a></li>
+<li>📖 <a href="https://segmentfault.com/a/1190000006671020" target="_blank" rel="noopener">JavaScript 中词法作用域、闭包与跳出闭包 —— SegmentFault</a></li>
+<li>📖 <a href="https://juejin.im/entry/58e70077b123db15eb88dc7e" target="_blank" rel="noopener">JavaScript 深入之词法作用域和动态作用域 —— 掘金</a></li>
+<li>📖 <a href="https://juejin.im/post/5afb0ae56fb9a07aa2138425" target="_blank" rel="noopener">深入理解闭包之前置知识 → 作用域与词法作用域 —— 掘金</a></li>
+<li>📖 <a href="https://stackoverflow.com/questions/1047454/what-is-lexical-scope" target="_blank" rel="noopener">What is lexical scope? —— stackoverflow</a></li>
+<li>📖 [You Don’t Know JS: Scope &amp; Closures —— Kyle Simpson](<a href="https://github.com/fishenal/You-Dont-Know-JS/blob/master/scope" target="_blank" rel="noopener">https://github.com/fishenal/You-Dont-Know-JS/blob/master/scope</a> &amp; closures/ch2.md)</li>
+</ul>
+<hr>
+<h2 id="8-闭包"><a href="#8-闭包" class="headerlink" title="8. 闭包"></a>8. 闭包</h2><h3 id="文章-7"><a href="#文章-7" class="headerlink" title="文章"></a>文章</h3><ul>
+<li>📖 <a href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Closures" target="_blank" rel="noopener">闭包 —— MDN</a></li>
+<li>📖 <a href="http://www.w3school.com.cn/js/pro_js_functions_closures.asp" target="_blank" rel="noopener">ECMAScript 闭包（closure）—— w3school</a></li>
+<li>📖 <a href="http://www.ruanyifeng.com/blog/2009/08/learning_javascript_closures.html" target="_blank" rel="noopener">学习 Javascript 闭包（Closure） —— 阮一峰</a></li>
+<li>📖 <a href="https://www.liaoxuefeng.com/wiki/001434446689867b27157e896e74d51a89c25cc8b43bdb3000/00143449934543461c9d5dfeeb848f5b72bd012e1113d15000" target="_blank" rel="noopener">闭包 —— 廖雪峰</a></li>
+<li>📖 <a href="https://www.jianshu.com/p/796e903754f1" target="_blank" rel="noopener">一次性搞懂 JavaScript 闭包 —— 简书</a></li>
+<li>📖 <a href="https://segmentfault.com/a/1190000006875662" target="_blank" rel="noopener">JavaScript 闭包 —— SegmentFault</a></li>
+<li>📖 <a href="https://juejin.im/entry/5800eb7da22b9d005b36156e" target="_blank" rel="noopener">js 匿名自执行函数中闭包的高级使用 —— 掘金</a></li>
+<li>📖 <a href="https://juejin.im/entry/59df405251882551bf7e58c6" target="_blank" rel="noopener">高效使用 JavaScript 闭包 —— 掘金</a></li>
+<li>📖 <a href="https://www.cnblogs.com/wangfupeng1988/p/3977924.html" target="_blank" rel="noopener">深入理解 JavaScript 原型与闭包 —— 王福朋</a></li>
+</ul>
+<h3 id="视频-5"><a href="#视频-5" class="headerlink" title="视频"></a>视频</h3><ul>
+<li>📺 <a href="http://www.iqiyi.com/w_19rr1amael.html" target="_blank" rel="noopener">JavaScript 闭包和闭包面试题 —— 爱奇艺</a></li>
+<li>📺 <a href="http://www.le.com/ptv/vplay/27478410.html" target="_blank" rel="noopener">js 面向对象闭包数组 11.闭包 —— 乐视</a></li>
+<li>📺 <a href="http://www.le.com/ptv/vplay/30505852.html" target="_blank" rel="noopener">白贺翔_函数(闭包) —— 乐视</a></li>
+</ul>
+<p><strong>⬆️ 返回目录</strong></p>
+<hr>
+<h2 id="9-map-reduce-filter-等高阶函数"><a href="#9-map-reduce-filter-等高阶函数" class="headerlink" title="9. map, reduce, filter 等高阶函数"></a>9. map, reduce, filter 等高阶函数</h2><h3 id="文章-8"><a href="#文章-8" class="headerlink" title="文章"></a>文章</h3><ul>
+<li>📖 <a href="https://www.liaoxuefeng.com/wiki/001434446689867b27157e896e74d51a89c25cc8b43bdb3000/001434499355829ead974e550644e2ebd9fd8bb1b0dd721000" target="_blank" rel="noopener">高阶函数 —— 廖雪峰</a></li>
+<li>📖 <a href="https://www.zhangxinxu.com/wordpress/2013/04/es5新增数组方法/" target="_blank" rel="noopener">ES5 中新增的 Array 方法详细说明 —— 张鑫旭</a></li>
+<li>📖 <a href="https://juejin.im/post/5835808067f3560065ed4ab2" target="_blank" rel="noopener">一张图看懂 JavaScript 中数组的迭代方法：forEach、map、filter、reduce、every、some —— 掘金</a></li>
+<li>📖 <a href="https://segmentfault.com/a/1190000012127329" target="_blank" rel="noopener">Transducing（上）－《JavaScript 轻量级函数式编程》 —— SegmentFault</a></li>
+<li>📖 <a href="https://github.com/BuptStEve/blog/issues/15" target="_blank" rel="noopener">JavaScript 函数式编程（三） —— @BuptStEve</a></li>
+</ul>
+<hr>
+<h2 id="10-表达式和语句"><a href="#10-表达式和语句" class="headerlink" title="10. 表达式和语句"></a>10. 表达式和语句</h2><h3 id="文章-9"><a href="#文章-9" class="headerlink" title="文章"></a>文章</h3><ul>
+<li>📖 <a href="https://www.cnblogs.com/xianshenglu/p/8386918.html" target="_blank" rel="noopener">js 表达式与语句 —— 博客园</a></li>
+<li>📖 <a href="https://segmentfault.com/q/1010000004102804" target="_blank" rel="noopener">JS 表达式和语句的区别 —— SegmentFault</a></li>
+<li>📖 <a href="https://blog.csdn.net/mett_smith/article/details/78761247" target="_blank" rel="noopener">JavaScript 中的表达式（expression）和语句/声明（statement） —— CSDN</a></li>
+<li>📖 <a href="https://segmentfault.com/a/1190000004565693" target="_blank" rel="noopener">重讀 Axel 的 Javascript 中的 Expression vs Statement 一文 —— SegmentFault</a></li>
+<li>📖 <a href="http://2ality.com/2012/09/expressions-vs-statements.html" target="_blank" rel="noopener">Expressions versus statements in JavaScript —— Dr. Axel</a></li>
+</ul>
+<hr>
+<h2 id="11-变量提升"><a href="#11-变量提升" class="headerlink" title="11. 变量提升"></a>11. 变量提升</h2><h3 id="文章-10"><a href="#文章-10" class="headerlink" title="文章"></a>文章</h3><ul>
+<li>📖 <a href="http://www.runoob.com/js/js-hoisting.html" target="_blank" rel="noopener">JavaScript 变量提升 —— 菜鸟教程</a></li>
+<li>📖 <a href="https://juejin.im/post/59905bea6fb9a03c34192c51" target="_blank" rel="noopener">ES6 变量作用域与提升：变量的生命周期详解 —— 掘金</a></li>
+<li>📖 <a href="https://segmentfault.com/a/1190000004345355#articleHeader5" target="_blank" rel="noopener">[翻译] JavaScript Scoping and Hoisting —— SegmentFault</a></li>
+<li>📖 <a href="http://www.adequatelygood.com/JavaScript-Scoping-and-Hoisting.html" target="_blank" rel="noopener">JavaScript Scoping and Hoisting —— Ben Cherry</a></li>
+</ul>
+<hr>
+<h2 id="12-Promise"><a href="#12-Promise" class="headerlink" title="12. Promise"></a>12. Promise</h2><h3 id="文章-11"><a href="#文章-11" class="headerlink" title="文章"></a>文章</h3><ul>
+<li>📖 <a href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Guide/Using_promises" target="_blank" rel="noopener">使用 promises —— MDN</a></li>
+<li>📖 <a href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Promise" target="_blank" rel="noopener">Promise —— MDN</a></li>
+<li>📖 <a href="https://www.liaoxuefeng.com/wiki/001434446689867b27157e896e74d51a89c25cc8b43bdb3000/0014345008539155e93fc16046d4bb7854943814c4f9dc2000" target="_blank" rel="noopener">Promise — 廖雪峰</a></li>
+<li>📖 <a href="https://www.cnblogs.com/rubylouvre/p/3495286.html" target="_blank" rel="noopener">JavaScript Promise：去而复返 —— 司徒正美</a></li>
+<li>📖 <a href="https://developers.google.com/web/fundamentals/primers/promises#_1" target="_blank" rel="noopener">(上面的原文)JavaScript Promise：简介 —— Web Fundamentals</a></li>
+<li>📖 <a href="https://segmentfault.com/a/1190000011813934" target="_blank" rel="noopener">1 分钟读完《10 分钟学会 JavaScript 的 Async/Await》 —— justjavac</a></li>
+<li>📖 <a href="https://juejin.im/entry/56499ae160b2d1404c4f8834" target="_blank" rel="noopener">JavaScript Promise 迷你书（中文版）</a></li>
+<li>📖 <a href="https://www.cnblogs.com/yunfeifei/p/4453690.html" target="_blank" rel="noopener">JavaScript 进阶之路——认识和使用 Promise，重构你的 Js 代码 —— 博客园</a></li>
+</ul>
+<h3 id="视频-6"><a href="#视频-6" class="headerlink" title="视频"></a>视频</h3><ul>
+<li>📺 <a href="https://www.imooc.com/learn/949" target="_blank" rel="noopener">Promise 入门 —— 慕课网</a></li>
+</ul>
+<hr>
+<h2 id="13-立即执行函数-模块化-命名空间"><a href="#13-立即执行函数-模块化-命名空间" class="headerlink" title="13. 立即执行函数, 模块化, 命名空间"></a>13. 立即执行函数, 模块化, 命名空间</h2><h3 id="文章-12"><a href="#文章-12" class="headerlink" title="文章"></a>文章</h3><ul>
+<li>📖 <a href="http://www.ruanyifeng.com/blog/2012/10/javascript_module.html" target="_blank" rel="noopener">Javascript 模块化编程（一）：模块的写法 —— 阮一峰</a></li>
+<li>📖 <a href="https://www.jianshu.com/p/4dbf4a4c8ebb" target="_blank" rel="noopener">javascript 模块化编程-详解立即执行函数表达式 —— 简书</a></li>
+<li>📖 <a href="https://juejin.im/entry/57fee360a22b9d005b1d9ae3" target="_blank" rel="noopener">Javascript 的匿名函数与自执行 —— 掘金</a></li>
+<li>📖 <a href="https://segmentfault.com/a/1190000006966358" target="_blank" rel="noopener">前端模块化——技术选型 —— SegmentFault</a></li>
+<li>📖 <a href="https://segmentfault.com/a/1190000015991869#articleHeader8" target="_blank" rel="noopener">谈谈 Js 前端模块化规范 —— SegmentFault</a></li>
+<li>📖 <a href="http://web.jobbole.com/87534/" target="_blank" rel="noopener">函数声明与函数表达式的区别 —— 伯乐在线</a></li>
+</ul>
+<hr>
+<h2 id="14-递归"><a href="#14-递归" class="headerlink" title="14. 递归"></a>14. 递归</h2><h3 id="文章-13"><a href="#文章-13" class="headerlink" title="文章"></a>文章</h3><ul>
+<li>📖 <a href="https://segmentfault.com/q/1010000003942347" target="_blank" rel="noopener">求解释 js 递归 —— SegmentFault</a></li>
+<li>📖 <a href="https://juejin.im/post/5948c0d8fe88c2006a939e2a" target="_blank" rel="noopener">JavaScript 中的递归 —— 掘金</a></li>
+<li>📖 <a href="https://juejin.im/post/59c1d91d6fb9a00a53275f79" target="_blank" rel="noopener">递归（上）－《JavaScript 轻量级函数式编程》 —— 掘金</a></li>
+<li>📖 <a href="https://juejin.im/post/59c87fb46fb9a00a437b1a2e" target="_blank" rel="noopener">递归（下）－《JavaScript 轻量级函数式编程》 —— 掘金</a></li>
+<li>📖 <a href="https://juejin.im/post/5acdd7486fb9a028ca53547c" target="_blank" rel="noopener">尾调用和尾递归 —— 掘金</a></li>
+<li>📖 <a href="https://blog.csdn.net/qianqianstd/article/details/75807462" target="_blank" rel="noopener">几个经典递归问题用 js 实现 —— CSDN</a></li>
+<li>📖 <a href="https://blog.csdn.net/x_i_xw/article/details/72026868" target="_blank" rel="noopener">递归函数的几个例子 —— CSDN</a></li>
+</ul>
+<hr>
+<h2 id="15-算法"><a href="#15-算法" class="headerlink" title="15. 算法"></a>15. 算法</h2><h3 id="文章-14"><a href="#文章-14" class="headerlink" title="文章"></a>文章</h3><ul>
+<li>📖 <a href="https://segmentfault.com/a/1190000020072884" target="_blank" rel="noopener">前端十大经典算法</a></li>
+<li>📖 <a href="https://juejin.im/post/594dfe795188250d725a220a#comment" target="_blank" rel="noopener">在 JavaScript 中学习数据结构与算法 —— 掘金</a></li>
+<li>📖 <a href="https://juejin.im/post/58c9d5fb1b69e6006b686bce" target="_blank" rel="noopener">JS 中可能用得到的全部的排序算法 —— 掘金</a></li>
+<li>📖 <a href="https://www.jianshu.com/p/1b4068ccd505" target="_blank" rel="noopener">JS 家的排序算法 —— 简书</a></li>
+<li>📖 <a href="https://segmentfault.com/a/1190000008593715" target="_blank" rel="noopener">前端常见算法的 JS 实现 —— SegmentFault</a></li>
+<li>📖 <a href="https://www.jackpu.com/qian-duan-mian-shi-zhong-de-chang-jian-de-suan-fa-wen-ti/" target="_blank" rel="noopener">前端面试中的常见的算法问题 ——蒲小花的博客</a></li>
+</ul>
+<h3 id="视频-7"><a href="#视频-7" class="headerlink" title="视频"></a>视频</h3><ul>
+<li>📺 <a href="https://www.imooc.com/learn/888" target="_blank" rel="noopener">Javascript 实现二叉树算法 —— 慕课网</a></li>
+</ul>
+<hr>
+<h2 id="16-数据结构"><a href="#16-数据结构" class="headerlink" title="16. 数据结构"></a>16. 数据结构</h2><h3 id="文章-15"><a href="#文章-15" class="headerlink" title="文章"></a>文章</h3><ul>
+<li>📖 <a href="https://www.jianshu.com/p/5e0e8d183102" target="_blank" rel="noopener">来我们浅谈一下 js 的数据结构 —— 简书</a></li>
+<li>📖 <a href="https://www.jianshu.com/nb/16835496" target="_blank" rel="noopener">JavaScript 中的算法与数据结构 —— 简书</a></li>
+<li>📖 <a href="http://blog.sina.com.cn/s/blog_7b9c5e4101017mjt.html" target="_blank" rel="noopener">学 JS 必看-JavaScript 数据结构深度剖析 —— 大道至简的博客</a></li>
+<li>📖 <a href="https://juejin.im/entry/586effe0da2f600053d85a9a" target="_blank" rel="noopener">js 中基础数据结构数组去重问题 —— 掘金</a></li>
+</ul>
+<h3 id="视频-8"><a href="#视频-8" class="headerlink" title="视频"></a>视频</h3><ul>
+<li>📺 📺 <a href="http://www.le.com/ptv/vplay/27606964.html" target="_blank" rel="noopener">JavaScript 数据结构-运算符 —— 乐视</a></li>
+</ul>
+<hr>
+<h2 id="17-消息队列和事件循环"><a href="#17-消息队列和事件循环" class="headerlink" title="17. 消息队列和事件循环"></a>17. 消息队列和事件循环</h2><h3 id="文章-16"><a href="#文章-16" class="headerlink" title="文章"></a>文章</h3><ul>
+<li>📖 <a href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/EventLoop" target="_blank" rel="noopener">并发模型与事件循环 —— MDN</a></li>
+<li>📖 <a href="http://www.ruanyifeng.com/blog/2014/10/event-loop.html" target="_blank" rel="noopener">JavaScript 运行机制详解：再谈 Event Loop —— 阮一峰</a></li>
+<li>📖 <a href="https://www.cnblogs.com/dong-xu/p/7000163.html" target="_blank" rel="noopener">深入理解 JavaScript 事件循环 —— 博客园</a></li>
+<li>📖 <a href="https://zhuanlan.zhihu.com/p/26229293" target="_blank" rel="noopener">深入浅出 Javascript 事件循环机制 —— 知乎</a></li>
+<li>📖 <a href="https://segmentfault.com/a/1190000014940904#articleHeader7" target="_blank" rel="noopener">JS 事件循环机制（event loop）之宏任务、微任务 —— SegmentFault</a></li>
+<li>📖 <a href="https://segmentfault.com/a/1190000004322358" target="_blank" rel="noopener">JavaScript：彻底理解同步、异步和事件循环 —— SegmentFault</a></li>
+<li>📖 <a href="https://juejin.im/post/5a6547d0f265da3e283a1df7" target="_blank" rel="noopener">从浏览器多进程到 JS 单线程，JS 运行机制最全面的一次梳理 —— 掘金</a></li>
+</ul>
+<hr>
+<h2 id="18-setTimeout-setInterval-和-requestAnimationFrame"><a href="#18-setTimeout-setInterval-和-requestAnimationFrame" class="headerlink" title="18. setTimeout, setInterval 和 requestAnimationFrame"></a>18. setTimeout, setInterval 和 requestAnimationFrame</h2><h3 id="文章-17"><a href="#文章-17" class="headerlink" title="文章"></a>文章</h3><ul>
+<li>📖 <a href="http://www.runoob.com/jsref/met-win-settimeout.html" target="_blank" rel="noopener">Window setTimeout() 方法 —— 菜鸟教程</a></li>
+<li>📖 <a href="http://www.runoob.com/jsref/met-win-setinterval.html" target="_blank" rel="noopener">Window setInterval() 方法 —— 菜鸟教程</a></li>
+<li>📖 <a href="https://juejin.im/post/5aa4c47af265da239866e236" target="_blank" rel="noopener">关于 setTimeout —— 掘金</a></li>
+<li>📖 <a href="https://juejin.im/post/5a77f8ce5188257a6d635d76" target="_blank" rel="noopener">你不知道的 Javascript：有趣的 setTimeout —— 掘金</a></li>
+<li>📖 <a href="https://juejin.im/entry/5861ebf01b69e6006ce61d38" target="_blank" rel="noopener">原来你是这样的 setTimeout —— 掘金</a></li>
+<li>📖 <a href="https://segmentfault.com/q/1010000005989491" target="_blank" rel="noopener">setTimeout() 和 setInterval() 本质区别在哪里？ —— SegmentFault</a></li>
+<li>book: <a href="https://developer.mozilla.org/zh-CN/docs/Web/API/Window/requestAnimationFrame" target="_blank" rel="noopener">window.requestAnimationFrame —— MDN</a></li>
+<li>📖 <a href="http://www.cnblogs.com/onepixel/p/7078617.html" target="_blank" rel="noopener">requestAnimationFrame 知多少？ —— 博客园</a></li>
+<li>📖 <a href="https://www.zhangxinxu.com/wordpress/2013/09/css3-animation-requestanimationframe-tween-动画算法/" target="_blank" rel="noopener">CSS3 动画那么强，requestAnimationFrame 还有毛线用？ —— 张鑫旭</a></li>
+<li>📖 <a href="https://segmentfault.com/a/1190000014661035" target="_blank" rel="noopener">「JavaScript 定时器」setInterval、setTimeout 和 requestAnimationFrame 浅析 —— SegmentFault</a></li>
+<li>📖 <a href="https://segmentfault.com/a/1190000000386368" target="_blank" rel="noopener">翻译：setInterval 与 requestAnimationFrame 的时间间隔测试 —— SegmentFault</a></li>
+<li>📖 <a href="https://segmentfault.com/q/1010000013909430" target="_blank" rel="noopener">阿里前端面试题：requestAnimationFrame 实现类似 setInterval 的计时器 —— SegmentFault</a></li>
+</ul>
+<h3 id="视频-9"><a href="#视频-9" class="headerlink" title="视频"></a>视频</h3><ul>
+<li>📺 <a href="http://v.youku.com/v_show/id_XNTA4OTQ0NzA0.html" target="_blank" rel="noopener">setTimeout 和 setInterval —— 优酷</a></li>
+</ul>
+<hr>
+<h2 id="19-继承-多态和代码复用"><a href="#19-继承-多态和代码复用" class="headerlink" title="19. 继承, 多态和代码复用"></a>19. 继承, 多态和代码复用</h2><h3 id="文章-18"><a href="#文章-18" class="headerlink" title="文章"></a>文章</h3><ul>
+<li>📖 <a href="https://www.cnblogs.com/Leo_wl/p/5734794.html" target="_blank" rel="noopener">JS 面向对象编程之：封装、继承、多态 —— 博客园</a></li>
+<li>📖 <a href="https://www.jianshu.com/p/5cb692658704" target="_blank" rel="noopener">Javascript 的继承与多态 —— 简书</a></li>
+<li>📖 <a href="https://juejin.im/post/59396c96fe88c2006afc2707" target="_blank" rel="noopener">js:面向对象编程，带你认识封装、继承和多态 —— 掘金</a></li>
+<li>📖 <a href="https://zhuanlan.zhihu.com/p/34693209" target="_blank" rel="noopener">JavaScript 中的“多继承” —— 掘金</a></li>
+<li>📖 <a href="https://github.com/TooBug/javascript.patterns/blob/master/chapter6.markdown" target="_blank" rel="noopener">代码复用模式 —— github</a></li>
+<li>📖 <a href="http://www.cnblogs.com/TomXu/archive/2012/04/24/2438050.html" target="_blank" rel="noopener">深入理解 JavaScript：代码复用模式(推荐篇) —— 汤姆大叔</a></li>
+<li>📖 <a href="https://www.cnblogs.com/TomXu/archive/2012/04/23/2438005.html" target="_blank" rel="noopener">深入理解 JavaScript：代码复用模式(避免篇) —— 汤姆大叔</a></li>
+</ul>
+<p><strong>⬆️ 返回目录</strong></p>
+<hr>
+<h2 id="20-按位操作符-类数组对象和类型化数组"><a href="#20-按位操作符-类数组对象和类型化数组" class="headerlink" title="20. 按位操作符, 类数组对象和类型化数组"></a>20. 按位操作符, 类数组对象和类型化数组</h2><h3 id="文章-19"><a href="#文章-19" class="headerlink" title="文章"></a>文章</h3><ul>
+<li>📖 <a href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Operators/Bitwise_Operators" target="_blank" rel="noopener">按位操作符 —— MDN</a></li>
+<li>📖 <a href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Typed_arrays" target="_blank" rel="noopener">类数组对象 —— MDN</a></li>
+<li>📖 <a href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/ArrayBuffer" target="_blank" rel="noopener">类型化数组 —— MDN</a></li>
+<li>📖 <a href="https://www.cnblogs.com/gradolabs/p/4762134.html" target="_blank" rel="noopener">JavaScript ArrayBuffer 浅析 —— 博客园</a></li>
+</ul>
+<hr>
+<h2 id="21-DOM-树和渲染过程"><a href="#21-DOM-树和渲染过程" class="headerlink" title="21. DOM 树和渲染过程"></a>21. DOM 树和渲染过程</h2><h3 id="文章-20"><a href="#文章-20" class="headerlink" title="文章"></a>文章</h3><ul>
+<li>📖 <a href="https://developer.mozilla.org/zh-CN/docs/Web/API/Document_Object_Model/How_to_create_a_DOM_tree" target="_blank" rel="noopener">如何创建一个 DOM 树 —— MDN</a></li>
+<li>📖 <a href="http://www.w3school.com.cn/htmldom/dom_nodes.asp" target="_blank" rel="noopener">HTML DOM 节点 —— W3school</a></li>
+<li>📖 <a href="http://javascript.ruanyifeng.com/dom/node.html" target="_blank" rel="noopener">DOM 概述 —— 阮一峰</a></li>
+<li>📖 <a href="https://juejin.im/post/583cbbfa61ff4b006ccc41fe" target="_blank" rel="noopener">《JavaScript 闯关记》之 DOM（上）—— 掘金</a></li>
+<li>📖 <a href="https://juejin.im/post/583cbc4961ff4b006ccc44fb" target="_blank" rel="noopener">《JavaScript 闯关记》之 DOM（下）—— 掘金</a></li>
+<li>📖 <a href="https://juejin.im/entry/58314efd8ac2470061bb30fd" target="_blank" rel="noopener">掌握 DOM 操作 —— 掘金</a></li>
+<li>📖 <a href="https://www.liaoxuefeng.com/wiki/001434446689867b27157e896e74d51a89c25cc8b43bdb3000/001434500494451273e6b3dec9d411d9ba841dee8caec45000" target="_blank" rel="noopener">操作 DOM —— 廖雪峰</a></li>
+<li>📖 <a href="https://juejin.im/post/59c60691518825396f4f71a1" target="_blank" rel="noopener">原来 CSS 与 JS 是这样阻塞 DOM 解析和渲染的 —— 掘金</a></li>
+</ul>
+<h3 id="视频-10"><a href="#视频-10" class="headerlink" title="视频"></a>视频</h3><ul>
+<li>📺 <a href="https://www.imooc.com/learn/488" target="_blank" rel="noopener">DOM 探索之基础详解篇 —— 慕课网</a></li>
+<li>📺 <a href="https://www.imooc.com/learn/138" target="_blank" rel="noopener">DOM 事件探秘 —— 慕课网</a></li>
+<li>📺 <a href="https://www.imooc.com/learn/530" target="_blank" rel="noopener">jQuery 基础(二)DOM 篇 —— 慕课网</a></li>
+<li>📺 <a href="http://www.iqiyi.com/w_19rr19s08l.html" target="_blank" rel="noopener">JS 操作 DOM 对象属性和方法 —— 爱奇艺</a></li>
+</ul>
+<hr>
+<h2 id="22-new-与构造函数-instanceof-与实例"><a href="#22-new-与构造函数-instanceof-与实例" class="headerlink" title="22. new 与构造函数, instanceof 与实例"></a>22. new 与构造函数, instanceof 与实例</h2><h3 id="文章-21"><a href="#文章-21" class="headerlink" title="文章"></a>文章</h3><ul>
+<li>📖 <a href="http://javascript.ruanyifeng.com/oop/basic.html" target="_blank" rel="noopener">构造函数与 new 命令 —— 阮一峰</a></li>
+<li>📖 <a href="http://www.ruanyifeng.com/blog/2010/05/object-oriented_javascript_inheritance.html" target="_blank" rel="noopener">Javascript 面向对象编程（二）：构造函数的继承 —— 阮一峰</a></li>
+<li>📖 <a href="https://blog.csdn.net/SpicyBoiledFish/article/details/71123162" target="_blank" rel="noopener">完整原型链详细图解(构造函数、原型、实例化对象) —— CSDN</a></li>
+<li>📖 <a href="http://www.php.cn/js-tutorial-376246.html" target="_blank" rel="noopener">JavaScript 中构造函数与 new 操作符的实例详解 —— PHP 中文网</a></li>
+<li>📖 <a href="https://blog.csdn.net/yin_991/article/details/80954453" target="_blank" rel="noopener">构造函数、实例、原型、原型链之间的关系 —— CSDN</a></li>
+<li>📖 <a href="https://blog.csdn.net/cecilia620/article/details/71158048" target="_blank" rel="noopener">深入理解 JS—instanceof 和原型链 —— CSDN</a></li>
+<li>📖 <a href="https://www.jianshu.com/p/15ac7393bc1f" target="_blank" rel="noopener">前端基础进阶（九）：详解面向对象、构造函数、原型与原型链 —— 简书</a></li>
+<li>📖 <a href="https://www.jianshu.com/p/60ffc4831bff" target="_blank" rel="noopener">js 用 new 实例化对象与直接调用的 this 的区别 —— 简书</a></li>
+<li>📖 <a href="http://justjavac.com/javascript/2012/12/22/javascript-values-not-everything-is-an-object.html" target="_blank" rel="noopener">JavaScript 并非所有的东西都是对象 —— justjavac</a></li>
+<li>📖 <a href="https://www.ibm.com/developerworks/cn/web/1306_jiangjj_jsinstanceof/" target="_blank" rel="noopener">JavaScript instanceof 运算符深入剖析 —— IBM</a></li>
+</ul>
+<h3 id="视频-11"><a href="#视频-11" class="headerlink" title="视频"></a>视频</h3><ul>
+<li>📺 <a href="http://www.le.com/ptv/vplay/27766889.html" target="_blank" rel="noopener">改良版的构造函数 —— 乐视</a></li>
+</ul>
+<hr>
+<h2 id="23-原型继承与原型链"><a href="#23-原型继承与原型链" class="headerlink" title="23. 原型继承与原型链"></a>23. 原型继承与原型链</h2><h3 id="文章-22"><a href="#文章-22" class="headerlink" title="文章"></a>文章</h3><ul>
+<li>📖 <a href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Inheritance_and_the_prototype_chain" target="_blank" rel="noopener">继承与原型链 —— MDN</a></li>
+<li>📖 <a href="https://github.com/bigdots/blog/issues/1" target="_blank" rel="noopener">构造函数、原型与原型链 —— github</a></li>
+<li>📖 <a href="https://github.com/stone0090/javascript-lessons/tree/master/2.5-Prototype" target="_blank" rel="noopener">原型及原型链 —— github(1269 Star)</a></li>
+<li>📖 <a href="https://segmentfault.com/a/1190000004282206" target="_blank" rel="noopener">理清 javascript 中的面向对象(一) 原型继承 —— SegmentFault</a></li>
+<li>📖 <a href="http://justjavac.com/2015/12/09/inheritance-and-the-prototype-chain.html" target="_blank" rel="noopener">JavaScript：继承和原型链(译) —— justjavac</a></li>
+<li>📖 <a href="http://www.cnblogs.com/shuiyi/p/5305435.html" target="_blank" rel="noopener">三张图搞懂 JavaScript 的原型对象与原型链 —— 博客园</a></li>
+<li>📖 <a href="https://blog.csdn.net/the__apollo/article/details/76774698" target="_blank" rel="noopener">一张图让你搞懂 JavaScript 的继承与原型链 —— CSDN</a></li>
+<li>📖 <a href="https://blog.csdn.net/xiaotao_css/article/details/72782416" target="_blank" rel="noopener">JS 高级–原型链(一看就懂，但 18 岁以下请绕道) —— CSDN</a></li>
+<li>📖 <a href="https://www.liaoxuefeng.com/wiki/001434446689867b27157e896e74d51a89c25cc8b43bdb3000/0014344997013405abfb7f0e1904a04ba6898a384b1e925000" target="_blank" rel="noopener">原型继承 —— 廖雪峰</a></li>
+<li>📖 <a href="https://juejin.im/post/58f94c9bb123db411953691b" target="_blank" rel="noopener">JS 原型链与继承别再被问倒了 —— 掘金</a></li>
+<li>📖 <a href="https://juejin.im/entry/5885db221b69e600592253e7" target="_blank" rel="noopener">征服 JavaScript 面试系列：类继承和原型继承的区别 —— 掘金</a></li>
+<li>📖 <a href="https://github.com/mqyqingfeng/Blog/issues/2" target="_blank" rel="noopener">JavaScript 深入之从原型到原型链 —— 冴羽</a></li>
+<li>📖 <a href="https://www.cnblogs.com/wangfupeng1988/p/3977924.html" target="_blank" rel="noopener">深入理解 JavaScript 原型与闭包 —— 王福朋</a></li>
+</ul>
+<h3 id="视频-12"><a href="#视频-12" class="headerlink" title="视频"></a>视频</h3><ul>
+<li>📺 <a href="http://www.le.com/ptv/vplay/27552753.html" target="_blank" rel="noopener">JS 高级-07-原型链继承 —— 乐视</a></li>
+<li>📺 <a href="https://v.qq.com/x/page/b0511nwa7d3.html" target="_blank" rel="noopener">JS 原型对象和原型链简介 —— 腾讯视频</a></li>
+</ul>
+<hr>
+<h2 id="24-Object-create-和-Object-assign"><a href="#24-Object-create-和-Object-assign" class="headerlink" title="24. Object.create 和 Object.assign"></a>24. Object.create 和 Object.assign</h2><h3 id="文章-23"><a href="#文章-23" class="headerlink" title="文章"></a>文章</h3><ul>
+<li>📖 <a href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Object/create" target="_blank" rel="noopener">Object.create —— MDN</a></li>
+<li>📖 <a href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Object/assign" target="_blank" rel="noopener">Object.assign —— MDN</a></li>
+<li>📖 <a href="https://www.imooc.com/article/17591" target="_blank" rel="noopener">Object.create vs Object.assign —— 慕课网手记</a></li>
+<li>📖 <a href="https://blog.csdn.net/DeepLies/article/details/52915143" target="_blank" rel="noopener">JS 中的 Object.assign()、Object.create()、Object.defineProperty() —— CSDN</a></li>
+<li>📖 <a href="http://www.onlyfordream.cn/2018/03/19/es6中object-create和object-assign/" target="_blank" rel="noopener">es6 中 object.create()和 object.assign() —— 风信子博客</a></li>
+<li>📖 <a href="https://github.com/saikojosh/Object-Assign-Deep" target="_blank" rel="noopener">Object-Assign-Deep —— github</a></li>
+</ul>
+<hr>
+<h2 id="25-工厂函数和类"><a href="#25-工厂函数和类" class="headerlink" title="25. 工厂函数和类"></a>25. 工厂函数和类</h2><h3 id="文章-24"><a href="#文章-24" class="headerlink" title="文章"></a>文章</h3><ul>
+<li>📖 <a href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Classes" target="_blank" rel="noopener">类 —— MDN</a></li>
+<li>📖 <a href="https://www.liaoxuefeng.com/wiki/001374738125095c955c1e6d8bb493182103fac9270762a000/00138682004077376d2d7f8cc8a4e2c9982f92788588322000" target="_blank" rel="noopener">类和实例 —— 廖雪峰</a></li>
+<li>📖 <a href="http://www.ruanyifeng.com/blog/2012/07/three_ways_to_define_a_javascript_class.html" target="_blank" rel="noopener">Javascript 定义类（class）的三种方法 —— 阮一峰</a></li>
+<li>📖 <a href="https://juejin.im/post/59c8c8756fb9a00a681ae5bd" target="_blank" rel="noopener">【译】ES6 的工厂函数 —— 掘金</a></li>
+<li>📖 <a href="https://juejin.im/entry/587992c961ff4b0065edf1ff" target="_blank" rel="noopener">JavaScript 创建对象之单例、工厂、构造函数模式 —— 掘金</a></li>
+</ul>
+<hr>
+<h2 id="26-设计模式"><a href="#26-设计模式" class="headerlink" title="26. 设计模式"></a>26. 设计模式</h2><h3 id="文章-25"><a href="#文章-25" class="headerlink" title="文章"></a>文章</h3><ul>
+<li>📖 <a href="https://juejin.im/post/59df4f74f265da430f311909" target="_blank" rel="noopener">JavaScript 设计模式 —— 掘金</a></li>
+<li>📖 <a href="http://wiki.jikexueyuan.com/project/javascript-design-patterns/" target="_blank" rel="noopener">学用 JavaScript 设计模式 —— 极客学院</a></li>
+<li>📖 <a href="https://segmentfault.com/a/1190000010914032" target="_blank" rel="noopener">[面试专题]JS 设计模式 —— SegmentFault</a></li>
+<li>📖 <a href="https://github.com/lxj/javascript.patterns" target="_blank" rel="noopener">JavaScript Patterns 中译本 —— github</a></li>
+</ul>
+<h3 id="视频-13"><a href="#视频-13" class="headerlink" title="视频"></a>视频</h3><ul>
+<li>📺 <a href="https://tv.sohu.com/v/dXMvMjQwNzYwNzQ4Lzg5NzM2MDA3LnNodG1s.html" target="_blank" rel="noopener">HTML5 课程大纲 2-11JS 设计模式</a></li>
+</ul>
+<hr>
+<h2 id="27-Memoization"><a href="#27-Memoization" class="headerlink" title="27. Memoization"></a>27. Memoization</h2><h3 id="文章-26"><a href="#文章-26" class="headerlink" title="文章"></a>文章</h3><ul>
+<li>📖 <a href="https://www.cnblogs.com/rubylouvre/archive/2009/08/06/1540678.html" target="_blank" rel="noopener">JavaScript Memoization —— 司徒正美</a></li>
+<li>📖 <a href="https://www.cnblogs.com/yingshuizy/p/4517102.html" target="_blank" rel="noopener">memoization 提升递归效率 —— 博客园</a></li>
+<li>📖 <a href="http://developer.51cto.com/art/201010/231513.htm" target="_blank" rel="noopener">如何提升 JavaScript 的递归效率 —— 51CTO</a></li>
+<li>📖 <a href="https://segmentfault.com/a/1190000016703106" target="_blank" rel="noopener">JavaScript 高级技巧 Memoization —— SegmentFaut</a></li>
+</ul>
+<hr>
+<h2 id="28-纯函数-函数副作用和状态变化"><a href="#28-纯函数-函数副作用和状态变化" class="headerlink" title="28. 纯函数, 函数副作用和状态变化"></a>28. 纯函数, 函数副作用和状态变化</h2><h3 id="文章-27"><a href="#文章-27" class="headerlink" title="文章"></a>文章</h3><ul>
+<li>📖 <a href="http://huziketang.mangojuice.top/books/react/lesson32" target="_blank" rel="noopener">纯函数(Pure Function) —— React.js 小书</a></li>
+<li>📖 <a href="https://ninghao.net/blog/4634" target="_blank" rel="noopener">JavaScript Functional Programming：纯函数 —— 宁皓网</a></li>
+<li>📖 <a href="https://www.jb51.net/article/28079.htm" target="_blank" rel="noopener">js 函数的副作用分析 —— 脚本之家</a></li>
+<li>📖 <a href="https://juejin.im/post/5b82bdb351882542e241ed32?utm_medium=hao.caibaojian.com&utm_source=hao.caibaojian.com" target="_blank" rel="noopener">如何使用纯函数式 JavaScript 处理脏副作用 —— 掘金</a></li>
+<li>📖 <a href="http://www.cnblogs.com/zhangycun/p/9403335.html" target="_blank" rel="noopener">原生 JavaScript 实现 state 状态管理系统 —— 博客园</a></li>
+<li>📖 <a href="https://github.com/BuptStEve/blog/issues/10" target="_blank" rel="noopener">JavaScript 函数式编程 —— @BuptStEve</a></li>
+</ul>
+<hr>
+<h2 id="29-耗性能操作和时间复杂度"><a href="#29-耗性能操作和时间复杂度" class="headerlink" title="29. 耗性能操作和时间复杂度"></a>29. 耗性能操作和时间复杂度</h2><h3 id="文章-28"><a href="#文章-28" class="headerlink" title="文章"></a>文章</h3><ul>
+<li>📖 <a href="https://juejin.im/entry/593f56528d6d810058a355f4" target="_blank" rel="noopener">时间复杂度 O(log n) 意味着什么？ —— 掘金</a></li>
+<li>📖 <a href="https://juejin.im/entry/5a49f7d36fb9a0450a67b269" target="_blank" rel="noopener">算法的时间复杂度和空间复杂度 —— 掘金</a></li>
+<li>📖 <a href="https://juejin.im/post/58d15f1044d90400691834d4" target="_blank" rel="noopener">算法（一）时间复杂度 —— 掘金</a></li>
+<li>📖 <a href="http://www.bradoncode.com/blog/2012/04/big-o-algorithm-examples-in-javascript.html" target="_blank" rel="noopener">Big O Search Algorithms in JavaScript —— Bradley Braithwaite</a></li>
+<li>📖 <a href="https://www.jenniferbland.com/time-complexity-analysis-in-javascript/" target="_blank" rel="noopener">Time Complexity Analysis in JavaScript — Jennifer Bland</a></li>
+</ul>
+<hr>
+<h2 id="30-JavaScript-引擎"><a href="#30-JavaScript-引擎" class="headerlink" title="30. JavaScript 引擎"></a>30. JavaScript 引擎</h2><h3 id="文章-29"><a href="#文章-29" class="headerlink" title="文章"></a>文章</h3><ul>
+<li>📖 <a href="https://baike.baidu.com/item/javascript引擎/5356108" target="_blank" rel="noopener">javascript 引擎 —— 百度百科</a></li>
+<li>📖 <a href="https://baike.baidu.com/item/V8/6178125" target="_blank" rel="noopener">V8(JavaScript 引擎) —— 百度百科</a></li>
+<li>📖 <a href="https://juejin.im/post/5a6309f76fb9a01cab2858b1" target="_blank" rel="noopener">图解搞懂 JavaScript 引擎 Event Loop —— 掘金</a>3</li>
+<li>📖 <a href="https://segmentfault.com/a/1190000010819020" target="_blank" rel="noopener">V8 JavaScript 引擎：高性能的 ES2015+ —— justjavac</a></li>
+<li>📖 <a href="https://segmentfault.com/a/1190000012806637" target="_blank" rel="noopener">10 分钟理解 JS 引擎的执行机制 —— SegmentFaut</a></li>
+<li>📖 <a href="https://www.cnblogs.com/weirdoQi/p/6609811.html" target="_blank" rel="noopener">V8 javascript 引擎 —— 博客园</a></li>
+</ul>
+<hr>
+<h2 id="31-二进制-十六进制-十进制-科学记数法"><a href="#31-二进制-十六进制-十进制-科学记数法" class="headerlink" title="31. 二进制, 十六进制, 十进制, 科学记数法"></a>31. 二进制, 十六进制, 十进制, 科学记数法</h2><h3 id="文章-30"><a href="#文章-30" class="headerlink" title="文章"></a>文章</h3><ul>
+<li>📖 <a href="http://www.cnblogs.com/gaizai/p/4233780.html" target="_blank" rel="noopener">二、八、十、十六进制转换(图解篇) —— 博客园</a></li>
+<li>📖 <a href="https://juejin.im/post/5b93dadaf265da0a857a58a3" target="_blank" rel="noopener">JavaScript 读写二进制数据 —— 掘金</a></li>
+</ul>
+<h3 id="视频-14"><a href="#视频-14" class="headerlink" title="视频"></a>视频</h3><ul>
+<li>📺 <a href="http://baishi.baidu.com/watch/7873060963471478456.html" target="_blank" rel="noopener">二进制、十进制、十六进制互相转化很难吗？ —— 百度视频</a></li>
+</ul>
+<hr>
+<h2 id="32-偏函数-柯里化-Compose-和-Pipe"><a href="#32-偏函数-柯里化-Compose-和-Pipe" class="headerlink" title="32. 偏函数, 柯里化, Compose 和 Pipe"></a>32. 偏函数, 柯里化, Compose 和 Pipe</h2><h3 id="文章-31"><a href="#文章-31" class="headerlink" title="文章"></a>文章</h3><ul>
+<li>📖 <a href="https://blog.csdn.net/qq_42129063/article/details/81874314" target="_blank" rel="noopener">Javascript 函数式编程之偏函数 —— CSDN</a></li>
+<li>📖 <a href="https://segmentfault.com/a/1190000010686144" target="_blank" rel="noopener">JavaScript 专题之偏函数 —— SegmentFault</a></li>
+<li>📖 <a href="https://segmentfault.com/q/1010000008626058" target="_blank" rel="noopener">柯里化和偏函数有什么区别？ —— SegmentFault</a></li>
+<li>📖 <a href="https://blog.csdn.net/neweastsun/article/details/75947785" target="_blank" rel="noopener">Javascript 偏函数与柯里化 —— CSDN</a></li>
+<li>📖 <a href="https://llh911001.gitbooks.io/mostly-adequate-guide-chinese/content/ch4.html" target="_blank" rel="noopener">柯里化(curry) —— JS 函数式编程指南</a></li>
+<li>📖 <a href="https://llh911001.gitbooks.io/mostly-adequate-guide-chinese/content/ch5.html" target="_blank" rel="noopener">代码组合(compose) —— JS 函数式编程指南</a></li>
+<li>📖 <a href="https://segmentfault.com/a/1190000008394749" target="_blank" rel="noopener">关于 javascript 函数式编程中 compose 的实现 —— SegmentFault</a></li>
+<li>📖 <a href="https://segmentfault.com/a/1190000011447164" target="_blank" rel="noopener">实现 compose 的五种思路 —— SegmentFault</a></li>
+<li>📖 <a href="https://segmentfault.com/a/1190000015102804" target="_blank" rel="noopener">JavaScript 函数式编程之函数组合函数 compose 和 pipe 的实现 —— SegmentFault</a></li>
+<li>📖 <a href="https://juejin.im/post/59a62f3d6fb9a0248363fd9d#comment" target="_blank" rel="noopener">JavaScript 轻量级函数式编程-第 4 章:组合函数 ——掘金</a></li>
+<li>📖 <a href="https://github.com/BuptStEve/blog/issues/11" target="_blank" rel="noopener">JavaScript 函数式编程（二） —— @BuptStEve</a></li>
+</ul>
+<hr>
+<h2 id="33-代码整洁之道"><a href="#33-代码整洁之道" class="headerlink" title="33. 代码整洁之道"></a>33. 代码整洁之道</h2><h3 id="文章-32"><a href="#文章-32" class="headerlink" title="文章"></a>文章</h3><ul>
+<li>📖 <a href="https://www.zcfy.cc/article/clean-code-javascript-readme-md-at-master-ryanmcdermott-clean-code-javascript-github-2273.html" target="_blank" rel="noopener">[译] JavaScript 代码整洁之道 —— 边城</a></li>
+<li>📖 <a href="http://www.ruanyifeng.com/blog/2012/04/javascript_programming_style.html" target="_blank" rel="noopener">Javascript 编程风格 —— 阮一峰</a></li>
+<li>📖 <a href="https://juejin.im/post/5a5b2a5c6fb9a01cbc6e59f9" target="_blank" rel="noopener">重构 - 代码整洁之道 —— 掘金</a></li>
+<li>📖 <a href="https://juejin.im/post/5a7d71836fb9a063435ecf51" target="_blank" rel="noopener">让你的代码更简短，更整洁，更易读的 ES6 小技巧 —— 掘金</a></li>
+<li>📖 <a href="http://blog.jobbole.com/23617/" target="_blank" rel="noopener">Web 前端：11 个让你代码整洁的原则 —— 伯乐在线</a></li>
+<li>📖 <a href="https://github.com/ryanmcdermott/clean-code-javascript" target="_blank" rel="noopener">Clean Code concepts adapted for JavaScript —— ryanmcdermott</a></li>
+</ul>
+
+            </div>
+            <hr/>
+
+            
+            <style>
+    #reward {
+        margin: 40px 0;
+        text-align: center;
+    }
+
+    #reward .reward-link {
+        font-size: 1.88rem;
+    }
+
+    #reward .btn-floating:hover {
+        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2), 0 5px 15px rgba(0, 0, 0, 0.2);
+    }
+
+    #rewardModal {
+        width: 320px;
+        height: 350px;
+    }
+
+    #rewardModal .reward-title {
+        margin: 15px auto;
+        padding-bottom: 5px;
+    }
+
+    #rewardModal .modal-content {
+        padding: 10px;
+    }
+
+    #rewardModal .close {
+        position: absolute;
+        right: 15px;
+        top: 15px;
+        color: rgba(0, 0, 0, 0.5);
+        font-size: 1.3rem;
+        line-height: 20px;
+        cursor: pointer;
+    }
+
+    #rewardModal .close:hover {
+        color: #ef5350;
+        transform: scale(1.3);
+        -moz-transform:scale(1.3);
+        -webkit-transform:scale(1.3);
+        -o-transform:scale(1.3);
+    }
+
+    #rewardModal .reward-tabs {
+        margin: 0 auto;
+        width: 210px;
+    }
+
+    .reward-tabs .tabs {
+        height: 38px;
+        margin: 10px auto;
+        padding-left: 0;
+    }
+
+    .reward-content ul {
+        padding-left: 0 !important;
+    }
+
+    .reward-tabs .tabs .tab {
+        height: 38px;
+        line-height: 38px;
+    }
+
+    .reward-tabs .tab a {
+        color: #fff;
+        background-color: #ccc;
+    }
+
+    .reward-tabs .tab a:hover {
+        background-color: #ccc;
+        color: #fff;
+    }
+
+    .reward-tabs .wechat-tab .active {
+        color: #fff !important;
+        background-color: #22AB38 !important;
+    }
+
+    .reward-tabs .alipay-tab .active {
+        color: #fff !important;
+        background-color: #019FE8 !important;
+    }
+
+    .reward-tabs .reward-img {
+        width: 210px;
+        height: 210px;
+    }
+</style>
+
+<div id="reward">
+    <a href="#rewardModal" class="reward-link modal-trigger btn-floating btn-large waves-effect waves-light red">赏</a>
+
+    <!-- Modal Structure -->
+    <div id="rewardModal" class="modal">
+        <div class="modal-content">
+            <a class="close modal-close"><i class="fa fa-close"></i></a>
+            <h4 class="reward-title">你的赏识是我前进的动力</h4>
+            <div class="reward-content">
+                <div class="reward-tabs">
+                    <ul class="tabs row">
+                        <li class="tab col s6 alipay-tab waves-effect waves-light"><a href="#alipay">支付宝</a></li>
+                        <li class="tab col s6 wechat-tab waves-effect waves-light"><a href="#wechat">微 信</a></li>
+                    </ul>
+                    <div id="alipay">
+                        <img src="/medias/reward/alipay.jpg" class="reward-img" alt="支付宝打赏二维码">
+                    </div>
+                    <div id="wechat">
+                        <img src="/medias/reward/wechat.png" class="reward-img" alt="微信打赏二维码">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    $(function () {
+        $('.tabs').tabs();
+    });
+</script>
+            
+
+            <link rel="stylesheet" type="text/css" href="/libs/share/css/share.min.css">
+
+<div id="article-share">
+    
+    <div class="social-share" data-disabled="qzone" data-wechat-qrcode-helper="<p>微信里点“发现”->“扫一扫”二维码便可查看分享。</p>"></div>
+    
+</div>
+
+<script src="/libs/share/js/social-share.min.js"></script>
+
+            
+
+    <div class="reprint" id="reprint-statement">
+        <p class="reprint-tip">
+            <i class="fa fa-exclamation-triangle"></i>&nbsp;&nbsp;
+            <span>转载规则</span>
+        </p>
+        
+            <div class="center-align">
+                <a rel="license" href="https://creativecommons.org/licenses/by/4.0/deed.zh">
+                    <img alt=""
+                         style="border-width:0"
+                         src="https://i.creativecommons.org/l/by/4.0/88x31.png"/>
+                </a>
+            </div>
+            <br/>
+            <span xmlns:dct="http://purl.org/dc/terms/" href="http://purl.org/dc/dcmitype/Text"
+                  property="dct:title" rel="dct:type">
+                    《前端开发JavaScript你必须懂得的33个概念》
+                </span> 由
+            <a xmlns:cc="http://creativecommons.org/ns#" href="/2019/09/12/jsidea/" property="cc:attributionName"
+               rel="cc:attributionURL">
+                浅夏晴空
+            </a> 采用
+            <a rel="license" href="https://creativecommons.org/licenses/by/4.0/deed.zh">
+                知识共享署名 4.0 国际许可协议
+            </a>进行许可。
+        
+    </div>
+
+    <script async defer>
+      document.addEventListener("copy", function (e) {
+        let toastHTML = '<span>复制成功，请遵循本文的转载规则</span><button class="btn-flat toast-action" onclick="navToReprintStatement()" style="font-size: smaller">查看</a>';
+        M.toast({html: toastHTML})
+      });
+
+      function navToReprintStatement() {
+        $("html, body").animate({scrollTop: $("#reprint-statement").offset().top - 80}, 800);
+      }
+    </script>
+
+
+        </div>
+    </div>
+
+    
+        <link rel="stylesheet" href="/libs/gitalk/gitalk.css">
+<link rel="stylesheet" href="/css/my-gitalk.css">
+
+<div class="card gitalk-card" data-aos="fade-up">
+    <div id="gitalk-container" class="card-content"></div>
+</div>
+
+<script src="/libs/gitalk/gitalk.min.js"></script>
+<script>
+    let gitalk = new Gitalk({
+        clientID: 'de8dfcea77a9e87de17a',
+        clientSecret: '569b91fd16e2f3972943f6907219b5ca2984aa1b',
+        repo: 'gongchenghuigch.github.io',
+        owner: 'gongchenghuigch',
+        admin: "gongchenghuigch",
+        id: '2019-09-12T11-27-34',
+        distractionFreeMode: false  // Facebook-like distraction free mode
+    });
+
+    gitalk.render('gitalk-container');
+</script>
+    
+
+    
+
+    
+
+    
+
+    
+        <style>
+    .valine-card {
+        margin: 1.5rem auto;
+    }
+
+    .valine-card .card-content {
+        padding: 20px 20px 5px 20px;
+    }
+
+    #vcomments input[type=text],
+    #vcomments input[type=email],
+    #vcomments input[type=url],
+    #vcomments textarea {
+        box-sizing: border-box;
+    }
+
+    #vcomments p {
+        margin: 2px 2px 10px;
+        font-size: 1.05rem;
+        line-height: 1.78rem;
+    }
+
+    #vcomments blockquote p {
+        text-indent: 0.2rem;
+    }
+
+    #vcomments a {
+        padding: 0 2px;
+        color: #42b983;
+        font-weight: 500;
+        text-decoration: underline;
+    }
+
+    #vcomments img {
+        max-width: 100%;
+        height: auto;
+        cursor: pointer;
+    }
+
+    #vcomments ol li {
+        list-style-type: decimal;
+    }
+
+    #vcomments ol,
+    ul {
+        display: block;
+        padding-left: 2em;
+        word-spacing: 0.05rem;
+    }
+
+    #vcomments ul li,
+    ol li {
+        display: list-item;
+        line-height: 1.8rem;
+        font-size: 1rem;
+    }
+
+    #vcomments ul li {
+        list-style-type: disc;
+    }
+
+    #vcomments ul ul li {
+        list-style-type: circle;
+    }
+
+    #vcomments table, th, td {
+        padding: 12px 13px;
+        border: 1px solid #dfe2e5;
+    }
+
+    #vcomments table, th, td {
+        border: 0;
+    }
+
+    table tr:nth-child(2n), thead {
+        background-color: #fafafa;
+    }
+
+    #vcomments table th {
+        background-color: #f2f2f2;
+        min-width: 80px;
+    }
+
+    #vcomments table td {
+        min-width: 80px;
+    }
+
+    #vcomments h1 {
+        font-size: 1.85rem;
+        font-weight: bold;
+        line-height: 2.2rem;
+    }
+
+    #vcomments h2 {
+        font-size: 1.65rem;
+        font-weight: bold;
+        line-height: 1.9rem;
+    }
+
+    #vcomments h3 {
+        font-size: 1.45rem;
+        font-weight: bold;
+        line-height: 1.7rem;
+    }
+
+    #vcomments h4 {
+        font-size: 1.25rem;
+        font-weight: bold;
+        line-height: 1.5rem;
+    }
+
+    #vcomments h5 {
+        font-size: 1.1rem;
+        font-weight: bold;
+        line-height: 1.4rem;
+    }
+
+    #vcomments h6 {
+        font-size: 1rem;
+        line-height: 1.3rem;
+    }
+
+    #vcomments p {
+        font-size: 1rem;
+        line-height: 1.5rem;
+    }
+
+    #vcomments hr {
+        margin: 12px 0;
+        border: 0;
+        border-top: 1px solid #ccc;
+    }
+
+    #vcomments blockquote {
+        margin: 15px 0;
+        border-left: 5px solid #42b983;
+        padding: 1rem 0.8rem 0.3rem 0.8rem;
+        color: #666;
+        background-color: rgba(66, 185, 131, .1);
+    }
+
+    #vcomments pre {
+        font-family: monospace, monospace;
+        padding: 1.2em;
+        margin: .5em 0;
+        background: #272822;
+        overflow: auto;
+        border-radius: 0.3em;
+        tab-size: 4;
+    }
+
+    #vcomments code {
+        font-family: monospace, monospace;
+        padding: 1px 3px;
+        font-size: 0.92rem;
+        color: #e96900;
+        background-color: #f8f8f8;
+        border-radius: 2px;
+    }
+
+    #vcomments pre code {
+        font-family: monospace, monospace;
+        padding: 0;
+        color: #e8eaf6;
+        background-color: #272822;
+    }
+
+    #vcomments pre[class*="language-"] {
+        padding: 1.2em;
+        margin: .5em 0;
+    }
+
+    #vcomments code[class*="language-"],
+    pre[class*="language-"] {
+        color: #e8eaf6;
+    }
+
+    #vcomments [type="checkbox"]:not(:checked), [type="checkbox"]:checked {
+        position: inherit;
+        margin-left: -1.3rem;
+        margin-right: 0.4rem;
+        margin-top: -1px;
+        vertical-align: middle;
+        left: unset;
+        visibility: visible;
+    }
+
+    #vcomments b,
+    strong {
+        font-weight: bold;
+    }
+
+    #vcomments dfn {
+        font-style: italic;
+    }
+
+    #vcomments small {
+        font-size: 85%;
+    }
+
+    #vcomments cite {
+        font-style: normal;
+    }
+
+    #vcomments mark {
+        background-color: #fcf8e3;
+        padding: .2em;
+    }
+
+    #vcomments table, th, td {
+        padding: 12px 13px;
+        border: 1px solid #dfe2e5;
+    }
+
+    table tr:nth-child(2n), thead {
+        background-color: #fafafa;
+    }
+
+    #vcomments table th {
+        background-color: #f2f2f2;
+        min-width: 80px;
+    }
+
+    #vcomments table td {
+        min-width: 80px;
+    }
+
+    #vcomments [type="checkbox"]:not(:checked), [type="checkbox"]:checked {
+        position: inherit;
+        margin-left: -1.3rem;
+        margin-right: 0.4rem;
+        margin-top: -1px;
+        vertical-align: middle;
+        left: unset;
+        visibility: visible;
+    }
+</style>
+
+<div class="card valine-card" data-aos="fade-up">
+    <div id="vcomments" class="card-content"></div>
+</div>
+
+<script src="/libs/valine/av-min.js"></script>
+<script src="/libs/valine/Valine.min.js"></script>
+<script>
+    new Valine({
+        el: '#vcomments',
+        appId: '',
+        appKey: '',
+        notify: 'true' === 'true',
+        verify: 'true' === 'true',
+        visitor: 'true' === 'true',
+        avatar: 'mm',
+        pageSize: '10',
+        lang: 'zh-cn',
+        placeholder: 'just go go'
+    });
+</script>
+    
+
+    
+
+<article id="prenext-posts" class="prev-next articles">
+    <div class="row article-row">
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge left-badge text-color">
+                <i class="fa fa-chevron-left"></i>&nbsp;上一篇</div>
+            <div class="card">
+                <a href="/2019/09/12/jsRAM/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/featureimages/19.jpg" class="responsive-img" alt="前端JS内存管理">
+                        
+                        <span class="card-title">前端JS内存管理</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            前言像C语言这样的底层语言一般都有底层的内存管理接口，比如 malloc()和free()。相反，JavaScript是在创建变量（对象，字符串等）时自动进行了分配内存，并且在不使用它们时“自动”释放。 释放的过程称为垃圾回收。这个“自动”
+                        
+                    </div>
+                    <div class="publish-info">
+                        <span class="publish-date">
+                            <i class="fa fa-clock-o fa-fw icon-date"></i>2019-09-12
+                        </span>
+                        <span class="publish-author">
+                            
+                            <i class="fa fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/JavaScript/" class="post-category" target="_blank">
+                                    JavaScript
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/JavaScript/" target="_blank">
+                        <span class="chip bg-color">JavaScript</span>
+                    </a>
+                    
+                    <a href="/tags/RAM/" target="_blank">
+                        <span class="chip bg-color">RAM</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge right-badge text-color">
+                下一篇&nbsp;<i class="fa fa-chevron-right"></i>
+            </div>
+            <div class="card">
+                <a href="/2019/09/12/article/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/featureimages/3.jpg" class="responsive-img" alt="非常优秀的前端博文集合">
+                        
+                        <span class="card-title">非常优秀的前端博文集合</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            JavaScript
+这一次，彻底弄懂 JavaScript 执行机制
+一个合格的中级前端工程师必须要掌握的 28 个 JavaScript 技巧
+JavaScript 专题系列 20 篇正式完结！
+JavaScript 复杂判断的更优雅写
+                        
+                    </div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="fa fa-clock-o fa-fw icon-date"></i>2019-09-12
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fa fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/前端/" class="post-category" target="_blank">
+                                    前端
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/前端/" target="_blank">
+                        <span class="chip bg-color">前端</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+    </div>
+</article>
+</div>
+
+
+
+    </div>
+    <div id="toc-aside" class="expanded col l3 hide-on-med-and-down">
+        <div class="toc-widget">
+            <div class="toc-title"><i class="fa fa-list-alt"></i>&nbsp;&nbsp;目录</div>
+            <div id="toc-content"></div>
+        </div>
+    </div>
+</div>
+
+<!-- TOC 悬浮按钮. -->
+
+<div id="floating-toc-btn" class="hide-on-med-and-down">
+    <a class="btn-floating btn-large bg-color">
+        <i class="fa fa-list"></i>
+    </a>
+</div>
+
+
+<script src="/libs/tocbot/tocbot.min.js"></script>
+<script>
+    $(function () {
+        tocbot.init({
+            tocSelector: '#toc-content',
+            contentSelector: '#articleContent',
+            headingsOffset: -($(window).height() * 0.4 - 45),
+            // headingsOffset: -205,
+            headingSelector: 'h2, h3, h4'
+        });
+
+        // modify the toc link href to support Chinese.
+        let i = 0;
+        let tocHeading = 'toc-heading-';
+        $('#toc-content a').each(function () {
+            $(this).attr('href', '#' + tocHeading + (++i));
+        });
+
+        // modify the heading title id to support Chinese.
+        i = 0;
+        $('#articleContent').children('h2, h3, h4').each(function () {
+            $(this).attr('id', tocHeading + (++i));
+        });
+
+        // Set scroll toc fixed.
+        let tocHeight = parseInt($(window).height() * 0.4 - 64);
+        let $tocWidget = $('.toc-widget');
+        $(window).scroll(function () {
+            let scroll = $(window).scrollTop();
+            /* add post toc fixed. */
+            if (scroll > tocHeight) {
+                $tocWidget.addClass('toc-fixed');
+            } else {
+                $tocWidget.removeClass('toc-fixed');
+            }
+        });
+
+        
+        /* 修复文章卡片 div 的宽度. */
+        let fixPostCardWidth = function (srcId, targetId) {
+            let srcDiv = $('#' + srcId);
+            if (srcDiv.length === 0) {
+                return;
+            }
+
+            let w = srcDiv.width();
+            if (w >= 450) {
+                w = w + 21;
+            } else if (w >= 350 && w < 450) {
+                w = w + 18;
+            } else if (w >= 300 && w < 350) {
+                w = w + 16;
+            } else {
+                w = w + 14;
+            }
+            $('#' + targetId).width(w);
+        };
+
+        // 切换TOC目录展开收缩的相关操作.
+        const expandedClass = 'expanded';
+        let $tocAside = $('#toc-aside');
+        let $mainContent = $('#main-content');
+        $('#floating-toc-btn .btn-floating').click(function () {
+            if ($tocAside.hasClass(expandedClass)) {
+                $tocAside.removeClass(expandedClass).slideUp(500);
+                $mainContent.removeClass('l9');
+            } else {
+                $tocAside.addClass(expandedClass).slideDown(500);
+                $mainContent.addClass('l9');
+            }
+            fixPostCardWidth('artDetail', 'prenext-posts');
+        });
+        
+    });
+</script>
+    
+
+</main>
+
+
+<footer class="page-footer bg-color">
+    <div class="container row center-align">
+        <div class="col s12 m8 l8 copy-right">
+            <span id="sitetime"></span> <br>
+            本站由&copy;<a href="https://gongchenghuigch.github.io/" target="_blank">gongchenghui</a>基于
+            <a href="https://hexo.io/" target="_blank">Hexo</a> 的
+            <a href="https://github.com/blinkfox/hexo-theme-matery" target="_blank">hexo-theme-matery</a>主题搭建.
+
+            
+                &nbsp;<i class="fa fa-area-chart"></i>&nbsp;站点总字数:&nbsp;
+                <span class="white-color">119.1k</span>
+            
+
+            
+			
+                <br>
+                
+                <span id="busuanzi_container_site_pv">
+                    <i class="fa fa-heart-o"></i>
+                    本站总访问量 <span id="busuanzi_value_site_pv" class="white-color"></span>
+                </span>
+                
+                
+                <span id="busuanzi_container_site_uv">
+                    <i class="fa fa-users"></i>
+                    次,&nbsp;访客数 <span id="busuanzi_value_site_uv" class="white-color"></span> 人.
+                </span>
+                
+            
+        </div>
+        <div class="col s12 m4 l4 social-link social-statis">
+
+
+    <a href="mailto:gongch0719@163.com" class="tooltipped" target="_blank" data-tooltip="邮件联系我" data-position="top" data-delay="50">
+        <i class="fa fa-envelope-open"></i>
+    </a>
+
+
+
+    <a href="tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=1134929850" class="tooltipped" data-tooltip="QQ联系我: 1134929850" data-position="top" data-delay="50">
+        <i class="fa fa-qq"></i>
+    </a>
+
+
+
+    <a href="/atom.xml" class="tooltipped" target="_blank" data-tooltip="RSS 订阅" data-position="top" data-delay="50">
+        <i class="fa fa-rss"></i>
+    </a>
+</div>
+    </div>
+</footer>
+
+<div class="progress-bar"></div>
+<script language = javascript >
+    function siteTime() {
+        window.setTimeout("siteTime()", 1000);
+        var seconds = 1000;
+        var minutes = seconds * 60;
+        var hours = minutes * 60;
+        var days = hours * 24;
+        var years = days * 365;
+        var today = new Date();
+        var todayYear = today.getFullYear();
+        var todayMonth = today.getMonth() + 1;
+        var todayDate = today.getDate();
+        var todayHour = today.getHours();
+        var todayMinute = today.getMinutes();
+        var todaySecond = today.getSeconds();
+        var t1 = Date.UTC(2018, 08, 11, 00, 00, 00); //北京时间2018-2-13 00:00:00 
+        var t2 = Date.UTC(todayYear, todayMonth, todayDate, todayHour, todayMinute, todaySecond); 
+        var diff = t2 - t1; var diffYears = Math.floor(diff / years); 
+        var diffDays = Math.floor((diff / days) - diffYears * 365); 
+        var diffHours = Math.floor((diff - (diffYears * 365 + diffDays) * days) / hours); 
+        var diffMinutes = Math.floor((diff - (diffYears * 365 + diffDays) * days - diffHours * hours) / minutes); 
+        var diffSeconds = Math.floor((diff - (diffYears * 365 + diffDays) * days - diffHours * hours - diffMinutes * minutes) / seconds); document.getElementById("sitetime").innerHTML = "本站已运行 " +diffYears+" 年 "+diffDays + " 天 " + diffHours + " 小时 " + diffMinutes + " 分钟 " + diffSeconds + " 秒"; 
+    } 
+	siteTime(); 
+</script>
+
+
+<!-- 搜索遮罩框 -->
+<div id="searchModal" class="modal">
+    <div class="modal-content">
+        <div class="search-header">
+            <span class="title"><i class="fa fa-search"></i>&nbsp;&nbsp;搜索</span>
+            <input type="search" id="searchInput" name="s" placeholder="请输入搜索的关键字"
+                   class="search-input">
+        </div>
+        <div id="searchResult"></div>
+    </div>
+</div>
+
+<script src="/js/search.js"></script>
+<script type="text/javascript">
+$(function () {
+    searchFunc("/" + "search.xml", 'searchInput', 'searchResult');
+});
+</script>
+<!-- 回到顶部按钮 -->
+<div id="backTop" class="top-scroll">
+    <a class="btn-floating btn-large waves-effect waves-light" href="#!">
+        <i class="fa fa-angle-up"></i>
+    </a>
+</div>
+
+
+<script src="/libs/materialize/materialize.min.js"></script>
+<script src="/libs/masonry/masonry.pkgd.min.js"></script>
+<script src="/libs/aos/aos.js"></script>
+<script src="/libs/scrollprogress/scrollProgress.min.js"></script>
+<script src="/libs/lightGallery/js/lightgallery-all.min.js"></script>
+<script src="/js/matery.js"></script>
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+
+
+
+    <script src="/libs/others/clicklove.js"></script>
+
+
+    <script async src="/libs/others/busuanzi.pure.mini.js"></script>
+
+
+</body>
+</html>
