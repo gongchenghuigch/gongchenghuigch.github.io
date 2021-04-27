@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://gongchenghuigch.github.io/"/>
-  <updated>2021-04-27T03:42:10.440Z</updated>
+  <updated>2021-04-27T06:26:11.424Z</updated>
   <id>https://gongchenghuigch.github.io/</id>
   
   <author>
@@ -15,6 +15,182 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>安装oh-my-zsh和code</title>
+    <link href="https://gongchenghuigch.github.io/2021/04/27/%E5%AE%89%E8%A3%85oh-my-zsh%E5%92%8Ccode/"/>
+    <id>https://gongchenghuigch.github.io/2021/04/27/%E5%AE%89%E8%A3%85oh-my-zsh%E5%92%8Ccode/</id>
+    <published>2021-04-27T06:25:38.000Z</published>
+    <updated>2021-04-27T06:26:11.424Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;h2 id=&quot;背景&quot;&gt;&lt;a href=&quot;#背景&quot; class=&quot;headerlink&quot; title=&quot;背景&quot;&gt;&lt;/a&gt;背景&lt;/h2&gt;&lt;p&gt;目前Mac自带的终端不是很好用，好多常规的Linux命令都不支持 比如：ll命令；那么我们可以安装第三方的终端&lt;/p&gt;
+&lt;h2
+        
+      
+    
+    </summary>
+    
+    
+      <category term="工具类" scheme="https://gongchenghuigch.github.io/categories/%E5%B7%A5%E5%85%B7%E7%B1%BB/"/>
+    
+    
+      <category term="终端" scheme="https://gongchenghuigch.github.io/tags/%E7%BB%88%E7%AB%AF/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>JS基础面试题</title>
+    <link href="https://gongchenghuigch.github.io/2021/04/27/JS%E5%9F%BA%E7%A1%80%E9%9D%A2%E8%AF%95%E9%A2%98/"/>
+    <id>https://gongchenghuigch.github.io/2021/04/27/JS%E5%9F%BA%E7%A1%80%E9%9D%A2%E8%AF%95%E9%A2%98/</id>
+    <published>2021-04-27T06:23:37.000Z</published>
+    <updated>2021-04-27T06:24:19.663Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;h2 id=&quot;（2）问：0-1-0-2-0-3-嘛？为什么？&quot;&gt;&lt;a href=&quot;#（2）问：0-1-0-2-0-3-嘛？为什么？&quot; class=&quot;headerlink&quot; title=&quot;（2）问：0.1 + 0.2 === 0.3 嘛？为什么？&quot;&gt;&lt;/a&gt;（2）问：0.1 +
+        
+      
+    
+    </summary>
+    
+    
+      <category term="JavaScript" scheme="https://gongchenghuigch.github.io/categories/JavaScript/"/>
+    
+    
+      <category term="JavaScript" scheme="https://gongchenghuigch.github.io/tags/JavaScript/"/>
+    
+      <category term="面试题" scheme="https://gongchenghuigch.github.io/tags/%E9%9D%A2%E8%AF%95%E9%A2%98/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>ES新特性</title>
+    <link href="https://gongchenghuigch.github.io/2021/04/27/ES%E6%96%B0%E7%89%B9%E6%80%A7/"/>
+    <id>https://gongchenghuigch.github.io/2021/04/27/ES%E6%96%B0%E7%89%B9%E6%80%A7/</id>
+    <published>2021-04-27T06:16:59.000Z</published>
+    <updated>2021-04-27T06:22:57.016Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;h2 id=&quot;ES6（2015）&quot;&gt;&lt;a href=&quot;#ES6（2015）&quot; class=&quot;headerlink&quot; title=&quot;ES6（2015）&quot;&gt;&lt;/a&gt;ES6（2015）&lt;/h2&gt;&lt;h3 id=&quot;1-类（class）&quot;&gt;&lt;a href=&quot;#1-类（class）&quot;
+        
+      
+    
+    </summary>
+    
+    
+      <category term="ECMAScript" scheme="https://gongchenghuigch.github.io/categories/ECMAScript/"/>
+    
+    
+      <category term="JavaScript" scheme="https://gongchenghuigch.github.io/tags/JavaScript/"/>
+    
+      <category term="es" scheme="https://gongchenghuigch.github.io/tags/es/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>深入浅出前端缓存</title>
+    <link href="https://gongchenghuigch.github.io/2021/04/27/%E6%B7%B1%E5%85%A5%E6%B5%85%E5%87%BA%E5%89%8D%E7%AB%AF%E7%BC%93%E5%AD%98/"/>
+    <id>https://gongchenghuigch.github.io/2021/04/27/%E6%B7%B1%E5%85%A5%E6%B5%85%E5%87%BA%E5%89%8D%E7%AB%AF%E7%BC%93%E5%AD%98/</id>
+    <published>2021-04-27T06:15:09.000Z</published>
+    <updated>2021-04-27T06:16:12.664Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;h2 id=&quot;引言&quot;&gt;&lt;a href=&quot;#引言&quot; class=&quot;headerlink&quot; title=&quot;引言&quot;&gt;&lt;/a&gt;引言&lt;/h2&gt;&lt;p&gt;2021 年，如果你的前端应用，需要在浏览器上保存数据，有三个主流方案：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Cookie&lt;/li&gt;
+&lt;li&gt;Web
+        
+      
+    
+    </summary>
+    
+    
+      <category term="前端" scheme="https://gongchenghuigch.github.io/categories/%E5%89%8D%E7%AB%AF/"/>
+    
+    
+      <category term="Cookie" scheme="https://gongchenghuigch.github.io/tags/Cookie/"/>
+    
+      <category term="Storage" scheme="https://gongchenghuigch.github.io/tags/Storage/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>JS 中的 prototype、__proto__与constructor（图解）</title>
+    <link href="https://gongchenghuigch.github.io/2021/04/27/JS%E4%B8%AD%E7%9A%84prototype%E3%80%81__proto__%E4%B8%8Econstructor%EF%BC%88%E5%9B%BE%E8%A7%A3%EF%BC%89/"/>
+    <id>https://gongchenghuigch.github.io/2021/04/27/JS%E4%B8%AD%E7%9A%84prototype%E3%80%81__proto__%E4%B8%8Econstructor%EF%BC%88%E5%9B%BE%E8%A7%A3%EF%BC%89/</id>
+    <published>2021-04-27T06:10:29.000Z</published>
+    <updated>2021-04-27T06:11:12.998Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;h1 id=&quot;1-前言&quot;&gt;&lt;a href=&quot;#1-前言&quot; class=&quot;headerlink&quot; title=&quot;1. 前言&quot;&gt;&lt;/a&gt;1.
+        
+      
+    
+    </summary>
+    
+    
+      <category term="JavaScript" scheme="https://gongchenghuigch.github.io/categories/JavaScript/"/>
+    
+    
+      <category term="前端" scheme="https://gongchenghuigch.github.io/tags/%E5%89%8D%E7%AB%AF/"/>
+    
+      <category term="JavaScript" scheme="https://gongchenghuigch.github.io/tags/JavaScript/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>babel编译流程及特性</title>
+    <link href="https://gongchenghuigch.github.io/2021/04/25/babel%E7%BC%96%E8%AF%91%E6%B5%81%E7%A8%8B%E5%8F%8A%E7%89%B9%E6%80%A7/"/>
+    <id>https://gongchenghuigch.github.io/2021/04/25/babel%E7%BC%96%E8%AF%91%E6%B5%81%E7%A8%8B%E5%8F%8A%E7%89%B9%E6%80%A7/</id>
+    <published>2021-04-25T06:12:21.000Z</published>
+    <updated>2021-04-27T06:12:58.417Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;h2 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot; title=&quot;前言&quot;&gt;&lt;/a&gt;前言&lt;/h2&gt;&lt;p&gt;Babel 是一个强大的 js 编译器。有了 Babel， 我们可以放肆的使用 js 的新特性，而不用考虑浏览器兼容性问题。不仅如此，基于
+        
+      
+    
+    </summary>
+    
+    
+      <category term="babel" scheme="https://gongchenghuigch.github.io/categories/babel/"/>
+    
+    
+      <category term="webpack" scheme="https://gongchenghuigch.github.io/tags/webpack/"/>
+    
+      <category term="babel" scheme="https://gongchenghuigch.github.io/tags/babel/"/>
+    
+  </entry>
   
   <entry>
     <title>18个webpack插件</title>
@@ -426,179 +602,6 @@
     
     
       <category term="css" scheme="https://gongchenghuigch.github.io/tags/css/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>git commit husky报错</title>
-    <link href="https://gongchenghuigch.github.io/2020/11/10/git-commit-husky%E6%8A%A5%E9%94%99/"/>
-    <id>https://gongchenghuigch.github.io/2020/11/10/git-commit-husky%E6%8A%A5%E9%94%99/</id>
-    <published>2020-11-10T11:45:34.000Z</published>
-    <updated>2021-01-03T11:46:20.663Z</updated>
-    
-    <summary type="html">
-    
-      
-      
-        
-        
-          &lt;h2 id=&quot;报错信息&quot;&gt;&lt;a href=&quot;#报错信息&quot; class=&quot;headerlink&quot; title=&quot;报错信息&quot;&gt;&lt;/a&gt;报错信息&lt;/h2&gt;&lt;pre class=&quot;line-numbers language-js&quot;&gt;&lt;code
-        
-      
-    
-    </summary>
-    
-    
-      <category term="git" scheme="https://gongchenghuigch.github.io/categories/git/"/>
-    
-    
-      <category term="git" scheme="https://gongchenghuigch.github.io/tags/git/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>JQuery源码解析</title>
-    <link href="https://gongchenghuigch.github.io/2020/11/03/JQuery%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90/"/>
-    <id>https://gongchenghuigch.github.io/2020/11/03/JQuery%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90/</id>
-    <published>2020-11-03T11:28:24.000Z</published>
-    <updated>2021-01-03T11:32:42.432Z</updated>
-    
-    <summary type="html">
-    
-      
-      
-        
-        
-          &lt;p&gt;github 上关于 jQuery 源码的全文注解，感兴趣的可以围观一下。jQuery v1.10.2 源码注解（&lt;a href=&quot;https://github.com/chokcoco/jQuery-）&quot; target=&quot;_blank&quot;
-        
-      
-    
-    </summary>
-    
-    
-      <category term="JQuery" scheme="https://gongchenghuigch.github.io/categories/JQuery/"/>
-    
-    
-      <category term="JavaScript" scheme="https://gongchenghuigch.github.io/tags/JavaScript/"/>
-    
-      <category term="JQuery" scheme="https://gongchenghuigch.github.io/tags/JQuery/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>前端常用工具类方法</title>
-    <link href="https://gongchenghuigch.github.io/2020/10/22/%E5%89%8D%E7%AB%AF%E5%B8%B8%E7%94%A8%E5%B7%A5%E5%85%B7%E7%B1%BB%E6%96%B9%E6%B3%95/"/>
-    <id>https://gongchenghuigch.github.io/2020/10/22/%E5%89%8D%E7%AB%AF%E5%B8%B8%E7%94%A8%E5%B7%A5%E5%85%B7%E7%B1%BB%E6%96%B9%E6%B3%95/</id>
-    <published>2020-10-22T11:42:56.000Z</published>
-    <updated>2021-01-03T11:44:13.707Z</updated>
-    
-    <summary type="html">
-    
-      
-      
-        
-        
-          &lt;h2 id=&quot;背景&quot;&gt;&lt;a href=&quot;#背景&quot; class=&quot;headerlink&quot; title=&quot;背景&quot;&gt;&lt;/a&gt;背景&lt;/h2&gt;&lt;p&gt;在日常开发中，我们经常会用一些工具类方法来实现业务逻辑 下面列举几种最常用的&lt;/p&gt;
-&lt;h2 id=&quot;URL截取参数&quot;&gt;&lt;a
-        
-      
-    
-    </summary>
-    
-    
-      <category term="工具类" scheme="https://gongchenghuigch.github.io/categories/%E5%B7%A5%E5%85%B7%E7%B1%BB/"/>
-    
-    
-      <category term="JavaScript" scheme="https://gongchenghuigch.github.io/tags/JavaScript/"/>
-    
-      <category term="URL" scheme="https://gongchenghuigch.github.io/tags/URL/"/>
-    
-      <category term="JSON" scheme="https://gongchenghuigch.github.io/tags/JSON/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>React+TS弹窗</title>
-    <link href="https://gongchenghuigch.github.io/2020/09/29/React+TS%E5%BC%B9%E7%AA%97/"/>
-    <id>https://gongchenghuigch.github.io/2020/09/29/React+TS%E5%BC%B9%E7%AA%97/</id>
-    <published>2020-09-29T11:47:48.000Z</published>
-    <updated>2021-01-03T11:48:36.368Z</updated>
-    
-    <summary type="html">
-    
-      
-      
-        
-        
-          &lt;h3 id=&quot;背景&quot;&gt;&lt;a href=&quot;#背景&quot; class=&quot;headerlink&quot;
-        
-      
-    
-    </summary>
-    
-    
-      <category term="React" scheme="https://gongchenghuigch.github.io/categories/React/"/>
-    
-    
-      <category term="React" scheme="https://gongchenghuigch.github.io/tags/React/"/>
-    
-      <category term="TypeScript" scheme="https://gongchenghuigch.github.io/tags/TypeScript/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>gitbook使用及配置详解</title>
-    <link href="https://gongchenghuigch.github.io/2020/07/21/gitbook%E4%BD%BF%E7%94%A8%E5%8F%8A%E9%85%8D%E7%BD%AE%E8%AF%A6%E8%A7%A3/"/>
-    <id>https://gongchenghuigch.github.io/2020/07/21/gitbook%E4%BD%BF%E7%94%A8%E5%8F%8A%E9%85%8D%E7%BD%AE%E8%AF%A6%E8%A7%A3/</id>
-    <published>2020-07-21T11:50:17.000Z</published>
-    <updated>2021-01-03T11:50:52.064Z</updated>
-    
-    <summary type="html">
-    
-      
-      
-        
-        
-          &lt;h2 id=&quot;安装&quot;&gt;&lt;a href=&quot;#安装&quot; class=&quot;headerlink&quot; title=&quot;安装&quot;&gt;&lt;/a&gt;安装&lt;/h2&gt;&lt;p&gt;安装命令：1&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;npm install -g gitbook-cli
-        
-      
-    
-    </summary>
-    
-    
-      <category term="gitbook" scheme="https://gongchenghuigch.github.io/categories/gitbook/"/>
-    
-    
-      <category term="gitbook" scheme="https://gongchenghuigch.github.io/tags/gitbook/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>React多行文字展开收起</title>
-    <link href="https://gongchenghuigch.github.io/2020/06/04/React%E5%A4%9A%E8%A1%8C%E6%96%87%E5%AD%97%E5%B1%95%E5%BC%80%E6%94%B6%E8%B5%B7/"/>
-    <id>https://gongchenghuigch.github.io/2020/06/04/React%E5%A4%9A%E8%A1%8C%E6%96%87%E5%AD%97%E5%B1%95%E5%BC%80%E6%94%B6%E8%B5%B7/</id>
-    <published>2020-06-04T11:53:48.000Z</published>
-    <updated>2021-01-03T11:54:30.223Z</updated>
-    
-    <summary type="html">
-    
-      
-      
-        
-        
-          &lt;h2 id=&quot;css实现&quot;&gt;&lt;a href=&quot;#css实现&quot; class=&quot;headerlink&quot;
-        
-      
-    
-    </summary>
-    
-    
-      <category term="React" scheme="https://gongchenghuigch.github.io/categories/React/"/>
-    
-    
-      <category term="React" scheme="https://gongchenghuigch.github.io/tags/React/"/>
     
   </entry>
   

